@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.pyeon2.mappers.OrderMapper">
+
+	<insert id="insertOrder">
+		insert into orderReq(item_code, item_name, count, category, area)
+		values(#{item_code}, #{item_name}, #{count}, #{category}, #{area})
+	</insert>
+</mapper>

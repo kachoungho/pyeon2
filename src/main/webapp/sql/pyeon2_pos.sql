@@ -10,6 +10,23 @@ drop table p2_item;
 drop table p2_dayCalc;
 drop table p2_weekCalc;
 drop table p2_monthCalc;
+drop table roll;
+
+
+insert into p2_member(id,pwd,name,position,area) values ('admin','1','admin','admin','정자동');
+insert into p2_member(id,pwd,name,position,area) values ('mina','1','mina','manager','정자동');
+insert into roll values('admin', 'ROLE_ADMIN');
+insert into roll values('mina', 'ROLE_USER');
+insert into p2_item values('1', 'beer', 'beer', '2200', '20', '0', 'drink', 'pangyo');
+insert into p2_item values('2', 'beer2', 'beer2', '2200', '20', '0', 'drink', 'pangyo');
+insert into p2_item values('3', 'beer3', 'beer3', '2200', '20', '0', 'drink', 'pangyo');
+insert into p2_item values('4', 'beer4', 'beer4', '2200', '20', '0', 'drink', 'pangyo');
+
+
+CREATE TABLE ROLL(
+	ID VARCHAR2(20 BYTE), 	
+	ROLE_NAME VARCHAR2(30 BYTE)
+   ) SEGMENT CREATION IMMEDIATE ;
 
 
 
