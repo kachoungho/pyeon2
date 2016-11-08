@@ -59,7 +59,7 @@ create table p2_calc(
 	constraint calc_pk  primary key(item_code, area)
 );
 
-
+insert into p2_item(item_code,item_name,item_image,price,count,hit,category,area) values('123','아이스크림','afjlghafjoghaon',2500,5,5,'빙과류','sss')
 create table p2_item(
 	item_code varchar2(40) not null, 
 	item_name varchar2(30) not null, 
