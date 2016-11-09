@@ -33,5 +33,20 @@ public class Pyeon2ServiceImpl implements Pyeon2Service {
 	public void Delete(ItemVO vo) throws Exception {
 		dao.Delete(vo);
 	}
+	
+	@Override
+	public List<ItemVO> orderList() throws Exception {
+		return dao.orderList();		
+	}
+
+	@Override
+	public void updateItemCount(ItemVO vo) throws Exception {
+		dao.updateItemCount(vo);
+	}
+
+	@Override
+	public void odertDelete(ItemVO vo) throws Exception {
+		dao.odertDelete(vo);
+	}
 
 }

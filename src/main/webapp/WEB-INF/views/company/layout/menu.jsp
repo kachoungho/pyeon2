@@ -11,7 +11,7 @@
     <li style="width:33.33%" class="w3-dropdown-hover">
       <a href="#">재고 관리 <i class="fa fa-caret-down"></i></a>
       <div style="width:440px;" class="w3-dropdown-content w3-light-gray w3-card-4">
-      	<a href="#">발 주 승 인</a>
+      	<a href="orderApproval">발 주 승 인</a>
         <a href="#">매장별 판매 현황</a>
       </div>
     </li>

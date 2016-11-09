@@ -11,4 +11,16 @@
 		insert into orderReq(item_code, item_name, count, category, area)
 		values(#{item_code}, #{item_name}, #{count}, #{category}, #{area})
 	</insert>
+	
+	<select id="orderList" resultType="com.pyeon2.vo.ItemVO">
+		select * from orderReq
+	</select>
+	
+	<update id="updateItemCount" >
+		update p2_item set count = count + #{count} where item_code = #{item_code} and area = #{area} 
+	</update>
+	
+	<delete id="odertDelete">
+		delete from orderReq where item_code = #{item_code} and area = #{area}
+	</delete>
 </mapper>

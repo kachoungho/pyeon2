@@ -4,9 +4,9 @@
 <html>
 <head>
 
-<meta http-equiv="Refresh" content="0; url=/controller/order">
+<meta http-equiv="Refresh" content="0; url=/test/orderApproval">
 <script type="text/javascript">
-	alert("발주 신청 성공");
+	alert("발주 승인 성공");
 	history.go(1);
 </script>
 

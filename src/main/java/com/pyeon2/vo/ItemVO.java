@@ -10,6 +10,7 @@ public class ItemVO {
 	private int hit;
 	private String category;
 	private String area;
+	private String p2_time;
 	
 	public String getItem_code() {
 		return item_code;
@@ -59,5 +60,11 @@ public class ItemVO {
 	public void setArea(String area) {
 		this.area = area;
 	}
-	
+	public String getP2_time() {
+		return p2_time;
+	}
+	public void setP2_time(String p2_time) {
+		this.p2_time = p2_time;
+	}
+		
 }

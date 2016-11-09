@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.pyeon2.vo.ItemVO;
@@ -14,7 +15,7 @@ import com.pyeon2.vo.ItemVO;
 @Repository
 public class Pyeon2DAOImpl implements Pyeon2DAO {
 
-	@Inject
+	@Autowired
 	private SqlSession session;
 	
 	private static String namespace1="com.pyeon2.mappers.OrderMapper";
@@ -43,6 +44,24 @@ public class Pyeon2DAOImpl implements Pyeon2DAO {
 	@Override
 	public List<ItemVO> selectName(ItemVO vo) {
 		return session.selectList(namespace2 + ".selectName", vo);
+	}
+	
+	
+	@Override
+	public List<ItemVO> orderList() throws Exception {
+		return session.selectList(namespace1 + ".orderList");
+	}
+
+
+	@Override
+	public void updateItemCount(ItemVO vo) throws Exception {
+		session.update(namespace1 + ".updateItemCount", vo);
+	}
+
+
+	@Override
+	public void odertDelete(ItemVO vo) throws Exception {
+		session.delete(namespace1 + ".odertDelete", vo);
 	}
 
 }
