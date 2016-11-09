@@ -16,8 +16,7 @@
 
 .menu {
 	margin: auto; 
-	height: 100px;
-	background-color: yellow	;
+	height: 40px;
 	
 }
 

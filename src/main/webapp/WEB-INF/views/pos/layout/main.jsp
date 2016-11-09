@@ -19,7 +19,7 @@
 	/* position: absolute; */
 	margin: auto; /* 
 	width: 1000px; */
-	height: 100px;
+	height: 40px;
 	background-color: yellow	;
 	
 }
