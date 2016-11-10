@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.pyeon2.vo.ItemVO;
+import com.pyeon2.vo.MemberVO;
 
 @Repository
 public class CompanyDAOImpl implements CompanyDAO{
@@ -29,6 +30,26 @@ public class CompanyDAOImpl implements CompanyDAO{
 	@Override
 	public void odertDelete(ItemVO vo) throws Exception {
 		session.delete(namespace + ".odertDelete", vo);
+	}
+
+	@Override
+	public List<MemberVO> getAdminMember() throws Exception {
+		return session.selectList(namespace + ".getAdminMember");
+	}
+
+	@Override
+	public List<MemberVO> getPSMember(MemberVO Mvo) throws Exception {
+		return session.selectList(namespace + ".getPSMember", Mvo);
+	}
+
+	@Override
+	public void insertAdminMember(MemberVO Mvo) throws Exception {
+		session.insert(namespace + ".insertAdminMember", Mvo);
+	}
+
+	@Override
+	public void insertPosition(MemberVO Mvo) throws Exception {
+		session.insert(namespace + ".insertPosition", Mvo);
 	}
 
 }
