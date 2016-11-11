@@ -299,7 +299,6 @@ public class PosController {
 			ss.setPage(pageNum);
 			ss.setPerPageNum(perPageNum);
 			ss.setItem_name("%"+item_name+"%");
-			
 			count = posService.getSelectCount(vo);
 			list = posService.selectName(ss);
 			

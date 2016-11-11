@@ -41,8 +41,9 @@
  					from p2_item
   					where rownum <= #{page} * #{perPageNum}
   					and bno > 0
+  					and item_name like #{item_name}
   				)
-			where rn > (#{page} -1) * #{perPageNum} and item_name like #{item_name} order by bno asc
+			where rn > (#{page} -1) * #{perPageNum} order by bno asc
  		]]>
 	</select>
 	
