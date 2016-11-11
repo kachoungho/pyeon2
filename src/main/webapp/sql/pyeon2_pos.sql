@@ -223,6 +223,12 @@ create table p2_item(
 	constraint item_pk  primary key(item_code, area)
 );
 
+drop sequence p2_item_num;
+
+create sequence p2_item_num
+   increment by 1
+   start with 1
+   nocache;
 
 create table p2_member(
 	id varchar2(20) not null,
