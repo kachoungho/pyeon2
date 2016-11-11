@@ -1,3 +1,5 @@
+update p2_user set back_time = sysdate where userid = 'ch'
+
 
 select * from p2_member;
 select * from p2_item;

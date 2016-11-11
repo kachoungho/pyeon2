@@ -11,8 +11,9 @@
     <li style="width:33.33%" class="w3-dropdown-hover">
       <a href="#">재고 관리 <i class="fa fa-caret-down"></i></a>
       <div style="width:440px;" class="w3-dropdown-content w3-light-gray w3-card-4">
-      	<a href="com_orderApproval">발 주 승 인</a>
-        <a href="com_stock">매장별 재고 현황</a>
+      	<a href="${pageContext.request.contextPath}/company/com_orderApproval">발 주 승 인</a>
+        <a href="${pageContext.request.contextPath}/company/com_stock">매장별 재고 현황</a>
+        <a href="${pageContext.request.contextPath}/company/com_companyStock">본사 재고 현황</a>
       </div>
     </li>
     
@@ -26,7 +27,7 @@
     <li style="width:33.33%" class="w3-dropdown-hover">
       <a href="#">인사 관리 <i class="fa fa-caret-down"></i></a>
       <div style="width:440px;" class="w3-dropdown-content w3-light-gray w3-card-4">
-      	<a href="./company/com_searchForm">직원 관리</a>
+      	<a href="${pageContext.request.contextPath}/company/com_searchForm">직원 관리</a>
       </div>
     </li>
   </ul>

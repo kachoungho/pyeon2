@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="ps_item_select_now" method="post">
+<form action="${pageContext.request.contextPath}/pos/ps_item_select_now" method="post">
 	검색할 제품 : <input type="text" name="item_name">
 	<input type="submit" value="검색">
 </form>
