@@ -11,12 +11,49 @@
 	
 	<!-- 물품(재고) 전체 리스트 출력 메소드 -->
 	<select id="getList" resultType="com.pyeon2.vo.ItemVO">
-		SELECT * FROM p2_item
+		<![CDATA[
+			select
+  				bno, item_code, item_name, item_image, price, count, hit, category, area
+			from
+  				(
+  					select
+    				/*+INDEX_DESC(tbl_board, pk_board)*/
+    					rownum rn, bno, item_code, item_name, item_image, price, count, hit, category, area
+ 					from p2_item
+  					where rownum <= #{page} * #{perPageNum}
+  					and bno > 0
+  				)
+			where rn > (#{page} -1) * #{perPageNum} order by bno asc
+ 		]]>
+		<!-- select * from (select ROWNUM num, N.* from (select * from p2_item) N) where num between #{page} and #{perPageNum} -->
 	</select>
 	
 	<!-- 물품(재고) 이름으로 검색하여 리스트 출력 메소드 -->
-	<select id="selectName" resultType="com.pyeon2.vo.ItemVO" parameterType="com.pyeon2.vo.ItemVO">
-		SELECT * FROM p2_item where item_name = #{item_name}
+	<select id="selectName" resultType="com.pyeon2.vo.ItemVO" parameterType="com.pyeon2.vo.SelectSearch">
+		<![CDATA[
+			select
+  				bno, item_code, item_name, item_image, price, count, hit, category, area
+			from
+  				(
+  					select
+    				/*+INDEX_DESC(tbl_board, pk_board)*/
+    					rownum rn, bno, item_code, item_name, item_image, price, count, hit, category, area
+ 					from p2_item
+  					where rownum <= #{page} * #{perPageNum}
+  					and bno > 0
+  				)
+			where rn > (#{page} -1) * #{perPageNum} and item_name like #{item_name} order by bno asc
+ 		]]>
+	</select>
+	
+	<!-- 물품 개수 -->
+	<select id="getCount" resultType="Integer">
+		SELECT count(*) FROM p2_item
+	</select>
+	
+	<!-- 선택된 물품 개수 -->
+	<select id="getSelectCount" resultType="Integer" parameterType="com.pyeon2.vo.ItemVO">
+		SELECT count(*) FROM p2_item where item_name = #{item_name}
 	</select>
 	
 	<!-- 물품(재고) 제거 메소드 -->
