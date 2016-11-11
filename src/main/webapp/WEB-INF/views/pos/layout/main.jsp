@@ -26,7 +26,7 @@
 
 .body {
 	/* margin-left: 310px; */
-	height: 500px;
+	height: 100%;
 	background-color: skyblue;
 }
 

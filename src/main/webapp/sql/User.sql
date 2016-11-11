@@ -1,4 +1,16 @@
 
+select userid,year,month,sum(hour) as hour,sum(money) as money from p2_userMoney where userid='ch' group by userid,year,month order by userid,year,month;      --user
+
+-- 알바가 자기것만 
+select userid,year,month,sum(hour) as hour,sum(money) as money from p2_userMoney where userid='ch' and year='2016' and month = '11' group by userid,year,month order by userid,year,month;  --user검색
+
+-- 지점장이 전부
+select userid,year,month,sum(hour) as hour,sum(money) as money from p2_userMoney group by userid,year,month order by userid,year,month;         --meniger
+
+-- 지점장이 년 월을 선택해서 그 달에 일한 알바생들 전부 출력
+select userid,year,month,sum(hour) as hour,sum(money) as money from p2_userMoney where year='2016' and month ='12' group by userid,year,month order by userid,year,month;    --메니져 연원 검색
+
+
 select * from p2_user;
 select * from p2_userMoney;
 
