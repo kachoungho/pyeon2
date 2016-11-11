@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.pyeon2.dao.CompanyDAO;
+import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
 
@@ -53,6 +54,21 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public List<ItemVO> areaItemList(ItemVO vo) throws Exception {
 		return comDao.areaItemList(vo);
+	}
+
+	@Override
+	public List<ComItemVO> comItemListAll() throws Exception {
+		return comDao.comItemListAll();
+	}
+
+	@Override
+	public List<ComItemVO> comItemList(ComItemVO vo) throws Exception {
+		return comDao.comItemList(vo);
+	}
+
+	@Override
+	public void orderUpdate(ItemVO vo) throws Exception {
+		comDao.orderUpdate(vo);
 	}
 
 }

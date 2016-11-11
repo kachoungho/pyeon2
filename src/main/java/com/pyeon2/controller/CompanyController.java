@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pyeon2.service.CompanyService;
+import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
 
@@ -85,6 +86,7 @@ public class CompanyController {
 		try {
 			companyService.updateItemCount(vo);
 			companyService.odertDelete(vo);
+			companyService.orderUpdate(vo);
 			mav.setViewName(".company.orderApprovalsuc");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -191,5 +193,30 @@ public class CompanyController {
 
 		return mav;
 	}
-	/*com_companyStock*/
+	
+	@RequestMapping(value = "company/com_companyStock", method = RequestMethod.GET)
+	public String companyStockGET() {
+		return ".company.company_companyStock";
+	}
+	
+	@RequestMapping(value = "company/com_companyStock", method = RequestMethod.POST)
+	public ModelAndView companyStockPOST(HttpServletRequest request) throws Exception {
+		ComItemVO vo = new ComItemVO();
+		ModelAndView mav = new ModelAndView();
+		List<ComItemVO> list = null;
+		
+		String category = request.getParameter("category");
+		vo.setCategory(category);
+		if(category.equals("all")){
+			list = companyService.comItemListAll();
+		} else {
+			list = companyService.comItemList(vo);
+		}
+		
+		
+		mav.addObject("result", list);
+		mav.setViewName(".company.company_companyStock");
+		
+		return mav;
+	}
 }

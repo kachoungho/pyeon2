@@ -2,6 +2,7 @@ package com.pyeon2.dao;
 
 import java.util.List;
 
+import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
 
@@ -14,6 +15,9 @@ public interface CompanyDAO {
 
 	// 발주 승인 후 발주신청 목록 제거 메소드
 	public void odertDelete(ItemVO vo) throws Exception;
+	
+	// 발주 승인 시 본사 재고 수량 변경
+	public void orderUpdate(ItemVO vo) throws Exception;
 
 	// 본사에서 회원 검색했을 때 관리자(admin)와 지점장(manager)만 출력
 	public List<MemberVO> getAdminMember() throws Exception;
@@ -30,4 +34,9 @@ public interface CompanyDAO {
 	// 지점별 재고 현황(물품) 불러오는 리스트
 	public List<ItemVO> areaItemList(ItemVO vo) throws Exception;
 
+	// 본사 전체 재고 확인
+	public List<ComItemVO> comItemListAll() throws Exception;
+
+	// 본사 전체 재고 카테고리별 리스트
+	public List<ComItemVO> comItemList(ComItemVO vo) throws Exception;
 }

@@ -18,6 +18,10 @@
 		delete from orderReq where item_code = #{item_code} and area = #{area}
 	</delete>
 	
+	<update id="orderUpdate" parameterType="com.pyeon2.vo.ItemVO">
+		update company_item set count = count - #{count} where item_code = #{item_code}
+	</update>
+	
 		<!-- 본사에서 회원 검색했을 때 관리자(admin)와 지점장(manager)만 출력 - 본사는 알바생들 관리 안하기 때문 -->
 	<select id="getAdminMember" resultType="com.pyeon2.vo.MemberVO">
 		select * from p2_member where position = 'admin' or position = 'manager'
@@ -42,9 +46,19 @@
 		insert into roll(id, role_name) values(#{id}, #{role_name})
 	</insert>
 	
-	
+	<!-- 지점별 재고 현황(물품) 불러오는 리스트 -->
 	<select id="areaItemList" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
 		select * from p2_item where area = #{area}
+	</select>
+	
+	<!-- 본사 전체 재고 확인 -->
+	<select id="comItemListAll" resultType="com.pyeon2.vo.ComItemVO">
+		select * from company_item
+	</select>
+	
+	<!-- 본사 전체 재고 카테고리별 리스트 -->
+	<select id="comItemList" resultType="com.pyeon2.vo.ComItemVO" parameterType="com.pyeon2.vo.ComItemVO">
+		select * from company_item where category = #{category}
 	</select>
 
 </mapper>

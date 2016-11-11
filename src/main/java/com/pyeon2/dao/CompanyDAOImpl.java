@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
 
@@ -55,6 +56,21 @@ public class CompanyDAOImpl implements CompanyDAO{
 	@Override
 	public List<ItemVO> areaItemList(ItemVO vo) throws Exception {
 		return session.selectList(namespace + ".areaItemList", vo);
+	}
+
+	@Override
+	public List<ComItemVO> comItemListAll() throws Exception {
+		return session.selectList(namespace + ".comItemListAll");
+	}
+
+	@Override
+	public List<ComItemVO> comItemList(ComItemVO vo) throws Exception {
+		return session.selectList(namespace + ".comItemList", vo);
+	}
+
+	@Override
+	public void orderUpdate(ItemVO vo) throws Exception {
+		session.update(namespace+ ".orderUpdate", vo);
 	}
 
 }
