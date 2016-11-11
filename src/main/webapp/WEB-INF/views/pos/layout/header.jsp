@@ -7,7 +7,7 @@
 
 <se:authorize access="hasAuthority('ROLE_USER')">
 	(${LoingUser})님 로그인 중
-	<a href="usermoneyfinsh?id=${LoingUser}">로 그 아 웃</a>
+	<a href="${pageContext.request.contextPath}/pos/usermoneyfinsh?id=${LoingUser}">로 그 아 웃</a>
 </se:authorize>
 
 <se:authorize access="hasAuthority('ROLE_MANAGER')">

@@ -10,18 +10,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="order" method="post">
-상품 코드 : <input type="text" name="item_code">
-상품 이름 : <input type="text" name="item_name">
-상품 갯수 : <input type="text" name="count">
-상품 카테고리 : <input type="text" name="category">
-지점 : <input type="text" name="area">
+<form action="ps_order" method="post"><br>
+상품 코드 : <input type="text" name="item_code"><br>
+상품 이름 : <input type="text" name="item_name"><br>
+상품 갯수 : <input type="text" name="count"><br>
+상품 카테고리 : <input type="text" name="category"><br>
+지점 : <input type="text" name="area"><br>
 <input type="submit" value="신청">
-<sec:authentication property="name" var="LoingUser" />
-	<sec:authorize access="hasAuthority('ROLE_USER')">
-		${LoingUser}님 접속중
-		
-	</sec:authorize>
 
 </form>
 </body>

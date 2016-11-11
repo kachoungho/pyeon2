@@ -26,4 +26,7 @@ public interface CompanyService {
 	
 	// 입력된 정보를 바탕으로 권한 자동으로 주기
 	public void insertPosition(MemberVO Mvo) throws Exception;
+	
+	// 지점별 재고 현황(물품) 불러오는 리스트
+	public List<ItemVO> areaItemList(ItemVO vo) throws Exception;
 }

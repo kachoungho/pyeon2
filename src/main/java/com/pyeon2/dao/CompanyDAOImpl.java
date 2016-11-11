@@ -52,4 +52,9 @@ public class CompanyDAOImpl implements CompanyDAO{
 		session.insert(namespace + ".insertPosition", Mvo);
 	}
 
+	@Override
+	public List<ItemVO> areaItemList(ItemVO vo) throws Exception {
+		return session.selectList(namespace + ".areaItemList", vo);
+	}
+
 }

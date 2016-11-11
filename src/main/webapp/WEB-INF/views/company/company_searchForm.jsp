@@ -38,7 +38,6 @@
 				<td>${ member.gender }</td>
 				<td>${ member.area }</td>
 			</tr>
-			<br>
 		</c:forEach>
 
 	</table>

@@ -30,6 +30,21 @@ public class CompanyController {
 	public String comStockGET() {
 		return ".company.company_stock";
 	}
+	
+	
+	@RequestMapping(value = "com_stock", method = RequestMethod.POST)
+	public ModelAndView comStockPOST(HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		ItemVO vo = new ItemVO(); 
+		System.out.println("area : " + request.getParameter("area"));
+		vo.setArea(request.getParameter("area"));
+		List<ItemVO> list = companyService.areaItemList(vo);
+		
+		mav.addObject("result", list);
+		mav.setViewName(".company.company_stock");
+		
+		return mav;
+	}
 
 	@RequestMapping(value = "com_store", method = RequestMethod.GET)
 	public String comStore() {
@@ -41,7 +56,7 @@ public class CompanyController {
 		return ".company.company_personnel";
 	}
 
-	@RequestMapping(value = "orderApproval", method = RequestMethod.GET)
+	@RequestMapping(value = "com_orderApproval", method = RequestMethod.GET)
 	public ModelAndView orderApprovalGET(Model model) {
 		System.out.println("orderApproval GET 요청 성공");
 		ModelAndView mav = new ModelAndView();
@@ -56,7 +71,7 @@ public class CompanyController {
 		return mav;
 	}
 
-	@RequestMapping(value = "orderApproval", method = RequestMethod.POST)
+	@RequestMapping(value = "com_orderApproval", method = RequestMethod.POST)
 	public ModelAndView orderApprovalPOST(HttpServletRequest request, Model model) {
 		System.out.println("orderApproval POST 요청 성공");
 		ModelAndView mav = new ModelAndView();
@@ -77,7 +92,7 @@ public class CompanyController {
 		return mav;
 	}
 
-	@RequestMapping(value = "orderCancel", method = RequestMethod.GET)
+	@RequestMapping(value = "com_orderCancel", method = RequestMethod.GET)
 	public ModelAndView orderCancelGET(HttpServletRequest request) {
 		System.out.println("orderCancel GET 요청 성공");
 		ModelAndView mav = new ModelAndView();

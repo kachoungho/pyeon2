@@ -23,7 +23,7 @@
 		<!-- 	result는 controller의 addObject로 부터 가져온다. -->
 
 		<c:forEach items="${orderList}" var="orderList">
-			<form action="orderApproval" method="post">
+			<form action="com_orderApproval" method="post">
 				<input type="hidden" name="item_code" value="${orderList.item_code}"> 
 				<input type="hidden" name="count" value="${orderList.count}"> 
 				<input type="hidden" name="area" value="${orderList.area}">
@@ -37,7 +37,7 @@
 				<td>${orderList.p2_time}</td>
 				<td><input type="submit" value="승인"></td>
 				<td><input type="button" value="미승인"
-				onclick="document.location.href='orderCancel?item_code=${orderList.item_code}&area=${orderList.area}'"></td>
+				onclick="document.location.href='com_orderCancel?item_code=${orderList.item_code}&area=${orderList.area}'"></td>
 			</tr>
 			</form>
 		</c:forEach>

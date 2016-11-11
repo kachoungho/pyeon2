@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Refresh" content="0; url=pos">
+<meta http-equiv="Refresh" content="0; url=${pageContext.request.contextPath}/pos">
 <script type="text/javascript">
 	alert("알바 로그인 성공");
 	history.go(1);

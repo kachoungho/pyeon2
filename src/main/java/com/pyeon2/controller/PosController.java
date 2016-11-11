@@ -29,18 +29,18 @@ public class PosController {
 		return ".pos";
 	}
 
-	@RequestMapping(value = "order", method = RequestMethod.GET)
+	@RequestMapping(value = "pos/ps_order", method = RequestMethod.GET)
 	public ModelAndView orderGET(Model model) {
 		System.out.println("order GET 요청 성공");
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName(".pos.order");
+		mav.setViewName(".pos.pos_order");
 
 		return mav;
 	}
 
-	@RequestMapping(value = "order", method = RequestMethod.POST)
+	@RequestMapping(value = "pos/ps_order", method = RequestMethod.POST)
 	public ModelAndView orderPOST(ItemVO vo, Model model) throws Exception {
 		System.out.println("order POST 요청 성공");
 
@@ -48,32 +48,32 @@ public class PosController {
 
 		posService.insertOrder(vo);
 
-		mav.setViewName(".pos.ordersuc");
+		mav.setViewName(".pos.pos_ordersuc");
 
 		return mav;
 	}
 
-	@RequestMapping(value = "ps_stock", method = RequestMethod.GET)
+	@RequestMapping(value = "pos/ps_stock", method = RequestMethod.GET)
 	public String posStock() {
 		return ".pos.pos_stock";
 	}
 
-	@RequestMapping(value = "ps_sales", method = RequestMethod.GET)
+	@RequestMapping(value = "pos/ps_sales", method = RequestMethod.GET)
 	public String posSales() {
 		return ".pos.pos_sales";
 	}
 
-	@RequestMapping(value = "ps_go_leave", method = RequestMethod.GET)
+	@RequestMapping(value = "pos/ps_go_leave", method = RequestMethod.GET)
 	public String posGo_leave() {
 		return ".pos.pos_go_leave";
 	}
 
-	@RequestMapping(value = "ps_calc", method = RequestMethod.GET)
+	@RequestMapping(value = "pos/ps_calc", method = RequestMethod.GET)
 	public String posCalc() {
 		return ".pos.pos_calc";
 	}
 
-	@RequestMapping("ps_item_selectAll")
+	@RequestMapping("pos/ps_item_selectAll")
 	public ModelAndView productList() {
 		ModelAndView mav = new ModelAndView();
 
@@ -89,7 +89,7 @@ public class PosController {
 		return mav;
 	}
 
-	@RequestMapping(value="ps_item_delete", method = RequestMethod.POST)
+	@RequestMapping(value="pos/ps_item_delete", method = RequestMethod.POST)
 	public ModelAndView Delete(HttpServletRequest request, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		ItemVO vo = new ItemVO();
@@ -102,7 +102,7 @@ public class PosController {
 		return mav;
 	}
 
-	@RequestMapping(value="ps_item_delete", method = RequestMethod.GET)
+	@RequestMapping(value="pos/ps_item_delete", method = RequestMethod.GET)
 	public ModelAndView fom() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(".pos.pos_item_delete");
@@ -110,7 +110,7 @@ public class PosController {
 		return mav;
 	}
 
-	@RequestMapping(value="ps_item_select", method = RequestMethod.POST)
+	@RequestMapping(value="pos/ps_item_select", method = RequestMethod.POST)
 	public ModelAndView selectName(HttpServletRequest request, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		ItemVO vo = new ItemVO();
@@ -124,7 +124,7 @@ public class PosController {
 		return mav;
 	}
 
-	@RequestMapping(value="ps_item_select", method = RequestMethod.GET)
+	@RequestMapping(value="pos/ps_item_select", method = RequestMethod.GET)
 	public ModelAndView selectform() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(".pos.pos_item_select");

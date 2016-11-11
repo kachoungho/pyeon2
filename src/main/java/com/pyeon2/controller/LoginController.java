@@ -48,7 +48,7 @@ public class LoginController {
 	}
 	
 	
-	@RequestMapping(value = "usermoneystart" , method =  RequestMethod.GET)
+	@RequestMapping(value = "pos/usermoneystart" , method =  RequestMethod.GET)
 	public ModelAndView userstarts(HttpServletRequest request, Model model) throws Exception{
 		String id = request.getParameter("id");
 		System.out.println("id : " + id);
@@ -63,7 +63,7 @@ public class LoginController {
 	}
 	
 	
-	@RequestMapping(value = "usermoneyfinsh" , method =  RequestMethod.GET)
+	@RequestMapping(value = "pos/usermoneyfinsh" , method =  RequestMethod.GET)
 	public ModelAndView userfinshs(HttpServletRequest request, Model model) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		UserVO vo = new UserVO();

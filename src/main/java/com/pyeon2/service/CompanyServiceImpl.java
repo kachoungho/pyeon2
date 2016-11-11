@@ -50,4 +50,9 @@ public class CompanyServiceImpl implements CompanyService {
 		comDao.insertPosition(Mvo);
 	}
 
+	@Override
+	public List<ItemVO> areaItemList(ItemVO vo) throws Exception {
+		return comDao.areaItemList(vo);
+	}
+
 }

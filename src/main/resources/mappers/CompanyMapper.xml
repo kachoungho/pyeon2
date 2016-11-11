@@ -41,5 +41,10 @@
 	<insert id="insertPosition" parameterType="com.pyeon2.vo.MemberVO">
 		insert into roll(id, role_name) values(#{id}, #{role_name})
 	</insert>
+	
+	
+	<select id="areaItemList" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
+		select * from p2_item where area = #{area}
+	</select>
 
 </mapper>

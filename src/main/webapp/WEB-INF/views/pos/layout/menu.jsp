@@ -12,11 +12,11 @@
       <a href="#">재고 관리 <i class="fa fa-caret-down"></i></a><!--  <i class="fa fa-caret-down"></i> -->
       <div style="width:328.5px;" class="w3-dropdown-content w3-light-gray w3-card-4">
       	<sec:authorize access="hasAuthority('ROLE_MANAGER')">
-			<a href="order">발 주 신 청</a>
+			<a href="pos/ps_order">발 주 신 청</a>
 		</sec:authorize>
-        <a href="ps_item_selectAll">상 품 리 스 트</a>
-        <a href="ps_item_select">상품 리스트 세부 검색</a>
-        <a href="ps_item_delete">상 품 제 거</a>
+        <a href="${pageContext.request.contextPath}/pos/ps_item_selectAll">상 품 리 스 트</a>
+        <a href="${pageContext.request.contextPath}/pos/ps_item_select">상품 리스트 세부 검색</a>
+        <a href="${pageContext.request.contextPath}/pos/ps_item_delete">상 품 제 거</a>
       </div>
     </li>
     
@@ -33,9 +33,9 @@
       <a href="#">출 / 퇴근 관리 <i class="fa fa-caret-down"></i></a>
       <div style="width:328.5px;" class="w3-dropdown-content w3-light-gray w3-card-4">
         <sec:authentication property="name" var="LoingUser" />
-        <se:authorize ifAnyGranted="ROLE_USER,ROLE_MANAGER">
-        	<a href="usermoneytotal?id=${LoingUser}">출 / 퇴근 이력 조회</a>
-        </se:authorize>   
+        <sec:authorize ifAnyGranted="ROLE_USER,ROLE_MANAGER">
+        	<a href="${pageContext.request.contextPath}/pos/usermoneytotal?id=${LoingUser}">출 / 퇴근 이력 조회</a>
+        </sec:authorize>   
       </div>
     
     <li style="width:25%"><a href="#">계  산</a></li>

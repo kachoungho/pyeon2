@@ -4,7 +4,7 @@
 <html>
 <head>
 
-<meta http-equiv="Refresh" content="0; url=/controller/orderApproval">
+<meta http-equiv="Refresh" content="0; url=/controller/com_orderApproval">
 <script type="text/javascript">
 	alert("발주 승인 성공");
 	history.go(1);
