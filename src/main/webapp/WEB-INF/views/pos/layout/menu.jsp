@@ -12,7 +12,7 @@
       <a href="#">재고 관리 <i class="fa fa-caret-down"></i></a><!--  <i class="fa fa-caret-down"></i> -->
       <div style="width:328.5px;" class="w3-dropdown-content w3-light-gray w3-card-4">
       	<sec:authorize access="hasAuthority('ROLE_MANAGER')">
-			<a href="pos/ps_order">발 주 신 청</a>
+			<a href="${pageContext.request.contextPath}/pos/ps_order">발 주 신 청</a>
 		</sec:authorize>
         <a href="${pageContext.request.contextPath}/pos/ps_item_selectAll">상 품 리 스 트</a>
         <a href="${pageContext.request.contextPath}/pos/ps_item_select">상품 리스트 세부 검색</a>

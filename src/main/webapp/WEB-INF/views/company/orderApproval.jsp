@@ -37,7 +37,7 @@
 				<td>${orderList.p2_time}</td>
 				<td><input type="submit" value="½ÂÀÎ"></td>
 				<td><input type="button" value="¹Ì½ÂÀÎ"
-				onclick="document.location.href='com_orderCancel?item_code=${orderList.item_code}&area=${orderList.area}'"></td>
+				onclick="document.location.href='${pageContext.request.contextPath}/company/com_orderCancel?item_code=${orderList.item_code}&area=${orderList.area}'"></td>
 			</tr>
 			</form>
 		</c:forEach>

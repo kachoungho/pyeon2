@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="ps_order" method="post"><br>
+<form action="${pageContext.request.contextPath}/pos/ps_order" method="post"><br>
 상품 코드 : <input type="text" name="item_code"><br>
 상품 이름 : <input type="text" name="item_name"><br>
 상품 갯수 : <input type="text" name="count"><br>

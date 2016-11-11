@@ -7,7 +7,7 @@
 <title>정보 입력 폼</title>
 </head>
 <body>
-	<form action="com_insert" method="get">
+	<form action="${pageContext.request.contextPath}/company/com_insert" method="get">
 		<table>
 			<tr>
 				<td>아이디</td>		

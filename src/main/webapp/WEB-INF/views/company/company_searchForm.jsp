@@ -8,7 +8,7 @@
 <title>관리자/지점장 리스트 출력</title>
 </head>
 <body>
-	<form action="com_search" method="get">
+	<form action="${pageContext.request.contextPath}/company/com_search" method="get">
 		<select name="position">
 			<option value="admin">관리자</option>
 			<option value="manager">지점장</option>

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="ps_item_delete" method="post">
+<form action="${pageContext.request.contextPath}/pos/ps_item_delete" method="post">
 	<h3>삭제 페이지</h3>
 	삭제할 상품 번호 : <input type="text" name = "item_code"><br>
 	지역 : <input type="text" name="area"><br>

@@ -4,7 +4,7 @@
 <html>
 <head>
 
-<meta http-equiv="Refresh" content="0; url=/controller/ps_order">
+<meta http-equiv="Refresh" content="0; url=${pageContext.request.contextPath}/pos/ps_order">
 <script type="text/javascript">
 	alert("발주 신청 성공");
 	history.go(1);

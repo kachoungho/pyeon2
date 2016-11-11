@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="com_stock" method="post">
+	<form action="${pageContext.request.contextPath}/company/com_stock" method="post">
 		<select name="area">
 			<option value="판교">판 교 점</option>
 			<option value="서울">서 울 점</option>
