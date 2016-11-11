@@ -25,8 +25,8 @@
 		insert into p2_userMoney(year,month,day,userid,hour,money,area) 
 		values ((SELECT TO_CHAR(go_time, 'YYYY' ) as year FROM p2_user where userid = #{id}),
 		(SELECT TO_CHAR(go_time, 'MM' ) as month FROM p2_user where userid = #{id}) ,(SELECT TO_CHAR(go_time, 'dd' ) as day FROM p2_user where userid = #{id}),
-		(SELECT TO_CHAR(NAME) as NAME FROM P2_MEMBER WHERE ID = '#{id}'),(SELECT ROUND((back_time-go_time)*24) as hour FROM p2_user where userid = #{id}),
-		(SELECT ROUND((back_time-go_time)*24)*5000 as money FROM p2_user where userid = #{id}),(SELECT TO_CHAR(area) as area FROM P2_MEMBER WHERE ID = '#{id}'))
+		(SELECT TO_CHAR(NAME) as NAME FROM P2_MEMBER WHERE ID = #{id}),(SELECT ROUND((back_time-go_time)*24) as hour FROM p2_user where userid = #{id}),
+		(SELECT ROUND((back_time-go_time)*24)*5000 as money FROM p2_user where userid = #{id}),(SELECT TO_CHAR(area) as area FROM P2_MEMBER WHERE ID = #{id}))
 	</insert>
 	
 	<!-- 로그아웃 시 일급 계산 저장 시 지점을 찾아주는 메소드 -->
