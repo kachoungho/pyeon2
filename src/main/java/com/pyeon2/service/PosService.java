@@ -19,6 +19,18 @@ public interface PosService {
 	// 물품(재고) 제거 메소드
 	public void Delete(ItemVO vo) throws Exception;
 	
+	//알바 일했던시급
+	public List<UserVO> selectalpayAll(UserVO vo) throws Exception;
+			
+	//알바 날짜 선택 시급
+	public List<UserVO> selectalpay(UserVO vo) throws Exception;
+			
+	//알바 일했던시급
+	public List<UserVO> selectmanpayAll(UserVO vo) throws Exception;
+					
+	//알바 날짜 선택 시급
+	public List<UserVO> selectmanpay(UserVO vo) throws Exception;
+	
 	/* 현재 미사용 메소드(출/퇴근 이력 조회)
 	public List<UserVO> usermoney(UserVO vo) throws Exception;
 	public List<UserVO> usermoneyM(MemberVO Mvo) throws Exception;*/

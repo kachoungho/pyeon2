@@ -33,10 +33,14 @@
       <a href="#">출 / 퇴근 관리 <i class="fa fa-caret-down"></i></a>
       <div style="width:328.5px;" class="w3-dropdown-content w3-light-gray w3-card-4">
         <sec:authentication property="name" var="LoingUser" />
-        <sec:authorize ifAnyGranted="ROLE_USER,ROLE_MANAGER">
-        	<a href="${pageContext.request.contextPath}/pos/usermoneytotal?id=${LoingUser}">출 / 퇴근 이력 조회</a>
+        <sec:authorize access="hasAuthority('ROLE_USER')">
+        	<a href="ps_selectpay?id=${LoingUser}">출 / 퇴근 이력 조회</a>
         </sec:authorize>   
+        <sec:authorize access="hasAuthority('ROLE_MANAGER')">
+        	<a href="ps_selectpays?id=${LoingUser}">출 / 퇴근 이력 조회</a>
+        </sec:authorize>  
       </div>
+      </li>
     
     <li style="width:25%"><a href="#">계  산</a></li>
   </ul>

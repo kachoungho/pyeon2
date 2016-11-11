@@ -39,15 +39,24 @@ public class PosDAOImpl implements PosDAO{
 	}
 
 	
-	/*
 	@Override
-	public List<UserVO> usermoney(UserVO vo) throws Exception {
-		return session.selectList(namespace+".usermoney",vo);
-	}	
+	public List<UserVO> selectalpayAll(UserVO vo) throws Exception {
+		return session.selectList(namespace +".selectalpayAll", vo);
+	}
 
 	@Override
-	public List<UserVO> usermoneyM(MemberVO Mvo) throws Exception {
-		return session.selectList(namespace+".usermoneyM",Mvo);
+	public List<UserVO> selectalpay(UserVO vo) throws Exception {
+		return session.selectList(namespace +".selectalpay", vo);
 	}
-	*/
+
+	@Override
+	public List<UserVO> selectmanpayAll(UserVO vo) throws Exception {
+		return session.selectList(namespace +".selectmanpayAll", vo);
+	}
+
+	@Override
+	public List<UserVO> selectmanpay(UserVO vo) throws Exception {
+		return session.selectList(namespace +".selectmanpay", vo);
+	}
+
 }

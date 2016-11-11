@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pyeon2.service.PosService;
 import com.pyeon2.vo.ItemVO;
+import com.pyeon2.vo.UserVO;
 
 @Controller
 /*@RequestMapping(value="/pos/")*/
@@ -132,33 +133,87 @@ public class PosController {
 		return mav;
 	}
 	
-	
-/*
-	@RequestMapping(value = "usermoneytotal" , method = RequestMethod.GET)
-	public ModelAndView usertotal(HttpServletRequest request) throws Exception{
+	@RequestMapping(value="ps_selectpay", method = RequestMethod.GET)
+	public ModelAndView selectalpay(HttpServletRequest request,Model model) {
 		ModelAndView mav = new ModelAndView();
+		List<UserVO> list;
+		
 		UserVO vo = new UserVO();
-		MemberVO Mvo = new MemberVO();
-		String id = request.getParameter("id");
-		System.out.println("id : " + id);
-		vo.setUserid(id);
+		vo.setUserid(request.getParameter("id"));
 		
-		Mvo = userService.checkId(vo);
-		
-		System.out.println("Mvo.getPosition() : " + Mvo.getPosition());
-		System.out.println("Mvo.getArea() : " + Mvo.getArea());
-		
-		if(Mvo.getPosition().equals("manager")){
-			List<UserVO> list = userService.usermoneyM(Mvo);
+		try {
+			list = posService.selectalpayAll(vo);
 			mav.addObject("result", list);
-			
-		} else if(Mvo.getPosition().equals("user")){
-			List<UserVO> list2 = userService.usermoney(vo);
-			mav.addObject("result", list2);
-			
+			mav.setViewName(".pos.pos_selectpay");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
-		mav.setViewName(".pos.usermonrytotal");
+		
 		return mav;
-	}*/
+	}
+	
+	@RequestMapping(value="ps_selectpay", method = RequestMethod.POST)
+	public ModelAndView selectalfroms(HttpServletRequest request,Model model){
+		UserVO vo = new UserVO();
+		ModelAndView mav = new ModelAndView();
+		List<UserVO> list;
+		System.out.println("request" + request.getParameter("ids"));
+		vo.setUserid(request.getParameter("ids"));
+		vo.setYear(request.getParameter("year"));
+		vo.setMonth(request.getParameter("month"));
+		
+		try {
+			list = posService.selectalpay(vo);
+			mav.addObject("result", list);
+			mav.setViewName(".pos.pos_selectpay");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="ps_selectpays", method = RequestMethod.GET)
+	public ModelAndView selectmanpay(HttpServletRequest request,Model model) {
+		ModelAndView mav = new ModelAndView();
+		List<UserVO> list;
+		
+		UserVO vo = new UserVO();
+		vo.setUserid(request.getParameter("id"));
+		
+		try {
+			list = posService.selectmanpayAll(vo);
+			mav.addObject("result", list);
+			mav.setViewName(".pos.pos_selectpay");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="ps_selectpays", method = RequestMethod.POST)
+	public ModelAndView selectmanfroms(HttpServletRequest request,Model model){
+		UserVO vo = new UserVO();
+		ModelAndView mav = new ModelAndView();
+		List<UserVO> list;
+		System.out.println("request" + request.getParameter("ids"));
+		vo.setUserid(request.getParameter("ids"));
+		vo.setYear(request.getParameter("year"));
+		vo.setMonth(request.getParameter("month"));
+		
+		try {
+			list = posService.selectmanpay(vo);
+			mav.addObject("result", list);
+			mav.setViewName(".pos.pos_selectpay");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return mav;
+	}
 }
