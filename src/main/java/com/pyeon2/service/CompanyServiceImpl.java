@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.pyeon2.dao.CompanyDAO;
 import com.pyeon2.vo.ItemVO;
+import com.pyeon2.vo.MemberVO;
 
 @Repository
 public class CompanyServiceImpl implements CompanyService {
@@ -27,6 +28,26 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public void odertDelete(ItemVO vo) throws Exception {
 		comDao.odertDelete(vo);
+	}
+
+	@Override
+	public List<MemberVO> getAdminMember() throws Exception {
+		return comDao.getAdminMember();
+	}
+
+	@Override
+	public List<MemberVO> getPSMember(MemberVO Mvo) throws Exception {
+		return comDao.getPSMember(Mvo);
+	}
+
+	@Override
+	public void insertAdminMember(MemberVO Mvo) throws Exception {
+		comDao.insertAdminMember(Mvo);
+	}
+
+	@Override
+	public void insertPosition(MemberVO Mvo) throws Exception {
+		comDao.insertPosition(Mvo);
 	}
 
 }

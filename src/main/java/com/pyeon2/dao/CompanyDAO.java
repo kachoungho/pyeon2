@@ -3,6 +3,7 @@ package com.pyeon2.dao;
 import java.util.List;
 
 import com.pyeon2.vo.ItemVO;
+import com.pyeon2.vo.MemberVO;
 
 public interface CompanyDAO {
 	// 발주 목록 확인 메소드
@@ -13,4 +14,9 @@ public interface CompanyDAO {
 	
 	// 발주 승인 후 발주신청 목록 제거 메소드
 	public void odertDelete(ItemVO vo) throws Exception;
+	
+	public List<MemberVO> getAdminMember() throws Exception;
+	public List<MemberVO> getPSMember(MemberVO Mvo) throws Exception;
+	public void insertAdminMember(MemberVO Mvo) throws Exception;
+	public void insertPosition(MemberVO Mvo) throws Exception;
 }

@@ -11,6 +11,7 @@ public class MemberVO {
 	private String address;
 	private String gender;
 	private String area;
+	private String role_name;
 	
 	public String getId() {
 		return id;
@@ -65,6 +66,12 @@ public class MemberVO {
 	}
 	public void setArea(String area) {
 		this.area = area;
+	}
+	public String getRole_name() {
+		return role_name;
+	}
+	public void setRole_name(String role_name) {
+		this.role_name = role_name;
 	}
 	
 }
