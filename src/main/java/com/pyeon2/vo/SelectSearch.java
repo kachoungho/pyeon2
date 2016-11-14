@@ -3,6 +3,15 @@ package com.pyeon2.vo;
 public class SelectSearch {
 	int page, perPageNum;
 	String item_name;
+	String category;
+	
+	
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
 	public int getPage() {
 		return page;
 	}

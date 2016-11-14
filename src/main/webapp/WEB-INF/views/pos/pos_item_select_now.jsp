@@ -52,25 +52,31 @@
 	</table>
 	
 	<form action="ps_item_select_now" method="post">
-		검색할 제품 : <input type="text" name="item_name">
 		<input type="hidden" value="${pageMaker.cri.page }">
+		<select name="category">
+ 			<option value="음료">음료</option>
+  			<option value="스낵">스낵</option>
+  			<option value="인스턴트">인스턴트</option>
+  			<option value="주류">주류</option>
+		</select>
+		검색할 제품 : <input type="text" name="item_name">
 		<input type="submit" value="검색">
 	</form>
 
 	<div class="text-center">
 		<ul class="pagination">
 			<c:if test="${pageMaker.prev }">
-				<li><a href="ps_item_select_now?page=${pageMaker.startPage - 1 }">&laquo;</a></li>
+				<li><a href="ps_item_select_now?page=${pageMaker.startPage - 1 }&category=${category}&item_name=${item_name}">&laquo;</a></li>
 			</c:if>
 			
 			<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
 				<li <c:out value="${pageMaker.cri.page == idx ? 'class=active' : '' }"/>>
-				<a href="ps_item_select_now?page=${idx}">${idx }</a>
+				<a href="ps_item_select_now?page=${idx}&category=${category}&item_name=${item_name}">${idx }</a>
 				</li>
 			</c:forEach>
 			
 			<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
-				<li><a href="ps_item_select_now?page=${pageMaker.endPage + 1 }">&raquo;</a></li>
+				<li><a href="ps_item_select_now?page=${pageMaker.endPage + 1 }&category=${category}&item_name=${item_name}">&raquo;</a></li>
 			</c:if>
 		</ul>
 	</div>
