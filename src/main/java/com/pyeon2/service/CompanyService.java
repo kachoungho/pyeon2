@@ -45,6 +45,9 @@ public interface CompanyService {
 	
 	// 멤버 정보 삭제
 	public void deleteMember(MemberVO Mvo) throws Exception;
+	
+	// 멤버 권한 삭제
+	public void deleteRole(MemberVO Mvo) throws Exception;
 
 	// 본사 전체 재고 확인 
 	public List<ComItemVO> comItemListAll() throws Exception;

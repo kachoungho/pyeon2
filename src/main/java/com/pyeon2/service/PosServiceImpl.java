@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.pyeon2.dao.PosDAO;
 import com.pyeon2.domain.Criteria;
 import com.pyeon2.vo.ItemVO;
+import com.pyeon2.vo.MemberVO;
 import com.pyeon2.vo.SelectSearch;
 import com.pyeon2.vo.UserVO;
 
@@ -65,6 +66,41 @@ public class PosServiceImpl implements PosService {
 	@Override
 	public int getSelectCount(ItemVO vo) {
 		return posDao.getSelectCount(vo);
+	}
+
+	@Override
+	public List<MemberVO> selectUser(MemberVO Mvo) throws Exception {
+		return posDao.selectUser(Mvo);
+	}
+	
+	@Override
+	public List<MemberVO> selectUserId(MemberVO Mvo) throws Exception {
+		return posDao.selectUserId(Mvo);
+	}
+
+	@Override
+	public void updateUser(MemberVO Mvo) throws Exception {
+		posDao.updateUser(Mvo);
+	}
+
+	@Override
+	public void deleteUser(MemberVO Mvo) throws Exception {
+		posDao.deleteUser(Mvo);
+	}
+
+	@Override
+	public void deleteRole(MemberVO Mvo) throws Exception {
+		posDao.deleteRole(Mvo);
+	}
+
+	@Override
+	public void insertUser(MemberVO Mvo) throws Exception {
+		posDao.insertUser(Mvo);
+	}
+
+	@Override
+	public void insertPosition(MemberVO Mvo) throws Exception {
+		posDao.insertPosition(Mvo);
 	}
 
 }

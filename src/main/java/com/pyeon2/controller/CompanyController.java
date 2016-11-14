@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pyeon2.service.CompanyService;
-import com.pyeon2.service.MemberService;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
@@ -22,9 +21,6 @@ public class CompanyController {
 
 	@Autowired
 	private CompanyService companyService;
-
-	@Autowired
-	private MemberService memberService;
 
 	@RequestMapping("company")
 	public String getCompany() {
@@ -242,28 +238,6 @@ public class CompanyController {
 		return mav;
 	}
 	
-	@RequestMapping("company/com_deleteForm")
-	public ModelAndView comPersonnelDeleteForm(HttpServletRequest request, MemberVO Mvo) {
-		
-		ModelAndView mav = new ModelAndView();
-		List<MemberVO> list;
-		
-		Mvo.setId(request.getParameter("id"));
-		
-		try {
-			list = companyService.getMember(Mvo);
-			
-			mav.addObject("list", list);
-			mav.setViewName(".company.company_deleteForm");
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		
-		return mav;
-	}
-	
 	@RequestMapping(value="company/com_delete", method = RequestMethod.POST)
 	public String comPersonnelDelete(HttpServletRequest request, MemberVO Mvo) {
 		
@@ -271,6 +245,7 @@ public class CompanyController {
 		
 		try {
 			companyService.deleteMember(Mvo);
+			companyService.deleteRole(Mvo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

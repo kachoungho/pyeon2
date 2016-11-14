@@ -91,4 +91,9 @@ public class CompanyServiceImpl implements CompanyService {
 		comDao.orderUpdate(vo);
 	}
 
+	@Override
+	public void deleteRole(MemberVO Mvo) throws Exception {
+		comDao.deleteRole(Mvo);
+	}
+
 }

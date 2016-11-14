@@ -15,8 +15,10 @@ drop table p2_weekCalc;
 drop table p2_monthCalc;
 drop table roll;
 
-
-
+alter table p2_member add optime varchar2(20);	-- 아르바이트생 근무시간 오전/오후/야간 구분
+insert into p2_member values('alba1', 1, 'alba1', 'user', '010', 20, '한국', '남', '정자동', '오전');
+insert into p2_member values('alba2', 1, 'alba2', 'user', '010', 20, '한국', '남', '정자동', '오후');
+insert into p2_member values('alba3', 1, 'alba3', 'user', '010', 20, '한국', '남', '정자동', '야간');
 
 insert into p2_item(bno,item_code,item_name,item_image,price,count,hit,category,area) values(p2_item_num.nextVal,'DRINK101','하늘보리P280ml',
 'http://cdn2.bgfretail.com/bgfbrand/files/product/79A4191B8B694F5090EAB3CF00A91F7A.jpg',1000,30,0,'음료','판교');

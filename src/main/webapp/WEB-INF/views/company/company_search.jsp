@@ -46,7 +46,7 @@
 			<td>AREA</td>
 		</tr>
 
-		<c:forEach items="${ result }" var="member" varStatus="status">
+		<c:forEach items="${ result }" var="member">
 			<tr>
 				<td>${ member.id }</td>
 				<td>${ member.name }</td>

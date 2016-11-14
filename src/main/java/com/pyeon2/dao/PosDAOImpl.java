@@ -71,4 +71,39 @@ public class PosDAOImpl implements PosDAO{
 		return session.selectOne(namespace +".getSelectCount", vo);
 	}
 
+	@Override
+	public List<MemberVO> selectUser(MemberVO Mvo) throws Exception {
+		return session.selectList(namespace + ".selectUser", Mvo);
+	}
+
+	@Override
+	public List<MemberVO> selectUserId(MemberVO Mvo) throws Exception {
+		return session.selectList(namespace + ".selectUserId", Mvo);
+	}
+
+	@Override
+	public void updateUser(MemberVO Mvo) throws Exception {
+		session.update(namespace + ".updateUser", Mvo);
+	}
+
+	@Override
+	public void deleteUser(MemberVO Mvo) throws Exception {
+		session.delete(namespace + ".deleteUser", Mvo);
+	}
+
+	@Override
+	public void deleteRole(MemberVO Mvo) throws Exception {
+		session.delete(namespace + ".deleteRole", Mvo);
+	}
+
+	@Override
+	public void insertUser(MemberVO Mvo) throws Exception {
+		session.insert(namespace + ".insertUser", Mvo);
+	}
+
+	@Override
+	public void insertPosition(MemberVO Mvo) throws Exception {
+		session.insert(namespace + ".insertPosition", Mvo);
+	}
+
 }

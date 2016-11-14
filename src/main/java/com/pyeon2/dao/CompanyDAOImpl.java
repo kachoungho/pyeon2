@@ -77,6 +77,11 @@ public class CompanyDAOImpl implements CompanyDAO{
 	public void deleteMember(MemberVO Mvo) throws Exception {
 		session.delete(namespace + ".deleteMember", Mvo);
 	}
+
+	@Override
+	public void deleteRole(MemberVO Mvo) throws Exception {
+		session.delete(namespace + ".deleteMember", Mvo);
+	}
 	
 	@Override
 	public List<ComItemVO> comItemListAll() throws Exception {
