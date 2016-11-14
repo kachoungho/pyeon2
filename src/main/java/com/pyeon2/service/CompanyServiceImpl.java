@@ -57,6 +57,26 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
+	public List<MemberVO> getMember(MemberVO Mvo) throws Exception {
+		return comDao.getMember(Mvo);
+	}
+
+	@Override
+	public void updateMember(MemberVO Mvo) throws Exception {
+		comDao.updateMember(Mvo);
+	}
+
+	@Override
+	public List<MemberVO> getAllMember() throws Exception {
+		return comDao.getAllMember();
+	}
+
+	@Override
+	public void deleteMember(MemberVO Mvo) throws Exception {
+		comDao.deleteMember(Mvo);
+	}
+	
+	@Override
 	public List<ComItemVO> comItemListAll() throws Exception {
 		return comDao.comItemListAll();
 	}
