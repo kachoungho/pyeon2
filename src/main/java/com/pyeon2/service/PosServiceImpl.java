@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.pyeon2.dao.PosDAO;
+import com.pyeon2.domain.Criteria;
 import com.pyeon2.vo.ItemVO;
+import com.pyeon2.vo.SelectSearch;
 import com.pyeon2.vo.UserVO;
 
 @Repository
@@ -21,13 +23,13 @@ public class PosServiceImpl implements PosService {
 	}
 
 	@Override
-	public List<ItemVO> getList() throws Exception {
-		return posDao.getList();
+	public List<ItemVO> getList(Criteria cri) throws Exception {
+		return posDao.getList(cri);
 	}
 
 	@Override
-	public List<ItemVO> selectName(ItemVO vo) throws Exception {
-		return posDao.selectName(vo);
+	public List<ItemVO> selectName(SelectSearch ss) throws Exception {
+		return posDao.selectName(ss);
 	}
 
 	@Override
@@ -53,6 +55,16 @@ public class PosServiceImpl implements PosService {
 	@Override
 	public List<UserVO> selectmanpay(UserVO vo) throws Exception {
 		return posDao.selectmanpay(vo);
+	}
+	
+	@Override
+	public int getCount() {
+		return posDao.getCount();
+	}
+
+	@Override
+	public int getSelectCount(ItemVO vo) {
+		return posDao.getSelectCount(vo);
 	}
 
 }

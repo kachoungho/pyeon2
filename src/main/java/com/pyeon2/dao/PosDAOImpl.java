@@ -6,8 +6,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.pyeon2.domain.Criteria;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
+import com.pyeon2.vo.SelectSearch;
 import com.pyeon2.vo.UserVO;
 
 @Repository
@@ -24,13 +26,13 @@ public class PosDAOImpl implements PosDAO{
 	}
 
 	@Override
-	public List<ItemVO> getList() throws Exception {
-		return session.selectList(namespace + ".getList");
+	public List<ItemVO> getList(Criteria cri) throws Exception {
+		return session.selectList(namespace + ".getList", cri);
 	}
 
 	@Override
-	public List<ItemVO> selectName(ItemVO vo) throws Exception {
-		return session.selectList(namespace + ".selectName", vo);
+	public List<ItemVO> selectName(SelectSearch ss) throws Exception {
+		return session.selectList(namespace + ".selectName", ss);
 	}
 
 	@Override
@@ -57,6 +59,16 @@ public class PosDAOImpl implements PosDAO{
 	@Override
 	public List<UserVO> selectmanpay(UserVO vo) throws Exception {
 		return session.selectList(namespace +".selectmanpay", vo);
+	}
+	
+	@Override
+	public int getCount() {
+		return session.selectOne(namespace +".getCount");
+	}
+
+	@Override
+	public int getSelectCount(ItemVO vo) {
+		return session.selectOne(namespace +".getSelectCount", vo);
 	}
 
 }
