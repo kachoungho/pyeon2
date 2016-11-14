@@ -277,15 +277,25 @@ public class PosController {
 	public ModelAndView selectName(HttpServletRequest request,Model model){
 		ModelAndView mav = new ModelAndView();
 		ItemVO vo = new ItemVO();
-		vo.setItem_name(request.getParameter("item_name"));
+		
 		String page = request.getParameter("page");
+		String category = request.getParameter("category");
+		String item_name = "";
 		SelectSearch ss = new SelectSearch();
 		
 		List<ItemVO> list;
 		int count = 0;
 		int pageNum = 1;
-		int perPageNum = 10;
-		String item_name = request.getParameter("item_name");
+		int perPageNum = 7;
+		
+		if(request.getParameter("item_name") == null){
+			item_name = "";
+		}
+		else{
+			item_name = request.getParameter("item_name");
+		}
+		vo.setCategory(category);
+		vo.setItem_name("%"+item_name+"%");
 		
 		if(page != null && !page.equals("")){
 			pageNum = Integer.parseInt(page);
@@ -299,19 +309,24 @@ public class PosController {
 			ss.setPage(pageNum);
 			ss.setPerPageNum(perPageNum);
 			ss.setItem_name("%"+item_name+"%");
+			ss.setCategory(category);
+
+			System.out.println("나와랏 :" + ss.getItem_name());
+			
 			count = posService.getSelectCount(vo);
+			System.out.println("count : " + posService.getSelectCount(vo));
 			list = posService.selectName(ss);
 			
-			PageMaker pageMaker = new PageMaker();
+			PageMaker pageMaker = new PageMaker(); //페이지 선택부분 처리
 			pageMaker.setCri(cri);
 			pageMaker.setTotalCount(count);
-			
-			System.out.println("list : " + list);
 			
 			mav.addObject("result", list);
 			mav.addObject("pageNum", pageNum);
 			mav.addObject("count", count);
 			mav.addObject("pageMaker", pageMaker);
+			mav.addObject("category", category);
+			mav.addObject("item_name", item_name);
 			
 			mav.setViewName(".pos.pos_item_select_now");
 			

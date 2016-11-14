@@ -42,6 +42,7 @@
   					where rownum <= #{page} * #{perPageNum}
   					and bno > 0
   					and item_name like #{item_name}
+  					and category = #{category}
   				)
 			where rn > (#{page} -1) * #{perPageNum} order by bno asc
  		]]>
