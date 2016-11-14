@@ -5,42 +5,71 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+
+<script type="text/javascript">
+	function button_event(btn) {
+		var name = btn;
+		var val = document.forms[name].elements['id'].value;
+		
+		if(val!=null){
+			if(confirm("[" + val + "]" + "님의 정보를 정말로 삭제하시겠습니까?") == true){
+				document.forms[name].submit();
+			} else {
+				return false;
+			}
+		}
+	}
+</script>
+
 <title>관리자/지점장 선택 후 리스트 출력</title>
 </head>
 <body>
 
-	<form action="${pageContext.request.contextPath}/company/com_search" method="get">
+	<form action="${pageContext.request.contextPath}/company/com_search"
+		method="post">
 		<select name="position">
+			<option value="all">전체 검색</option>
 			<option value="admin">관리자</option>
 			<option value="manager">지점장</option>
 		</select> &nbsp;&nbsp; <input type="submit" value="sorting">
-		<a href="com_searchForm">전체검색</a> 
-		<table>
-			<tr>
-				<td>ID</td>
-				<td>NAME</td>
-				<td>POSITION</td>
-				<td>PHONE</td>
-				<td>AGE</td>
-				<td>ADDRESS</td>
-				<td>GENDER</td>
-				<td>AREA</td>
-			</tr>
-
-			<c:forEach items="${ result }" var="member">
-				<tr>
-					<td>${ member.id }</td>
-					<td>${ member.name }</td>
-					<td>${ member.position }</td>
-					<td>${ member.phone }</td>
-					<td>${ member.age }</td>
-					<td>${ member.address }</td>
-					<td>${ member.gender }</td>
-					<td>${ member.area }</td>
-				</tr>
-			</c:forEach>
-
-		</table>
 	</form>
+
+	<table>
+		<tr>
+			<td>ID</td>
+			<td>NAME</td>
+			<td>POSITION</td>
+			<td>PHONE</td>
+			<td>AGE</td>
+			<td>ADDRESS</td>
+			<td>GENDER</td>
+			<td>AREA</td>
+		</tr>
+
+		<c:forEach items="${ result }" var="member" varStatus="status">
+			<tr>
+				<td>${ member.id }</td>
+				<td>${ member.name }</td>
+				<td>${ member.position }</td>
+				<td>${ member.phone }</td>
+				<td>${ member.age }</td>
+				<td>${ member.address }</td>
+				<td>${ member.gender }</td>
+				<td>${ member.area }</td>
+				<td><input type="button" value="수정"
+					onclick="document.location.href='${pageContext.request.contextPath}/company/com_updateForm?id=${member.id}'"></td>
+				<td>
+	 				<form action="${pageContext.request.contextPath}/company/com_delete"
+					method="POST" name="${member.id}">
+
+					<input type="hidden" name="id" value="${member.id}">
+					<input type="submit" value="삭제"
+						onclick="button_event('${member.id}');return false;" />
+				</form>
+				</td>
+			</tr>
+		</c:forEach>
+
+	</table>
 </body>
 </html>

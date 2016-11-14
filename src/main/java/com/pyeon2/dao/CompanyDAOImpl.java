@@ -57,4 +57,24 @@ public class CompanyDAOImpl implements CompanyDAO{
 		return session.selectList(namespace + ".areaItemList", vo);
 	}
 
+	@Override
+	public List<MemberVO> getMember(MemberVO Mvo) throws Exception {
+		return session.selectList(namespace + ".getMember", Mvo);
+	}
+
+	@Override
+	public void updateMember(MemberVO Mvo) throws Exception {
+		session.update(namespace + ".updateMember", Mvo);
+	}
+
+	@Override
+	public List<MemberVO> getAllMember() throws Exception {
+		return session.selectList(namespace + ".getAllMember");
+	}
+
+	@Override
+	public void deleteMember(MemberVO Mvo) throws Exception {
+		session.delete(namespace + ".deleteMember", Mvo);
+	}
+
 }
