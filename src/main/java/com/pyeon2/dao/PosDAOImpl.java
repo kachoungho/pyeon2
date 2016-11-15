@@ -71,4 +71,78 @@ public class PosDAOImpl implements PosDAO{
 		return session.selectOne(namespace +".getSelectCount", vo);
 	}
 
+	@Override
+	public List<MemberVO> selectUser(MemberVO Mvo) throws Exception {
+		return session.selectList(namespace + ".selectUser", Mvo);
+	}
+
+	@Override
+	public List<MemberVO> selectUserId(MemberVO Mvo) throws Exception {
+		return session.selectList(namespace + ".selectUserId", Mvo);
+	}
+
+	@Override
+	public void updateUser(MemberVO Mvo) throws Exception {
+		session.update(namespace + ".updateUser", Mvo);
+	}
+
+	@Override
+	public void deleteUser(MemberVO Mvo) throws Exception {
+		session.delete(namespace + ".deleteUser", Mvo);
+	}
+
+	@Override
+	public void deleteRole(MemberVO Mvo) throws Exception {
+		session.delete(namespace + ".deleteRole", Mvo);
+	}
+
+	@Override
+	public void insertUser(MemberVO Mvo) throws Exception {
+		session.insert(namespace + ".insertUser", Mvo);
+	}
+
+	@Override
+	public void insertPosition(MemberVO Mvo) throws Exception {
+		session.insert(namespace + ".insertPosition", Mvo);
+	}
+	
+	@Override
+	public List<ItemVO> calcList() throws Exception {
+		return session.selectList(namespace+".calcList");
+	}
+
+	@Override
+	public void calcinsert(ItemVO vo) throws Exception {
+		session.insert(namespace+".calcinsert", vo);
+	}
+
+	@Override
+	public void clacupdate(ItemVO vo) throws Exception {
+		session.insert(namespace+".clacupdate", vo);
+	}
+
+	@Override
+	public int totalcalc() throws Exception {
+		return session.selectOne(namespace+".totalcalc");
+	}
+
+	@Override
+	public void salinsert(ItemVO vo) throws Exception {
+		session.insert(namespace+".salinsert",vo);
+	}
+
+	@Override
+	public void daycalcinser(ItemVO vo) throws Exception {
+		session.insert(namespace+".daycalcinser",vo);
+	}
+
+	@Override
+	public void calcdelete() throws Exception {
+		session.delete(namespace+".calcdelete");
+	}
+
+	@Override
+	public void hitupdate(ItemVO vo) throws Exception {
+		session.delete(namespace+".hitupdate",vo);
+	}
 }

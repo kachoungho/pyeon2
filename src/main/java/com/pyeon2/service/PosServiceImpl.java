@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.pyeon2.dao.PosDAO;
 import com.pyeon2.domain.Criteria;
 import com.pyeon2.vo.ItemVO;
+import com.pyeon2.vo.MemberVO;
 import com.pyeon2.vo.SelectSearch;
 import com.pyeon2.vo.UserVO;
 
@@ -67,4 +68,80 @@ public class PosServiceImpl implements PosService {
 		return posDao.getSelectCount(vo);
 	}
 
+	@Override
+	public List<MemberVO> selectUser(MemberVO Mvo) throws Exception {
+		return posDao.selectUser(Mvo);
+	}
+	
+	@Override
+	public List<MemberVO> selectUserId(MemberVO Mvo) throws Exception {
+		return posDao.selectUserId(Mvo);
+	}
+
+	@Override
+	public void updateUser(MemberVO Mvo) throws Exception {
+		posDao.updateUser(Mvo);
+	}
+
+	@Override
+	public void deleteUser(MemberVO Mvo) throws Exception {
+		posDao.deleteUser(Mvo);
+	}
+
+	@Override
+	public void deleteRole(MemberVO Mvo) throws Exception {
+		posDao.deleteRole(Mvo);
+	}
+
+	@Override
+	public void insertUser(MemberVO Mvo) throws Exception {
+		posDao.insertUser(Mvo);
+	}
+
+	@Override
+	public void insertPosition(MemberVO Mvo) throws Exception {
+		posDao.insertPosition(Mvo);
+	}
+
+	@Override
+	public List<ItemVO> calcList() throws Exception {
+		// TODO Auto-generated method stub
+		return posDao.calcList();
+	}
+
+	@Override
+	public void calcinsert(ItemVO vo) throws Exception {
+		posDao.calcinsert(vo);
+	}
+
+	@Override
+	public void clacupdate(ItemVO vo) throws Exception {
+		posDao.clacupdate(vo);
+	}
+
+	@Override
+	public int totalcalc() throws Exception {
+		return posDao.totalcalc();
+	}
+
+	@Override
+	public void salinsert(ItemVO vo) throws Exception {
+		posDao.salinsert(vo);
+		
+	}
+
+	@Override
+	public void daycalcinser(ItemVO vo) throws Exception {
+		posDao.daycalcinser(vo);
+	}
+
+	@Override
+	public void calcdelete() throws Exception {
+		posDao.calcdelete();
+	}
+
+	@Override
+	public void hitupdate(ItemVO vo) throws Exception {
+		posDao.hitupdate(vo);
+	}
 }

@@ -12,6 +12,7 @@ public class MemberVO {
 	private String gender;
 	private String area;
 	private String role_name;
+	private String optime;
 	
 	public String getId() {
 		return id;
@@ -72,6 +73,12 @@ public class MemberVO {
 	}
 	public void setRole_name(String role_name) {
 		this.role_name = role_name;
+	}
+	public String getOptime() {
+		return optime;
+	}
+	public void setOptime(String optime) {
+		this.optime = optime;
 	}
 	
 }

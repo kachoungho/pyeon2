@@ -33,8 +33,7 @@
 	<select id="checkId" resultType="com.pyeon2.vo.MemberVO">
 		select position, area from p2_member where id = #{userid}
 	</select>
-	
-	
+
 	
 	<!-- 미사용 메소드들 
 	

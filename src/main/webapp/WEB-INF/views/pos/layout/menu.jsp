@@ -34,14 +34,15 @@
       <div style="width:328.5px;" class="w3-dropdown-content w3-light-gray w3-card-4">
         <sec:authentication property="name" var="LoingUser" />
         <sec:authorize access="hasAuthority('ROLE_USER')">
-        	<a href="ps_selectpay?id=${LoingUser}">출 / 퇴근 이력 조회</a>
+        	<a href="${pageContext.request.contextPath}/pos/ps_selectpay?id=${LoingUser}">출 / 퇴근 이력 조회</a>
         </sec:authorize>   
         <sec:authorize access="hasAuthority('ROLE_MANAGER')">
-        	<a href="ps_selectpays?id=${LoingUser}">출 / 퇴근 이력 조회</a>
+        	<a href="${pageContext.request.contextPath}/pos/ps_selectpays?id=${LoingUser}">출 / 퇴근 이력 조회</a>
+        	<a href="${pageContext.request.contextPath}/pos/ps_user_selectForm?id=${LoingUser}">아르바이트생 현황</a>
         </sec:authorize>  
       </div>
       </li>
     
-    <li style="width:25%"><a href="#">계  산</a></li>
+    <li style="width:25%"><a href="ps_calc">계  산</a></li>
   </ul>
 </div>

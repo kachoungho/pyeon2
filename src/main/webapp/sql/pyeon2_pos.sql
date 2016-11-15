@@ -3,21 +3,30 @@ update p2_user set back_time = sysdate where userid = 'ch'
 
 select * from p2_member;
 select * from p2_item;
+select * from p2_calc;
 select * from p2_dayCalc;
 select * from p2_weekCalc;
 select * from p2_monthCalc;
 select * from roll;
+select * from SAL;
 
 drop table p2_member;
 drop table p2_item;
+drop table p2_calc;
 drop table p2_dayCalc;
 drop table p2_weekCalc;
 drop table p2_monthCalc;
 drop table roll;
+<<<<<<< HEAD
 drop table p2_local;
+=======
+drop table sal;
+>>>>>>> 11fbc6b3bfd39881423d959add97cb80eb6bedad
 
-
-
+alter table p2_member add optime varchar2(20);	-- 아르바이트생 근무시간 오전/오후/야간 구분
+insert into p2_member values('alba1', 1, 'alba1', 'user', '010', 20, '한국', '남', '정자동', '오전');
+insert into p2_member values('alba2', 1, 'alba2', 'user', '010', 20, '한국', '남', '정자동', '오후');
+insert into p2_member values('alba3', 1, 'alba3', 'user', '010', 20, '한국', '남', '정자동', '야간');
 
 insert into p2_item(bno,item_code,item_name,item_image,price,count,hit,category,area) values(p2_item_num.nextVal,'DRINK101','하늘보리P280ml',
 'http://cdn2.bgfretail.com/bgfbrand/files/product/79A4191B8B694F5090EAB3CF00A91F7A.jpg',1000,30,0,'음료','판교');
@@ -435,28 +444,6 @@ create table p2_weekCalc(
 );
 
 
-create table p2_dayCalc(
-	item_code varchar2(40) not null, 
-	item_name varchar2(30) not null, 
-	price number(10) not null, 
-	count number(10), 
-	category varchar2(20), 
-	area varchar2(30) not null,
-	p2_time date DEFAULT SYSDATE,
-	constraint dayCalc_pk  primary key(item_code, area)
-);
-
-
-create table p2_calc(
-	item_code varchar2(40) not null, 
-	item_name varchar2(30) not null, 
-	price number(10) not null, 
-	count number(10), 
-	category varchar2(20), 
-	area varchar2(30) not null,
-	constraint calc_pk  primary key(item_code, area)
-);
-
 insert into p2_item(item_code,item_name,item_image,price,count,hit,category,area) values('123','아이스크림','afjlghafjoghaon',2500,5,5,'빙과류','sss')
 create table p2_item(
 	bno number,
@@ -489,4 +476,38 @@ create table p2_member(
 	gender varchar2(10),
 	area varchar2(30) not null,
 	constraint member_pk  primary key(id, area)
+);
+
+
+create table sal(
+	sold varchar2(10) not null,
+	pay number(10) not null,
+	paynum number(10) not null,
+	sal_time varchar2(30),
+	sys_time date default sysdate
+)
+create sequence paynum
+
+
+create table p2_calc(
+	item_code varchar2(40) not null, 
+	item_name varchar2(30) not null, 
+	price number(10) not null, 
+	count number(10), 
+	category varchar2(20), 
+	area varchar2(30) not null,
+	constraint calc_pk  primary key(item_code, area)
+);
+
+
+create table p2_dayCalc(
+	item_code varchar2(40) not null, 
+	item_name varchar2(30) not null, 
+	price number(10) not null, 
+	count number(10), 
+	category varchar2(20), 
+	area varchar2(30) not null,
+	num number(10) not null,
+	p2_time varchar2(30),
+	constraint dayCalc_pk  primary key(item_code, area,p2_time)
 );

@@ -42,6 +42,7 @@
   					where rownum <= #{page} * #{perPageNum}
   					and bno > 0
   					and item_name like #{item_name}
+  					and category = #{category}
   				)
 			where rn > (#{page} -1) * #{perPageNum} order by bno asc
  		]]>
@@ -81,5 +82,84 @@
 	<select id="selectmanpay" resultType="com.pyeon2.vo.UserVO" parameterType="com.pyeon2.vo.UserVO">
 		select userid,year,month,area,sum(hour) as hour,sum(money) as money from p2_userMoney where year=#{year} and month =#{month} and area = (SELECT TO_CHAR(area) as area FROM P2_MEMBER WHERE ID = #{userid}) group by area,userid,year,month order by area,userid,year,month
 	</select>
+	
+	<!-- 아르바이트 리스트 불러오기 (position=user인 아이들) -->
+	<select id="selectUser" resultType="com.pyeon2.vo.MemberVO" parameterType="com.pyeon2.vo.MemberVO">
+		select * from p2_member where position = 'user' and area = (select area from p2_member where id = #{id})
+	</select>
+	
+	<!-- 아르바이트 리스트 불러오기 (id만 받아와서) -->
+	<select id="selectUserId" resultType="com.pyeon2.vo.MemberVO" parameterType="com.pyeon2.vo.MemberVO">
+		select * from p2_member where id = #{id}
+	</select>
+	
+	<!-- 아르바이트생 정보 수정하기 -->
+	<update id="updateUser" parameterType="com.pyeon2.vo.MemberVO">
+		update p2_member set pwd = #{pwd}, name = #{name}, 
+		phone = #{phone}, age = #{age}, address = #{address}, optime = #{optime}
+		where id = #{id}
+	</update>
+	
+	<!-- 아르바이트생 정보 삭제하기 -->
+	<delete id="deleteUser" parameterType="com.pyeon2.vo.MemberVO">
+		delete from p2_member where id = #{id}
+	</delete>
+	
+	<!-- 아르바이트생 권한 삭제하기 -->
+	<delete id="deleteRole" parameterType="com.pyeon2.vo.MemberVO">
+		delete from roll where id = #{id}
+	</delete>
+	
+	<!-- 아르바이트생 정보 입력 -->
+	<insert id="insertUser" parameterType="com.pyeon2.vo.MemberVO">
+		insert into p2_member(id, pwd, name, position, phone, age, address, gender, area, optime)
+		values(#{id}, #{pwd}, #{name}, #{position}, #{phone}, #{age}, #{address}, #{gender}, #{area}, #{optime})
+	</insert>
+	
+	<!-- 입력된 정보를 바탕으로 권한 자동으로 주기 -->
+	<insert id="insertPosition" parameterType="com.pyeon2.vo.MemberVO">
+		insert into roll(id, role_name) values(#{id}, #{role_name})
+	</insert>
+	
+	<!-- 계산 목록 -->
+	<select id="calcList" resultType="com.pyeon2.vo.ItemVO">
+		select * from p2_calc
+	</select>
+	
+	<!-- 계산 가격 총액 -->
+ 	<select id="totalcalc" resultType="Integer">
+		select sum(price) from p2_calc
+	</select>
+	
+	<!-- 계산 목록에 입력 -->
+	<insert id="calcinsert" parameterType="com.pyeon2.vo.ItemVO">
+		insert into p2_calc(item_code,item_name,price,count,category,area) values(#{item_code},(select item_name from p2_item where item_code = #{item_code} and area =#{area}),
+		(select price from p2_item where item_code = #{item_code} and area =#{area}),1,(select category from p2_item where item_code = #{item_code} and area =#{area}),#{area})
+	</insert>
+	
+	<!-- 계산 목록 업데이트(count&price) -->
+	<update id="clacupdate" parameterType="com.pyeon2.vo.ItemVO">
+		update p2_calc set price = (select price from p2_item where item_code = #{item_code} and area = #{area})*((select count from p2_calc where item_code = #{item_code} and area = #{area})+1) , count = count+1 where item_code = #{item_code} and area = #{area}
+	</update>
+	
+	<!-- 계산된 총액과 시간 저장 -->
+	<insert id="salinsert" parameterType="com.pyeon2.vo.ItemVO">
+		insert into sal(sold,pay,paynum,sal_time) values('판매',#{total},paynum.nextVal,(SELECT TO_CHAR(sysdate, 'YYYY-MM-dd HH24:mi' ) as sysdates FROM dual ))
+	</insert>
+	
+	<!-- 정산하는 부분에 리스트 저장 -->
+	<insert id="daycalcinser" parameterType="com.pyeon2.vo.ItemVO">
+		insert into p2_dayCalc(item_code,item_name,price,count,category,area,num,p2_time) values (#{item_code},#{item_name},#{price},#{count},#{category},#{area},(select max(paynum) from sal),(select sal_time from sal where paynum = (select max(paynum) from sal)))
+	</insert>
+	
+	<!-- 계산 목록 계산시 삭제 -->
+	<delete id="calcdelete">
+		delete from p2_calc
+	</delete>
+	
+	<!-- 물품이 팔린만큼 제고에서  hit&count 업데이트 -->
+	<update id="hitupdate" parameterType="com.pyeon2.vo.ItemVO">
+		update p2_item set hit = hit + #{count} , count = count - #{count} where item_code = #{item_code} and area = #{area}
+	</update>
 	
 </mapper>

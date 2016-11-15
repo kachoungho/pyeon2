@@ -52,8 +52,14 @@
 	</table>
 	
 	<form action="ps_item_select_now" method="post">
-		검색할 제품 : <input type="text" name="item_name">
 		<input type="hidden" value="${pageMaker.cri.page }">
+		<select name="category">
+ 			<option value="음료">음료</option>
+  			<option value="스낵">스낵</option>
+  			<option value="인스턴트">인스턴트</option>
+  			<option value="주류">주류</option>
+		</select>
+		검색할 제품 : <input type="text" name="item_name">	
 		<input type="submit" value="검색">
 	</form>
 

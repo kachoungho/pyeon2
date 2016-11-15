@@ -34,6 +34,21 @@ public interface CompanyDAO {
 	// 지점별 재고 현황(물품) 불러오는 리스트
 	public List<ItemVO> areaItemList(ItemVO vo) throws Exception;
 
+	// 아이디별 멤버 정보 불러오는 리스트 (수정하기위함)
+	public List<MemberVO> getMember(MemberVO Mvo) throws Exception;
+
+	// 아이디별 멤버 수정
+	public void updateMember(MemberVO Mvo) throws Exception;
+
+	// 모든 멤버 리스트 출력
+	public List<MemberVO> getAllMember() throws Exception;
+	
+	// 멤버 정보 삭제
+	public void deleteMember(MemberVO Mvo) throws Exception;
+	
+	// 멤버 권한 삭제
+	public void deleteRole(MemberVO Mvo) throws Exception;
+	
 	// 본사 전체 재고 확인
 	public List<ComItemVO> comItemListAll() throws Exception;
 

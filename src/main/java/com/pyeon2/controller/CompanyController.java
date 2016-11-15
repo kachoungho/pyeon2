@@ -31,19 +31,18 @@ public class CompanyController {
 	public String comStockGET() {
 		return ".company.company_stock";
 	}
-	
-	
+
 	@RequestMapping(value = "company/com_stock", method = RequestMethod.POST)
 	public ModelAndView comStockPOST(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		ItemVO vo = new ItemVO(); 
+		ItemVO vo = new ItemVO();
 		System.out.println("area : " + request.getParameter("area"));
 		vo.setArea(request.getParameter("area"));
 		List<ItemVO> list = companyService.areaItemList(vo);
-		
+
 		mav.addObject("result", list);
 		mav.setViewName(".company.company_stock");
-		
+
 		return mav;
 	}
 
@@ -130,21 +129,28 @@ public class CompanyController {
 		return mav;
 	}
 
-	@RequestMapping(value = "company/com_search", method = RequestMethod.GET)
+	@RequestMapping(value = "company/com_search", method = RequestMethod.POST)
 	public ModelAndView comPersonnel(HttpServletRequest request) {
 
 		ModelAndView mav = new ModelAndView();
 		List<MemberVO> list;
 
-		MemberVO memberVO = new MemberVO();
-		memberVO.setPosition(request.getParameter("position"));
+		MemberVO Mvo = new MemberVO();
 
+		String position = request.getParameter("position");
+		Mvo.setPosition(position);
+		
 		try {
 
-			list = companyService.getPSMember(memberVO);
+			if (position.equals("all")) {
+				list = companyService.getAllMember();
+			} else {
+				list = companyService.getPSMember(Mvo);
+			}
+
 			mav.addObject("result", list);
 			mav.setViewName(".company.company_search");
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -157,13 +163,14 @@ public class CompanyController {
 		return ".company.company_insertForm";
 	}
 
-	@RequestMapping(value = "company/com_insert", method = RequestMethod.GET)
+	@RequestMapping(value = "company/com_insert", method = RequestMethod.POST)
 	public ModelAndView comPersonnelInsert(HttpServletRequest request, MemberVO memberVO) {
 
 		ModelAndView mav = new ModelAndView();
 		List<MemberVO> list;
 
 		try {
+
 			companyService.insertAdminMember(memberVO);
 
 			String position = memberVO.getPosition();
@@ -193,7 +200,58 @@ public class CompanyController {
 
 		return mav;
 	}
+
+
+	@RequestMapping("company/com_updateForm")
+	public ModelAndView comPersonnelUpdateForm(HttpServletRequest request, MemberVO Mvo) {
+
+		ModelAndView mav = new ModelAndView();
+		List<MemberVO> list;
+
+		Mvo.setId(request.getParameter("id"));
+
+		try {
+			list = companyService.getMember(Mvo);
+
+			mav.addObject("list", list);
+			mav.setViewName(".company.company_updateForm");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return mav;
+	}
+
+	@RequestMapping(value = "company/com_update", method = RequestMethod.POST)
+	public ModelAndView comPersonnelUpdate(HttpServletRequest request, MemberVO Mvo) {
+
+		ModelAndView mav = new ModelAndView();
+
+		try {
+			companyService.updateMember(Mvo);
+			mav.setViewName(".company.company_update");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return mav;
+	}
 	
+	@RequestMapping(value="company/com_delete", method = RequestMethod.POST)
+	public String comPersonnelDelete(HttpServletRequest request, MemberVO Mvo) {
+		
+		Mvo.setId(request.getParameter("id"));
+		
+		try {
+			companyService.deleteMember(Mvo);
+			companyService.deleteRole(Mvo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ".company.company_delete";
+	}
 	@RequestMapping(value = "company/com_companyStock", method = RequestMethod.GET)
 	public String companyStockGET() {
 		return ".company.company_companyStock";
