@@ -14,6 +14,7 @@ drop table p2_dayCalc;
 drop table p2_weekCalc;
 drop table p2_monthCalc;
 drop table roll;
+drop table p2_local;
 
 
 
@@ -263,7 +264,7 @@ insert into p2_item(bno,item_code,item_name,item_image,price,count,hit,category,
 insert into p2_item(bno,item_code,item_name,item_image,price,count,hit,category,area) values(p2_item_num.nextVal,'DRINK105','네이처티라임모히또중',
 'http://cdn2.bgfretail.com/bgfbrand/files/product/8801056052997.jpg',2000,30,0,'음료','정자');
 insert into p2_item(bno,item_code,item_name,item_image,price,count,hit,category,area) values(p2_item_num.nextVal,'DRINK106','커피빈카페라떼P300',
-'http://cdn2.bgfretail.com/bgfbrand/files/product/E801676D88D548D0A1B4D66C997C2990.jpg',2500,30,0,'음료','정자');
+'http://c/.dn2.bgfretail.com/bgfbrand/files/product/E801676D88D548D0A1B4D66C997C2990.jpg',2500,30,0,'음료','정자');
 insert into p2_item(bno,item_code,item_name,item_image,price,count,hit,category,area) values(p2_item_num.nextVal,'DRINK107','인삼한뿌리소병',
 'http://cdn2.bgfretail.com/bgfbrand/files/product/8801007020945.jpg',4000,30,0,'음료','정자');
 insert into p2_item(bno,item_code,item_name,item_image,price,count,hit,category,area) values(p2_item_num.nextVal,'DRINK108','립톤복숭아중P',
@@ -386,6 +387,21 @@ insert into p2_item values('2', 'beer2', 'beer2', '2200', '20', '0', 'drink', 'p
 insert into p2_item values('3', 'beer3', 'beer3', '2200', '20', '0', 'drink', 'pangyo');
 insert into p2_item values('4', 'beer4', 'beer4', '2200', '20', '0', 'drink', 'pangyo');
 
+
+insert into p2_gps values('판교', '경기도 성남시 분당구 삼평동 682 유스페이스2 B동 8층', 'Pyeon2 판교점' ,'010-6666-8345');
+insert into p2_gps values('정자', '경기도 성남시 분당구 정자동 166-1 101호', 'Pyeon2 정자점' , '010-5581-0156');
+insert into p2_gps values('야탑', '경기 성남시 분당구 야탑동 355-4 한주코아제상가동', 'Pyeon2 야탑점' , '010-3131-7995');
+
+
+drop table p2_gps;
+
+
+create table p2_gps(
+	area varchar2(30) not null,
+	address varchar2(500) not null,
+	place varchar2(100) not null,
+	phone varchar2(20)
+);
 
 
 CREATE TABLE ROLL(

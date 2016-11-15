@@ -5,6 +5,8 @@ select * from company_item;				-- 본사 재고 테이블
 drop table company_item;
 
 
+
+
 create table company_item(
 	item_code varchar2(40) not null, 
 	item_name varchar2(100) not null, 
