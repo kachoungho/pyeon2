@@ -43,6 +43,6 @@
       </div>
       </li>
     
-    <li style="width:25%"><a href="#">계  산</a></li>
+    <li style="width:25%"><a href="ps_calc">계  산</a></li>
   </ul>
 </div>

@@ -103,4 +103,45 @@ public class PosServiceImpl implements PosService {
 		posDao.insertPosition(Mvo);
 	}
 
+	@Override
+	public List<ItemVO> calcList() throws Exception {
+		// TODO Auto-generated method stub
+		return posDao.calcList();
+	}
+
+	@Override
+	public void calcinsert(ItemVO vo) throws Exception {
+		posDao.calcinsert(vo);
+	}
+
+	@Override
+	public void clacupdate(ItemVO vo) throws Exception {
+		posDao.clacupdate(vo);
+	}
+
+	@Override
+	public int totalcalc() throws Exception {
+		return posDao.totalcalc();
+	}
+
+	@Override
+	public void salinsert(ItemVO vo) throws Exception {
+		posDao.salinsert(vo);
+		
+	}
+
+	@Override
+	public void daycalcinser(ItemVO vo) throws Exception {
+		posDao.daycalcinser(vo);
+	}
+
+	@Override
+	public void calcdelete() throws Exception {
+		posDao.calcdelete();
+	}
+
+	@Override
+	public void hitupdate(ItemVO vo) throws Exception {
+		posDao.hitupdate(vo);
+	}
 }

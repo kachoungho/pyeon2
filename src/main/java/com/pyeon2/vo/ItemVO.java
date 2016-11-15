@@ -11,6 +11,10 @@ public class ItemVO {
 	private String category;
 	private String area;
 	private String p2_time;
+	private int pay;
+	private int total;
+	private String sold;
+	private String sal_time;
 	
 	public String getItem_code() {
 		return item_code;
@@ -65,6 +69,30 @@ public class ItemVO {
 	}
 	public void setP2_time(String p2_time) {
 		this.p2_time = p2_time;
+	}
+	public int getPay() {
+		return pay;
+	}
+	public void setPay(int pay) {
+		this.pay = pay;
+	}
+	public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
+	}
+	public String getSold() {
+		return sold;
+	}
+	public void setSold(String sold) {
+		this.sold = sold;
+	}
+	public String getSal_time() {
+		return sal_time;
+	}
+	public void setSal_time(String sal_time) {
+		this.sal_time = sal_time;
 	}
 		
 }

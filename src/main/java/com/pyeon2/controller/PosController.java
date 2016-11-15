@@ -462,5 +462,119 @@ public class PosController {
 
 		return mav;
 	}
+	
+	@RequestMapping(value="ps_calc", method = RequestMethod.GET)
+	public ModelAndView calcget() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(".pos.pos_calc");
+
+		return mav;
+	}
+	
+	@RequestMapping(value = "ps_calc", method = RequestMethod.POST)
+	public ModelAndView calcpost(HttpServletRequest request, Model model) throws Exception{
+		ItemVO vo = new ItemVO();
+		vo.setItem_code(request.getParameter("item_code"));
+		vo.setArea(request.getParameter("area"));
+		/*vo.setPay(Integer.parseInt(request.getParameter("pay")));*/
+		ModelAndView mav = new ModelAndView();
+		int cal = 0;
+		int total = 0;
+		/*int pay = vo.getPay();*/
+		List<ItemVO> list = posService.calcList();
+		for(int i =0 ; i < list.size() ; i++){
+			if(vo.getItem_code().equals(list.get(i).getItem_code())&& vo.getArea().equals(list.get(i).getArea())){
+				cal = 1;
+			}
+		}
+		
+		switch (cal) {
+			case 1:
+			{
+				posService.clacupdate(vo);
+				break;
+			}
+			case 0:
+			{
+				posService.calcinsert(vo);
+				break;
+			}
+			default:
+			{
+				break;
+			}
+		}
+		
+		list = posService.calcList();
+		total = posService.totalcalc();
+		/*pay = pay - total;*/
+		
+		mav.addObject("result", list);
+		mav.addObject("total",total);
+		/*mav.addObject("pay",pay);*/
+		mav.setViewName(".pos.pos_calc");
+
+		return mav;
+	}
+	
+	@RequestMapping(value = "ps_daycalc", method = RequestMethod.POST)
+	public ModelAndView calcpostday(HttpServletRequest request, Model model) throws Exception{
+		ItemVO vo = new ItemVO();
+		
+		vo.setPay(Integer.parseInt(request.getParameter("pay")));
+		ModelAndView mav = new ModelAndView();
+		int total = 0;
+		int pay = vo.getPay();
+		List<ItemVO> list = posService.calcList();
+		
+		total = posService.totalcalc();
+		pay = pay - total;
+		
+		mav.addObject("result", list);
+		mav.addObject("total",total);
+		mav.addObject("pay",pay);
+		mav.setViewName(".pos.pos_calc");
+
+		return mav;
+	}
+	
+	@RequestMapping(value = "ps_daycalcfin", method = RequestMethod.POST)
+	public ModelAndView calcpostfinday(HttpServletRequest request, Model model) throws Exception{
+		ItemVO vo = new ItemVO();
+		
+		ModelAndView mav = new ModelAndView();
+		vo.setTotal(Integer.parseInt(request.getParameter("total")));
+		posService.salinsert(vo);
+		
+		List<ItemVO> list = posService.calcList();
+		
+		for(int i = 0 ; i<list.size() ; i++){
+			vo.setItem_code(list.get(i).getItem_code());
+			vo.setItem_name(list.get(i).getItem_name());
+			vo.setCount(list.get(i).getCount());
+			vo.setCategory(list.get(i).getCategory());
+			vo.setArea(list.get(i).getArea());
+			vo.setPrice(list.get(i).getPrice());
+			
+			posService.daycalcinser(vo);
+			posService.hitupdate(vo);
+		}
+		
+		posService.calcdelete();
+		
+		mav.setViewName(".pos.pos_calc");
+
+		return mav;
+	}
+	
+	@RequestMapping(value = "ps_calccancle", method = RequestMethod.POST)
+	public ModelAndView calccancle(Model model) throws Exception{
+
+		ModelAndView mav = new ModelAndView();
+		posService.calcdelete();
+		
+		mav.setViewName(".pos.pos_calc");
+		return mav;
+	}
 
 }
