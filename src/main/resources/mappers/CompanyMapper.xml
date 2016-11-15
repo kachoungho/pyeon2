@@ -96,12 +96,47 @@
 
 	<!-- 본사 전체 재고 확인 -->
 	<select id="comItemListAll" resultType="com.pyeon2.vo.ComItemVO">
-		select * from company_item
+		<![CDATA[
+			select
+  				bno, item_code, item_name, item_image, cost, price, count, category
+			from
+  				(
+  					select
+    				/*+INDEX_DESC(tbl_board, pk_board)*/
+    					rownum rn, bno, item_code, item_name, item_image, cost, price, count, category
+ 					from company_item
+  					where rownum <= #{page} * #{perPageNum}
+  					and bno > 0
+  				)
+			where rn > (#{page} -1) * #{perPageNum} order by bno asc
+ 		]]>
+	</select>
+	
+	<select id="getComItemCount" resultType="Integer">
+		select count(*) from company_item
 	</select>
 	
 	<!-- 본사 전체 재고 카테고리별 리스트 -->
 	<select id="comItemList" resultType="com.pyeon2.vo.ComItemVO" parameterType="com.pyeon2.vo.ComItemVO">
-		select * from company_item where category = #{category}
+		<![CDATA[
+			select
+  				bno, item_code, item_name, item_image, cost, price, count, category
+			from
+  				(
+  					select
+    				/*+INDEX_DESC(tbl_board, pk_board)*/
+    					rownum rn, bno, item_code, item_name, item_image, cost, price, count, category
+ 					from company_item
+  					where rownum <= #{cri.page} * #{cri.perPageNum}
+  					and bno > 0
+  					and category = #{category}
+  				)
+			where rn > (#{cri.page} -1) * #{cri.perPageNum} order by bno asc
+ 		]]>
+	</select>
+	
+	<select id="getComItemCountCategory" resultType="Integer" parameterType="String">
+		select count(*) from company_item where category = #{category}
 	</select>
 	
 	<select id="getAreaCount" parameterType="com.pyeon2.vo.ItemVO" resultType="Integer">

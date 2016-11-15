@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.pyeon2.domain.Criteria;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
@@ -84,8 +85,8 @@ public class CompanyDAOImpl implements CompanyDAO{
 	}
 	
 	@Override
-	public List<ComItemVO> comItemListAll() throws Exception {
-		return session.selectList(namespace + ".comItemListAll");
+	public List<ComItemVO> comItemListAll(Criteria cri) throws Exception {
+		return session.selectList(namespace + ".comItemListAll", cri);
 	}
 
 	@Override
@@ -101,6 +102,16 @@ public class CompanyDAOImpl implements CompanyDAO{
 	@Override
 	public int getAreaCount(ItemVO vo) throws Exception {
 		return session.selectOne(namespace + ".getAreaCount", vo);
+	}
+
+	@Override
+	public int getComItemCount() throws Exception {
+		return session.selectOne(namespace + ".getComItemCount");
+	}
+
+	@Override
+	public int getComItemCountCategory(String category) throws Exception {
+		return session.selectOne(namespace + ".getComItemCountCategory", category);
 	}
 
 }

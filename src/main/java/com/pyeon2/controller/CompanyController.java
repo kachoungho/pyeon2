@@ -369,28 +369,64 @@ public class CompanyController {
 		
 		return ".company.company_delete";
 	}
-	@RequestMapping(value = "company/com_companyStock", method = RequestMethod.GET)
+	/*@RequestMapping(value = "company/com_companyStock", method = RequestMethod.GET)
 	public String companyStockGET() {
 		return ".company.company_companyStock";
-	}
+	}*/
 	
-	@RequestMapping(value = "company/com_companyStock", method = RequestMethod.POST)
-	public ModelAndView companyStockPOST(HttpServletRequest request) throws Exception {
+	@RequestMapping(value = "company/com_companyStock")
+	public ModelAndView companyStockPOST(HttpServletRequest request, String page) throws Exception {
 		ComItemVO vo = new ComItemVO();
 		ModelAndView mav = new ModelAndView();
 		List<ComItemVO> list = null;
-		
 		String category = request.getParameter("category");
-		vo.setCategory(category);
-		if(category.equals("all")){
-			list = companyService.comItemListAll();
-		} else {
-			list = companyService.comItemList(vo);
+
+		int count = 0;
+		int pageNum = 1;
+
+		if (page != null && !page.equals("")) {
+			pageNum = Integer.parseInt(page);
 		}
-		
-		
-		mav.addObject("result", list);
-		mav.setViewName(".company.company_companyStock");
+
+		try {
+			Criteria cri = new Criteria();
+			cri.setPage(pageNum);
+			cri.setPerPageNum(7);
+
+			if(category == null){
+				category = "all";
+				count = companyService.getComItemCount();
+			}
+			else{
+				category = request.getParameter("category");
+				count = companyService.getComItemCountCategory(category);
+			}
+			
+			vo.setCategory(category);
+			vo.setCri(cri);
+			
+			if(category.equals("all")){
+				list = companyService.comItemListAll(cri);
+			} else {
+				list = companyService.comItemList(vo);
+			}
+
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(cri);
+			pageMaker.setTotalCount(count);
+
+			mav.addObject("result", list);
+			mav.addObject("pageNum", pageNum);
+			mav.addObject("count", count);
+			mav.addObject("pageMaker", pageMaker);
+			mav.addObject("category", category);
+
+			mav.setViewName(".company.company_companyStock");
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return mav;
 	}

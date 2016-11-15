@@ -2,6 +2,7 @@ package com.pyeon2.dao;
 
 import java.util.List;
 
+import com.pyeon2.domain.Criteria;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
@@ -50,11 +51,17 @@ public interface CompanyDAO {
 	public void deleteRole(MemberVO Mvo) throws Exception;
 	
 	// 본사 전체 재고 확인
-	public List<ComItemVO> comItemListAll() throws Exception;
+	public List<ComItemVO> comItemListAll(Criteria cri) throws Exception;
 
 	// 본사 전체 재고 카테고리별 리스트
 	public List<ComItemVO> comItemList(ComItemVO vo) throws Exception;
 	
 	// 지점별 재고 수
 	public int getAreaCount(ItemVO vo) throws Exception;
+	
+	// 본사 재고 수
+	public int getComItemCount() throws Exception;
+	
+	//카테고리별 본사 재고 수
+	public int getComItemCountCategory(String category) throws Exception;
 }
