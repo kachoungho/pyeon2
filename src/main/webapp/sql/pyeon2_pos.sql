@@ -404,6 +404,7 @@ insert into p2_gps values('야탑', '경기 성남시 분당구 야탑동 355-4 
 
 drop table p2_gps;
 
+select * from 
 
 create table p2_gps(
 	area varchar2(30) not null,
@@ -478,6 +479,7 @@ create table p2_member(
 	constraint member_pk  primary key(id, area)
 );
 
+drop table sal
 
 create table sal(
 	sold varchar2(10) not null,
