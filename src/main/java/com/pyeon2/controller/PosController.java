@@ -429,7 +429,7 @@ public class PosController {
 		return mav;
 	}
 
-	@RequestMapping(value = "pos/pos_user_insert", method = RequestMethod.POST)
+	@RequestMapping(value = "pos/ps_user_insert", method = RequestMethod.POST)
 	public ModelAndView comPersonnelInsert(HttpServletRequest request, MemberVO Mvo) {
 
 		ModelAndView mav = new ModelAndView();
@@ -463,19 +463,25 @@ public class PosController {
 		return mav;
 	}
 	
-	@RequestMapping(value="ps_calc", method = RequestMethod.GET)
-	public ModelAndView calcget() {
+	@RequestMapping(value="pos/ps_calcform", method = RequestMethod.GET)
+	public ModelAndView calcget(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
+		MemberVO vo = new MemberVO();
+		vo.setId(request.getParameter("id"));
+		
+		mav.addObject("vo", vo);
 		mav.setViewName(".pos.pos_calc");
 
 		return mav;
 	}
 	
-	@RequestMapping(value = "ps_calc", method = RequestMethod.POST)
+	@RequestMapping(value = "pos/ps_calc", method = RequestMethod.POST)
 	public ModelAndView calcpost(HttpServletRequest request, Model model) throws Exception{
+		
 		ItemVO vo = new ItemVO();
 		vo.setItem_code(request.getParameter("item_code"));
-		vo.setArea(request.getParameter("area"));
+		vo.setId(request.getParameter("id"));
+		
 		/*vo.setPay(Integer.parseInt(request.getParameter("pay")));*/
 		ModelAndView mav = new ModelAndView();
 		int cal = 0;
@@ -511,17 +517,19 @@ public class PosController {
 		
 		mav.addObject("result", list);
 		mav.addObject("total",total);
+		mav.addObject("vo", vo);
 		/*mav.addObject("pay",pay);*/
 		mav.setViewName(".pos.pos_calc");
 
 		return mav;
 	}
 	
-	@RequestMapping(value = "ps_daycalc", method = RequestMethod.POST)
+	@RequestMapping(value = "pos/ps_daycalc", method = RequestMethod.POST)
 	public ModelAndView calcpostday(HttpServletRequest request, Model model) throws Exception{
 		ItemVO vo = new ItemVO();
 		
 		vo.setPay(Integer.parseInt(request.getParameter("pay")));
+		vo.setId(request.getParameter("id"));
 		ModelAndView mav = new ModelAndView();
 		int total = 0;
 		int pay = vo.getPay();
@@ -533,17 +541,19 @@ public class PosController {
 		mav.addObject("result", list);
 		mav.addObject("total",total);
 		mav.addObject("pay",pay);
+		mav.addObject("vo", vo);
 		mav.setViewName(".pos.pos_calc");
 
 		return mav;
 	}
 	
-	@RequestMapping(value = "ps_daycalcfin", method = RequestMethod.POST)
+	@RequestMapping(value = "pos/ps_daycalcfin", method = RequestMethod.POST)
 	public ModelAndView calcpostfinday(HttpServletRequest request, Model model) throws Exception{
 		ItemVO vo = new ItemVO();
 		
 		ModelAndView mav = new ModelAndView();
 		vo.setTotal(Integer.parseInt(request.getParameter("total")));
+		vo.setId(request.getParameter("id"));
 		posService.salinsert(vo);
 		
 		List<ItemVO> list = posService.calcList();
@@ -562,17 +572,21 @@ public class PosController {
 		
 		posService.calcdelete();
 		
+		mav.addObject("vo", vo);
 		mav.setViewName(".pos.pos_calc");
 
 		return mav;
 	}
 	
-	@RequestMapping(value = "ps_calccancle", method = RequestMethod.POST)
-	public ModelAndView calccancle(Model model) throws Exception{
+	@RequestMapping(value = "pos/ps_calccancle", method = RequestMethod.POST)
+	public ModelAndView calccancle(HttpServletRequest request, Model model) throws Exception{
 
 		ModelAndView mav = new ModelAndView();
+		ItemVO vo = new ItemVO();
+		vo.setId(request.getParameter("id"));
 		posService.calcdelete();
 		
+		mav.addObject("vo", vo);
 		mav.setViewName(".pos.pos_calc");
 		return mav;
 	}

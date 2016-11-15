@@ -1,7 +1,8 @@
 package com.pyeon2.vo;
 
 public class ItemVO {
-
+	
+	private String id;
 	private String item_code;
 	private String item_name;
 	private String item_image;
@@ -16,6 +17,12 @@ public class ItemVO {
 	private String sold;
 	private String sal_time;
 	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getItem_code() {
 		return item_code;
 	}

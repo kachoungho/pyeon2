@@ -42,7 +42,8 @@
         </sec:authorize>  
       </div>
       </li>
-    
-    <li style="width:25%"><a href="ps_calc">계  산</a></li>
+    <sec:authorize access="hasAnyAuthority('ROLE_MANAGER', 'ROLE_USER')">
+    <li style="width:25%"><a href="${pageContext.request.contextPath}/pos/ps_calcform?id=${LoingUser}">계  산</a></li>
+  	</sec:authorize>
   </ul>
 </div>
