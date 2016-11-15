@@ -144,4 +144,9 @@ public class PosServiceImpl implements PosService {
 	public void hitupdate(ItemVO vo) throws Exception {
 		posDao.hitupdate(vo);
 	}
+
+	@Override
+	public String areaserch(ItemVO vo) throws Exception {
+		return posDao.areaserch(vo);
+	}
 }

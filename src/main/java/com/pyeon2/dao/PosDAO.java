@@ -83,4 +83,7 @@ public interface PosDAO {
 		
 	//계산된 count만큼 item테이블에서 hit올라감
 	public void hitupdate(ItemVO vo) throws Exception;
+	
+	//area 가져오기
+	public String areaserch(ItemVO vo) throws Exception;
 }

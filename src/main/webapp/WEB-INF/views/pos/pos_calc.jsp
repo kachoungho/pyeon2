@@ -13,16 +13,16 @@
 <script type="text/javascript">
   function input(index) {
     if (index == 1) {
-      document.daily.action='ps_calc';
+      document.daily.action="${pageContext.request.contextPath}/pos/ps_calc";
     }
     if (index == 2) {
-      document.daily.action='ps_daycalc';
+      document.daily.action="${pageContext.request.contextPath}/pos/ps_daycalc";
     }
     if (index == 3) {
-        document.daily.action='ps_daycalcfin';
+        document.daily.action="${pageContext.request.contextPath}/pos/ps_daycalcfin";
     }
     if (index == 4) {
-        document.daily.action='ps_calccancle';
+        document.daily.action="${pageContext.request.contextPath}/pos/ps_calccancle";
     }
    
     document.daily.submit();
@@ -120,7 +120,7 @@
 
 
 	<input type="text" name="item_code">
-	<input type="hidden" name="area" value="판교"> 
+	<input type="hidden" name="area" value="${ area }"> 
 	<input type="button" value = "입력" onclick = 'input(1)'/>
 </form>
 

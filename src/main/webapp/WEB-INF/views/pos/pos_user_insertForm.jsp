@@ -8,7 +8,7 @@
 <title>아르바이트생 정보 입력</title>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/pos/pos_user_insert"
+	<form action="${pageContext.request.contextPath}/pos/ps_user_insert"
 		method="post">
 		<table>
 			<tr>

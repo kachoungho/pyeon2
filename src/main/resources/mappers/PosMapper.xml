@@ -162,4 +162,8 @@
 		update p2_item set hit = hit + #{count} , count = count - #{count} where item_code = #{item_code} and area = #{area}
 	</update>
 	
+	<select id="areaserch" resultType="String" parameterType="com.pyeon2.vo.ItemVO"> 
+		SELECT TO_CHAR(area) as area FROM P2_MEMBER WHERE ID = #{id}
+	</select>
+	
 </mapper>
