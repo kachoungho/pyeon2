@@ -145,4 +145,9 @@ public class PosDAOImpl implements PosDAO{
 	public void hitupdate(ItemVO vo) throws Exception {
 		session.delete(namespace+".hitupdate",vo);
 	}
+
+	@Override
+	public String areaserch(ItemVO vo) throws Exception {
+		return session.selectOne(namespace+".areaserch",vo);
+	}
 }

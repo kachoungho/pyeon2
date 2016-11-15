@@ -133,8 +133,8 @@
 	
 	<!-- 계산 목록에 입력 -->
 	<insert id="calcinsert" parameterType="com.pyeon2.vo.ItemVO">
-		insert into p2_calc(item_code,item_name,price,count,category,area) values(#{item_code},(select item_name from p2_item where item_code = #{item_code} and area = (SELECT TO_CHAR(area) as area FROM P2_MEMBER WHERE ID = #{id})),
-		(select price from p2_item where item_code = #{item_code} and area = (SELECT TO_CHAR(area) as area FROM P2_MEMBER WHERE ID = #{id})),1,(select category from p2_item where item_code = #{item_code} and area = (SELECT TO_CHAR(area) as area FROM P2_MEMBER WHERE ID = #{id})),(SELECT TO_CHAR(area) as area FROM P2_MEMBER WHERE ID = #{id}))
+		insert into p2_calc(item_code,item_name,price,count,category,area) values(#{item_code},(select item_name from p2_item where item_code = #{item_code} and area =#{area}),
+		(select price from p2_item where item_code = #{item_code} and area =#{area}),1,(select category from p2_item where item_code = #{item_code} and area =#{area}),#{area})
 	</insert>
 	
 	<!-- 계산 목록 업데이트(count&price) -->
@@ -161,5 +161,9 @@
 	<update id="hitupdate" parameterType="com.pyeon2.vo.ItemVO">
 		update p2_item set hit = hit + #{count} , count = count - #{count} where item_code = #{item_code} and area = #{area}
 	</update>
+	
+	<select id="areaserch" resultType="String" parameterType="com.pyeon2.vo.ItemVO"> 
+		SELECT TO_CHAR(area) as area FROM P2_MEMBER WHERE ID = #{id}
+	</select>
 	
 </mapper>

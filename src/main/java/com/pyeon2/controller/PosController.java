@@ -464,12 +464,12 @@ public class PosController {
 	}
 	
 	@RequestMapping(value="pos/ps_calcform", method = RequestMethod.GET)
-	public ModelAndView calcget(HttpServletRequest request) {
+	public ModelAndView calcget(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		MemberVO vo = new MemberVO();
+		ItemVO vo = new ItemVO();
 		vo.setId(request.getParameter("id"));
-		
-		mav.addObject("vo", vo);
+		String area = posService.areaserch(vo);
+		mav.addObject("area", area);
 		mav.setViewName(".pos.pos_calc");
 
 		return mav;
@@ -480,7 +480,7 @@ public class PosController {
 		
 		ItemVO vo = new ItemVO();
 		vo.setItem_code(request.getParameter("item_code"));
-		vo.setId(request.getParameter("id"));
+		vo.setArea(request.getParameter("area"));
 		
 		/*vo.setPay(Integer.parseInt(request.getParameter("pay")));*/
 		ModelAndView mav = new ModelAndView();
@@ -517,7 +517,7 @@ public class PosController {
 		
 		mav.addObject("result", list);
 		mav.addObject("total",total);
-		mav.addObject("vo", vo);
+		mav.addObject("area", vo.getArea());
 		/*mav.addObject("pay",pay);*/
 		mav.setViewName(".pos.pos_calc");
 
@@ -527,9 +527,8 @@ public class PosController {
 	@RequestMapping(value = "pos/ps_daycalc", method = RequestMethod.POST)
 	public ModelAndView calcpostday(HttpServletRequest request, Model model) throws Exception{
 		ItemVO vo = new ItemVO();
-		
+		vo.setArea(request.getParameter("area"));
 		vo.setPay(Integer.parseInt(request.getParameter("pay")));
-		vo.setId(request.getParameter("id"));
 		ModelAndView mav = new ModelAndView();
 		int total = 0;
 		int pay = vo.getPay();
@@ -541,7 +540,7 @@ public class PosController {
 		mav.addObject("result", list);
 		mav.addObject("total",total);
 		mav.addObject("pay",pay);
-		mav.addObject("vo", vo);
+		mav.addObject("area", vo.getArea());
 		mav.setViewName(".pos.pos_calc");
 
 		return mav;
@@ -553,7 +552,6 @@ public class PosController {
 		
 		ModelAndView mav = new ModelAndView();
 		vo.setTotal(Integer.parseInt(request.getParameter("total")));
-		vo.setId(request.getParameter("id"));
 		posService.salinsert(vo);
 		
 		List<ItemVO> list = posService.calcList();
@@ -572,7 +570,7 @@ public class PosController {
 		
 		posService.calcdelete();
 		
-		mav.addObject("vo", vo);
+		mav.addObject("area", vo.getArea());
 		mav.setViewName(".pos.pos_calc");
 
 		return mav;
@@ -583,10 +581,9 @@ public class PosController {
 
 		ModelAndView mav = new ModelAndView();
 		ItemVO vo = new ItemVO();
-		vo.setId(request.getParameter("id"));
 		posService.calcdelete();
-		
-		mav.addObject("vo", vo);
+		vo.setArea(request.getParameter("area"));
+		mav.addObject("area", vo.getArea());
 		mav.setViewName(".pos.pos_calc");
 		return mav;
 	}

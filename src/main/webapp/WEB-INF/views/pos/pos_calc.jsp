@@ -120,7 +120,7 @@
 
 
 	<input type="text" name="item_code">
-	<input type="hidden" name="id" value="${ vo.id }"> 
+	<input type="hidden" name="area" value="${ area }"> 
 	<input type="button" value = "입력" onclick = 'input(1)'/>
 </form>
 
