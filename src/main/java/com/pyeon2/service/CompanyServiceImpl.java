@@ -95,5 +95,11 @@ public class CompanyServiceImpl implements CompanyService {
 	public void deleteRole(MemberVO Mvo) throws Exception {
 		comDao.deleteRole(Mvo);
 	}
+	
+	@Override
+	public int getAreaCount(ItemVO vo) throws Exception {
+		return comDao.getAreaCount(vo);
+	}
+
 
 }

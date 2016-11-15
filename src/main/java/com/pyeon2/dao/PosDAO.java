@@ -86,4 +86,5 @@ public interface PosDAO {
 	
 	//area 가져오기
 	public String areaserch(ItemVO vo) throws Exception;
+	
 }

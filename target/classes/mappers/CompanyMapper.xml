@@ -48,7 +48,23 @@
 	
 	<!-- 지점별 재고 현황(물품) 불러오는 리스트 -->
 	<select id="areaItemList" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
-		select * from p2_item where area = #{area}
+		<![CDATA[
+			select
+  				bno, item_code, item_name, item_image, price, count, hit, category, area
+			from
+  				(
+  					select
+    				/*+INDEX_DESC(tbl_board, pk_board)*/
+    					rownum rn, bno, item_code, item_name, item_image, price, count, hit, category, area
+ 					from p2_item
+  					where rownum <= #{cri.page} * #{cri.perPageNum}
+  					and bno > 0
+  					and area like #{area}
+  					and category like #{category}
+  					and item_name like #{item_name}
+  				)
+			where rn > (#{cri.page} -1) * #{cri.perPageNum} order by bno asc
+ 		]]>
 	</select>
 	
 	<!-- 아이디별 멤버 정보 불러오는 리스트 (수정하기위함) -->
@@ -86,6 +102,10 @@
 	<!-- 본사 전체 재고 카테고리별 리스트 -->
 	<select id="comItemList" resultType="com.pyeon2.vo.ComItemVO" parameterType="com.pyeon2.vo.ComItemVO">
 		select * from company_item where category = #{category}
+	</select>
+	
+	<select id="getAreaCount" parameterType="com.pyeon2.vo.ItemVO" resultType="Integer">
+		select count(*) from p2_item where category like #{category} and area like #{area} and item_name like #{item_name}
 	</select>
 
 </mapper>

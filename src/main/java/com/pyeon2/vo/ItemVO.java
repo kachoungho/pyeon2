@@ -1,5 +1,7 @@
 package com.pyeon2.vo;
 
+import com.pyeon2.domain.Criteria;
+
 public class ItemVO {
 	
 	private String id;
@@ -16,7 +18,14 @@ public class ItemVO {
 	private int total;
 	private String sold;
 	private String sal_time;
+	private Criteria cri;
 	
+	public Criteria getCri() {
+		return cri;
+	}
+	public void setCri(Criteria cri) {
+		this.cri = cri;
+	}
 	public String getId() {
 		return id;
 	}

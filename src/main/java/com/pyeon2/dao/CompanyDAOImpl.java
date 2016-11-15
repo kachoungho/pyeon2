@@ -98,4 +98,9 @@ public class CompanyDAOImpl implements CompanyDAO{
 		session.update(namespace+ ".orderUpdate", vo);
 	}
 
+	@Override
+	public int getAreaCount(ItemVO vo) throws Exception {
+		return session.selectOne(namespace + ".getAreaCount", vo);
+	}
+
 }

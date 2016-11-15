@@ -11,38 +11,155 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pyeon2.domain.Criteria;
+import com.pyeon2.domain.PageMaker;
 import com.pyeon2.service.CompanyService;
+import com.pyeon2.service.PosService;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
+import com.pyeon2.vo.SelectSearch;
 
 @Controller
 public class CompanyController {
 
 	@Autowired
 	private CompanyService companyService;
+	
+	@Autowired
+	private PosService posService;
 
 	@RequestMapping("company")
 	public String getCompany() {
 		return ".company";
 	}
 
-	@RequestMapping(value = "company/com_stock", method = RequestMethod.GET)
+	/*@RequestMapping(value = "company/com_stock", method = RequestMethod.GET)
 	public String comStockGET() {
 		return ".company.company_stock";
-	}
+	}*/
 
-	@RequestMapping(value = "company/com_stock", method = RequestMethod.POST)
+	@RequestMapping("company/com_stock")
 	public ModelAndView comStockPOST(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		
+		List<ItemVO> list;
+		int count = 0;
+		int pageNum = 1;
+		String page = request.getParameter("page");
+		String area = request.getParameter("area");
+		String category = request.getParameter("category");
+		String item_name = request.getParameter("item_name");
+		
+		String sArea = "판교";
 		ItemVO vo = new ItemVO();
-		System.out.println("area : " + request.getParameter("area"));
-		vo.setArea(request.getParameter("area"));
-		List<ItemVO> list = companyService.areaItemList(vo);
+		
+		if(page != null && !page.equals("")){
+			pageNum = Integer.parseInt(page);
+		}
+		
+		if(area != null && !area.equals("")){
+			sArea = area;
+		}
+		
+		try {
+			Criteria cri = new Criteria();
+			cri.setPage(pageNum);
+			cri.setPerPageNum(7);
+			
+			vo.setArea("%"+sArea+"%");
+			vo.setCri(cri);
+			vo.setCategory("%"+category+"%");
+			vo.setItem_name("%"+item_name+"%");
+			
+			count = companyService.getAreaCount(vo);
+			list = companyService.areaItemList(vo);
 
-		mav.addObject("result", list);
-		mav.setViewName(".company.company_stock");
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(cri);
+			pageMaker.setTotalCount(count);
+			
+			mav.addObject("result", list);
+			mav.addObject("pageNum", pageNum);
+			mav.addObject("count", count);
+			mav.addObject("pageMaker", pageMaker);
+			mav.addObject("area", area);
+			mav.addObject("category", category);
+			mav.addObject("item_name", item_name);
+			
+			mav.setViewName(".company.company_stock");
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
+		return mav;
+	}
+	
+	@RequestMapping(value="company/com_stock_select")
+	public ModelAndView selectName(HttpServletRequest request,Model model){
+		ModelAndView mav = new ModelAndView();
+		ItemVO vo = new ItemVO();
+		
+		String page = request.getParameter("page");
+		String category = request.getParameter("category");
+		String item_name = "";
+		SelectSearch ss = new SelectSearch();
+		
+		List<ItemVO> list;
+		int count = 0;
+		int pageNum = 1;
+		int perPageNum = 7;
+		
+		if(request.getParameter("item_name") == null){
+			item_name = "";
+		}
+		else{
+			item_name = request.getParameter("item_name");
+		}
+		vo.setCategory(category);
+		vo.setItem_name("%"+item_name+"%");
+		
+		if(page != null && !page.equals("")){
+			pageNum = Integer.parseInt(page);
+		}
+		
+		try {
+			Criteria cri = new Criteria();
+			cri.setPage(pageNum);
+			cri.setPerPageNum(perPageNum);
+			
+			ss.setPage(pageNum);
+			ss.setPerPageNum(perPageNum);
+			ss.setItem_name("%"+item_name+"%");
+			ss.setCategory(category);
+
+			System.out.println("나와랏 :" + ss.getItem_name());
+			
+			count = posService.getSelectCount(vo);
+			System.out.println("count : " + posService.getSelectCount(vo));
+			list = posService.selectName(ss);
+			
+			PageMaker pageMaker = new PageMaker(); //페이지 선택부분 처리
+			pageMaker.setCri(cri);
+			pageMaker.setTotalCount(count);
+			
+			mav.addObject("result", list);
+			mav.addObject("pageNum", pageNum);
+			mav.addObject("count", count);
+			mav.addObject("pageMaker", pageMaker);
+			mav.addObject("category", category);
+			mav.addObject("item_name", item_name);
+			
+			
+			mav.setViewName(".company.company_stock_select");
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return mav;
 	}
 

@@ -54,4 +54,7 @@ public interface CompanyDAO {
 
 	// 본사 전체 재고 카테고리별 리스트
 	public List<ComItemVO> comItemList(ComItemVO vo) throws Exception;
+	
+	// 지점별 재고 수
+	public int getAreaCount(ItemVO vo) throws Exception;
 }
