@@ -37,6 +37,7 @@
         <sec:authorize access="hasAuthority('ROLE_MANAGER')">
         	<a href="${pageContext.request.contextPath}/pos/ps_selectpays?id=${LoingUser}">출 / 퇴근 이력 조회</a>
         	<a href="${pageContext.request.contextPath}/pos/ps_user_selectForm?id=${LoingUser}">아르바이트생 현황</a>
+        	<a href="${pageContext.request.contextPath}/pos/ps_user_insertForm?id=${LoingUser}">아르바이트생 정보 등록</a>
         </sec:authorize>  
       </div>
       </li>

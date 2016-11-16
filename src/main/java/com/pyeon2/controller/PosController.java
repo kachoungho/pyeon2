@@ -618,7 +618,7 @@ public class PosController {
 			list = posService.selectUser(Mvo);
 
 			mav.addObject("list", list);
-			mav.setViewName(".pos.pos_user_select");
+			mav.setViewName(".pos.pos_user_insert");
 
 		} catch (Exception e) {
 			e.printStackTrace();

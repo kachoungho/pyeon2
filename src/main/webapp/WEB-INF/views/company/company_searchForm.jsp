@@ -15,8 +15,44 @@
 			<option value="manager">지점장</option>
 		</select> &nbsp;&nbsp; <input type="submit" value="sorting">
 	</form>
-	
-	<a href="com_insertForm">회원정보입력</a> 
-	
+
+	<table>
+		<tr>
+			<td>ID</td>
+			<td>NAME</td>
+			<td>POSITION</td>
+			<td>PHONE</td>
+			<td>AGE</td>
+			<td>ADDRESS</td>
+			<td>GENDER</td>
+			<td>AREA</td>
+		</tr>
+
+		<c:forEach items="${ result }" var="member">
+			<tr>
+				<td>${ member.id }</td>
+				<td>${ member.name }</td>
+				<td>${ member.position }</td>
+				<td>${ member.phone }</td>
+				<td>${ member.age }</td>
+				<td>${ member.address }</td>
+				<td>${ member.gender }</td>
+				<td>${ member.area }</td>
+				<td><input type="button" value="수정"
+					onclick="document.location.href='${pageContext.request.contextPath}/company/com_updateForm?id=${member.id}'"></td>
+				<td>
+	 				<form action="${pageContext.request.contextPath}/company/com_delete"
+					method="POST" name="${member.id}">
+
+					<input type="hidden" name="id" value="${member.id}">
+					<input type="submit" value="삭제"
+						onclick="button_event('${member.id}');return false;" />
+				</form>
+				</td>
+			</tr>
+		</c:forEach>
+
+	</table>
+
 </body>
 </html>
