@@ -1,5 +1,7 @@
 package com.pyeon2.vo;
 
+import com.pyeon2.domain.Criteria;
+
 public class ItemVO {
 	private int bno;
 	private String id;
@@ -16,7 +18,7 @@ public class ItemVO {
 	private int total;
 	private String sold;
 	private String sal_time;
-	
+	private Criteria cri;
 	
 
 	public int getBno() {
@@ -24,6 +26,12 @@ public class ItemVO {
 	}
 	public void setBno(int bno) {
 		this.bno = bno;
+	}
+	public Criteria getCri() {
+		return cri;
+	}
+	public void setCri(Criteria cri) {
+		this.cri = cri;
 	}
 	public String getId() {
 		return id;

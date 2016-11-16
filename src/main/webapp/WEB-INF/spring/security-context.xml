@@ -11,8 +11,6 @@
 
 		<security:intercept-url pattern="/company/**" access="hasAuthority('ROLE_ADMIN')"/>
 		<security:intercept-url pattern="/pos/**" access="hasAnyAuthority('ROLE_MANAGER', 'ROLE_USER')"/>
-		<!-- <security:intercept-url pattern="/pos/**" access="hasAuthority('ROLE_USER')"/> -->
-		
 		
 	</security:http>
 
@@ -23,7 +21,7 @@
 				data-source-ref="dataSource"
 				users-by-username-query="SELECT ID, PWD, 1 ENABLED 
     	                          FROM P2_MEMBER WHERE ID = ?"
-				authorities-by-username-query="SELECT ID, ROLE_NAME FROM ROLL WHERE ID = ?" />
+				authorities-by-username-query="SELECT ID, ROLE_NAME FROM ROLE WHERE ID = ?" />
 
 		</security:authentication-provider>
 	</security:authentication-manager>

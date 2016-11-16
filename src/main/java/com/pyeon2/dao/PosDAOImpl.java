@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.pyeon2.domain.Criteria;
+import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
 import com.pyeon2.vo.SelectSearch;
@@ -149,5 +150,21 @@ public class PosDAOImpl implements PosDAO{
 	@Override
 	public String areaserch(ItemVO vo) throws Exception {
 		return session.selectOne(namespace+".areaserch",vo);
+	}
+	
+	@Override
+	public List<ComItemVO> getCompanyList(Criteria cri) {
+		return session.selectList(namespace + ".getCompanyList", cri);
+	}
+
+	@Override
+	public int getCompanyCount() {
+		return session.selectOne(namespace + ".getCompanyCount");
+	}
+
+	//2016-11-15
+	@Override
+	public String getArea(String name) {
+		return session.selectOne(namespace + ".getArea" , name);
 	}
 }

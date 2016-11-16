@@ -1,10 +1,19 @@
 package com.pyeon2.vo;
 
+import com.pyeon2.domain.Criteria;
+
 public class ComItemVO {
 	private String item_code, item_name, item_image, category;
 	private int cost, price, count;
+	private Criteria cri;
 	
 	
+	public Criteria getCri() {
+		return cri;
+	}
+	public void setCri(Criteria cri) {
+		this.cri = cri;
+	}
 	public String getItem_code() {
 		return item_code;
 	}

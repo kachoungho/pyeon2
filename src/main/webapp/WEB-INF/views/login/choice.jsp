@@ -16,11 +16,9 @@
 		</script>
 	</sec:authorize>
 	
-	
 	<sec:authentication property="name" var="LoingUser" />
 	<sec:authorize access="hasAuthority('ROLE_USER')">
 		<meta http-equiv="Refresh" content="0; url=${pageContext.request.contextPath}/pos/usermoneystart?id=${LoingUser}">
-		
 	</sec:authorize>
 	
 	<sec:authorize access="hasAuthority('ROLE_MANAGER')">

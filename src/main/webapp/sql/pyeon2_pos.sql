@@ -1,5 +1,6 @@
 update p2_user set back_time = sysdate where userid = 'ch'
 
+ALTER TABLE roll RENAME TO role;
 
 select * from p2_member;
 select * from p2_item;
@@ -7,7 +8,7 @@ select * from p2_calc;
 select * from p2_dayCalc;
 select * from p2_weekCalc;
 select * from p2_monthCalc;
-select * from roll;
+select * from role;
 select * from SAL;
 
 drop table p2_member;

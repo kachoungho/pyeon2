@@ -107,7 +107,7 @@
 	
 	<!-- 아르바이트생 권한 삭제하기 -->
 	<delete id="deleteRole" parameterType="com.pyeon2.vo.MemberVO">
-		delete from roll where id = #{id}
+		delete from role where id = #{id}
 	</delete>
 	
 	<!-- 아르바이트생 정보 입력 -->
@@ -118,7 +118,7 @@
 	
 	<!-- 입력된 정보를 바탕으로 권한 자동으로 주기 -->
 	<insert id="insertPosition" parameterType="com.pyeon2.vo.MemberVO">
-		insert into roll(id, role_name) values(#{id}, #{role_name})
+		insert into role(id, role_name) values(#{id}, #{role_name})
 	</insert>
 	
 	<!-- 계산 목록 -->
@@ -164,6 +164,34 @@
 	
 	<select id="areaserch" resultType="String" parameterType="com.pyeon2.vo.ItemVO"> 
 		SELECT TO_CHAR(area) as area FROM P2_MEMBER WHERE ID = #{id}
+	</select>
+	
+	<!-- 본사 물품 리스트 -->
+	<select id="getCompanyList" resultType="com.pyeon2.vo.ComItemVO">
+		<![CDATA[
+			select
+  				bno, item_code, item_name, item_image, cost, price, count, category
+			from
+  				(
+  					select
+    				/*+INDEX_DESC(tbl_board, pk_board)*/
+    					rownum rn, bno, item_code, item_name, item_image, cost, price, count, category
+ 					from company_item
+  					where rownum <= #{page} * #{perPageNum}
+  					and bno > 0
+  				)
+			where rn > (#{page} -1) * #{perPageNum} order by bno asc
+ 		]]>
+	</select>
+	
+	<!-- 본사 물품 재고 수 -->
+	<select id="getCompanyCount" resultType="Integer">
+		select count(*) from company_item
+	</select>
+	
+	<!-- 지점장의 지역 검색 -->
+	<select id="getArea" resultType="String">
+		select area from p2_member where name = #{name}
 	</select>
 	
 </mapper>

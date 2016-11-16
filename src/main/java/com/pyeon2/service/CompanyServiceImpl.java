@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.pyeon2.dao.CompanyDAO;
+import com.pyeon2.domain.Criteria;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
@@ -77,8 +78,8 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 	
 	@Override
-	public List<ComItemVO> comItemListAll() throws Exception {
-		return comDao.comItemListAll();
+	public List<ComItemVO> comItemListAll(Criteria cri) throws Exception {
+		return comDao.comItemListAll(cri);
 	}
 
 	@Override
@@ -95,5 +96,21 @@ public class CompanyServiceImpl implements CompanyService {
 	public void deleteRole(MemberVO Mvo) throws Exception {
 		comDao.deleteRole(Mvo);
 	}
+	
+	@Override
+	public int getAreaCount(ItemVO vo) throws Exception {
+		return comDao.getAreaCount(vo);
+	}
+
+	@Override
+	public int getComItemCount() throws Exception {
+		return comDao.getComItemCount();
+	}
+
+	@Override
+	public int getComItemCountCategory(String category) throws Exception {
+		return comDao.getComItemCountCategory(category);
+	}
+
 
 }

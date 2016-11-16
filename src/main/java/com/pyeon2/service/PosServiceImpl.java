@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.pyeon2.dao.PosDAO;
 import com.pyeon2.domain.Criteria;
+import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
 import com.pyeon2.vo.SelectSearch;
@@ -149,4 +150,21 @@ public class PosServiceImpl implements PosService {
 	public String areaserch(ItemVO vo) throws Exception {
 		return posDao.areaserch(vo);
 	}
+	
+	@Override
+	public List<ComItemVO> getCompanyList(Criteria cri) {
+		return posDao.getCompanyList(cri);
+	}
+
+	@Override
+	public int getCompanyCount() {
+		return posDao.getCompanyCount();
+	}
+
+	//2016-11-15
+	@Override
+	public String getArea(String name) {
+		return posDao.getArea(name);
+	}
+
 }
