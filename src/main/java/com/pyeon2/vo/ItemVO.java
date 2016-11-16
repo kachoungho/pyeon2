@@ -1,7 +1,7 @@
 package com.pyeon2.vo;
 
 public class ItemVO {
-	
+	private int bno;
 	private String id;
 	private String item_code;
 	private String item_name;
@@ -17,6 +17,14 @@ public class ItemVO {
 	private String sold;
 	private String sal_time;
 	
+	
+
+	public int getBno() {
+		return bno;
+	}
+	public void setBno(int bno) {
+		this.bno = bno;
+	}
 	public String getId() {
 		return id;
 	}

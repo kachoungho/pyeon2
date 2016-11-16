@@ -17,11 +17,8 @@ drop table p2_dayCalc;
 drop table p2_weekCalc;
 drop table p2_monthCalc;
 drop table roll;
-<<<<<<< HEAD
 drop table p2_local;
-=======
 drop table sal;
->>>>>>> 11fbc6b3bfd39881423d959add97cb80eb6bedad
 
 alter table p2_member add optime varchar2(20);	-- 아르바이트생 근무시간 오전/오후/야간 구분
 insert into p2_member values('alba1', 1, 'alba1', 'user', '010', 20, '한국', '남', '정자동', '오전');
