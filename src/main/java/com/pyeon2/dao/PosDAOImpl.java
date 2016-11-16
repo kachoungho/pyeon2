@@ -98,6 +98,11 @@ public class PosDAOImpl implements PosDAO{
 	}
 
 	@Override
+	public void deleteUserTime(UserVO vo) throws Exception {
+		session.delete(namespace + ".deleteUserTime", vo);
+	}
+
+	@Override
 	public void insertUser(MemberVO Mvo) throws Exception {
 		session.insert(namespace + ".insertUser", Mvo);
 	}
@@ -105,6 +110,11 @@ public class PosDAOImpl implements PosDAO{
 	@Override
 	public void insertPosition(MemberVO Mvo) throws Exception {
 		session.insert(namespace + ".insertPosition", Mvo);
+	}
+
+	@Override
+	public void insertUserTime(UserVO vo) throws Exception {
+		session.insert(namespace + ".insertUserTime", vo);
 	}
 	
 	@Override
@@ -167,4 +177,5 @@ public class PosDAOImpl implements PosDAO{
 	public String getArea(String name) {
 		return session.selectOne(namespace + ".getArea" , name);
 	}
+
 }
