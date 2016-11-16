@@ -191,7 +191,7 @@
 	
 	<!-- 지점장의 지역 검색 -->
 	<select id="getArea" resultType="String">
-		select area from p2_member where name = #{name}
+		select area from p2_member where id = #{name}
 	</select>
 	
 </mapper>
