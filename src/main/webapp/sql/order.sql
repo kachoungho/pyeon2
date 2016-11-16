@@ -20,8 +20,19 @@ create table orderReq_temp(
 	constraint orderReq_temp_pk  primary key(item_code, area)
 );
 
+create sequence orderReq_num
+   increment by 1
+   start with 1
+   nocache;
+   
+   create sequence orderReq_temp_num
+   increment by 1
+   start with 1
+   nocache;
+
 select * from orderReq;
 select * from orderReq_temp;
 
 drop table orderReq;
 drop table orderReq_temp;
+

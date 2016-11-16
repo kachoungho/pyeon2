@@ -14,16 +14,16 @@ import com.pyeon2.vo.SelectSearch;
 import com.pyeon2.vo.UserVO;
 
 @Repository
-public class PosDAOImpl implements PosDAO{
+public class PosDAOImpl implements PosDAO {
 
 	@Autowired
 	private SqlSession session;
-	
+
 	private static String namespace = "com.pyeon2.mappers.PosMapper";
 
 	@Override
-	public void insertOrder(ItemVO vo) throws Exception {
-		session.insert(namespace + ".insertOrder", vo);
+	public void insertOrderTemp(ItemVO vo) throws Exception {
+		session.insert(namespace + ".insertOrderTemp", vo);
 	}
 
 	@Override
@@ -38,38 +38,37 @@ public class PosDAOImpl implements PosDAO{
 
 	@Override
 	public void Delete(ItemVO vo) throws Exception {
-		session.delete(namespace + ".Delete", vo);		
+		session.delete(namespace + ".Delete", vo);
 	}
 
-	
 	@Override
 	public List<UserVO> selectalpayAll(UserVO vo) throws Exception {
-		return session.selectList(namespace +".selectalpayAll", vo);
+		return session.selectList(namespace + ".selectalpayAll", vo);
 	}
 
 	@Override
 	public List<UserVO> selectalpay(UserVO vo) throws Exception {
-		return session.selectList(namespace +".selectalpay", vo);
+		return session.selectList(namespace + ".selectalpay", vo);
 	}
 
 	@Override
 	public List<UserVO> selectmanpayAll(UserVO vo) throws Exception {
-		return session.selectList(namespace +".selectmanpayAll", vo);
+		return session.selectList(namespace + ".selectmanpayAll", vo);
 	}
 
 	@Override
 	public List<UserVO> selectmanpay(UserVO vo) throws Exception {
-		return session.selectList(namespace +".selectmanpay", vo);
+		return session.selectList(namespace + ".selectmanpay", vo);
 	}
-	
+
 	@Override
 	public int getCount() {
-		return session.selectOne(namespace +".getCount");
+		return session.selectOne(namespace + ".getCount");
 	}
 
 	@Override
 	public int getSelectCount(ItemVO vo) {
-		return session.selectOne(namespace +".getSelectCount", vo);
+		return session.selectOne(namespace + ".getSelectCount", vo);
 	}
 
 	@Override
@@ -98,6 +97,11 @@ public class PosDAOImpl implements PosDAO{
 	}
 
 	@Override
+	public void deleteUserTime(UserVO vo) throws Exception {
+		session.delete(namespace + ".deleteUserTime", vo);
+	}
+
+	@Override
 	public void insertUser(MemberVO Mvo) throws Exception {
 		session.insert(namespace + ".insertUser", Mvo);
 	}
@@ -106,52 +110,62 @@ public class PosDAOImpl implements PosDAO{
 	public void insertPosition(MemberVO Mvo) throws Exception {
 		session.insert(namespace + ".insertPosition", Mvo);
 	}
-	
+
+	@Override
+	public void insertUserTime(UserVO vo) throws Exception {
+		session.insert(namespace + ".insertUserTime", vo);
+	}
+
 	@Override
 	public List<ItemVO> calcList() throws Exception {
-		return session.selectList(namespace+".calcList");
+		return session.selectList(namespace + ".calcList");
+	}
+	
+	@Override
+	public List<ItemVO> calcLists(ItemVO vo) throws Exception {
+		return session.selectList(namespace+".calcLists",vo);
 	}
 
 	@Override
 	public void calcinsert(ItemVO vo) throws Exception {
-		session.insert(namespace+".calcinsert", vo);
+		session.insert(namespace + ".calcinsert", vo);
 	}
 
 	@Override
 	public void clacupdate(ItemVO vo) throws Exception {
-		session.insert(namespace+".clacupdate", vo);
+		session.insert(namespace + ".clacupdate", vo);
 	}
 
 	@Override
-	public int totalcalc() throws Exception {
-		return session.selectOne(namespace+".totalcalc");
+	public int totalcalc(ItemVO vo) throws Exception {
+		return session.selectOne(namespace+".totalcalc",vo);
 	}
 
 	@Override
 	public void salinsert(ItemVO vo) throws Exception {
-		session.insert(namespace+".salinsert",vo);
+		session.insert(namespace + ".salinsert", vo);
 	}
 
 	@Override
 	public void daycalcinser(ItemVO vo) throws Exception {
-		session.insert(namespace+".daycalcinser",vo);
+		session.insert(namespace + ".daycalcinser", vo);
 	}
 
 	@Override
-	public void calcdelete() throws Exception {
-		session.delete(namespace+".calcdelete");
+	public void calcdelete(ItemVO vo) throws Exception {
+		session.delete(namespace+".calcdelete",vo);
 	}
 
 	@Override
 	public void hitupdate(ItemVO vo) throws Exception {
-		session.delete(namespace+".hitupdate",vo);
+		session.delete(namespace + ".hitupdate", vo);
 	}
 
 	@Override
 	public String areaserch(ItemVO vo) throws Exception {
-		return session.selectOne(namespace+".areaserch",vo);
+		return session.selectOne(namespace + ".areaserch", vo);
 	}
-	
+
 	@Override
 	public List<ComItemVO> getCompanyList(Criteria cri) {
 		return session.selectList(namespace + ".getCompanyList", cri);
@@ -162,10 +176,20 @@ public class PosDAOImpl implements PosDAO{
 		return session.selectOne(namespace + ".getCompanyCount");
 	}
 
-	//2016-11-15
+	// 2016-11-15
 	@Override
 	public String getArea(String name) {
-		return session.selectOne(namespace + ".getArea" , name);
+		return session.selectOne(namespace + ".getArea", name);
+	}
+
+	@Override
+	public List<ItemVO> orderTempList(Criteria cri) {
+		return session.selectList(namespace + ".orderTempList", cri);
+	}
+
+	@Override
+	public int orderTempCount() {
+		return session.selectOne(namespace + ".orderTempCount");
 	}
 
 	@Override

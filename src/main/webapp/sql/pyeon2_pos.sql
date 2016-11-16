@@ -11,6 +11,7 @@ select * from p2_monthCalc;
 select * from role;
 select * from SAL;
 
+
 drop table p2_member;
 drop table p2_item;
 drop table p2_calc;
@@ -484,7 +485,8 @@ create table sal(
 	pay number(10) not null,
 	paynum number(10) not null,
 	sal_time varchar2(30),
-	sys_time date default sysdate
+	sys_time date default sysdate,
+	area varchar2(30) not null
 )
 create sequence paynum
 
@@ -509,5 +511,6 @@ create table p2_dayCalc(
 	area varchar2(30) not null,
 	num number(10) not null,
 	p2_time varchar2(30),
-	constraint dayCalc_pk  primary key(item_code, area,p2_time)
+	sys_time date default sysdate,
+	constraint dayCalc_pk  primary key(item_code, area,sys_time)
 );

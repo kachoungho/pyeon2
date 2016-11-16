@@ -4,9 +4,9 @@
 <mapper namespace="com.pyeon2.mappers.PosMapper">
 
 	<!-- 발주 신청 메소드 -->
-	<insert id="insertOrder">
-		insert into orderReq(item_code, item_name, count, category, area)
-		values(#{item_code}, #{item_name}, #{count}, #{category}, #{area})
+	<insert id="insertOrderTemp">
+		insert into orderReq_temp(bno, item_code, item_name, count, category, area)
+		values(orderReq_temp_num.nextVal, #{item_code}, #{item_name}, #{count}, #{category}, #{area})
 	</insert>
 	
 	<!-- 물품(재고) 전체 리스트 출력 메소드 -->
@@ -94,7 +94,7 @@
 		select * from p2_member where position = 'user' and area = (select area from p2_member where id = #{id})
 	</select>
 	
-	<!-- 아르바이트 리스트 불러오기 (id만 받아와서) -->
+	<!-- 아르바이트 리스트 불러오기 (매니저의 id만 받아와서) -->
 	<select id="selectUserId" resultType="com.pyeon2.vo.MemberVO" parameterType="com.pyeon2.vo.MemberVO">
 		select * from p2_member where id = #{id}
 	</select>
@@ -116,6 +116,10 @@
 		delete from role where id = #{id}
 	</delete>
 	
+	<delete id="deleteUserTime" parameterType="com.pyeon2.vo.UserVO">
+		delete from p2_user where userid = #{userid}
+	</delete>
+	
 	<!-- 아르바이트생 정보 입력 -->
 	<insert id="insertUser" parameterType="com.pyeon2.vo.MemberVO">
 		insert into p2_member(id, pwd, name, position, phone, age, address, gender, area, optime)
@@ -127,14 +131,24 @@
 		insert into role(id, role_name) values(#{id}, #{role_name})
 	</insert>
 	
+	<!-- 아르바이트생 등록 시 월급 계산을 위해 p2_user 테이블에 처음 등록하기 -->
+	<insert id="insertUserTime" parameterType="com.pyeon2.vo.UserVO">
+		insert into p2_user(userid, area) values (#{userid}, (select area from p2_member where id = #{userid}))
+	</insert>
+	
 	<!-- 계산 목록 -->
 	<select id="calcList" resultType="com.pyeon2.vo.ItemVO">
 		select * from p2_calc
 	</select>
 	
+	<!-- 계산 목록 뿌리는것 -->
+	<select id="calcLists" resultType="com.pyeon2.vo.ItemVO" parameterType="com.pyeon2.vo.MemberVO">
+		select * from p2_calc where area = #{area}
+	</select>
+	
 	<!-- 계산 가격 총액 -->
- 	<select id="totalcalc" resultType="Integer">
-		select sum(price) from p2_calc
+ 	<select id="totalcalc" resultType="Integer" parameterType="com.pyeon2.vo.MemberVO">
+		select sum(price) from p2_calc where area = #{area}
 	</select>
 	
 	<!-- 계산 목록에 입력 -->
@@ -150,7 +164,7 @@
 	
 	<!-- 계산된 총액과 시간 저장 -->
 	<insert id="salinsert" parameterType="com.pyeon2.vo.ItemVO">
-		insert into sal(sold,pay,paynum,sal_time) values('판매',#{total},paynum.nextVal,(SELECT TO_CHAR(sysdate, 'YYYY-MM-dd HH24:mi' ) as sysdates FROM dual ))
+		insert into sal(sold,pay,paynum,sal_time,area) values('판매',#{total},paynum.nextVal,(SELECT TO_CHAR(sysdate, 'YYYY-MM-dd HH24:mi' ) as sysdates FROM dual ),#{area})
 	</insert>
 	
 	<!-- 정산하는 부분에 리스트 저장 -->
@@ -159,8 +173,8 @@
 	</insert>
 	
 	<!-- 계산 목록 계산시 삭제 -->
-	<delete id="calcdelete">
-		delete from p2_calc
+	<delete id="calcdelete" parameterType="com.pyeon2.vo.ItemVO">
+		delete from p2_calc where area = #{area}
 	</delete>
 	
 	<!-- 물품이 팔린만큼 제고에서  hit&count 업데이트 -->
@@ -197,7 +211,31 @@
 	
 	<!-- 지점장의 지역 검색 -->
 	<select id="getArea" resultType="String">
-		select area from p2_member where name = #{name}
+		select area from p2_member where id = #{name}
 	</select>
+	
+	<!-- 발주 임시 테이블 리스트 -->
+	<select id="orderTempList" resultType="com.pyeon2.vo.ItemVO" parameterType="com.pyeon2.domain.Criteria">
+		<![CDATA[
+			select
+  				bno, item_code, item_name, count, category, area, p2_time
+			from
+  				(
+  					select
+    				/*+INDEX_DESC(tbl_board, pk_board)*/
+    					rownum rn, bno, item_code, item_name, count, category, area, p2_time
+ 					from orderReq_temp
+  					where rownum <= #{page} * #{perPageNum}
+  					and bno > 0
+  				)
+			where rn > (#{page} -1) * #{perPageNum} order by bno asc
+ 		]]>
+	</select>
+	
+	<!-- 발주 임시 테이블 리스트 개수 -->
+	<select id="orderTempCount" resultType="Integer">
+		select count(*) from orderReq_temp
+	</select>
+	
 	
 </mapper>

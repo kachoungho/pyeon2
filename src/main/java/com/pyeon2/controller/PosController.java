@@ -60,7 +60,7 @@ public class PosController {
 			
 			System.out.println("name : " + name);
 			if(name == null){
-				area = "판교";
+				area = "";
 			}
 			else{
 				area = posService.getArea(name);
@@ -90,14 +90,60 @@ public class PosController {
 		
 		return mav;
 	}
-
+	
 	@RequestMapping(value = "pos/ps_order", method = RequestMethod.POST)
-	public ModelAndView orderPOST(ItemVO vo, Model model, String page) throws Exception {
+	public String orderPOST(ItemVO vo, Model model, String page) throws Exception {
 		System.out.println("order POST 요청 성공");
 		
+		posService.insertOrderTemp(vo);
+		
+		return "redirect:ps_order";
+	}
+	
+	@RequestMapping(value = "pos/ps_order_temp", method = RequestMethod.GET)
+	public ModelAndView orderTempGet(ItemVO vo, String page){
 		ModelAndView mav = new ModelAndView();
-		posService.insertOrder(vo);
-		mav.setViewName(".pos.pos_ordersuc");
+		List<ItemVO> list;
+		int count = 0;
+		int pageNum = 1;
+		
+		if(page != null && !page.equals("")){
+			pageNum = Integer.parseInt(page);
+		}
+		
+		try {
+			Criteria cri = new Criteria();
+			cri.setPage(pageNum);
+			cri.setPerPageNum(7);
+			count = posService.orderTempCount();
+			list = posService.orderTempList(cri);
+			
+			System.out.println("List : " + list);
+			System.out.println("count : " + count);
+			
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(cri);
+			pageMaker.setTotalCount(count);
+			
+			mav.addObject("result", list);
+			mav.addObject("pageNum", pageNum);
+			mav.addObject("count", count);
+			mav.addObject("pageMaker", pageMaker);
+			
+			mav.setViewName(".pos.pos_order_temp");
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "pos/ps_order_temp", method = RequestMethod.POST)
+	public ModelAndView orderTempPost(ItemVO vo, String page){
+		ModelAndView mav = new ModelAndView();
+		
 		
 		return mav;
 	}
@@ -440,11 +486,13 @@ public class PosController {
 	}
 
 	@RequestMapping(value = "pos/ps_user_delete", method = RequestMethod.POST)
-	public String comPersonnelDelete(HttpServletRequest request, MemberVO Mvo) {
+	public String comPersonnelDelete(HttpServletRequest request, MemberVO Mvo, UserVO vo) {
 
 		Mvo.setId(request.getParameter("id"));
+		vo.setUserid(request.getParameter("id"));
 
 		try {
+			posService.deleteUserTime(vo);
 			posService.deleteUser(Mvo);
 			posService.deleteRole(Mvo);
 		} catch (Exception e) {
@@ -476,7 +524,7 @@ public class PosController {
 	}
 
 	@RequestMapping(value = "pos/ps_user_insert", method = RequestMethod.POST)
-	public ModelAndView comPersonnelInsert(HttpServletRequest request, MemberVO Mvo) {
+	public ModelAndView comPersonnelInsert(HttpServletRequest request, MemberVO Mvo, UserVO vo) {
 
 		ModelAndView mav = new ModelAndView();
 		List<MemberVO> list;
@@ -489,12 +537,15 @@ public class PosController {
 			String id = Mvo.getId();
 			String user = "user";
 
-			// 매니저가 정보를 입력하면서 roll 테이블에 포지션에 따라 권한도 주어짐
+			// 매니저가 정보를 입력하면서 role 테이블에 포지션에 따라 권한도 주어짐
 			if (position.equals(user)) {
 				Mvo.setId(request.getParameter("id"));
 				Mvo.setRole_name("ROLE_USER");
 				posService.insertPosition(Mvo);
-
+				
+				// p2_user 테이블에 최초 데이터 저장 (이 후로 시간은 다른 메소드에서 업데이트)
+				vo.setUserid(request.getParameter("id"));
+				posService.insertUserTime(vo);
 			}
 
 			list = posService.selectUser(Mvo);
@@ -557,8 +608,8 @@ public class PosController {
 			}
 		}
 		
-		list = posService.calcList();
-		total = posService.totalcalc();
+		list = posService.calcLists(vo);
+		total = posService.totalcalc(vo);
 		/*pay = pay - total;*/
 		
 		mav.addObject("result", list);
@@ -579,14 +630,14 @@ public class PosController {
 		int total = 0;
 		int pay = vo.getPay();
 		List<ItemVO> list = posService.calcList();
-		
-		total = posService.totalcalc();
+		mav.addObject("area", vo.getArea());
+		total = posService.totalcalc(vo);
 		pay = pay - total;
 		
 		mav.addObject("result", list);
 		mav.addObject("total",total);
 		mav.addObject("pay",pay);
-		mav.addObject("area", vo.getArea());
+		
 		mav.setViewName(".pos.pos_calc");
 
 		return mav;
@@ -598,6 +649,7 @@ public class PosController {
 		
 		ModelAndView mav = new ModelAndView();
 		vo.setTotal(Integer.parseInt(request.getParameter("total")));
+		vo.setArea(request.getParameter("area"));
 		posService.salinsert(vo);
 		
 		List<ItemVO> list = posService.calcList();
@@ -613,10 +665,10 @@ public class PosController {
 			posService.daycalcinser(vo);
 			posService.hitupdate(vo);
 		}
-		
-		posService.calcdelete();
-		
 		mav.addObject("area", vo.getArea());
+		posService.calcdelete(vo);
+		
+		
 		mav.setViewName(".pos.pos_calc");
 
 		return mav;
@@ -627,8 +679,9 @@ public class PosController {
 
 		ModelAndView mav = new ModelAndView();
 		ItemVO vo = new ItemVO();
-		posService.calcdelete();
+		
 		vo.setArea(request.getParameter("area"));
+		posService.calcdelete(vo);
 		mav.addObject("area", vo.getArea());
 		mav.setViewName(".pos.pos_calc");
 		return mav;

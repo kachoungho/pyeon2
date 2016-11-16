@@ -11,7 +11,7 @@ import com.pyeon2.vo.UserVO;
 
 public interface PosService {
 	// 발주 신청 메소드
-	public void insertOrder(ItemVO vo) throws Exception;
+	public void insertOrderTemp(ItemVO vo) throws Exception;
 
 	// 물품(재고) 전체 리스트 출력 메소드
 	public List<ItemVO> getList(Criteria cri) throws Exception;
@@ -57,15 +57,24 @@ public interface PosService {
 	
 	// 아르바이트생 권한 삭제하기
 	public void deleteRole(MemberVO Mvo) throws Exception;
+	
+	// 아르바이트생 p2_user 테이블 정보 삭제
+	public void deleteUserTime(UserVO vo) throws Exception;
 
 	// 아르바이트생 정보 입력
 	public void insertUser(MemberVO Mvo) throws Exception;
 
 	// 입력된 정보를 바탕으로 권한 자동으로 주기
 	public void insertPosition(MemberVO Mvo) throws Exception;
+	
+	// 아르바이트생 등록 시 월급 계산을 위해 p2_user 테이블에 처음 등록하기
+	public void insertUserTime(UserVO vo) throws Exception;
 
 	//계산 리스트
 	public List<ItemVO> calcList() throws Exception;
+	
+	//계산 리스트 뿌리기
+	public List<ItemVO> calcLists(ItemVO vo) throws Exception;
 			
 	//계산 insert
 	public void calcinsert(ItemVO vo) throws Exception;
@@ -74,7 +83,7 @@ public interface PosService {
 	public void clacupdate(ItemVO vo) throws Exception;
 			
 	//찍힌 price 총합
-	public int totalcalc() throws Exception;
+	public int totalcalc(ItemVO vo) throws Exception;
 			
 	//sal테이블에 시간,가격,계산 번호 입력
 	public void salinsert(ItemVO vo) throws Exception;
@@ -83,7 +92,7 @@ public interface PosService {
 	public void daycalcinser(ItemVO vo) throws Exception;
 			
 	//계산된 리스트 삭제
-	public void calcdelete() throws Exception;
+	public void calcdelete(ItemVO vo) throws Exception;
 			
 	//계산된 count만큼 item테이블에서 hit올라감
 	public void hitupdate(ItemVO vo) throws Exception;
@@ -100,4 +109,10 @@ public interface PosService {
 	//2016-11-15
 	//지접장의 지점
 	public String getArea(String name);
+	
+	//발주 신청 임시저장 리스트
+	public List<ItemVO> orderTempList(Criteria cri);
+	
+	//발주 신청 리스트 갯수
+	public int orderTempCount();
 }

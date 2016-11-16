@@ -18,10 +18,10 @@ public class PosServiceImpl implements PosService {
 
 	@Autowired
 	private PosDAO posDao;
-	
+
 	@Override
-	public void insertOrder(ItemVO vo) throws Exception {
-		posDao.insertOrder(vo);
+	public void insertOrderTemp(ItemVO vo) throws Exception {
+		posDao.insertOrderTemp(vo);
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class PosServiceImpl implements PosService {
 	public void Delete(ItemVO vo) throws Exception {
 		posDao.Delete(vo);
 	}
-	
+
 	@Override
 	public List<UserVO> selectalpayAll(UserVO vo) throws Exception {
 		return posDao.selectalpayAll(vo);
@@ -58,7 +58,7 @@ public class PosServiceImpl implements PosService {
 	public List<UserVO> selectmanpay(UserVO vo) throws Exception {
 		return posDao.selectmanpay(vo);
 	}
-	
+
 	@Override
 	public int getCount() {
 		return posDao.getCount();
@@ -73,7 +73,7 @@ public class PosServiceImpl implements PosService {
 	public List<MemberVO> selectUser(MemberVO Mvo) throws Exception {
 		return posDao.selectUser(Mvo);
 	}
-	
+
 	@Override
 	public List<MemberVO> selectUserId(MemberVO Mvo) throws Exception {
 		return posDao.selectUserId(Mvo);
@@ -95,6 +95,11 @@ public class PosServiceImpl implements PosService {
 	}
 
 	@Override
+	public void deleteUserTime(UserVO vo) throws Exception {
+		posDao.deleteUserTime(vo);
+	}
+
+	@Override
 	public void insertUser(MemberVO Mvo) throws Exception {
 		posDao.insertUser(Mvo);
 	}
@@ -105,9 +110,19 @@ public class PosServiceImpl implements PosService {
 	}
 
 	@Override
+	public void insertUserTime(UserVO vo) throws Exception {
+		posDao.insertUserTime(vo);
+	}
+
+	@Override
 	public List<ItemVO> calcList() throws Exception {
-		// TODO Auto-generated method stub
 		return posDao.calcList();
+	}
+
+	@Override
+	public List<ItemVO> calcLists(ItemVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return posDao.calcLists(vo);
 	}
 
 	@Override
@@ -121,14 +136,14 @@ public class PosServiceImpl implements PosService {
 	}
 
 	@Override
-	public int totalcalc() throws Exception {
-		return posDao.totalcalc();
+	public int totalcalc(ItemVO vo) throws Exception {
+		return posDao.totalcalc(vo);
 	}
 
 	@Override
 	public void salinsert(ItemVO vo) throws Exception {
 		posDao.salinsert(vo);
-		
+
 	}
 
 	@Override
@@ -137,8 +152,8 @@ public class PosServiceImpl implements PosService {
 	}
 
 	@Override
-	public void calcdelete() throws Exception {
-		posDao.calcdelete();
+	public void calcdelete(ItemVO vo) throws Exception {
+		posDao.calcdelete(vo);
 	}
 
 	@Override
@@ -150,7 +165,7 @@ public class PosServiceImpl implements PosService {
 	public String areaserch(ItemVO vo) throws Exception {
 		return posDao.areaserch(vo);
 	}
-	
+
 	@Override
 	public List<ComItemVO> getCompanyList(Criteria cri) {
 		return posDao.getCompanyList(cri);
@@ -161,7 +176,7 @@ public class PosServiceImpl implements PosService {
 		return posDao.getCompanyCount();
 	}
 
-	//2016-11-15
+	// 2016-11-15
 	@Override
 	public String getArea(String name) {
 		return posDao.getArea(name);
@@ -170,6 +185,16 @@ public class PosServiceImpl implements PosService {
 	@Override
 	public int getSelectCount2(ItemVO vo) {
 		return posDao.getSelectCount2(vo);
+	}
+
+	@Override
+	public List<ItemVO> orderTempList(Criteria cri) {
+		return posDao.orderTempList(cri);
+	}
+
+	@Override
+	public int orderTempCount() {
+		return posDao.orderTempCount();
 	}
 
 }

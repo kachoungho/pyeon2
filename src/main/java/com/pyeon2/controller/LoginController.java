@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pyeon2.dao.MemberDAO;
 import com.pyeon2.service.MemberService;
 import com.pyeon2.vo.MemberVO;
 import com.pyeon2.vo.UserVO;
@@ -18,10 +17,7 @@ import com.pyeon2.vo.UserVO;
 public class LoginController {
 
 	@Autowired
-	private MemberDAO memberDAO;
-
-	@Autowired
-	public MemberService memeberService;
+	public MemberService memberService;
 
 	@RequestMapping(value="login", method = RequestMethod.GET)
 	public String login() {
@@ -55,7 +51,7 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView();
 		UserVO vo = new UserVO();
 		vo.setUserid(id);
-		memeberService.userstart(vo);
+		memberService.userstart(vo);
 		
 		mav.setViewName("login/loginsuc");
 
@@ -69,10 +65,10 @@ public class LoginController {
 		UserVO vo = new UserVO();
 		MemberVO Mvo = new MemberVO();
 		vo.setUserid(request.getParameter("id"));
-		memeberService.userfinsh(vo);
-		Mvo = memeberService.checkId(vo);
+		memberService.userfinsh(vo);
+		Mvo = memberService.checkId(vo);
 		Mvo.setId(request.getParameter("id"));
-		memeberService.userinsertmoney(Mvo);
+		memberService.userinsertmoney(Mvo);
 		
 		mav.setViewName("login/logoutSuc");
 		
