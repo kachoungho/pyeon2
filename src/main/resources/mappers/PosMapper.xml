@@ -194,4 +194,6 @@
 		select area from p2_member where id = #{name}
 	</select>
 	
+	
+	
 </mapper>
