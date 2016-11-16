@@ -1,86 +1,120 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<link rel="stylesheet" type="text/css" href="/controller/resources/css/listcss.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/company/com_stock" method="post">
-		<input type="hidden" value="${pageMaker.cri.page }">
-		<select name="area">
-			<option value="ÆÇ±³">ÆÇ ±³ Á¡</option>
-			<option value="¼­¿ï">¼­ ¿ï Á¡</option>	
-		</select>
-		<select name="category">
+	<form action="${pageContext.request.contextPath}/company/com_stock"
+		method="post">
+		<input type="hidden" value="${pageMaker.cri.page }"> <select
+			class="com_stock_select1" name="area">
+			<option value="íŒêµ">íŒ êµ ì </option>
+			<option value="ì •ì">ì • ì ì </option>
+			<option value="ì•¼íƒ‘">ì•¼ íƒ‘ ì </option>
+		</select> <select class="com_stock_select2" name="category">
 			<option value="">category</option>
- 			<option value="À½·á">À½·á</option>
-  			<option value="½º³¼">½º³¼</option>
-  			<option value="ÀÎ½ºÅÏÆ®">ÀÎ½ºÅÏÆ®</option>
-  			<option value="ÁÖ·ù">ÁÖ·ù</option>
-		</select>
-		°Ë»öÇÒ Á¦Ç° : <input type="text" name="item_name">
-		<input type="submit" value="¼± ÅÃ"/>
-	</form>
-	
-	<c:if test="${result == null}">
-		<br><br><br><br><br><br><br><br><br><br><br>
-		<br><br><br><br><br><br><br><br><br><br><br>
-	</c:if>
-	
-	<c:if test="${result != null}">
-	<br><br><br>
-		<table>
-			<tr>
-				<td align="center">»óÇ° ÀÌ¹ÌÁö</td>
-				<td align="center">Ä« Å× °í ¸®</td>
-				<td align="center">»ó Ç° ÄÚ µå</td>
-				<td align="center">»ó Ç° ¸í</td>			
-				<td align="center">¼ÒºñÀÚ °¡°İ</td>
-				<td align="center">Àç°í ¼ö·®</td>
-				<td align="center">ÆÇ ¸Å ·®</td>			
-				<td align="center">Áö    Á¡</td>
-			</tr>
+			<option value="ìŒë£Œ">ìŒë£Œ</option>
+			<option value="ìŠ¤ë‚µ">ìŠ¤ë‚µ</option>
+			<option value="ì¸ìŠ¤í„´íŠ¸">ì¸ìŠ¤í„´íŠ¸</option>
+			<option value="ì£¼ë¥˜">ì£¼ë¥˜</option>
+		</select> 
 		
-			<c:forEach items="${result}" var="list">
+		<label class="com_stock_label">ê²€ìƒ‰í•  ì œí’ˆëª… </label> 
+		
+		<input class="com_stock_input"
+			type="text" name="item_name">
+		<input class="com_stock_button" width="40" type="image" src="/controller/resources/images/choice.png" alt="submit">
+	</form>
+
+	<c:if test="${result == null}">
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+	</c:if>
+
+	<c:if test="${result != null}">
+		<br>
+		<br>
+		<br>
+		<table class="ex1">
+			<thead>
 				<tr>
-				<td align="center"><img width="30" height="60" src="${list.item_image }"></td>
-				<td align="center">${list.category}</td>
-				<td align="center">${list.item_code}</td>
-				<td align="center">${list.item_name}</td>
-				<td align="center">${list.price}</td>
-				<td align="center">${list.count}</td>
-				<td align="center">${list.hit}</td>
-				<td align="center">${list.area}</td>
-			</tr>
+					<th scope="col">ìƒí’ˆ ì´ë¯¸ì§€</th>
+					<th scope="col">ì¹´ í…Œ ê³  ë¦¬</th>
+					<th scope="col">ìƒ í’ˆ ì½” ë“œ</th>
+					<th scope="col">ìƒ í’ˆ ëª…</th>
+					<th scope="col">ì†Œë¹„ì ê°€ê²©</th>
+					<th scope="col">ì¬ê³  ìˆ˜ëŸ‰</th>
+					<th scope="col">íŒ ë§¤ ëŸ‰</th>
+					<th scope="col">ì§€ ì </th>
+				</tr>
+			</thead>
+
+			<c:forEach items="${result}" var="list">
+				<tbody>
+					<tr class="odd">
+						<td class="date1"><img width="50" height="50"
+							src="${list.item_image }"></td>
+						<td class="date2">${list.category}</td>
+						<td class="date3">${list.item_code}</td>
+						<td class="date4">${list.item_name}</td>
+						<td class="date5">${list.price} ì›</td>
+						<td class="date6">${list.count} ê°œ</td>
+						<td class="date7">${list.hit} ê°œ</td>
+						<td class="date8">${list.area}</td>
+					</tr>
+				</tbody>
 			</c:forEach>
 		</table>
 	</c:if>
 
 	<br>
-	
-	<div class="text-center">
-		<ul class="pagination">
+
+	<div>
+		<ul class="com_stock_li-paging">
 			<c:if test="${pageMaker.prev }">
-				<li><a href="${pageContext.request.contextPath}/company/com_stock?page=${pageMaker.startPage - 1 }&item_name=${item_name}&category=${category}&area=${area}">&laquo;</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/company/com_stock?page=${pageMaker.startPage - 1 }&item_name=${item_name}&category=${category}&area=${area}">&laquo;</a></li>
 			</c:if>
-			
-			<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-				<li <c:out value="${pageMaker.cri.page == idx ? 'class=active' : '' }"/>>
-				<a href="${pageContext.request.contextPath}/company/com_stock?page=${idx}&item_name=${item_name}&category=${category}&area=${area}">${idx }</a>
+
+			<c:forEach begin="${pageMaker.startPage }"
+				end="${pageMaker.endPage }" var="idx">
+				<li
+					<c:out value="${pageMaker.cri.page == idx ? 'class=active' : '' }"/>>
+					<a
+					href="${pageContext.request.contextPath}/company/com_stock?page=${idx}&item_name=${item_name}&category=${category}&area=${area}">${idx }</a>
 				</li>
 			</c:forEach>
-			
+
 			<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
-				<li><a href="${pageContext.request.contextPath}/company/com_stock?page=${pageMaker.endPage + 1 }&item_name=${item_name}&category=${category}&area=${area}">&raquo;</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/company/com_stock?page=${pageMaker.endPage + 1 }&item_name=${item_name}&category=${category}&area=${area}">&raquo;</a></li>
 			</c:if>
 		</ul>
 	</div>

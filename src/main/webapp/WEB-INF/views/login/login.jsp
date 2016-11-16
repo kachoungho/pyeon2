@@ -56,13 +56,13 @@ div {
 	<form action="${loginURL}" method="post">
 		<div>
 			<label for="fname">
-				<img src="<c:url value="/images/users.png"/>">&nbsp;&nbsp;
+				<img src="/controller/resources/images/users.png"/>&nbsp;&nbsp;
 			</label>
 				<input name="j_username" class="text" style="height: 20px;"/>
 			<p>
 			
 			<label for="lname">
-				<img src="<c:url value="/images/lock.png"/>">&nbsp;&nbsp;
+				<img src="/controller/resources/images/lock.png">&nbsp;&nbsp;
 			</label>
 				<input type="password" name="j_password" class="text" style="height: 20px;"/>
 			<p>

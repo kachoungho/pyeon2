@@ -4,8 +4,15 @@ public class SelectSearch {
 	int page, perPageNum;
 	String item_name;
 	String category;
+	String area;
 	
 	
+	public String getArea() {
+		return area;
+	}
+	public void setArea(String area) {
+		this.area = area;
+	}
 	public String getCategory() {
 		return category;
 	}

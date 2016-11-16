@@ -167,4 +167,9 @@ public class PosServiceImpl implements PosService {
 		return posDao.getArea(name);
 	}
 
+	@Override
+	public int getSelectCount2(ItemVO vo) {
+		return posDao.getSelectCount2(vo);
+	}
+
 }

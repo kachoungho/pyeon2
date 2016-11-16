@@ -39,6 +39,9 @@ public interface PosService {
 
 	// 물품(재고) 선택된 물품 수
 	public int getSelectCount(ItemVO vo);
+	
+	// 물품(재고) 선택된 물품 수 상품명 null일 경우
+	public int getSelectCount2(ItemVO vo);
 
 	// 아르바이트 리스트 불러오기 (position=user인 아이들)
 	public List<MemberVO> selectUser(MemberVO Mvo) throws Exception;

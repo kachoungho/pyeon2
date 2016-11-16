@@ -15,8 +15,6 @@
 			<a href="${pageContext.request.contextPath}/pos/ps_order">발 주 신 청</a>
 		</sec:authorize>
         <a href="${pageContext.request.contextPath}/pos/ps_item_selectAll">상 품 리 스 트</a>
-        <a href="${pageContext.request.contextPath}/pos/ps_item_select">상품 리스트 세부 검색</a>
-        <a href="${pageContext.request.contextPath}/pos/ps_item_delete">상 품 제 거</a>
       </div>
     </li>
     

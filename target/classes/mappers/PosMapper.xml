@@ -43,6 +43,7 @@
   					and bno > 0
   					and item_name like #{item_name}
   					and category = #{category}
+  					and area = #{area}
   				)
 			where rn > (#{page} -1) * #{perPageNum} order by bno asc
  		]]>
@@ -55,7 +56,12 @@
 	
 	<!-- 선택된 물품 개수 -->
 	<select id="getSelectCount" resultType="Integer" parameterType="com.pyeon2.vo.ItemVO">
-		SELECT count(*) FROM p2_item where item_name = #{item_name}
+		SELECT count(*) FROM p2_item where item_name like #{item_name} and area = #{area}
+	</select>
+	
+	<!-- 선택된 물품 개수 상품명이 없을 경우-->
+	<select id="getSelectCount2" resultType="Integer" parameterType="com.pyeon2.vo.ItemVO">
+		SELECT count(*) FROM p2_item where category = #{category} and area = #{area}
 	</select>
 	
 	<!-- 물품(재고) 제거 메소드 -->

@@ -380,7 +380,7 @@ public class CompanyController {
 		ModelAndView mav = new ModelAndView();
 		List<ComItemVO> list = null;
 		String category = request.getParameter("category");
-
+		System.out.println("category" + category);
 		int count = 0;
 		int pageNum = 1;
 
@@ -393,7 +393,7 @@ public class CompanyController {
 			cri.setPage(pageNum);
 			cri.setPerPageNum(7);
 
-			if(category == null){
+			if(category == null || category.equals("all")){
 				category = "all";
 				count = companyService.getComItemCount();
 			}
@@ -405,8 +405,9 @@ public class CompanyController {
 			vo.setCategory(category);
 			vo.setCri(cri);
 			
-			if(category.equals("all")){
+			if(category.equals("all") ){
 				list = companyService.comItemListAll(cri);
+				
 			} else {
 				list = companyService.comItemList(vo);
 			}

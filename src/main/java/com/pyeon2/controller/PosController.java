@@ -122,13 +122,6 @@ public class PosController {
 		return ".pos.pos_calc";
 	}
 
-	@RequestMapping(value = "pos/ps_item_delete", method = RequestMethod.GET)
-	public ModelAndView deleteform() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(".pos.pos_item_delete");
-
-		return mav;
-	}
 
 	@RequestMapping(value = "pos/ps_item_delete", method = RequestMethod.POST)
 	public ModelAndView delete(HttpServletRequest request) throws Exception {
@@ -143,13 +136,6 @@ public class PosController {
 		return mav;
 	}
 
-	@RequestMapping(value = "pos/ps_item_select", method = RequestMethod.GET)
-	public ModelAndView selectform() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(".pos.pos_item_select");
-
-		return mav;
-	}
 
 	@RequestMapping(value = "pos/ps_selectpay", method = RequestMethod.GET)
 	public ModelAndView selectalpay(HttpServletRequest request, Model model) {
@@ -323,9 +309,15 @@ public class PosController {
 	      
 	      String page = request.getParameter("page");
 	      String category = request.getParameter("category");
+	      String id = request.getParameter("id");
 	      String item_name = "";
 	      SelectSearch ss = new SelectSearch();
+
+	      System.out.println(id);
 	      
+	      String area = posService.getArea(id);
+	      vo.setArea(area);
+	      System.out.println(area);
 	      List<ItemVO> list;
 	      int count = 0;
 	      int pageNum = 1;
@@ -338,7 +330,7 @@ public class PosController {
 	         item_name = request.getParameter("item_name");
 	      }
 	      vo.setCategory(category);
-	      vo.setItem_name("%"+item_name+"%");
+	      
 	      
 	      if(page != null && !page.equals("")){
 	         pageNum = Integer.parseInt(page);
@@ -353,11 +345,22 @@ public class PosController {
 	         ss.setPerPageNum(perPageNum);
 	         ss.setItem_name("%"+item_name+"%");
 	         ss.setCategory(category);
-
+	         ss.setArea(area);
+	         
+	         
+	         System.out.println("상품명 :" + item_name);
+	         System.out.println("카테고리 :" + vo.getCategory());
 	         System.out.println("나와랏 :" + ss.getItem_name());
 	         
-	         count = posService.getSelectCount(vo);
-	         System.out.println("count : " + posService.getSelectCount(vo));
+	         if(item_name.equals("")){
+	        	 count = posService.getSelectCount2(vo);
+	         } else {
+	        	 vo.setItem_name("%"+item_name+"%");
+		         count = posService.getSelectCount(vo);
+	         }
+	         
+	         
+	         System.out.println("count : " + count);
 	         list = posService.selectName(ss);
 	         
 	         PageMaker pageMaker = new PageMaker(); //페이지 선택부분 처리
@@ -370,11 +373,11 @@ public class PosController {
 	         mav.addObject("pageMaker", pageMaker);
 	         mav.addObject("category", category);
 	         mav.addObject("item_name", item_name);
+	         mav.addObject("area", area);
 	         
 	         mav.setViewName(".pos.pos_item_select_now");
 	         
 	      } catch (Exception e) {
-	         // TODO Auto-generated catch block
 	         e.printStackTrace();
 	      }
 	      

@@ -167,4 +167,9 @@ public class PosDAOImpl implements PosDAO{
 	public String getArea(String name) {
 		return session.selectOne(namespace + ".getArea" , name);
 	}
+
+	@Override
+	public int getSelectCount2(ItemVO vo) {
+		return session.selectOne(namespace + ".getSelectCount2" , vo);
+	}
 }
