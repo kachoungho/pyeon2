@@ -135,9 +135,14 @@
 		select * from p2_calc
 	</select>
 	
+	<!-- 계산 목록 뿌리는것 -->
+	<select id="calcLists" resultType="com.pyeon2.vo.ItemVO" parameterType="com.pyeon2.vo.MemberVO">
+		select * from p2_calc where area = #{area}
+	</select>
+	
 	<!-- 계산 가격 총액 -->
- 	<select id="totalcalc" resultType="Integer">
-		select sum(price) from p2_calc
+ 	<select id="totalcalc" resultType="Integer" parameterType="com.pyeon2.vo.MemberVO">
+		select sum(price) from p2_calc where area = #{area}
 	</select>
 	
 	<!-- 계산 목록에 입력 -->
@@ -153,7 +158,7 @@
 	
 	<!-- 계산된 총액과 시간 저장 -->
 	<insert id="salinsert" parameterType="com.pyeon2.vo.ItemVO">
-		insert into sal(sold,pay,paynum,sal_time) values('판매',#{total},paynum.nextVal,(SELECT TO_CHAR(sysdate, 'YYYY-MM-dd HH24:mi' ) as sysdates FROM dual ))
+		insert into sal(sold,pay,paynum,sal_time,area) values('판매',#{total},paynum.nextVal,(SELECT TO_CHAR(sysdate, 'YYYY-MM-dd HH24:mi' ) as sysdates FROM dual ),#{area})
 	</insert>
 	
 	<!-- 정산하는 부분에 리스트 저장 -->
@@ -162,8 +167,8 @@
 	</insert>
 	
 	<!-- 계산 목록 계산시 삭제 -->
-	<delete id="calcdelete">
-		delete from p2_calc
+	<delete id="calcdelete" parameterType="com.pyeon2.vo.ItemVO">
+		delete from p2_calc where area = #{area}
 	</delete>
 	
 	<!-- 물품이 팔린만큼 제고에서  hit&count 업데이트 -->

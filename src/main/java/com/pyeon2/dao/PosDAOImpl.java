@@ -120,6 +120,11 @@ public class PosDAOImpl implements PosDAO {
 	public List<ItemVO> calcList() throws Exception {
 		return session.selectList(namespace + ".calcList");
 	}
+	
+	@Override
+	public List<ItemVO> calcLists(ItemVO vo) throws Exception {
+		return session.selectList(namespace+".calcLists",vo);
+	}
 
 	@Override
 	public void calcinsert(ItemVO vo) throws Exception {
@@ -132,8 +137,8 @@ public class PosDAOImpl implements PosDAO {
 	}
 
 	@Override
-	public int totalcalc() throws Exception {
-		return session.selectOne(namespace + ".totalcalc");
+	public int totalcalc(ItemVO vo) throws Exception {
+		return session.selectOne(namespace+".totalcalc",vo);
 	}
 
 	@Override
@@ -147,8 +152,8 @@ public class PosDAOImpl implements PosDAO {
 	}
 
 	@Override
-	public void calcdelete() throws Exception {
-		session.delete(namespace + ".calcdelete");
+	public void calcdelete(ItemVO vo) throws Exception {
+		session.delete(namespace+".calcdelete",vo);
 	}
 
 	@Override

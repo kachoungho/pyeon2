@@ -605,8 +605,8 @@ public class PosController {
 			}
 		}
 		
-		list = posService.calcList();
-		total = posService.totalcalc();
+		list = posService.calcLists(vo);
+		total = posService.totalcalc(vo);
 		/*pay = pay - total;*/
 		
 		mav.addObject("result", list);
@@ -627,14 +627,14 @@ public class PosController {
 		int total = 0;
 		int pay = vo.getPay();
 		List<ItemVO> list = posService.calcList();
-		
-		total = posService.totalcalc();
+		mav.addObject("area", vo.getArea());
+		total = posService.totalcalc(vo);
 		pay = pay - total;
 		
 		mav.addObject("result", list);
 		mav.addObject("total",total);
 		mav.addObject("pay",pay);
-		mav.addObject("area", vo.getArea());
+		
 		mav.setViewName(".pos.pos_calc");
 
 		return mav;
@@ -646,6 +646,7 @@ public class PosController {
 		
 		ModelAndView mav = new ModelAndView();
 		vo.setTotal(Integer.parseInt(request.getParameter("total")));
+		vo.setArea(request.getParameter("area"));
 		posService.salinsert(vo);
 		
 		List<ItemVO> list = posService.calcList();
@@ -661,10 +662,10 @@ public class PosController {
 			posService.daycalcinser(vo);
 			posService.hitupdate(vo);
 		}
-		
-		posService.calcdelete();
-		
 		mav.addObject("area", vo.getArea());
+		posService.calcdelete(vo);
+		
+		
 		mav.setViewName(".pos.pos_calc");
 
 		return mav;
@@ -675,8 +676,9 @@ public class PosController {
 
 		ModelAndView mav = new ModelAndView();
 		ItemVO vo = new ItemVO();
-		posService.calcdelete();
+		
 		vo.setArea(request.getParameter("area"));
+		posService.calcdelete(vo);
 		mav.addObject("area", vo.getArea());
 		mav.setViewName(".pos.pos_calc");
 		return mav;

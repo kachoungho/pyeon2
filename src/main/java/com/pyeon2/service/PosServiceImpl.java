@@ -118,6 +118,12 @@ public class PosServiceImpl implements PosService {
 	public List<ItemVO> calcList() throws Exception {
 		return posDao.calcList();
 	}
+	
+	@Override
+	public List<ItemVO> calcLists(ItemVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return posDao.calcLists(vo);
+	}
 
 	@Override
 	public void calcinsert(ItemVO vo) throws Exception {
@@ -130,8 +136,8 @@ public class PosServiceImpl implements PosService {
 	}
 
 	@Override
-	public int totalcalc() throws Exception {
-		return posDao.totalcalc();
+	public int totalcalc(ItemVO vo) throws Exception {
+		return posDao.totalcalc(vo);
 	}
 
 	@Override
@@ -146,8 +152,8 @@ public class PosServiceImpl implements PosService {
 	}
 
 	@Override
-	public void calcdelete() throws Exception {
-		posDao.calcdelete();
+	public void calcdelete(ItemVO vo) throws Exception {
+		posDao.calcdelete(vo);
 	}
 
 	@Override
