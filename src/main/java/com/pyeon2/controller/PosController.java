@@ -164,9 +164,25 @@ public class PosController {
 	}
 	
 	@RequestMapping(value = "pos/ps_order_temp", method = RequestMethod.POST)
-	public ModelAndView orderTempPost(List<ItemVO> result, String page){
+	public ModelAndView orderTempPost(String page, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
-		
+		List<ItemVO> list;
+		list = posService.selectAlreadyOrderedList();
+		int temp = 0;
+		try{
+			for(int i = 0; i < list.size(); i++){
+				posService.insertOrder(list.get(i));
+				temp = 1;
+			}
+			
+			if(temp == 1){
+				posService.orderTempDeleteAll();
+			}
+			
+			mav.setViewName(".pos.pos_order");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		return mav;
 	}

@@ -9,6 +9,36 @@
 		values(orderReq_temp_num.nextVal, #{item_code}, #{item_name}, #{count}, #{category}, #{area})
 	</insert>
 	
+	<update id="insertOrder">
+		<![CDATA[
+        MERGE INTO orderReq a
+            USING dual
+               on (a.item_code = #{item_code} AND 
+                   a.area = #{area})
+             WHEN MATCHED THEN
+             UPDATE SET
+                 a.count = a.count + #{count} where a.item_code = #{item_code} and a.area = #{area}
+              WHEN NOT MATCHED THEN
+                INSERT (      
+                			  a.bno,
+                              a.item_code, 
+                              a.item_name, 
+                              a.count, 
+                              a.category,
+                              a.area
+                        ) 
+                values (
+                			  orderReq_num.nextVal,
+                              #{item_code},
+                              #{item_name},
+                              #{count},
+                              #{category},
+                              #{area}
+                        )
+          ]]>
+		
+	</update>
+	
 	<!-- 발주 신청 임시 리스트 삭제 -->
 	<delete id="orderTempDelete" parameterType="com.pyeon2.vo.ItemVO">
 		delete from orderReq_temp where item_code = #{item_code} and area = #{area}
@@ -249,6 +279,14 @@
 	
 	<select id="orderTempCompare" resultType="com.pyeon2.vo.ItemVO">
 		select item_code, area from orderReq_temp
+	</select>
+	
+	<delete id="orderTempDeleteAll">
+		delete orderReq_temp
+	</delete>
+	
+	<select id="selectAlreadyOrderedList" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
+		select * from orderReq_temp
 	</select>
 	
 	

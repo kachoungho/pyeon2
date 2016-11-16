@@ -25,6 +25,11 @@ public class PosDAOImpl implements PosDAO {
 	public void insertOrderTemp(ItemVO vo) throws Exception {
 		session.insert(namespace + ".insertOrderTemp", vo);
 	}
+	
+	@Override
+	public void insertOrder(ItemVO vo) throws Exception {
+		session.update(namespace + ".insertOrder", vo);
+	}
 
 	@Override
 	public List<ItemVO> getList(Criteria cri) throws Exception {
@@ -210,5 +215,15 @@ public class PosDAOImpl implements PosDAO {
 	@Override
 	public void orderTempDelete(ItemVO vo) {
 		session.delete(namespace + ".orderTempDelete", vo);
+	}
+
+	@Override
+	public void orderTempDeleteAll() {
+		session.delete(namespace + ".orderTempDeleteAll");
+	}
+
+	@Override
+	public List<ItemVO> selectAlreadyOrderedList() {
+		return session.selectList(namespace + ".selectAlreadyOrderedList");
 	}
 }

@@ -10,8 +10,11 @@ import com.pyeon2.vo.SelectSearch;
 import com.pyeon2.vo.UserVO;
 
 public interface PosService {
-	// 발주 신청 메소드
+	//발주 신청 임시 저장 메소드
 	public void insertOrderTemp(ItemVO vo) throws Exception;
+	
+	//발주 신청 메소드
+	public void insertOrder(ItemVO vo) throws Exception;
 	
 	//발주 신청 개수 변경
 	public void updateOrderTemp(ItemVO vo) throws Exception;
@@ -124,4 +127,10 @@ public interface PosService {
 	
 	//발주 신청 임시저장 리스트 삭제
 	public void orderTempDelete(ItemVO vo);
+	
+	//발주 신청 임시저장 리스트 전체 삭제
+	public void orderTempDeleteAll();
+	
+	//이미 발주 신청된 리스트
+	public List<ItemVO> selectAlreadyOrderedList();
 }

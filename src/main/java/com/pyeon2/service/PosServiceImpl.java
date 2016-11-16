@@ -23,6 +23,11 @@ public class PosServiceImpl implements PosService {
 	public void insertOrderTemp(ItemVO vo) throws Exception {
 		posDao.insertOrderTemp(vo);
 	}
+	
+	@Override
+	public void insertOrder(ItemVO vo) throws Exception {
+		posDao.insertOrder(vo);
+	}
 
 	@Override
 	public List<ItemVO> getList(Criteria cri) throws Exception {
@@ -210,6 +215,16 @@ public class PosServiceImpl implements PosService {
 	@Override
 	public void orderTempDelete(ItemVO vo) {
 		posDao.orderTempDelete(vo);
+	}
+
+	@Override
+	public void orderTempDeleteAll() {
+		posDao.orderTempDeleteAll();
+	}
+
+	@Override
+	public List<ItemVO> selectAlreadyOrderedList() {
+		return posDao.selectAlreadyOrderedList();
 	}
 
 }
