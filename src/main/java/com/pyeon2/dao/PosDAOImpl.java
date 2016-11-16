@@ -196,4 +196,19 @@ public class PosDAOImpl implements PosDAO {
 	public int getSelectCount2(ItemVO vo) {
 		return session.selectOne(namespace + ".getSelectCount2" , vo);
 	}
+
+	@Override
+	public void updateOrderTemp(ItemVO vo) throws Exception {
+		session.update(namespace + ".updateOrderTemp", vo);
+	}
+
+	@Override
+	public List<ItemVO> orderTempCompare() {
+		return session.selectList(namespace + ".orderTempCompare");
+	}
+
+	@Override
+	public void orderTempDelete(ItemVO vo) {
+		session.delete(namespace + ".orderTempDelete", vo);
+	}
 }

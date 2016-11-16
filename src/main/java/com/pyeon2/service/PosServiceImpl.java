@@ -197,4 +197,19 @@ public class PosServiceImpl implements PosService {
 		return posDao.orderTempCount();
 	}
 
+	@Override
+	public void updateOrderTemp(ItemVO vo) throws Exception {
+		posDao.updateOrderTemp(vo);
+	}
+
+	@Override
+	public List<ItemVO> orderTempCompare() {
+		return posDao.orderTempCompare();
+	}
+
+	@Override
+	public void orderTempDelete(ItemVO vo) {
+		posDao.orderTempDelete(vo);
+	}
+
 }

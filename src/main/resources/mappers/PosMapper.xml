@@ -3,11 +3,16 @@
 
 <mapper namespace="com.pyeon2.mappers.PosMapper">
 
-	<!-- 발주 신청 메소드 -->
+	<!-- 발주 신청 임시 리스트 메소드 -->
 	<insert id="insertOrderTemp">
 		insert into orderReq_temp(bno, item_code, item_name, count, category, area)
 		values(orderReq_temp_num.nextVal, #{item_code}, #{item_name}, #{count}, #{category}, #{area})
 	</insert>
+	
+	<!-- 발주 신청 임시 리스트 삭제 -->
+	<delete id="orderTempDelete" parameterType="com.pyeon2.vo.ItemVO">
+		delete from orderReq_temp where item_code = #{item_code} and area = #{area}
+	</delete>
 	
 	<!-- 물품(재고) 전체 리스트 출력 메소드 -->
 	<select id="getList" resultType="com.pyeon2.vo.ItemVO">
@@ -235,6 +240,15 @@
 	<!-- 발주 임시 테이블 리스트 개수 -->
 	<select id="orderTempCount" resultType="Integer">
 		select count(*) from orderReq_temp
+	</select>
+	
+	<!-- 발주 임시 테이블 카운트 업데이트 -->
+	<update id="updateOrderTemp" parameterType="com.pyeon2.vo.ItemVO">
+		update orderReq_temp set count = count + #{count} where item_code = #{item_code} and area = #{area}
+	</update>
+	
+	<select id="orderTempCompare" resultType="com.pyeon2.vo.ItemVO">
+		select item_code, area from orderReq_temp
 	</select>
 	
 	

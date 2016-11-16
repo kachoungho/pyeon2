@@ -13,6 +13,9 @@ public interface PosDAO {
 	//발주 신청 메소드
 	public void insertOrderTemp(ItemVO vo) throws Exception;
 	
+	//발주 신청 개수 변경
+	public void updateOrderTemp(ItemVO vo) throws Exception;
+	
 	// 물품(재고) 전체 리스트 출력 메소드
 	public List<ItemVO> getList(Criteria cri) throws Exception;
 	
@@ -115,5 +118,11 @@ public interface PosDAO {
 	
 	//발주 신청 리스트 개수
 	public int orderTempCount();
+	
+	//발주 신청 임시저장 리스트에서 item_code, area 리스트
+	public List<ItemVO> orderTempCompare();
+	
+	//발주 신청 임시저장 리스트 삭제
+	public void orderTempDelete(ItemVO vo);
 	
 }
