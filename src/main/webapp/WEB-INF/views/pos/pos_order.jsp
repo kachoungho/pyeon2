@@ -21,7 +21,7 @@
 상품 이름 : <input type="text" name="item_name" value="${item_name }">
 상품 갯수 : <input type="text" name="count"><br>
 상품 카테고리 : <input type="text" name="category" value="${category }">
-지점 : <input type="text" name="area" value="${area }">
+지점 : <input type="text" name="area" value="${area }" readonly="readonly">
 <input type="submit" value="신청">
 
 </form>
