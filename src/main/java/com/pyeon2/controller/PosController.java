@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.pyeon2.domain.Criteria;
 import com.pyeon2.domain.PageMaker;
 import com.pyeon2.service.PosService;
+import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
 import com.pyeon2.vo.SelectSearch;
@@ -36,26 +37,68 @@ public class PosController {
 	}
 
 	@RequestMapping(value = "pos/ps_order", method = RequestMethod.GET)
-	public ModelAndView orderGET(Model model) {
+	public ModelAndView orderGET(Model model, String page, String item_code, String item_name, String category, String name) {
 		System.out.println("order GET 요청 성공");
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName(".pos.pos_order");
-
+		List<ComItemVO> list;
+		int count = 0;
+		int pageNum = 1;
+		String area = "";
+		
+		if(page != null && !page.equals("")){
+			pageNum = Integer.parseInt(page);
+		}
+		
+		try {
+			Criteria cri = new Criteria();
+			cri.setPage(pageNum);
+			cri.setPerPageNum(7);
+			count = posService.getCompanyCount();
+			list = posService.getCompanyList(cri);
+			
+			System.out.println("name : " + name);
+			if(name == null){
+				area = "판교";
+			}
+			else{
+				area = posService.getArea(name);
+			}
+			
+			System.out.println("List : " + list);
+			
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(cri);
+			pageMaker.setTotalCount(count);
+			
+			mav.addObject("result", list);
+			mav.addObject("pageNum", pageNum);
+			mav.addObject("count", count);
+			mav.addObject("pageMaker", pageMaker);
+			mav.addObject("item_code", item_code);
+			mav.addObject("item_name", item_name);
+			mav.addObject("category", category);
+			mav.addObject("area", area);
+			
+			mav.setViewName(".pos.pos_order");
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return mav;
 	}
 
 	@RequestMapping(value = "pos/ps_order", method = RequestMethod.POST)
-	public ModelAndView orderPOST(ItemVO vo, Model model) throws Exception {
+	public ModelAndView orderPOST(ItemVO vo, Model model, String page) throws Exception {
 		System.out.println("order POST 요청 성공");
-
+		
 		ModelAndView mav = new ModelAndView();
-
 		posService.insertOrder(vo);
-
 		mav.setViewName(".pos.pos_ordersuc");
-
+		
 		return mav;
 	}
 

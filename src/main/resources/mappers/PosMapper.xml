@@ -166,4 +166,32 @@
 		SELECT TO_CHAR(area) as area FROM P2_MEMBER WHERE ID = #{id}
 	</select>
 	
+	<!-- 본사 물품 리스트 -->
+	<select id="getCompanyList" resultType="com.pyeon2.vo.ComItemVO">
+		<![CDATA[
+			select
+  				bno, item_code, item_name, item_image, cost, price, count, category
+			from
+  				(
+  					select
+    				/*+INDEX_DESC(tbl_board, pk_board)*/
+    					rownum rn, bno, item_code, item_name, item_image, cost, price, count, category
+ 					from company_item
+  					where rownum <= #{page} * #{perPageNum}
+  					and bno > 0
+  				)
+			where rn > (#{page} -1) * #{perPageNum} order by bno asc
+ 		]]>
+	</select>
+	
+	<!-- 본사 물품 재고 수 -->
+	<select id="getCompanyCount" resultType="Integer">
+		select count(*) from company_item
+	</select>
+	
+	<!-- 지점장의 지역 검색 -->
+	<select id="getArea" resultType="String">
+		select area from p2_member where name = #{name}
+	</select>
+	
 </mapper>

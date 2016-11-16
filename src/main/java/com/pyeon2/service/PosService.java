@@ -3,6 +3,7 @@ package com.pyeon2.service;
 import java.util.List;
 
 import com.pyeon2.domain.Criteria;
+import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
 import com.pyeon2.vo.SelectSearch;
@@ -86,4 +87,14 @@ public interface PosService {
 	
 	//area 가져오기
 	public String areaserch(ItemVO vo) throws Exception;
+	
+	//본사 재고 리스트
+	public List<ComItemVO> getCompanyList(Criteria cri);
+			
+	//본사 재고 물품 수
+	public int getCompanyCount();
+		
+	//2016-11-15
+	//지접장의 지점
+	public String getArea(String name);
 }
