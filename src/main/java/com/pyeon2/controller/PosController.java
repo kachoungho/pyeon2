@@ -483,11 +483,13 @@ public class PosController {
 	}
 
 	@RequestMapping(value = "pos/ps_user_delete", method = RequestMethod.POST)
-	public String comPersonnelDelete(HttpServletRequest request, MemberVO Mvo) {
+	public String comPersonnelDelete(HttpServletRequest request, MemberVO Mvo, UserVO vo) {
 
 		Mvo.setId(request.getParameter("id"));
+		vo.setUserid(request.getParameter("id"));
 
 		try {
+			posService.deleteUserTime(vo);
 			posService.deleteUser(Mvo);
 			posService.deleteRole(Mvo);
 		} catch (Exception e) {
@@ -519,7 +521,7 @@ public class PosController {
 	}
 
 	@RequestMapping(value = "pos/ps_user_insert", method = RequestMethod.POST)
-	public ModelAndView comPersonnelInsert(HttpServletRequest request, MemberVO Mvo) {
+	public ModelAndView comPersonnelInsert(HttpServletRequest request, MemberVO Mvo, UserVO vo) {
 
 		ModelAndView mav = new ModelAndView();
 		List<MemberVO> list;
@@ -532,12 +534,15 @@ public class PosController {
 			String id = Mvo.getId();
 			String user = "user";
 
-			// 매니저가 정보를 입력하면서 roll 테이블에 포지션에 따라 권한도 주어짐
+			// 매니저가 정보를 입력하면서 role 테이블에 포지션에 따라 권한도 주어짐
 			if (position.equals(user)) {
 				Mvo.setId(request.getParameter("id"));
 				Mvo.setRole_name("ROLE_USER");
 				posService.insertPosition(Mvo);
-
+				
+				// p2_user 테이블에 최초 데이터 저장 (이 후로 시간은 다른 메소드에서 업데이트)
+				vo.setUserid(request.getParameter("id"));
+				posService.insertUserTime(vo);
 			}
 
 			list = posService.selectUser(Mvo);

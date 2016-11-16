@@ -88,7 +88,7 @@
 		select * from p2_member where position = 'user' and area = (select area from p2_member where id = #{id})
 	</select>
 	
-	<!-- 아르바이트 리스트 불러오기 (id만 받아와서) -->
+	<!-- 아르바이트 리스트 불러오기 (매니저의 id만 받아와서) -->
 	<select id="selectUserId" resultType="com.pyeon2.vo.MemberVO" parameterType="com.pyeon2.vo.MemberVO">
 		select * from p2_member where id = #{id}
 	</select>
@@ -110,6 +110,10 @@
 		delete from role where id = #{id}
 	</delete>
 	
+	<delete id="deleteUserTime" parameterType="com.pyeon2.vo.UserVO">
+		delete from p2_user where userid = #{userid}
+	</delete>
+	
 	<!-- 아르바이트생 정보 입력 -->
 	<insert id="insertUser" parameterType="com.pyeon2.vo.MemberVO">
 		insert into p2_member(id, pwd, name, position, phone, age, address, gender, area, optime)
@@ -119,6 +123,11 @@
 	<!-- 입력된 정보를 바탕으로 권한 자동으로 주기 -->
 	<insert id="insertPosition" parameterType="com.pyeon2.vo.MemberVO">
 		insert into role(id, role_name) values(#{id}, #{role_name})
+	</insert>
+	
+	<!-- 아르바이트생 등록 시 월급 계산을 위해 p2_user 테이블에 처음 등록하기 -->
+	<insert id="insertUserTime" parameterType="com.pyeon2.vo.UserVO">
+		insert into p2_user(userid, area) values (#{userid}, (select area from p2_member where id = #{userid}))
 	</insert>
 	
 	<!-- 계산 목록 -->

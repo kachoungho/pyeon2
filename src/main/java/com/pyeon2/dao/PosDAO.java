@@ -55,11 +55,17 @@ public interface PosDAO {
 	// 아르바이트생 권한 삭제하기
 	public void deleteRole(MemberVO Mvo) throws Exception;
 	
+	// 아르바이트생 p2_user 테이블 정보 삭제
+	public void deleteUserTime(UserVO vo) throws Exception;
+	
 	// 아르바이트생 정보 입력
 	public void insertUser(MemberVO Mvo) throws Exception;
 
 	// 입력된 정보를 바탕으로 권한 자동으로 주기
 	public void insertPosition(MemberVO Mvo) throws Exception;
+	
+	// 아르바이트생 등록 시 월급 계산을 위해 p2_user 테이블에 처음 등록하기
+	public void insertUserTime(UserVO vo) throws Exception;
 	
 	//계산 리스트
 	public List<ItemVO> calcList() throws Exception;
