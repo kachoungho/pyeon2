@@ -4,9 +4,9 @@
 <mapper namespace="com.pyeon2.mappers.PosMapper">
 
 	<!-- 발주 신청 메소드 -->
-	<insert id="insertOrder">
-		insert into orderReq(item_code, item_name, count, category, area)
-		values(#{item_code}, #{item_name}, #{count}, #{category}, #{area})
+	<insert id="insertOrderTemp">
+		insert into orderReq_temp(bno, item_code, item_name, count, category, area)
+		values(orderReq_temp_num.nextVal, #{item_code}, #{item_name}, #{count}, #{category}, #{area})
 	</insert>
 	
 	<!-- 물품(재고) 전체 리스트 출력 메소드 -->
@@ -193,5 +193,29 @@
 	<select id="getArea" resultType="String">
 		select area from p2_member where id = #{name}
 	</select>
+	
+	<!-- 발주 임시 테이블 리스트 -->
+	<select id="orderTempList" resultType="com.pyeon2.vo.ItemVO" parameterType="com.pyeon2.domain.Criteria">
+		<![CDATA[
+			select
+  				bno, item_code, item_name, count, category, area, p2_time
+			from
+  				(
+  					select
+    				/*+INDEX_DESC(tbl_board, pk_board)*/
+    					rownum rn, bno, item_code, item_name, count, category, area, p2_time
+ 					from orderReq_temp
+  					where rownum <= #{page} * #{perPageNum}
+  					and bno > 0
+  				)
+			where rn > (#{page} -1) * #{perPageNum} order by bno asc
+ 		]]>
+	</select>
+	
+	<!-- 발주 임시 테이블 리스트 개수 -->
+	<select id="orderTempCount" resultType="Integer">
+		select count(*) from orderReq_temp
+	</select>
+	
 	
 </mapper>

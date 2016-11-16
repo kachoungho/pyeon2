@@ -22,8 +22,8 @@ public class PosDAOImpl implements PosDAO{
 	private static String namespace = "com.pyeon2.mappers.PosMapper";
 
 	@Override
-	public void insertOrder(ItemVO vo) throws Exception {
-		session.insert(namespace + ".insertOrder", vo);
+	public void insertOrderTemp(ItemVO vo) throws Exception {
+		session.insert(namespace + ".insertOrderTemp", vo);
 	}
 
 	@Override
@@ -166,5 +166,15 @@ public class PosDAOImpl implements PosDAO{
 	@Override
 	public String getArea(String name) {
 		return session.selectOne(namespace + ".getArea" , name);
+	}
+
+	@Override
+	public List<ItemVO> orderTempList(Criteria cri) {
+		return session.selectList(namespace + ".orderTempList", cri);
+	}
+
+	@Override
+	public int orderTempCount() {
+		return session.selectOne(namespace + ".orderTempCount");
 	}
 }

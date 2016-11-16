@@ -11,7 +11,7 @@ import com.pyeon2.vo.UserVO;
 
 public interface PosDAO {
 	//발주 신청 메소드
-	public void insertOrder(ItemVO vo) throws Exception;
+	public void insertOrderTemp(ItemVO vo) throws Exception;
 	
 	// 물품(재고) 전체 리스트 출력 메소드
 	public List<ItemVO> getList(Criteria cri) throws Exception;
@@ -97,5 +97,11 @@ public interface PosDAO {
 	//2016-11-15
 	//지접장의 지점
 	public String getArea(String name);
+	
+	//발주 신청 임시저장 리스트
+	public List<ItemVO> orderTempList(Criteria cri);
+	
+	//발주 신청 리스트 개수
+	public int orderTempCount();
 	
 }

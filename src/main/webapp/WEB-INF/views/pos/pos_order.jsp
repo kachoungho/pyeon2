@@ -22,9 +22,9 @@
 상품 갯수 : <input type="text" name="count"><br>
 상품 카테고리 : <input type="text" name="category" value="${category }">
 지점 : <input type="text" name="area" value="${area }" readonly="readonly">
-<input type="submit" value="신청">
-
+<input type="submit" value="추가">
 </form>
+<a href="${pageContext.request.contextPath}/pos/ps_order_temp">발주 신청 리스트</a>
 <br>
 	<table>
 		<tr>

@@ -20,8 +20,8 @@ public class PosServiceImpl implements PosService {
 	private PosDAO posDao;
 	
 	@Override
-	public void insertOrder(ItemVO vo) throws Exception {
-		posDao.insertOrder(vo);
+	public void insertOrderTemp(ItemVO vo) throws Exception {
+		posDao.insertOrderTemp(vo);
 	}
 
 	@Override
@@ -165,6 +165,16 @@ public class PosServiceImpl implements PosService {
 	@Override
 	public String getArea(String name) {
 		return posDao.getArea(name);
+	}
+
+	@Override
+	public List<ItemVO> orderTempList(Criteria cri) {
+		return posDao.orderTempList(cri);
+	}
+
+	@Override
+	public int orderTempCount() {
+		return posDao.orderTempCount();
 	}
 
 }
