@@ -236,7 +236,7 @@ public class CompanyController {
 		try {
 
 			list = companyService.getAdminMember();
-			mav.addObject("list", list);
+			mav.addObject("result", list);
 			mav.setViewName(".company.company_searchForm");
 
 		} catch (Exception e) {
@@ -309,7 +309,7 @@ public class CompanyController {
 
 			list = companyService.getAdminMember();
 			mav.addObject("list", list);
-			mav.setViewName(".company.company_searchForm");
+			mav.setViewName(".company.company_insert");
 
 		} catch (Exception e) {
 			e.printStackTrace();
