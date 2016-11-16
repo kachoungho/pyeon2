@@ -95,6 +95,11 @@ public class PosServiceImpl implements PosService {
 	}
 
 	@Override
+	public void deleteUserTime(UserVO vo) throws Exception {
+		posDao.deleteUserTime(vo);
+	}
+
+	@Override
 	public void insertUser(MemberVO Mvo) throws Exception {
 		posDao.insertUser(Mvo);
 	}
@@ -105,8 +110,12 @@ public class PosServiceImpl implements PosService {
 	}
 
 	@Override
+	public void insertUserTime(UserVO vo) throws Exception {
+		posDao.insertUserTime(vo);
+	}
+
+	@Override
 	public List<ItemVO> calcList() throws Exception {
-		// TODO Auto-generated method stub
 		return posDao.calcList();
 	}
 
