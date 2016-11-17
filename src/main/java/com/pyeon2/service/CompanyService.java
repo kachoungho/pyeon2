@@ -16,7 +16,7 @@ public interface CompanyService {
 
 	// 발주 승인 후 발주신청 목록 제거 메소드
 	public void odertDelete(ItemVO vo) throws Exception;
-	
+
 	// 발주 승인 시 본사 재고 수량 변경
 	public void orderUpdate(ItemVO vo) throws Exception;
 
@@ -34,35 +34,38 @@ public interface CompanyService {
 
 	// 지점별 재고 현황(물품) 불러오는 리스트
 	public List<ItemVO> areaItemList(ItemVO vo) throws Exception;
-	
+
 	// 아이디별 멤버 정보 불러오는 리스트 (수정하기위함)
 	public List<MemberVO> getMember(MemberVO Mvo) throws Exception;
-	
+
 	// 아이디별 멤버 수정
 	public void updateMember(MemberVO Mvo) throws Exception;
-	
+
 	// 모든 멤버 리스트 출력
 	public List<MemberVO> getAllMember() throws Exception;
-	
+
 	// 멤버 정보 삭제
 	public void deleteMember(MemberVO Mvo) throws Exception;
-	
+
 	// 멤버 권한 삭제
 	public void deleteRole(MemberVO Mvo) throws Exception;
 
-	// 본사 전체 재고 확인 
+	// 본사 전체 재고 확인
 	public List<ComItemVO> comItemListAll(Criteria cri) throws Exception;
 
 	// 본사 전체 재고 카테고리별 리스트
 	public List<ComItemVO> comItemList(ComItemVO vo) throws Exception;
-	
+
 	// 지점별 재고 수
 	public int getAreaCount(ItemVO vo) throws Exception;
-	
+
 	// 본사 재고 수
 	public int getComItemCount() throws Exception;
-	
-	//카테고리별 본사 재고 수
+
+	// 카테고리별 본사 재고 수
 	public int getComItemCountCategory(String category) throws Exception;
+
+	// 발주 승인,미승인 수정 메소드
+	public void updateOrderState(ItemVO vo) throws Exception;
 	
 }

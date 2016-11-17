@@ -1,10 +1,24 @@
 
 select * from orderReq;
 select * from orderReq_temp;
+select * from orderReqState where area = '판교';
 
 drop table orderReq;
 drop table orderReq_temp;
+drop table orderReqState;
 
+
+create table orderReqState(
+	bno number,
+	item_code varchar2(40) not null, 
+	item_name varchar2(30) not null, 
+	count number(10), 
+	category varchar2(20), 
+	area varchar2(30) not null,
+	p2_time varchar2(40),
+	state varchar2(30),
+	constraint orderReqState_pk  primary key(item_code, area, state)
+);
 
 
 create table orderReq(
@@ -15,9 +29,13 @@ create table orderReq(
 	category varchar2(20), 
 	area varchar2(30) not null,
 	p2_time date DEFAULT SYSDATE,
+	state varchar2(30),
 	constraint orderReq_pk  primary key(item_code, area)
 );
 
+alter table orderReq_temp add(state varchar2(30));
+alter table orderReq add(state varchar2(30));
+alter table orderReq_temp drop(state);
 
 create table orderReq_temp(
 	bno number,
@@ -27,6 +45,7 @@ create table orderReq_temp(
 	category varchar2(20), 
 	area varchar2(30) not null,
 	p2_time date DEFAULT SYSDATE,
+	state varchar2(30),
 	constraint orderReq_temp_pk  primary key(item_code, area)
 );
 
@@ -39,5 +58,10 @@ create sequence orderReq_num
    increment by 1
    start with 1
    nocache;
+   
+create sequence orderReqState_num
+   increment by 1
+   start with 1
+   nocache;
 
-
+drop sequence orderReqState_num

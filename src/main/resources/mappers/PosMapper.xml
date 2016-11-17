@@ -5,8 +5,8 @@
 
 	<!-- 발주 신청 임시 리스트 메소드 -->
 	<insert id="insertOrderTemp">
-		insert into orderReq_temp(bno, item_code, item_name, count, category, area)
-		values(orderReq_temp_num.nextVal, #{item_code}, #{item_name}, #{count}, #{category}, #{area})
+		insert into orderReq_temp(bno, item_code, item_name, count, category, area, state)
+		values(orderReq_temp_num.nextVal, #{item_code}, #{item_name}, #{count}, #{category}, #{area}, #{state})
 	</insert>
 	
 	<update id="insertOrder">
@@ -25,7 +25,8 @@
                               a.item_name, 
                               a.count, 
                               a.category,
-                              a.area
+                              a.area,
+                              a.state
                         ) 
                 values (
                 			  orderReq_num.nextVal,
@@ -33,11 +34,16 @@
                               #{item_name},
                               #{count},
                               #{category},
-                              #{area}
+                              #{area},
+                              #{state}
                         )
           ]]>
-		
 	</update>
+	
+	<!-- 발주 신청 리스트 입력 -->
+	<insert id="orderInsert">
+		insert into orderReqState values(orderReqState_num.nextVal, #{item_code}, #{item_name}, #{count}, #{category}, #{area}, #{p2_time}, #{state})
+	</insert>
 	
 	<!-- 발주 신청 임시 리스트 삭제 -->
 	<delete id="orderTempDelete" parameterType="com.pyeon2.vo.ItemVO">
@@ -277,21 +283,33 @@
 		update orderReq_temp set count = count + #{count} where item_code = #{item_code} and area = #{area}
 	</update>
 	
+	<!-- 발주 신청 임시저장 리스트에서 item_code, area 리스트 -->
 	<select id="orderTempCompare" resultType="com.pyeon2.vo.ItemVO">
-		select item_code, item_name, count, category, area, p2_time from orderReq_temp
+		select item_code, item_name, count, category, area, p2_time, state from orderReq_temp
 	</select>
 	
+	<!-- 발주 신청 임시저장 리스트 전체 삭제 -->
 	<delete id="orderTempDeleteAll">
 		delete orderReq_temp
 	</delete>
 	
+	<!-- 이미 발주 신청된 리스트 -->
 	<select id="selectAlreadyOrderedList" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
 		select * from orderReq_temp
 	</select>
 	
+	<!-- 발주 비용 -->
 	<insert id="orderSpend" parameterType="com.pyeon2.vo.ItemVO">
 		insert into orderSpend 
 	</insert>
 	
+	<!-- 발주 현황 리스트 -->
+	<select id="getStateList" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
+		select * from orderReqState where area = #{area}
+	</select>
 	
+	<!-- 발주 현황 삭제 -->
+	<delete id="deleteOrder" parameterType="com.pyeon2.vo.ItemVO">
+		delete from orderReqState where item_code = #{item_code} and p2_time = #{p2_time}
+	</delete>
 </mapper>

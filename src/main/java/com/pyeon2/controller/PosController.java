@@ -103,7 +103,6 @@ public class PosController {
 		list = posService.orderTempCompare();
 		System.out.println("item_code : " + vo.getItem_code());
 		System.out.println("area : " + vo.getArea());
-		
 		for(int i = 0; i < list.size(); i++){
 			if(list.get(i).getItem_code().equals(vo.getItem_code()) && list.get(i).getArea().equals(vo.getArea())){
 				compare = 1;
@@ -158,7 +157,6 @@ public class PosController {
 			mav.setViewName(".pos.pos_order_temp");
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -176,12 +174,11 @@ public class PosController {
 		try{
 			for(int i = 0; i < list.size(); i++){
 				posService.insertOrder(list.get(i));
-				//posService.orderSpend(list.get(i));
+				posService.orderInsert(list.get(i));
 				temp = 1;
 			}
 			
 			if(temp == 1){
-				
 				posService.orderTempDeleteAll();
 			}
 			
@@ -784,5 +781,34 @@ public class PosController {
 		mav.setViewName(".pos.pos_calc");
 		return mav;
 	}
+	
+	@RequestMapping(value = "pos/ps_orderState", method = RequestMethod.GET)
+	public ModelAndView ps_orderStateGET(HttpServletRequest request) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		ItemVO vo = new ItemVO();
+		String name = request.getParameter("id");
+		String area = posService.getArea(name);
+		System.out.println("area : " + area );
+		vo.setArea(area);
+		
+		List<ItemVO> list = posService.getStateList(vo);
+		
+		mav.addObject("list", list);
+		mav.setViewName(".pos.pos_orderState");
+		return mav;
+	}
 
+	@RequestMapping(value = "pos/ps_orderStates", method = RequestMethod.GET)
+	public ModelAndView ps_orderStatePOST(HttpServletRequest request) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		ItemVO vo = new ItemVO();
+		
+		vo.setItem_code(request.getParameter("item_code"));
+		vo.setP2_time(request.getParameter("p2_time"));
+		
+		posService.deleteOrder(vo);
+		
+		mav.setViewName(".pos.pos_StateDeleteSuc");
+		return mav;
+	}
 }

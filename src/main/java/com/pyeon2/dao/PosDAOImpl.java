@@ -231,4 +231,19 @@ public class PosDAOImpl implements PosDAO {
 	public void orderSpend(ItemVO vo) {
 		session.insert(namespace + ".orderSpend", vo);
 	}
+
+	@Override
+	public void orderInsert(ItemVO vo) throws Exception {
+		session.insert(namespace + ".orderInsert", vo);
+	}
+
+	@Override
+	public List<ItemVO> getStateList(ItemVO vo) throws Exception {
+		return session.selectList(namespace + ".getStateList", vo);
+	}
+
+	@Override
+	public void deleteOrder(ItemVO vo) throws Exception {
+		session.delete(namespace + ".deleteOrder", vo);
+	}
 }

@@ -198,8 +198,12 @@ public class CompanyController {
 		vo.setItem_code(request.getParameter("item_code"));
 		vo.setCount(Integer.parseInt(request.getParameter("count")));
 		vo.setArea(request.getParameter("area"));
-
+		vo.setItem_name(request.getParameter("item_name"));
+		vo.setCategory(request.getParameter("category"));
+		vo.setP2_time(request.getParameter("p2_time"));
+		vo.setState("발주 승인");
 		try {
+			companyService.updateOrderState(vo);
 			companyService.updateItemCount(vo);
 			companyService.odertDelete(vo);
 			companyService.orderUpdate(vo);
@@ -218,8 +222,11 @@ public class CompanyController {
 		ItemVO vo = new ItemVO();
 
 		vo.setItem_code(request.getParameter("item_code"));
+		vo.setCount(Integer.parseInt(request.getParameter("count")));
 		vo.setArea(request.getParameter("area"));
+		vo.setState("발주 미승인");
 		try {
+			companyService.updateOrderState(vo);
 			companyService.odertDelete(vo);
 			mav.setViewName(".company.orderCancelSuc");
 		} catch (Exception e) {

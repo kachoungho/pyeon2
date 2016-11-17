@@ -23,7 +23,7 @@ public class PosServiceImpl implements PosService {
 	public void insertOrderTemp(ItemVO vo) throws Exception {
 		posDao.insertOrderTemp(vo);
 	}
-	
+
 	@Override
 	public void insertOrder(ItemVO vo) throws Exception {
 		posDao.insertOrder(vo);
@@ -230,6 +230,21 @@ public class PosServiceImpl implements PosService {
 	@Override
 	public void orderSpend(ItemVO vo) {
 		posDao.orderSpend(vo);
+	}
+
+	@Override
+	public void orderInsert(ItemVO vo) throws Exception {
+		posDao.orderInsert(vo);
+	}
+
+	@Override
+	public List<ItemVO> getStateList(ItemVO vo) throws Exception {
+		return posDao.getStateList(vo);
+	}
+
+	@Override
+	public void deleteOrder(ItemVO vo) throws Exception {
+		posDao.deleteOrder(vo);
 	}
 
 }

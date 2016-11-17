@@ -16,16 +16,12 @@
 
 
 .menu {
-	/* position: absolute; */
-	margin: auto; /* 
-	width: 1000px; */
+	margin: auto; 
 	height: 40px;
-	background-color: yellow	;
 	
 }
 
 .body {
-	/* margin-left: 310px; */
 	height: 100%;
 }
 
@@ -39,6 +35,7 @@
 	background-color: red;
 }
 
+.clearfix { overflow: auto; }
 </style>
 <title>스프링 프로젝트</title>
 </head>
@@ -56,7 +53,7 @@
 			<tiles:insertAttribute name="body" />
 		</div>
 
-		<div class="footer">
+		<div class="footer clearfix">
 			<tiles:insertAttribute name="footer" />
 		</div>
 	</div>

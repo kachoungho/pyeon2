@@ -19,8 +19,15 @@ public class ItemVO {
 	private String sold;
 	private String sal_time;
 	private Criteria cri;
+	private String state;
 	
 
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 	public int getBno() {
 		return bno;
 	}

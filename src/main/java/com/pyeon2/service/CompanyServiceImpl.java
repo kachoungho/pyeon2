@@ -112,5 +112,8 @@ public class CompanyServiceImpl implements CompanyService {
 		return comDao.getComItemCountCategory(category);
 	}
 
-
+	@Override
+	public void updateOrderState(ItemVO vo) throws Exception {
+		comDao.updateOrderState(vo);
+	}
 }

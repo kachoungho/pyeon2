@@ -8,10 +8,10 @@ table.ex1 {
 	text-align: right;
 	border-collapse: collapse;
 	font-family: 'Jeju Gothic',	 sans-serif;
-}
+}	
 
 .ex1 th, .ex1 td {
-	padding: 5px 10px
+	/* padding: 5px 10px */
 }
 
 .ex1 caption {
@@ -190,6 +190,18 @@ table.ex1 {
 	font-size: 20px
 }
 
+#order_label{
+	font-family: 'Jeju Gothic', sans-serif;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 20px;
+	color: white;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .com_stock_button {
 	margin-top: 4.9%;
 	float: left;
@@ -267,4 +279,22 @@ table.ex1 {
 	float : left;
 	width: 40px;
 	height: 40px;
+}
+
+#table_order {
+	margin-left:70px;
+	color: black;
+	font-weight: bold;
+	height: 100%;
+	text-align: center;
+	background-color: #ABC668;
+}
+
+#input_order {
+	float:left;
+	border: none;
+	width: 250px;
+	border-right: 1px solid #009688;
+	border-bottom: 1px solid #009688;
+	font-family: 'Jeju Gothic', sans-serif;
 }

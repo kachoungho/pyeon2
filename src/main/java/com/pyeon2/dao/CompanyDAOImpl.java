@@ -114,4 +114,9 @@ public class CompanyDAOImpl implements CompanyDAO{
 		return session.selectOne(namespace + ".getComItemCountCategory", category);
 	}
 
+	@Override
+	public void updateOrderState(ItemVO vo) throws Exception {
+		session.update(namespace + ".updateOrderState", vo);
+	}
+
 }
