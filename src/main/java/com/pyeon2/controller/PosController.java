@@ -196,7 +196,7 @@ public class PosController {
 	@RequestMapping(value = "pos/ps_order_temp_delete", method = RequestMethod.GET)
 	public ModelAndView orderTempDelete(String page, String item_code, String area){
 		ModelAndView mav = new ModelAndView();
-		List<ItemVO> list;
+		/*List<ItemVO> list;
 		int count = 0;
 		int pageNum = Integer.parseInt(page);
 		
@@ -232,7 +232,16 @@ public class PosController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
+		String check = "1";
+		ItemVO vo = new ItemVO();
+		vo.setArea(area);
+		vo.setItem_code(item_code);
+		
+		posService.orderTempDelete(vo);
+		
+		mav.addObject("check", check);
+		mav.setViewName(".pos.pos_order_temp");
 		
 		return mav;
 	}
