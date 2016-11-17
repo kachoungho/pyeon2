@@ -27,7 +27,8 @@
     <li style="width:33.33%" class="w3-dropdown-hover">
       <a href="#">인사 관리 <i class="fa fa-caret-down"></i></a>
       <div style="width:440px;" class="w3-dropdown-content w3-light-gray w3-card-4">
-      	<a href="${pageContext.request.contextPath}/company/com_searchForm">직원 관리</a>
+      	<a href="${pageContext.request.contextPath}/company/com_searchForm">직원 검색</a>
+      	<a href="${pageContext.request.contextPath}/company/com_insertForm">직원 정보 추가</a>
       </div>
     </li>
   </ul>

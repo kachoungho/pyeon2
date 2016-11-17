@@ -27,7 +27,6 @@
 .body {
 	/* margin-left: 310px; */
 	height: 100%;
-	background-color: skyblue;
 }
 
 .header {

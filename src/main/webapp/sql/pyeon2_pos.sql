@@ -487,8 +487,10 @@ create table sal(
 	sal_time varchar2(30),
 	sys_time date default sysdate,
 	area varchar2(30) not null
-)
-create sequence paynum
+);
+create sequence paynum;
+
+drop sequence paynum
 
 
 create table p2_calc(
