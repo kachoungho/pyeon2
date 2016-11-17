@@ -1,10 +1,11 @@
 
 select * from orderReq;
 select * from orderReq_temp;
+select * from ordeerSpend;
 
 drop table orderReq;
 drop table orderReq_temp;
-
+drop table orderSpend;
 
 
 create table orderReq(
@@ -30,12 +31,27 @@ create table orderReq_temp(
 	constraint orderReq_temp_pk  primary key(item_code, area)
 );
 
+create table orderSpend(
+	bno number(7),
+	spend varchar2(10),
+	pay number(10),
+	spend_date date,
+	area varchar2(20)
+)
+
+
+
+create sequence orderSpend_num
+   increment by 1
+   start with 1
+   nocache;
+
 create sequence orderReq_num
    increment by 1
    start with 1
    nocache;
    
-   create sequence orderReq_temp_num
+create sequence orderReq_temp_num
    increment by 1
    start with 1
    nocache;
