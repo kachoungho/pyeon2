@@ -313,7 +313,11 @@
 	<select id="getStateList" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
 		select * from orderReqState where area = #{area}
 	</select>
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> c4c60239ff76cb72a1eb39da58c7b3761c691499
 	<select id="getPrice" parameterType="com.pyeon2.vo.ItemVO" resultType="Integer">
 		select (cost * #{count}) from company_item where item_code = #{item_code}
 	</select>
