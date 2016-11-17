@@ -1,9 +1,24 @@
 
 select * from company_item;				-- 본사 재고 테이블
-
+select * from company_notice;	
 
 drop table company_item;
+drop table company_notice
+drop sequence noticenum
 
+create table company_notice(
+	noticenum number(10) not null,
+	title varchar2(30) not null,
+	name varchar2(10) not null,
+	position varchar2(10) not null,
+	contant varchar2(1000) not null,
+	noticedate varchar2(30) not null
+)
+
+create sequence noticenum
+   increment by 1
+   start with 1
+   nocache;
 
 
 
