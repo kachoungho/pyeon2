@@ -14,10 +14,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.pyeon2.domain.Criteria;
 import com.pyeon2.domain.PageMaker;
 import com.pyeon2.service.CompanyService;
+import com.pyeon2.service.MemberService;
 import com.pyeon2.service.PosService;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
+import com.pyeon2.vo.NoticeVO;
 import com.pyeon2.vo.SelectSearch;
 
 @Controller
@@ -28,6 +30,9 @@ public class CompanyController {
 	
 	@Autowired
 	private PosService posService;
+	
+	@Autowired
+	private MemberService memberService;
 
 	@RequestMapping("company")
 	public String getCompany() {
@@ -436,6 +441,106 @@ public class CompanyController {
 			e.printStackTrace();
 		}
 		
+		return mav;
+	}
+	
+	@RequestMapping(value = "company/com_notice_list", method = RequestMethod.GET)
+	public ModelAndView comnotice(HttpServletRequest request ,Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		List<NoticeVO> list = companyService.getnoticelist();
+		mav.addObject("result", list);
+		mav.setViewName(".company.company_notice_list");
+		return mav;
+	}
+	
+	@RequestMapping(value = "company/com_notice_list", method = RequestMethod.POST)
+	public ModelAndView comnoticelist(HttpServletRequest request ,Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		NoticeVO Nvo = new NoticeVO();
+		
+		Nvo.setTitle(request.getParameter("title"));
+		Nvo.setName(request.getParameter("name"));
+		Nvo.setPosition(request.getParameter("position"));
+		Nvo.setContant(request.getParameter("contant"));
+		
+		companyService.noticewrite(Nvo);
+		
+		List<NoticeVO> list = companyService.getnoticelist();
+		
+		mav.addObject("result", list);
+		mav.setViewName(".company.company_notice_list");
+		return mav;
+	}
+	
+	@RequestMapping(value = "company/com_notice_write", method = RequestMethod.POST)
+	public ModelAndView comnoticewrite(HttpServletRequest request ,Model model) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		
+		MemberVO Mvo = new MemberVO();
+		Mvo.setId(request.getParameter("id"));
+		
+		List<MemberVO> list = memberService.getname(Mvo);
+		mav.addObject("result",list);
+		mav.setViewName(".company.company_notice_write");
+		return mav;
+	}
+	
+	@RequestMapping(value = "company/com_notice_contant" , method = RequestMethod.GET)
+	public ModelAndView comnoticecontant(HttpServletRequest request ,Model model)throws Exception{
+		ModelAndView mav = new ModelAndView();
+		
+		NoticeVO Nvo = new NoticeVO();
+		Nvo.setNoticenum(Integer.parseInt(request.getParameter("noticenum")));
+		
+		List<NoticeVO> list = companyService.getnoticecontant(Nvo);
+		
+		mav.addObject("result",list);
+		mav.setViewName(".company.company_notice_contant");
+		return mav;
+	}
+	
+	@RequestMapping(value = "company/com_notice_contant" , method = RequestMethod.POST)
+	public ModelAndView comnoticecontantPO(HttpServletRequest request ,Model model)throws Exception{
+		ModelAndView mav = new ModelAndView();
+		
+		NoticeVO Nvo = new NoticeVO();
+		Nvo.setNoticenum(Integer.parseInt(request.getParameter("noticenum")));
+		Nvo.setTitle(request.getParameter("title"));
+		Nvo.setContant(request.getParameter("contant"));
+		
+		companyService.noticeupdate(Nvo);
+		List<NoticeVO> list = companyService.getnoticecontant(Nvo);
+		
+		mav.addObject("result",list);
+		mav.setViewName(".company.company_notice_contant");
+		return mav;
+	}
+	
+	@RequestMapping(value ="company/com_notice_modify",method = RequestMethod.POST)
+	public ModelAndView comnoticecontantmo(HttpServletRequest request ,Model model)throws Exception{
+		ModelAndView mav = new ModelAndView();
+		
+		NoticeVO Nvo = new NoticeVO();
+		Nvo.setNoticenum(Integer.parseInt(request.getParameter("noticenum")));
+		
+		List<NoticeVO> list = companyService.getnoticecontant(Nvo);
+		
+		mav.addObject("result",list);
+		mav.setViewName(".company.company_notice_modify");
+		return mav;
+	}
+	
+	@RequestMapping(value="company/com_notice_delete",method = RequestMethod.POST)
+	public ModelAndView comnoticedelete(HttpServletRequest request ,Model model)throws Exception{
+		ModelAndView mav = new ModelAndView();
+		NoticeVO Nvo = new NoticeVO();
+		
+		Nvo.setNoticenum(Integer.parseInt(request.getParameter("noticenum")));
+		companyService.noticedelete(Nvo);
+		
+		mav.setViewName(".company.company_notice_delete");
 		return mav;
 	}
 }

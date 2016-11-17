@@ -10,6 +10,7 @@ import com.pyeon2.domain.Criteria;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
+import com.pyeon2.vo.NoticeVO;
 
 @Repository
 public class CompanyDAOImpl implements CompanyDAO{
@@ -117,6 +118,31 @@ public class CompanyDAOImpl implements CompanyDAO{
 	@Override
 	public void updateOrderState(ItemVO vo) throws Exception {
 		session.update(namespace + ".updateOrderState", vo);
+	}
+	
+	@Override
+	public List<NoticeVO> getnoticelist() throws Exception {
+		return session.selectList(namespace+".getnoticelist");
+	}
+
+	@Override
+	public void noticewrite(NoticeVO Nvo) throws Exception {
+		session.insert(namespace+".noticewrite", Nvo);
+	}
+
+	@Override
+	public List<NoticeVO> getnoticecontant(NoticeVO Nvo) throws Exception {
+		return session.selectList(namespace+".getnoticecontant",Nvo);
+	}
+
+	@Override
+	public void noticeupdate(NoticeVO Nvo) throws Exception {
+		session.update(namespace+".noticeupdate",Nvo);
+	}
+
+	@Override
+	public void noticedelete(NoticeVO Nvo) throws Exception {
+		session.delete(namespace+".noticedelete",Nvo);
 	}
 
 }
