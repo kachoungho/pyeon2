@@ -145,9 +145,10 @@ table.ex1 {
 	margin-left: 5%;
 	padding: 9px 0;
 	width: 10%;
-	color: #000;
+	color: #000;/* 
 	border: 1px solid transparent;
 	border-bottom: 1px solid #009688;
+	border-right: 1px solid #009688; */
 	font-family: 'Jeju Gothic', sans-serif;
 	float: left;
 	margin-top: 5%;
@@ -198,4 +199,72 @@ table.ex1 {
 
 .button {
 	display: block;
+}
+.button_center{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;	
+}
+
+#table_insert {
+	color: black;
+	margin-top: 5%;
+	margin-bottom: 5%;
+	margin-right: 30%;
+	margin-left: 30%;
+	padding: 40px;
+	font-size: 20px;
+	font-weight: bold;
+	height: 750px;
+	text-align: center;
+	background-color: rgba(87, 242, 224, 0.2);
+}
+
+#tr_insert {
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 5%;
+	background-color: rgba(30, 118, 26, 0.2);
+	border-radius: 16px !important;
+	color: white;
+	height: 50px;
+	font-family: 'Jeju Gothic', sans-serif;
+}
+
+#input_insert {
+	margin-left: 20px;
+	border: none;
+	border-right: 1px solid #009688;
+	border-bottom: 1px solid #009688;
+	width: 300px;
+	font-family: 'Jeju Gothic', sans-serif;
+	padding-right: 50px;
+}
+
+#label_insert {
+	text-align: center;
+	font-family: 'Jeju Gothic', sans-serif;
+	color: black;
+	font-size: 30px;
+	margin-bottom: 50px;
+}
+
+#select_insert {
+	margin-left: 20px;
+	width: 300px;
+	color: #000;
+	border: none;
+	border-right: 1px solid #009688;
+	border-bottom: 1px solid #009688;
+	font-family: 'Jeju Gothic', sans-serif;
+}
+
+#button_insert {
+	display: block;
+	float: right;
+}
+.img_insert{
+	float : left;
+	width: 40px;
+	height: 40px;
 }
