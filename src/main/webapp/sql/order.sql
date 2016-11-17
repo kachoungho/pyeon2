@@ -1,3 +1,12 @@
+
+select * from orderReq;
+select * from orderReq_temp;
+
+drop table orderReq;
+drop table orderReq_temp;
+
+
+
 create table orderReq(
 	bno number,
 	item_code varchar2(40) not null, 
@@ -8,6 +17,7 @@ create table orderReq(
 	p2_time date DEFAULT SYSDATE,
 	constraint orderReq_pk  primary key(item_code, area)
 );
+
 
 create table orderReq_temp(
 	bno number,
@@ -30,9 +40,4 @@ create sequence orderReq_num
    start with 1
    nocache;
 
-select * from orderReq;
-select * from orderReq_temp;
-
-drop table orderReq;
-drop table orderReq_temp;
 
