@@ -94,14 +94,35 @@ public class PosController {
 	@RequestMapping(value = "pos/ps_order", method = RequestMethod.POST)
 	public String orderPOST(ItemVO vo, Model model, String page) throws Exception {
 		System.out.println("order POST 요청 성공");
+		List<ItemVO> list;
+		int compare = 0;
+		list = posService.orderTempCompare();
+		System.out.println("item_code : " + vo.getItem_code());
+		System.out.println("area : " + vo.getArea());
 		
-		posService.insertOrderTemp(vo);
+		for(int i = 0; i < list.size(); i++){
+			System.out.println("item_code : " + list.get(i).getItem_code());
+			System.out.println("item_code : " + vo.getItem_code());
+			System.out.println("area : " + list.get(i).getArea());
+			System.out.println("area : " + vo.getArea());
+			if(list.get(i).getItem_code().equals(vo.getItem_code()) && list.get(i).getArea().equals(vo.getArea())){
+				compare = 1;
+			}
+		}
+		
+		if(compare == 1){
+			posService.updateOrderTemp(vo);
+		}
+		else{
+			posService.insertOrderTemp(vo);
+		}
+		
 		
 		return "redirect:ps_order";
 	}
 	
 	@RequestMapping(value = "pos/ps_order_temp", method = RequestMethod.GET)
-	public ModelAndView orderTempGet(ItemVO vo, String page){
+	public ModelAndView orderTempGet(ItemVO vo, String page, String item_code, String area){
 		ModelAndView mav = new ModelAndView();
 		List<ItemVO> list;
 		int count = 0;
@@ -129,6 +150,8 @@ public class PosController {
 			mav.addObject("pageNum", pageNum);
 			mav.addObject("count", count);
 			mav.addObject("pageMaker", pageMaker);
+			mav.addObject("item_code", item_code);
+			mav.addObject("area", area);
 			
 			mav.setViewName(".pos.pos_order_temp");
 			
@@ -141,9 +164,69 @@ public class PosController {
 	}
 	
 	@RequestMapping(value = "pos/ps_order_temp", method = RequestMethod.POST)
-	public ModelAndView orderTempPost(ItemVO vo, String page){
+	public ModelAndView orderTempPost(String page, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
+		List<ItemVO> list;
+		list = posService.selectAlreadyOrderedList();
+		int temp = 0;
+		try{
+			for(int i = 0; i < list.size(); i++){
+				posService.insertOrder(list.get(i));
+				temp = 1;
+			}
+			
+			if(temp == 1){
+				posService.orderTempDeleteAll();
+			}
+			
+			mav.setViewName(".pos.pos_order");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		
+		return mav;
+	}
+	
+	@RequestMapping(value = "pos/ps_order_temp_delete", method = RequestMethod.GET)
+	public ModelAndView orderTempDelete(String page, String item_code, String area){
+		ModelAndView mav = new ModelAndView();
+		List<ItemVO> list;
+		int count = 0;
+		int pageNum = Integer.parseInt(page);
+		
+		try {
+			Criteria cri = new Criteria();
+			cri.setPage(pageNum);
+			cri.setPerPageNum(7);
+			
+			ItemVO vo = new ItemVO();
+			vo.setArea(area);
+			vo.setItem_code(item_code);
+			
+			posService.orderTempDelete(vo);
+			count = posService.orderTempCount();
+			list = posService.orderTempList(cri);
+			
+			System.out.println("List : " + list);
+			System.out.println("count : " + count);
+			
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(cri);
+			pageMaker.setTotalCount(count);
+			
+			mav.addObject("result", list);
+			mav.addObject("pageNum", pageNum);
+			mav.addObject("count", count);
+			mav.addObject("pageMaker", pageMaker);
+			mav.addObject("item_code", item_code);
+			mav.addObject("area", area);
+			
+			mav.setViewName(".pos.pos_order_temp");
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return mav;
 	}
@@ -551,7 +634,7 @@ public class PosController {
 			list = posService.selectUser(Mvo);
 
 			mav.addObject("list", list);
-			mav.setViewName(".pos.pos_user_select");
+			mav.setViewName(".pos.pos_user_insert");
 
 		} catch (Exception e) {
 			e.printStackTrace();

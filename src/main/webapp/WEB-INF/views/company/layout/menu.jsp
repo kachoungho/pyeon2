@@ -28,7 +28,11 @@
       <a href="#">인사 관리 <i class="fa fa-caret-down"></i></a>
       <div style="width:440px;" class="w3-dropdown-content w3-light-gray w3-card-4">
       	<a href="${pageContext.request.contextPath}/company/com_searchForm">직원 검색</a>
+<<<<<<< HEAD
       	<a href="${pageContext.request.contextPath}/company/com_insertForm">직원 정보 추가</a>
+=======
+      	<a href="${pageContext.request.contextPath}/company/com_insertForm">직원 정보 등록</a>
+>>>>>>> 50a407557b6df51c345e52aaca676749d3d77ee8
       </div>
     </li>
   </ul>
