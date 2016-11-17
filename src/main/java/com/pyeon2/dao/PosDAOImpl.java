@@ -231,4 +231,9 @@ public class PosDAOImpl implements PosDAO {
 	public void orderSpend(ItemVO vo) {
 		session.insert(namespace + ".orderSpend", vo);
 	}
+
+	@Override
+	public int getPrice(ItemVO vo) {
+		return session.selectOne(namespace + ".getPrice", vo);
+	}
 }

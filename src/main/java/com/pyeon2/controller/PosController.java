@@ -170,18 +170,23 @@ public class PosController {
 		ModelAndView mav = new ModelAndView();
 		List<ItemVO> list;
 		list = posService.selectAlreadyOrderedList();
-
-		System.out.println("wow : " + request.getParameter("result"));
+		ItemVO vo = new ItemVO();
+		int totalPrice = 0;
 		int temp = 0;
+		
 		try{
 			for(int i = 0; i < list.size(); i++){
 				posService.insertOrder(list.get(i));
-				//posService.orderSpend(list.get(i));
+				totalPrice = totalPrice + posService.getPrice(list.get(i));
+				System.out.println(posService.getPrice(list.get(i)));
+				System.out.println(totalPrice);
 				temp = 1;
 			}
 			
 			if(temp == 1){
-				
+				vo.setTotalPrice(totalPrice);
+				vo.setArea(list.get(0).getArea());
+				posService.orderSpend(vo);
 				posService.orderTempDeleteAll();
 			}
 			

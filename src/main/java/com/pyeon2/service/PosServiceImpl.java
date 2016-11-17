@@ -232,4 +232,9 @@ public class PosServiceImpl implements PosService {
 		posDao.orderSpend(vo);
 	}
 
+	@Override
+	public int getPrice(ItemVO vo) {
+		return posDao.getPrice(vo);
+	}
+
 }

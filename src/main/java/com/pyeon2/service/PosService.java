@@ -136,4 +136,7 @@ public interface PosService {
 	
 	//발주 비용
 	public void orderSpend(ItemVO vo);
+	
+	//아이템별 가격
+	public int getPrice(ItemVO vo);
 }

@@ -19,8 +19,14 @@ public class ItemVO {
 	private String sold;
 	private String sal_time;
 	private Criteria cri;
-	
+	private int totalPrice;
 
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 	public int getBno() {
 		return bno;
 	}

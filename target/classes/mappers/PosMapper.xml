@@ -288,10 +288,19 @@
 	<select id="selectAlreadyOrderedList" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
 		select * from orderReq_temp
 	</select>
-	
+
 	<insert id="orderSpend" parameterType="com.pyeon2.vo.ItemVO">
-		insert into orderSpend 
+		insert into orderSpend (bno, spend, pay, spend_date, area) values(
+		orderSpend_num.nextVal,
+		'지출',
+		#{totalPrice},
+		SYSDATE,
+		#{area})
 	</insert>
+	
+	<select id="getPrice" parameterType="com.pyeon2.vo.ItemVO" resultType="Integer">
+		select (cost * #{count}) from company_item where item_code = #{item_code}
+	</select>
 	
 	
 </mapper>
