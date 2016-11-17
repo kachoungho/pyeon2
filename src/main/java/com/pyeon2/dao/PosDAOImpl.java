@@ -226,4 +226,9 @@ public class PosDAOImpl implements PosDAO {
 	public List<ItemVO> selectAlreadyOrderedList() {
 		return session.selectList(namespace + ".selectAlreadyOrderedList");
 	}
+
+	@Override
+	public void orderSpend(ItemVO vo) {
+		session.insert(namespace + ".orderSpend", vo);
+	}
 }

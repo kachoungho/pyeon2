@@ -43,6 +43,8 @@ public class PosController {
 		ModelAndView mav = new ModelAndView();
 
 		List<ComItemVO> list;
+		List<ItemVO> list2;
+		list2 = posService.orderTempCompare();
 		int count = 0;
 		int pageNum = 1;
 		String area = "";
@@ -80,6 +82,7 @@ public class PosController {
 			mav.addObject("item_name", item_name);
 			mav.addObject("category", category);
 			mav.addObject("area", area);
+			mav.addObject("list", list2);
 			
 			mav.setViewName(".pos.pos_order");
 			
@@ -92,7 +95,8 @@ public class PosController {
 	}
 	
 	@RequestMapping(value = "pos/ps_order", method = RequestMethod.POST)
-	public String orderPOST(ItemVO vo, Model model, String page) throws Exception {
+	public ModelAndView orderPOST(ItemVO vo, Model model, String page) throws Exception {
+		ModelAndView mav = new ModelAndView();
 		System.out.println("order POST 요청 성공");
 		List<ItemVO> list;
 		int compare = 0;
@@ -101,10 +105,6 @@ public class PosController {
 		System.out.println("area : " + vo.getArea());
 		
 		for(int i = 0; i < list.size(); i++){
-			System.out.println("item_code : " + list.get(i).getItem_code());
-			System.out.println("item_code : " + vo.getItem_code());
-			System.out.println("area : " + list.get(i).getArea());
-			System.out.println("area : " + vo.getArea());
 			if(list.get(i).getItem_code().equals(vo.getItem_code()) && list.get(i).getArea().equals(vo.getArea())){
 				compare = 1;
 			}
@@ -117,8 +117,10 @@ public class PosController {
 			posService.insertOrderTemp(vo);
 		}
 		
+		mav.addObject("list", list);
+		mav.setViewName("redirect:ps_order");
 		
-		return "redirect:ps_order";
+		return mav;
 	}
 	
 	@RequestMapping(value = "pos/ps_order_temp", method = RequestMethod.GET)
@@ -168,18 +170,22 @@ public class PosController {
 		ModelAndView mav = new ModelAndView();
 		List<ItemVO> list;
 		list = posService.selectAlreadyOrderedList();
+
+		System.out.println("wow : " + request.getParameter("result"));
 		int temp = 0;
 		try{
 			for(int i = 0; i < list.size(); i++){
 				posService.insertOrder(list.get(i));
+				//posService.orderSpend(list.get(i));
 				temp = 1;
 			}
 			
 			if(temp == 1){
+				
 				posService.orderTempDeleteAll();
 			}
 			
-			mav.setViewName(".pos.pos_order");
+			mav.setViewName(".pos.pos_order_temp");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
