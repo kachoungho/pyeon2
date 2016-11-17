@@ -539,8 +539,10 @@ public class PosController {
 
 		try {
 			list = posService.selectUser(Mvo);
+			String area = posService.getArea(request.getParameter("id"));
 
 			mav.addObject("list", list);
+			mav.addObject("area", area);
 			mav.setViewName(".pos.pos_user_select");
 		} catch (Exception e) {
 			e.printStackTrace();
