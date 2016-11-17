@@ -151,6 +151,7 @@
 		delete from role where id = #{id}
 	</delete>
 	
+	<!-- 아르바이트생 p2_user 테이블 정보 삭제 -->
 	<delete id="deleteUserTime" parameterType="com.pyeon2.vo.UserVO">
 		delete from p2_user where userid = #{userid}
 	</delete>

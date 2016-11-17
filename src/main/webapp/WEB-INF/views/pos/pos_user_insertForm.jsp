@@ -5,66 +5,85 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<link rel="stylesheet" type="text/css"
+	href="/controller/resources/css/listcss.css">
 <title>아르바이트생 정보 입력</title>
 </head>
 <body>
 	<form action="${pageContext.request.contextPath}/pos/ps_user_insert"
 		method="post">
-		<table>
+		<table id="table_insert">
 			<tr>
-				<td>아이디</td>
-				<td><input type="text" name="id"></td>
+				<th colspan="2"><label id="label_insert"> 직원 정보 입력 </label></th>
 			</tr>
 			<tr>
-				<td>비밀번호</td>
-				<td><input type="password" name="pwd"></td>
+				<th id="tr_insert"><img class="img_insert" style=""
+					src="/controller/resources/images/id.png">아이디</th>
+				<th><input id="input_insert" type="text" name="id"></th>
 			</tr>
 			<tr>
-				<td>이름</td>
-				<td><input type="text" name="name"></td>
+				<th id="tr_insert"><img class="img_insert"
+					src="/controller/resources/images/pwd.png">비밀번호</th>
+				<th><input id="input_insert" type="password" name="pwd"></th>
 			</tr>
 			<tr>
-				<td>직급</td>
-				<td><select name="position">
+				<th id="tr_insert"><img class="img_insert"
+					src="/controller/resources/images/name.png">이름</th>
+				<th><input id="input_insert" type="text" name="name"></th>
+			</tr>
+			<tr>
+				<th id="tr_insert"><img class="img_insert"
+					src="/controller/resources/images/rank.png">직급</th>
+				<th><select id="select_insert" name="position">
 						<option value="user">아르바이트</option>
-				</select></td>
+				</select></th>
 			</tr>
 			<tr>
-				<td>전화번호</td>
-				<td><input type="text" name="phone"></td>
+				<th id="tr_insert"><img class="img_insert"
+					src="/controller/resources/images/phone.png">전화번호</th>
+				<th><input id="input_insert" type="text" name="phone"></th>
 			</tr>
 			<tr>
-				<td>나이</td>
-				<td><input type="text" name="age"></td>
+				<th id="tr_insert"><img class="img_insert"
+					src="/controller/resources/images/age.png">생년월일</th>
+				<th><input id="input_insert" type="text" name="age"></th>
 			</tr>
 			<tr>
-				<td>주소</td>
-				<td><input type="text" name="address"></td>
+				<th id="tr_insert"><img class="img_insert"
+					src="/controller/resources/images/address.png">주소</th>
+				<th><input id="input_insert" type="text" name="address"></th>
 			</tr>
 			<tr>
-				<td>성별</td>
-				<td><select name="gender">
+				<th id="tr_insert"><img class="img_insert"
+					src="/controller/resources/images/gender.png">성별</th>
+				<th><select id="select_insert" name="gender">
 						<option value="man">남자</option>
 						<option value="woman">여자</option>
-				</select></td>
+				</select></th>
 			</tr>
-			<tr>
 			<c:forEach items="${ list }" var="list">
-				<td>지점</td>
-				<td><input type="text" name="area" value="${ list.area }" readonly="readonly"></td>
+				<tr>
+					<th id="tr_insert"><img class="img_insert"
+						src="/controller/resources/images/area.png">지점</th>
+					<th><input id="input_insert" type="text" name="area"
+						value="${ list.area }" readonly="readonly"></th>
+				</tr>
 			</c:forEach>
-			</tr>
 			<tr>
-				<td>근무시간</td>
-				<td><select name="optime">
-						<option value="am">오전</option>
-						<option value="pm">오후</option>
-						<option value="night">야간</option>
-				</select></td>
+				<th id="tr_insert"><img class="img_insert"
+					src="/controller/resources/images/clock.png">근무시간</th>
+				<th><select id="select_insert" name="optime">
+						<option value="오전">오전</option>
+						<option value="오후">오후</option>
+						<option value="야간">야간</option>
+				</select></th>
 			</tr>
 
 			<tr>
-				<td><input type="submit"></td>
+				<th></th>
+				<th><input id="button_insert" width="40" type="image"
+					src="/controller/resources/images/check.png" alt="submit">
+				</th>
 			</tr>
 		</table>
 	</form>
