@@ -7,11 +7,12 @@ table.ex1 {
 	margin: 0 auto;
 	text-align: right;
 	border-collapse: collapse;
-	font-family: 'Jeju Gothic',	 sans-serif;
-}	
+	font-family: 'Jeju Gothic', sans-serif;
+}
 
 .ex1 th, .ex1 td {
 	/* padding: 5px 10px */
+	
 }
 
 .ex1 caption {
@@ -24,7 +25,8 @@ table.ex1 {
 }
 
 .ex1 thead th {
-	background: #ABC668;
+	/* background: #ABC668; */
+	background: #054A75;
 	color: #fff;
 	text-align: center;
 	border-right: 1px solid #fff;
@@ -36,7 +38,6 @@ table.ex1 {
 }
 
 .ex1 tbody td.date1 {
-	
 	width: 10%;
 	height: 70px;
 	font-family: 'Jeju Gothic', sans-serif;
@@ -50,7 +51,6 @@ table.ex1 {
 	text-align: center;
 	width: 10%;
 	font-family: 'Jeju Gothic', sans-serif;
-	
 }
 
 .ex1 tbody td.date3 {
@@ -145,7 +145,7 @@ table.ex1 {
 	margin-left: 5%;
 	padding: 9px 0;
 	width: 10%;
-	color: #000;/* 
+	color: #000; /* 
 	border: 1px solid transparent;
 	border-bottom: 1px solid #009688;
 	border-right: 1px solid #009688; */
@@ -190,7 +190,7 @@ table.ex1 {
 	font-size: 20px
 }
 
-#order_label{
+#order_label {
 	font-family: 'Jeju Gothic', sans-serif;
 	display: block;
 	margin-left: auto;
@@ -212,10 +212,11 @@ table.ex1 {
 .button {
 	display: block;
 }
-.button_center{
+
+.button_center {
 	display: block;
 	margin-left: auto;
-	margin-right: auto;	
+	margin-right: auto;
 }
 
 #table_insert {
@@ -229,18 +230,22 @@ table.ex1 {
 	font-weight: bold;
 	height: 750px;
 	text-align: center;
-	background-color: rgba(87, 242, 224, 0.2);
+	/* background-color: rgba(87, 242, 224, 0.2); */
+	background-color: rgba(58, 129, 165, 0.4);
 }
 
 #tr_insert {
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 5%;
-	background-color: rgba(30, 118, 26, 0.2);
 	border-radius: 16px !important;
 	color: white;
 	height: 50px;
 	font-family: 'Jeju Gothic', sans-serif;
+	/* background-color: rgba(30, 118, 26, 0.2); */
+	/* background-color: rgba(30, 118, 26, 0.2); */
+	background-color: #3266C1;
+	opacity: 0.8;
 }
 
 #input_insert {
@@ -275,23 +280,25 @@ table.ex1 {
 	display: block;
 	float: right;
 }
-.img_insert{
-	float : left;
+
+.img_insert {
+	float: left;
 	width: 40px;
 	height: 40px;
 }
 
 #table_order {
-	margin-left:70px;
+	margin-left: 70px;
 	color: black;
 	font-weight: bold;
 	height: 100%;
 	text-align: center;
-	background-color: #ABC668;
+	background-color: #054A75;
+	opacity: 0.9;
 }
 
 #input_order {
-	float:left;
+	float: left;
 	border: none;
 	width: 250px;
 	border-right: 1px solid #009688;

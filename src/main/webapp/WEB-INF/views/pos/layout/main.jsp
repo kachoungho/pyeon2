@@ -13,29 +13,36 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <style type="text/css">
-
-
 .menu {
-	margin: auto; 
+	margin: auto;
 	height: 40px;
-	
 }
 
 .body {
 	height: 100%;
+	background: url(/controller/resources/images/background10.png) no-repeat
+		center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
 
 .header {
-	height: 100px;
-	background-color: red;
+	height: 150px;
 }
 
 .footer {
 	height: 100px;
-	background-color: red;
 }
 
-.clearfix { overflow: auto; }
+#clearfix {
+	overflow: auto;
+}
+
+.test{
+	
+}
 </style>
 <title>스프링 프로젝트</title>
 </head>
@@ -48,12 +55,12 @@
 		<div class="menu">
 			<tiles:insertAttribute name="menu" />
 		</div>
-		
+
 		<div class="body">
 			<tiles:insertAttribute name="body" />
 		</div>
 
-		<div class="footer clearfix">
+		<div class="footer" id="clearfix">
 			<tiles:insertAttribute name="footer" />
 		</div>
 	</div>
