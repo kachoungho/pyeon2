@@ -6,13 +6,21 @@
 <head>
 <meta http-equiv="Refresh" content="0; url=${pageContext.request.contextPath}/pos/ps_order">
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<script type="text/javascript">
-	alert("발주 성공");
-	history.go(1);
-</script>
+
 <title>Insert title here</title>
 </head>
 <body>
-	
+<c:if test="${check == 1 }">
+	<script type="text/javascript">
+		alert("삭제 성공");
+		history.go(1);
+	</script>
+</c:if>
+<c:if test="${check == null }">
+	<script type="text/javascript">
+		alert("발주 성공");
+		history.go(1);
+	</script>
+</c:if>
 </body>
 </html>
