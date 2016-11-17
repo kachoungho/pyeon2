@@ -157,6 +157,7 @@
 		delete from role where id = #{id}
 	</delete>
 	
+	<!-- 아르바이트생 p2_user 테이블 정보 삭제 -->
 	<delete id="deleteUserTime" parameterType="com.pyeon2.vo.UserVO">
 		delete from p2_user where userid = #{userid}
 	</delete>
@@ -300,13 +301,25 @@
 	
 	<!-- 발주 비용 -->
 	<insert id="orderSpend" parameterType="com.pyeon2.vo.ItemVO">
-		insert into orderSpend 
+		insert into orderSpend (bno, spend, pay, spend_date, area) values(
+		orderSpend_num.nextVal,
+		'지출',
+		#{totalPrice},
+		SYSDATE,
+		#{area})
 	</insert>
 	
+<<<<<<< HEAD
 	<!-- 발주 현황 리스트 -->
 	<select id="getStateList" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
 		select * from orderReqState where area = #{area}
 	</select>
+=======
+	<select id="getPrice" parameterType="com.pyeon2.vo.ItemVO" resultType="Integer">
+		select (cost * #{count}) from company_item where item_code = #{item_code}
+	</select>
+	
+>>>>>>> c167474b6917d53ed3884ec0479ade93f5d66710
 	
 	<!-- 발주 현황 삭제 -->
 	<delete id="deleteOrder" parameterType="com.pyeon2.vo.ItemVO">

@@ -20,6 +20,7 @@ public class ItemVO {
 	private String sal_time;
 	private Criteria cri;
 	private String state;
+	private int totalPrice;
 	
 
 	public String getState() {
@@ -27,6 +28,13 @@ public class ItemVO {
 	}
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 	public int getBno() {
 		return bno;

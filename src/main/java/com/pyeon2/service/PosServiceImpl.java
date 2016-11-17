@@ -246,5 +246,9 @@ public class PosServiceImpl implements PosService {
 	public void deleteOrder(ItemVO vo) throws Exception {
 		posDao.deleteOrder(vo);
 	}
+	
+	public int getPrice(ItemVO vo) {
+		return posDao.getPrice(vo);
+	}
 
 }

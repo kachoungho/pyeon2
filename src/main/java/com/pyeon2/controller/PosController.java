@@ -168,17 +168,24 @@ public class PosController {
 		ModelAndView mav = new ModelAndView();
 		List<ItemVO> list;
 		list = posService.selectAlreadyOrderedList();
-
-		System.out.println("wow : " + request.getParameter("result"));
+		ItemVO vo = new ItemVO();
+		int totalPrice = 0;
 		int temp = 0;
+		
 		try{
 			for(int i = 0; i < list.size(); i++){
 				posService.insertOrder(list.get(i));
 				posService.orderInsert(list.get(i));
+				totalPrice = totalPrice + posService.getPrice(list.get(i));
+				System.out.println(posService.getPrice(list.get(i)));
+				System.out.println(totalPrice);
 				temp = 1;
 			}
 			
 			if(temp == 1){
+				vo.setTotalPrice(totalPrice);
+				vo.setArea(list.get(0).getArea());
+				posService.orderSpend(vo);
 				posService.orderTempDeleteAll();
 			}
 			
@@ -536,8 +543,10 @@ public class PosController {
 
 		try {
 			list = posService.selectUser(Mvo);
+			String area = posService.getArea(request.getParameter("id"));
 
 			mav.addObject("list", list);
+			mav.addObject("area", area);
 			mav.setViewName(".pos.pos_user_select");
 		} catch (Exception e) {
 			e.printStackTrace();

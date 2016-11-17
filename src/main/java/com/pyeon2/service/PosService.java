@@ -136,7 +136,7 @@ public interface PosService {
 
 	// 발주 비용
 	public void orderSpend(ItemVO vo);
-
+	
 	// 발주 신청 리스트 입력
 	public void orderInsert(ItemVO vo) throws Exception;
 
@@ -145,4 +145,7 @@ public interface PosService {
 
 	// 발주 현황 삭제
 	public void deleteOrder(ItemVO vo) throws Exception;
+	
+	//아이템별 가격
+	public int getPrice(ItemVO vo);
 }

@@ -246,4 +246,8 @@ public class PosDAOImpl implements PosDAO {
 	public void deleteOrder(ItemVO vo) throws Exception {
 		session.delete(namespace + ".deleteOrder", vo);
 	}
+	
+	public int getPrice(ItemVO vo) {
+		return session.selectOne(namespace + ".getPrice", vo);
+	}
 }

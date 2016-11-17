@@ -7,6 +7,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<link rel="stylesheet" type="text/css"
+	href="/controller/resources/css/listcss.css">
 <title>Insert title here</title>
 </head>
 <body>
@@ -21,13 +23,15 @@
 	
 		 <sec:authentication property="name" var="LoingUser" />
 		<input type="hidden" value="${LoingUser }" name="ids">
-		<select id="year" name="year">
+		<select class="com_stock_select1" id="year" name="year">
+						<option>--year--</option>
 						<option value="" hidden=""></option>
 						<option value= "2014" >2014</option>
 						<option value= "2015" >2015</option>
 						<option value= "2016" >2016</option>
-		</select> 년&nbsp;&nbsp;
-		<select id="year" name="month">
+		</select>
+		<select class="com_stock_select1" id="year" name="month">
+						<option>--month--</option>
 						<option value="" hidden=""></option>
 						<option value= "01" >1월</option>
 						<option value= "02" >2월</option>
@@ -41,26 +45,31 @@
 						<option value= "10" >10월</option>
 						<option value= "11" >11월</option>
 						<option value= "12" >12월</option>
-		</select> 년&nbsp;&nbsp;
+		</select>
 		
-		<input type="submit" value="검색">
-		<table>
+		 <input
+			class="com_stock_button" width="40" type="image"
+			src="/controller/resources/images/choice.png" alt="submit">
+		<table class="ex1">
+		<thead>
 			<tr>
-				<td align="center">이름</td>
-				<td align="center">년</td>
-				<td align="center">월</td>
-				<td align="center">지역</td>
-				<td align="center">업무 시간</td>
-				<td align="center">급여</td>
+				<th scope="col">이름</th>
+				<th scope="col">년</th>
+				<th scope="col">월</th>
+				<th scope="col">지역</th>
+				<th scope="col">업무 시간</th>
+				<th scope="col">급여</th>
 			</tr>
+		</thead>
 			<c:forEach items="${result}" var="user">
-			<tr>
-				<td align="center">${user.userid }</td>
-				<td align="center">${user.year }</td>
-				<td align="center">${user.month }</td>
-				<td align="center">${user.area }</td>
-				<td align="center">${user.hour }</td>
-				<td align="center">${user.money }</td>
+			<tbody>
+			<tr class="odd">
+				<td class="date5">${user.userid }</td>
+				<td class="date5">${user.year }</td>
+				<td class="date5">${user.month }</td>
+				<td class="date5">${user.area }</td>
+				<td class="date5">${user.hour }</td>
+				<td class="date5">${user.money }</td>
 			</tr>
 			</c:forEach>
 			
