@@ -309,17 +309,14 @@
 		#{area})
 	</insert>
 	
-<<<<<<< HEAD
 	<!-- 발주 현황 리스트 -->
 	<select id="getStateList" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
 		select * from orderReqState where area = #{area}
 	</select>
-=======
+	
 	<select id="getPrice" parameterType="com.pyeon2.vo.ItemVO" resultType="Integer">
 		select (cost * #{count}) from company_item where item_code = #{item_code}
 	</select>
-	
->>>>>>> c167474b6917d53ed3884ec0479ade93f5d66710
 	
 	<!-- 발주 현황 삭제 -->
 	<delete id="deleteOrder" parameterType="com.pyeon2.vo.ItemVO">
