@@ -227,4 +227,9 @@ public class PosServiceImpl implements PosService {
 		return posDao.selectAlreadyOrderedList();
 	}
 
+	@Override
+	public void orderSpend(ItemVO vo) {
+		posDao.orderSpend(vo);
+	}
+
 }

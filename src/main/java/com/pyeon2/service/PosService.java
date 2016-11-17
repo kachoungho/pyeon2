@@ -133,4 +133,7 @@ public interface PosService {
 	
 	//이미 발주 신청된 리스트
 	public List<ItemVO> selectAlreadyOrderedList();
+	
+	//발주 비용
+	public void orderSpend(ItemVO vo);
 }

@@ -71,5 +71,35 @@
 			</c:if>
 		</ul>
 	</div>
+	
+	<table>
+		<tr>
+			<td>item_code</td>
+			<td>item_name</td>
+			<td>count</td>
+			<td>category</td>
+			<td>area</td>
+			<td>발주 신청 시간</td>		
+			<td>발주 신청 삭제</td>
+		</tr>
+		<c:forEach items="${list }" var="list">
+			<tr>
+				<td>${list.item_code }</td>	
+				<td>${list.item_name }</td>
+				<td>${list.count }</td>
+				<td>${list.category }</td>
+				<td>${list.area }</td>
+				<td>${list.p2_time }</td>
+				<td class="date8"><input width="40" type="image"
+					src="/controller/resources/images/delete.png" alt="button"
+					onclick="document.location.href='ps_order_temp_delete?item_code=${list.item_code}&area=${list.area}&page=${pageMaker.cri.page }'">
+				</td>
+			</tr>
+		</c:forEach>
+	</table>
+	<form action="${pageContext.request.contextPath}/pos/ps_order_temp" method="post">
+		<input type="submit" value="발주 신청">
+	</form>
+	
 </body>
 </html>
