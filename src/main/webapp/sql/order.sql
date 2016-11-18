@@ -1,15 +1,7 @@
 
 select * from orderReq;
 select * from orderReq_temp;
-<<<<<<< HEAD
-select * from orderReqState where area = '판교';
-
-drop table orderReq;
-drop table orderReq_temp;
-drop table orderReqState;
-
-=======
-select * from ordeerSpend;
+select * from orderSpend;
 
 drop table orderReq;
 drop table orderReq_temp;
