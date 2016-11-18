@@ -7,11 +7,10 @@ drop table orderReq;
 drop table orderReq_temp;
 drop table orderReqState;
 
+drop table orderSpend;
+
 select * from ordeerSpend;
 
-drop table orderReq;
-drop table orderReq_temp;
-drop table orderSpend;
 
 create table orderReqState(
 	bno number,
