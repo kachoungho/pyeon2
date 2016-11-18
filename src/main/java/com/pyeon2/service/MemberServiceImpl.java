@@ -40,17 +40,9 @@ public class MemberServiceImpl implements MemberService {
 		return memDao.checkId(vo);
 	}
 	
-	/*
 	@Override
-	public List<UserVO> usermoneyM(MemberVO Mvo) throws Exception {
-		return dao.usermoneyM(Mvo);
+	public List<MemberVO> getname(MemberVO Mvo) throws Exception {
+		return  memDao.getname(Mvo);
 	}
-
-	@Override
-	public void userinsertmoney(MemberVO Mvo) throws Exception {
-		dao.userinsertmoney(Mvo);
-	}
-
-	*/
 
 }

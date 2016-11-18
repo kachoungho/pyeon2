@@ -6,6 +6,7 @@ import com.pyeon2.domain.Criteria;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
+import com.pyeon2.vo.NoticeVO;
 
 public interface CompanyService {
 	// 발주 목록 확인 메소드
@@ -67,5 +68,20 @@ public interface CompanyService {
 
 	// 발주 승인,미승인 수정 메소드
 	public void updateOrderState(ItemVO vo) throws Exception;
+	
+	//공지사항 리스트 가져오기
+	public List<NoticeVO> getnoticelist() throws Exception; 
+		
+	//동지사항 글쓰기
+	public void noticewrite(NoticeVO Nvo) throws Exception;
+		
+	//공지사항 가져오기
+	public List<NoticeVO> getnoticecontant(NoticeVO Nvo) throws Exception;
+		
+	//공지사항 업데이트
+	public void noticeupdate(NoticeVO Nvo) throws Exception;
+		
+	//공지사항 삭제
+	public void noticedelete(NoticeVO Nvo) throws Exception;
 	
 }

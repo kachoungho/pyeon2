@@ -13,10 +13,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pyeon2.domain.Criteria;
 import com.pyeon2.domain.PageMaker;
+import com.pyeon2.service.CompanyService;
 import com.pyeon2.service.PosService;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
+import com.pyeon2.vo.NoticeVO;
 import com.pyeon2.vo.SelectSearch;
 import com.pyeon2.vo.UserVO;
 
@@ -27,6 +29,8 @@ public class PosController {
 	@Autowired
 	private PosService posService;
 
+	@Autowired
+	private CompanyService companyService;
 	/*
 	 * @Autowired public UserService userService;
 	 */
@@ -818,6 +822,30 @@ public class PosController {
 		posService.deleteOrder(vo);
 		
 		mav.setViewName(".pos.pos_StateDeleteSuc");
+		return mav;
+	}
+	
+	@RequestMapping(value = "pos/ps_notice_list", method = RequestMethod.GET)
+	public ModelAndView comnotice(HttpServletRequest request ,Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		List<NoticeVO> list = companyService.getnoticelist();
+		mav.addObject("result", list);
+		mav.setViewName(".pos.pos_notice_list");
+		return mav;
+	}
+	
+	@RequestMapping(value = "pos/ps_notice_contant" , method = RequestMethod.GET)
+	public ModelAndView comnoticecontant(HttpServletRequest request ,Model model)throws Exception{
+		ModelAndView mav = new ModelAndView();
+		
+		NoticeVO Nvo = new NoticeVO();
+		Nvo.setNoticenum(Integer.parseInt(request.getParameter("noticenum")));
+		
+		List<NoticeVO> list = companyService.getnoticecontant(Nvo);
+		
+		mav.addObject("result",list);
+		mav.setViewName(".pos.pos_notice_contant");
 		return mav;
 	}
 }

@@ -177,4 +177,29 @@
 	<update id="updateOrderState">
 		update orderReqState set state = #{state} where state = '승인 대기' and area = #{area} and item_code = #{item_code}
 	</update>
+	
+	<!-- 공지사항 리스트 검색 -->
+	<select id="getnoticelist" resultType="com.pyeon2.vo.NoticeVO">
+		select * from company_notice
+	</select>
+	
+	<!-- 공지사항 글쓰기 -->
+	<insert id="noticewrite" parameterType="com.pyeon2.vo.NoticeVO">
+		insert into company_notice(noticenum,title,name,position,contant,noticedate) values(noticenum.nextVal,#{title},#{name},#{position},#{contant},(SELECT TO_CHAR(sysdate, 'YYYY-MM-dd HH24:mi' ) FROM dual ))
+	</insert>
+	
+	<!-- 공지사항 내용 가져오기 -->
+	<select id="getnoticecontant" resultType="com.pyeon2.vo.NoticeVO" parameterType="com.pyeon2.vo.NoticeVO">
+		select * from company_notice where noticenum = #{noticenum}
+	</select>
+	
+	<!-- 공지사항 업데이트 -->
+	<update id="noticeupdate" parameterType="com.pyeon2.vo.NoticeVO">
+		update company_notice set title = #{title} , contant = #{contant} where noticenum = #{noticenum}
+	</update>
+	
+	<!-- 공지 사항 삭제 -->
+	<delete id="noticedelete" parameterType="com.pyeon2.vo.NoticeVO">
+		delete from company_notice where noticenum = #{noticenum}
+	</delete>
 </mapper>

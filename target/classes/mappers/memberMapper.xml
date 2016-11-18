@@ -35,15 +35,9 @@
 	</select>
 
 	
-	<!-- 미사용 메소드들 
-	
-	<select id="usermoney" resultMap="UserResultMapper" parameterType="com.pyeon2.vo.UserVO">
-		select * from p2_userMoney where month = (SELECT TO_CHAR(go_time, 'MM' ) as month FROM p2_user where userid = #{userid})
+	<!-- 공지사항 글쓰기 이름 , position가져오는 메소드 -->
+	<select id="getname" resultType="com.pyeon2.vo.MemberVO" parameterType="com.pyeon2.vo.MemberVO"> 
+		select name,position from p2_member where id = #{id}
 	</select>
 	
-	<select id="usermoneyM" resultMap="UserResultMapper" parameterType="com.pyeon2.vo.MemberVO">
-		select * from p2_userMoney where month = (SELECT TO_CHAR(go_time, 'MM' ) as month FROM p2_user where area = #{area})
-	</select>
-	
-	 -->
 </mapper>

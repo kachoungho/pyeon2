@@ -314,10 +314,10 @@
 		select * from orderReqState where area = #{area}
 	</select>
 
+	<!-- 아이템별 가격 -->
 	<select id="getPrice" parameterType="com.pyeon2.vo.ItemVO" resultType="Integer">
 		select (cost * #{count}) from company_item where item_code = #{item_code}
 	</select>
-	
 	
 	<!-- 발주 현황 삭제 -->
 	<delete id="deleteOrder" parameterType="com.pyeon2.vo.ItemVO">

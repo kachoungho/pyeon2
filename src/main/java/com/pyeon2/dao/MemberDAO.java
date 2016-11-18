@@ -1,5 +1,7 @@
 package com.pyeon2.dao;
 
+import java.util.List;
+
 import com.pyeon2.vo.MemberVO;
 import com.pyeon2.vo.UserVO;
 
@@ -19,4 +21,7 @@ public interface MemberDAO {
 	
 	// 로그아웃 시 일급 계산 저장 시 지점을 찾아주는 메소드
 	public MemberVO checkId(UserVO vo) throws Exception;
+	
+	// 글쓰기시 글쓴이 이름 , position 가졍오는 메소드
+	public List<MemberVO> getname(MemberVO Mvo) throws Exception;
 }

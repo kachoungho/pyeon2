@@ -1,5 +1,7 @@
 package com.pyeon2.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -40,6 +42,11 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public MemberVO checkId(UserVO vo) throws Exception {
 		return session.selectOne(namespace + ".checkId", vo);
+	}
+	
+	@Override
+	public List<MemberVO> getname(MemberVO Mvo) throws Exception {
+		return session.selectList(namespace+".getname",Mvo);
 	}
 
 }

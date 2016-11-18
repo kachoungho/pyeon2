@@ -10,6 +10,7 @@ import com.pyeon2.domain.Criteria;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
+import com.pyeon2.vo.NoticeVO;
 
 @Repository
 public class CompanyServiceImpl implements CompanyService {
@@ -115,5 +116,30 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public void updateOrderState(ItemVO vo) throws Exception {
 		comDao.updateOrderState(vo);
+	}
+	
+	@Override
+	public List<NoticeVO> getnoticelist() throws Exception {
+		return comDao.getnoticelist();
+	}
+
+	@Override
+	public void noticewrite(NoticeVO Nvo) throws Exception {
+		comDao.noticewrite(Nvo);
+	}
+
+	@Override
+	public List<NoticeVO> getnoticecontant(NoticeVO Nvo) throws Exception {
+		return comDao.getnoticecontant(Nvo);
+	}
+
+	@Override
+	public void noticeupdate(NoticeVO Nvo) throws Exception {
+		comDao.noticeupdate(Nvo);
+	}
+
+	@Override
+	public void noticedelete(NoticeVO Nvo) throws Exception {
+		comDao.noticedelete(Nvo);
 	}
 }

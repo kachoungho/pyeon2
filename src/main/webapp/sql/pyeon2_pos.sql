@@ -488,7 +488,10 @@ create table sal(
 	sys_time date default sysdate,
 	area varchar2(30) not null
 );
-create sequence paynum;
+create sequence paynum
+   increment by 1
+   start with 1
+   nocache;
 
 drop sequence paynum
 
