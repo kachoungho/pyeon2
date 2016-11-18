@@ -20,6 +20,6 @@
 			class="com_stock_button" width="40" type="image"
 			src="/controller/resources/images/choice.png" alt="submit">
 	</form>
-	<br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </body>
 </html>

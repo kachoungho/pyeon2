@@ -18,7 +18,7 @@
 	<br>
 	<sec:authentication property="name" var="name" />
 	<div style="overflow: auto;">
-		<div style="float: left; width: 60%;">
+		<div style="float: left; width: 50%;">
 			<table class="ex1">
 				<thead>
 					<tr>
@@ -28,8 +28,8 @@
 						<th scope="col">상 품 명</th>
 						<th scope="col">원 가</th>
 						<th scope="col">소비자 가격</th>
-						<th scope="col">재고<br>수량
-						</th>
+						<!-- <th scope="col">재고<br>수량
+						</th> -->
 						<th scope="col">선 택</th>
 					</tr>
 				</thead>
@@ -44,7 +44,7 @@
 							<td class="date9">${list.item_name}</td>
 							<td class="date5">${list.cost}원</td>
 							<td class="date9">${list.price}원</td>
-							<td class="date6">${list.count}개</td>
+							<%-- <td class="date6">${list.count}개</td> --%>
 							<td class="date8"><input width="40" type="image"
 								src="/controller/resources/images/check.png" alt="button"
 								onclick="document.location.href='${pageContext.request.contextPath}/pos/ps_order?item_code=${list.item_code}&item_name=${list.item_name}&category=${list.category }&page=${pageMaker.cri.page }&name=${name}'">
@@ -79,7 +79,7 @@
 			<br> <br> <br>
 		</div>
 
-		<div style="float: left; width: 40%;">
+		<div style="float: left; width: 50%;">
 			<div>
 				<form action="${pageContext.request.contextPath}/pos/ps_order"
 					method="post">

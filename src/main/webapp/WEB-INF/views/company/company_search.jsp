@@ -64,18 +64,17 @@
 					<td class="date7">${ member.address }</td>
 					<td class="date8">${ member.gender }</td>
 					<td class="date5">${ member.area }</td>
-					<td class="date8">
-					<input class="button_center" width="40" type="image"
-								src="/controller/resources/images/update.png" alt="button"
-								onclick="document.location.href='${pageContext.request.contextPath}/company/com_updateForm?id=${member.id}'">
-								
+					<td class="date8"><input class="button_center" width="40"
+						type="image" src="/controller/resources/images/update.png"
+						alt="button"
+						onclick="document.location.href='${pageContext.request.contextPath}/company/com_updateForm?id=${member.id}'">
 					<td class="date8">
 						<form
 							action="${pageContext.request.contextPath}/company/com_delete"
 							method="POST" name="${member.id}">
 
-							<input type="hidden" name="id" value="${member.id}"> 
-							<input class="button_center" width="40" type="image"
+							<input type="hidden" name="id" value="${member.id}"> <input
+								class="button_center" width="40" type="image"
 								src="/controller/resources/images/delete.png" alt="submit"
 								onclick="button_event('${member.id}');return false;">
 						</form>
@@ -84,6 +83,28 @@
 			</tbody>
 		</c:forEach>
 	</table>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<br>
 	<br>
 	<br>
