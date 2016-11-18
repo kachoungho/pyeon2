@@ -8,12 +8,12 @@ drop sequence noticenum
 
 create table company_notice(
 	noticenum number(10) not null,
-	title varchar2(30) not null,
-	name varchar2(10) not null,
-	position varchar2(10) not null,
+	title varchar2(50) not null,
+	name varchar2(30) not null,
+	position varchar2(30) not null,
 	contant varchar2(1000) not null,
 	noticedate varchar2(30) not null
-)
+);
 
 create sequence noticenum
    increment by 1

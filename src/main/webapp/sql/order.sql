@@ -1,12 +1,20 @@
 
 select * from orderReq;
 select * from orderReq_temp;
+<<<<<<< HEAD
 select * from orderSpend;
+=======
+select * from orderReqState where area = '판교';
 
 drop table orderReq;
 drop table orderReq_temp;
+drop table orderReqState;
+
 drop table orderSpend;
->>>>>>> c167474b6917d53ed3884ec0479ade93f5d66710
+
+select * from ordeerSpend;
+>>>>>>> a47c629f24b19c8a4a9a4a75a35f82678edebbf6
+
 
 create table orderReqState(
 	bno number,

@@ -21,18 +21,21 @@
 }
 
 .body {
-	/* margin-left: 310px; */
 	height: 100%;
+	background: url(/controller/resources/images/background10.png) no-repeat
+		center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
 
 .header {
-	height: 100px;
-	background-color: red;
+	height: 150px;
 }
 
 .footer {
 	height: 100px;
-	background-color: red;
 }
 
 .clearfix { overflow: auto; }

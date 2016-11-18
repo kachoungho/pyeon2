@@ -1,31 +1,60 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<link rel="stylesheet" type="text/css"
+	href="/controller/resources/css/listcss.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 </head>
 <body>
+	<br>
+	<br>
+	<br>
 	<sec:authentication property="name" var="LoingUser" />
-		<input type="hidden" name="id" value="${LoingUser}">
-		<table>
+	<input type="hidden" name="id" value="${LoingUser}">
+	<table class="ex1">
+		<thead>
 			<tr>
-				<td>No</td>
-				<td>Á¦¸ñ</td>
-				<td>ÀÛ¼ºÀÚ</td>
-				<td>ÀÛ¼ºÀÏ</td>
+				<th scope="col">ê¸€ë²ˆí˜¸</th>
+				<th scope="col">ì œ ëª©</th>
+				<th scope="col">ì‘ì„±ì</th>
+				<th scope="col">ì‘ì„±ì¼</th>
 			</tr>
-			<c:forEach items="${result }" var="list">
-				<tr>
-					<td>${list.noticenum }</td>
-					<td><a href="${pageContext.request.contextPath}/pos/ps_notice_contant?noticenum=${list.noticenum }">${list.title }</a></td>
-					<td>${list.name}</td>
-					<td>${list.noticedate }</td>
+		</thead>
+		<c:forEach items="${result }" var="list">
+			<tbody>
+				<tr class="odd">
+					<td class="date2">${list.noticenum }</td>
+					<td class="date2"><a
+						href="${pageContext.request.contextPath}/pos/ps_notice_contant?noticenum=${list.noticenum }">${list.title }</a></td>
+					<td class="date2">${list.name}</td>
+					<td class="date2">${list.noticedate }</td>
 				</tr>
-			</c:forEach>
-		</table>
-	</body>
+			</tbody>
+		</c:forEach>
+	</table>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+</body>
 </html>

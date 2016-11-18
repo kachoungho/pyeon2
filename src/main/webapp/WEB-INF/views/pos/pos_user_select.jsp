@@ -25,18 +25,20 @@
 	}
 </script>
 
+
 <title>아르바이트 멤버 현황</title>
 </head>
 <body>
+	<br>
+	<br>
+	<br>
 	<table class="ex1">
 		<thead>
 			<tr>
-				<th colspan="11">
-				<c:forEach items="${ area }" var="area">
+				<th colspan="11"><c:forEach items="${ area }" var="area">
 					${ area }
 					지점 아르바이트생 정보 현황
-				</c:forEach>
-				</th>
+				</c:forEach></th>
 			</tr>
 			<tr>
 				<th scope="col">아이디</th>
@@ -84,5 +86,8 @@
 		</c:forEach>
 	</table>
 
+	<br>
+	<br>
+	<br>
 </body>
 </html>

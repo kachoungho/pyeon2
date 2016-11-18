@@ -8,34 +8,41 @@
 <%
 	String cp = request.getContextPath();
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <style type="text/css">
-
-
 .menu {
-	margin: auto; 
+	margin: auto;
 	height: 40px;
-	
 }
 
 .body {
 	height: 100%;
+	background: url(/controller/resources/images/background10.png) no-repeat
+		center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
 
 .header {
-	height: 100px;
-	background-color: red;
+	height: 150px;
 }
 
 .footer {
 	height: 100px;
-	background-color: red;
 }
 
-.clearfix { overflow: auto; }
+#clearfix {
+	overflow: auto;
+}
+
+.test{
+	
+}
 </style>
 <title>스프링 프로젝트</title>
 </head>
@@ -48,12 +55,12 @@
 		<div class="menu">
 			<tiles:insertAttribute name="menu" />
 		</div>
-		
+
 		<div class="body">
 			<tiles:insertAttribute name="body" />
 		</div>
 
-		<div class="footer clearfix">
+		<div class="footer" id="clearfix">
 			<tiles:insertAttribute name="footer" />
 		</div>
 	</div>
