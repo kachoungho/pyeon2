@@ -281,6 +281,11 @@ table.ex1 {
 	float: right;
 }
 
+#button_write {
+	display: block;
+	float: right;
+}
+
 .img_insert {
 	float: left;
 	width: 40px;
