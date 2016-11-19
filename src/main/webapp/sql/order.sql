@@ -1,19 +1,15 @@
 
 select * from orderReq;
 select * from orderReq_temp;
-<<<<<<< HEAD
 select * from orderSpend;
-=======
 select * from orderReqState where area = '판교';
 
 drop table orderReq;
 drop table orderReq_temp;
 drop table orderReqState;
-
 drop table orderSpend;
 
 select * from ordeerSpend;
->>>>>>> a47c629f24b19c8a4a9a4a75a35f82678edebbf6
 
 
 create table orderReqState(
@@ -63,9 +59,9 @@ create table orderSpend(
 	pay number(10),
 	spend_date date,
 	area varchar2(20)
-)
+);
 
-
+drop sequence orderSpend_num;
 
 create sequence orderSpend_num
    increment by 1

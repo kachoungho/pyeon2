@@ -199,6 +199,8 @@ public class CompanyController {
 		ModelAndView mav = new ModelAndView();
 		List<ItemVO> list;
 		ItemVO vo = new ItemVO();
+		int totalPrice = 0;
+		int sequence = 0;
 
 		vo.setItem_code(request.getParameter("item_code"));
 		vo.setCount(Integer.parseInt(request.getParameter("count")));
@@ -212,6 +214,12 @@ public class CompanyController {
 			companyService.updateItemCount(vo);
 			companyService.odertDelete(vo);
 			companyService.orderUpdate(vo);
+			totalPrice = posService.getPrice(vo);
+			vo.setTotalPrice(totalPrice);
+			sequence = posService.getSpendSequence(vo);
+			vo.setBno(sequence);
+			System.out.println("sequence : " + sequence);
+			posService.orderSpend(vo);
 			mav.setViewName(".company.orderApprovalsuc");
 		} catch (Exception e) {
 			e.printStackTrace();

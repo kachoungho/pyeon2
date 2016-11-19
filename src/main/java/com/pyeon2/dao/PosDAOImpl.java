@@ -229,7 +229,7 @@ public class PosDAOImpl implements PosDAO {
 
 	@Override
 	public void orderSpend(ItemVO vo) {
-		session.insert(namespace + ".orderSpend", vo);
+		session.update(namespace + ".orderSpend", vo);
 	}
 
 	@Override
@@ -249,5 +249,15 @@ public class PosDAOImpl implements PosDAO {
 	
 	public int getPrice(ItemVO vo) {
 		return session.selectOne(namespace + ".getPrice", vo);
+	}
+
+	@Override
+	public int getSpendSequence(ItemVO vo) {
+		return session.selectOne(namespace + ".getSpendSequence", vo);
+	}
+
+	@Override
+	public void orderSpendTemp(ItemVO vo) {
+		session.insert(namespace + ".orderSpendTemp", vo);
 	}
 }

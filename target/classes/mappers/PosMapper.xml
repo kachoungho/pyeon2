@@ -300,14 +300,29 @@
 	</select>
 	
 	<!-- 발주 비용 -->
-	<insert id="orderSpend" parameterType="com.pyeon2.vo.ItemVO">
-		insert into orderSpend (bno, spend, pay, spend_date, area) values(
+	<update id="orderSpend" parameterType="com.pyeon2.vo.ItemVO">
+		<!-- insert into orderSpend (bno, spend, pay, spend_date, area) values(
 		orderSpend_num.nextVal,
 		'지출',
 		#{totalPrice},
 		SYSDATE,
-		#{area})
-	</insert>
+		#{area}) -->
+		
+		<!-- <![CDATA[
+        MERGE INTO orderSpend a
+            USING dual
+               on (a.pay = null AND a.bno = #{bno})
+             WHEN MATCHED THEN
+             UPDATE SET
+             	 a.pay = #{totalPrice} where a.bno = #{bno}         
+             WHEN NOT MATCHED THEN
+             UPDATE SET      
+                 a.pay = a.pay + #{totalPrice} where a.bno = #{bno}
+          ]]> -->
+          <![CDATA[
+			update orderSpend set pay = pay + #{totalPrice} where bno = #{bno} and area = #{area}
+          ]]>
+	</update>
 	
 	<!-- 발주 현황 리스트 -->
 	<select id="getStateList" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
@@ -323,4 +338,14 @@
 	<delete id="deleteOrder" parameterType="com.pyeon2.vo.ItemVO">
 		delete from orderReqState where item_code = #{item_code} and p2_time = #{p2_time}
 	</delete>
+	
+	<!-- orderSpend Sequence 추출 -->
+	<select id="getSpendSequence" resultType="Integer" parameterType="com.pyeon2.vo.ItemVO">
+		select max(bno) from orderSpend
+	</select>
+	
+	<!-- price 계산 전 임시로 orderSpend 컬럼 생성 -->
+	<insert id="orderSpendTemp" parameterType="com.pyeon2.vo.ItemVO">
+		insert into orderSpend (bno, spend, pay, spend_date, area) values(orderSpend_num.nextVal, '지출', 0, SYSDATE, #{area})
+	</insert>
 </mapper>

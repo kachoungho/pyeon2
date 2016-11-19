@@ -148,4 +148,10 @@ public interface PosService {
 	
 	//아이템별 가격
 	public int getPrice(ItemVO vo);
+	
+	//orderSpend sequence 추출
+	public int getSpendSequence(ItemVO vo);
+	
+	//발주 비용 계산전 임시로 컬럼 생성
+	public void orderSpendTemp(ItemVO vo);
 }

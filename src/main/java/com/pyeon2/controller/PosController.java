@@ -180,7 +180,7 @@ public class PosController {
 			for(int i = 0; i < list.size(); i++){
 				posService.insertOrder(list.get(i));
 				posService.orderInsert(list.get(i));
-				totalPrice = totalPrice + posService.getPrice(list.get(i));
+				//totalPrice = totalPrice + posService.getPrice(list.get(i));
 				System.out.println(posService.getPrice(list.get(i)));
 				System.out.println(totalPrice);
 				temp = 1;
@@ -189,7 +189,7 @@ public class PosController {
 			if(temp == 1){
 				vo.setTotalPrice(totalPrice);
 				vo.setArea(list.get(0).getArea());
-				posService.orderSpend(vo);
+				posService.orderSpendTemp(vo);
 				posService.orderTempDeleteAll();
 			}
 			

@@ -251,4 +251,14 @@ public class PosServiceImpl implements PosService {
 		return posDao.getPrice(vo);
 	}
 
+	@Override
+	public int getSpendSequence(ItemVO vo) {
+		return posDao.getSpendSequence(vo);
+	}
+
+	@Override
+	public void orderSpendTemp(ItemVO vo) {
+		posDao.orderSpendTemp(vo);
+	}
+
 }
