@@ -84,3 +84,14 @@ create sequence orderReqState_num
    nocache;
 
 drop sequence orderReqState_num
+
+create table orderReqState(
+   bno number,
+   item_code varchar2(40) not null, 
+   item_name varchar2(30) not null, 
+   count number(10), 
+   category varchar2(20), 
+   area varchar2(30) not null,
+   p2_time varchar2(40),
+   state varchar2(30)
+);
