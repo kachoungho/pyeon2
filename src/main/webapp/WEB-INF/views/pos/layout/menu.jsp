@@ -39,7 +39,7 @@
 		</a>
 			<div style="width: 266.5px;"
 				class="w3-dropdown-content w3-light-gray w3-card-4">
-				<a href="#">일 일 정 산</a> <a href="#">주 간 정 산</a> <a href="#">월 간
+				<a href="${pageContext.request.contextPath}/pos/ps_daymoney?id=${LoingUser}">일 일 정 산</a> <a href="#">주 간 정 산</a> <a href="#">월 간
 					정 산</a>
 			</div></li>
 

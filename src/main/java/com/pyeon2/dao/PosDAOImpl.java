@@ -260,4 +260,46 @@ public class PosDAOImpl implements PosDAO {
 	public void orderSpendTemp(ItemVO vo) {
 		session.insert(namespace + ".orderSpendTemp", vo);
 	}
+	
+	@Override
+	public List<ItemVO> sallist(ItemVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+".sallist",vo);
+	}
+
+	@Override
+	public List<ItemVO> orderSpendlist(ItemVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+".orderSpendlist",vo);
+	}
+
+	@Override
+	public void daymoneyinsert(ItemVO vo) throws Exception {
+		session.insert(namespace+".daymoneyinsert",vo);
+	}
+
+	@Override
+	public List<ItemVO> daymoneylist(ItemVO vo) throws Exception {
+		return session.selectList(namespace+".daymoneylist",vo);
+	}
+
+	@Override
+	public void daysaldelete(ItemVO vo) throws Exception {
+		session.delete(namespace+".daysaldelete",vo);
+	}
+
+	@Override
+	public void dayspenddelete(ItemVO vo) throws Exception {
+		session.delete(namespace+".dayspenddelete",vo);
+	}
+
+	@Override
+	public int daysaltotalpay(ItemVO vo) throws Exception {
+		return session.selectOne(namespace+".daysaltotalpay",vo);
+	}
+
+	@Override
+	public int daysalspendpay(ItemVO vo) throws Exception {
+		return session.selectOne(namespace+".daysalspendpay",vo);
+	}
 }

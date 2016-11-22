@@ -153,6 +153,30 @@ public interface PosDAO {
 	//orderSpend sequence 추출
 	public int getSpendSequence(ItemVO vo);
 	
-	//발주 비용 계산전 임시로 컬럼 생성
+	// 발주 비용 계산전 임시로 컬럼 생성
 	public void orderSpendTemp(ItemVO vo);
+
+	// 일일 수익 가져오기
+	public List<ItemVO> sallist(ItemVO vo) throws Exception;
+
+	// 일일 지출 가져오기
+	public List<ItemVO> orderSpendlist(ItemVO vo) throws Exception;
+
+	// 일일 정산 입력
+	public void daymoneyinsert(ItemVO vo) throws Exception;
+
+	// 일일 정산 리스트 가져오기
+	public List<ItemVO> daymoneylist(ItemVO vo) throws Exception;
+
+	// sal 삭제
+	public void daysaldelete(ItemVO vo) throws Exception;
+
+	// orderSpend 삭제
+	public void dayspenddelete(ItemVO vo) throws Exception;
+
+	// sal 총액
+	public int daysaltotalpay(ItemVO vo) throws Exception;
+
+	// spend 총액
+	public int daysalspendpay(ItemVO vo) throws Exception;
 }

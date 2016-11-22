@@ -848,4 +848,64 @@ public class PosController {
 		mav.setViewName(".pos.pos_notice_contant");
 		return mav;
 	}
+	
+	@RequestMapping(value = "pos/ps_daymoney" , method = RequestMethod.GET)
+	public ModelAndView daymoney(HttpServletRequest request,Model model) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		ItemVO vo = new ItemVO();
+		vo.setId(request.getParameter("id"));
+		String area = posService.areaserch(vo);
+		vo.setArea(area);
+		
+		List<ItemVO> list1 = posService.sallist(vo);
+		List<ItemVO> list2 = posService.orderSpendlist(vo);
+		
+		mav.addObject("result1",list1);
+		mav.addObject("result2",list2);
+		mav.addObject("area", area);
+		mav.setViewName(".pos.pos_daymoney");
+		return mav;
+	}
+	
+	@RequestMapping(value="pos/ps_daymoneyconfirm" , method = RequestMethod.POST)
+	public ModelAndView daymoneyconfirm(HttpServletRequest request,Model model) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		ItemVO vo = new ItemVO();
+		vo.setArea(request.getParameter("area"));
+		
+		
+		List<ItemVO> list1 = posService.sallist(vo);
+		for(int i = 0 ; i < list1.size() ; i++){
+			vo.setPaynum(list1.get(i).getPaynum());
+			vo.setTitle(list1.get(i).getSold());
+			vo.setContent("수입");
+			vo.setPay(list1.get(i).getPay());
+			posService.daymoneyinsert(vo);
+		}
+		int pay1 = posService.daysaltotalpay(vo);
+		posService.daysaldelete(vo);
+		
+		List<ItemVO> list2 = posService.orderSpendlist(vo);
+		for(int i = 0 ; i < list2.size() ; i++){
+			vo.setPaynum(0);
+			vo.setTitle(list2.get(i).getSpend());
+			vo.setContent("지출");
+			vo.setPay(list2.get(i).getPay());
+			posService.daymoneyinsert(vo);
+		}
+		int pay2 = posService.daysalspendpay(vo);
+		posService.dayspenddelete(vo);
+		
+		int total = pay1 - pay2;
+		
+		vo.setArea(request.getParameter("area"));
+		List<ItemVO> list3 = posService.daymoneylist(vo);
+		
+		mav.addObject("pay1",pay1);
+		mav.addObject("pay2",pay2);
+		mav.addObject("total",total);
+		mav.addObject("result",list3);
+		mav.setViewName(".pos.pos_daymoneyconfirm");
+		return mav;
+	}
 }

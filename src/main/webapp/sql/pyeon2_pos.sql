@@ -519,3 +519,15 @@ create table p2_dayCalc(
 	sys_time date default sysdate,
 	constraint dayCalc_pk  primary key(item_code, area,sys_time)
 );
+
+create table p2_daymoney(
+	num number(10),
+	title varchar2(20) not null,
+	content varchar2(10) not null,
+	pay number(10) not null,
+	area varchar2(30) not null,
+	year varchar2(20) not null,
+	month varchar2(20) not null,
+	days varchar2(20) not null,
+	dayda date
+);

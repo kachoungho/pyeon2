@@ -261,4 +261,44 @@ public class PosServiceImpl implements PosService {
 		posDao.orderSpendTemp(vo);
 	}
 
+	@Override
+	public List<ItemVO> sallist(ItemVO vo) throws Exception {
+		return posDao.sallist(vo);
+	}
+
+	@Override
+	public List<ItemVO> orderSpendlist(ItemVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return posDao.orderSpendlist(vo);
+	}
+
+	@Override
+	public void daymoneyinsert(ItemVO vo) throws Exception {
+		posDao.daymoneyinsert(vo);
+	}
+
+	@Override
+	public List<ItemVO> daymoneylist(ItemVO vo) throws Exception {
+		return posDao.daymoneylist(vo);
+	}
+
+	@Override
+	public void daysaldelete(ItemVO vo) throws Exception {
+		posDao.daysaldelete(vo);
+	}
+
+	@Override
+	public void dayspenddelete(ItemVO vo) throws Exception {
+		posDao.dayspenddelete(vo);
+	}
+
+	@Override
+	public int daysaltotalpay(ItemVO vo) throws Exception {
+		return posDao.daysaltotalpay(vo);
+	}
+
+	@Override
+	public int daysalspendpay(ItemVO vo) throws Exception {
+		return posDao.daysalspendpay(vo);
+	}
 }

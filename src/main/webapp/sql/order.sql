@@ -4,6 +4,8 @@ select * from orderReq_temp;
 select * from orderSpend;
 select * from orderReqState where area = '판교';
 
+select * from orderSpend where spend_date between '2016-11-21 13:23:00.0' and '2016-11-21 14:23:00.0';
+
 drop table orderReq;
 drop table orderReq_temp;
 drop table orderReqState;
@@ -13,17 +15,15 @@ select * from ordeerSpend;
 
 
 create table orderReqState(
-	bno number,
-	item_code varchar2(40) not null, 
-	item_name varchar2(30) not null, 
-	count number(10), 
-	category varchar2(20), 
-	area varchar2(30) not null,
-	p2_time varchar2(40),
-	state varchar2(30),
-	constraint orderReqState_pk  primary key(item_code, area, state)
+   bno number,
+   item_code varchar2(40) not null, 
+   item_name varchar2(30) not null, 
+   count number(10), 
+   category varchar2(20), 
+   area varchar2(30) not null,
+   p2_time varchar2(40),
+   state varchar2(30)
 );
-
 
 create table orderReq(
 	bno number,
