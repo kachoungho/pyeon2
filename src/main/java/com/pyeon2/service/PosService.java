@@ -180,5 +180,5 @@ public interface PosService {
 	public List<ItemVO> daysalspendpay(ItemVO vo) throws Exception;
 	
 	//daymoney의 총 컬럼 수
-	public int daymoneyCount(ItemVO vo) throws Exception;
+	public String daymoneyCount(ItemVO vo) throws Exception;
 }

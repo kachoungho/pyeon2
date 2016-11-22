@@ -303,7 +303,7 @@ public class PosServiceImpl implements PosService {
 	}
 
 	@Override
-	public int daymoneyCount(ItemVO vo) throws Exception {
+	public String daymoneyCount(ItemVO vo) throws Exception {
 		return posDao.daymoneyCount(vo);
 	}
 }

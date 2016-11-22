@@ -884,16 +884,6 @@ public class PosController {
 			pageNum = Integer.parseInt(request.getParameter("page"));
 		}
 		
-		Criteria cri = new Criteria();
-		cri.setPage(pageNum);
-		cri.setPerPageNum(7);
-		count = posService.daymoneyCount(vo);
-		vo.setCri(cri);
-		
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(count);
-		
 		if((request.getParameter("year") == null) && (request.getParameter("month") == null)) {
 			year = "";
 			month = "";
@@ -905,13 +895,26 @@ public class PosController {
 			//days = request.getParameter("days");
 		}
 		
-		System.out.println("area : " + area);
-		System.out.println("year : " + year);
-		System.out.println("month : " + month);
 		vo.setYear("%"+year+"%");
 		vo.setMonth("%"+month+"%");
 		//vo.setDays("%"+days+"%");
 		
+		Criteria cri = new Criteria();
+		cri.setPage(pageNum);
+		cri.setPerPageNum(7);
+		if(posService.daymoneyCount(vo) == null){
+			count = 0;
+		}
+		else {
+			count = Integer.parseInt(posService.daymoneyCount(vo));
+		}
+		
+		vo.setCri(cri);
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(count);
+				
 		List<ItemVO> list1 = posService.sallist(vo);
 		for(int i = 0 ; i < list1.size() ; i++){
 			vo.setPaynum(list1.get(i).getPaynum());

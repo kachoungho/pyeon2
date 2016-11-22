@@ -304,7 +304,7 @@ public class PosDAOImpl implements PosDAO {
 	}
 
 	@Override
-	public int daymoneyCount(ItemVO vo) throws Exception {
+	public String daymoneyCount(ItemVO vo) throws Exception {
 		return session.selectOne(namespace + ".daymoneyCount", vo);
 	}
 }

@@ -12,7 +12,7 @@
 </head>
 <body>
 	<h3>정산 목록</h3>
-	<form action="ps_daymoneyconfirmSelect" method="post">
+	<form action="ps_daymoneyconfirm" method="post">
 		<input type="hidden" name="area" value="${area }">
 		<select name="year">
 			<option value="2016">2016</option>

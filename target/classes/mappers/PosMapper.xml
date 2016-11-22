@@ -425,7 +425,7 @@
 		select sum(pay) as pay from p2_daymoney where area = #{area} and title = '지출' and year like #{year} and month like #{month}
 	</select>
 	
-	<select id="daymoneyCount" parameterType="com.pyeon2.vo.ItemVO" resultType="Integer">
-		select count(*) from p2_daymoney
+	<select id="daymoneyCount" parameterType="com.pyeon2.vo.ItemVO" resultType="String">
+		select count(*) from p2_daymoney where year like #{year} and month like #{month}
 	</select>
 </mapper>
