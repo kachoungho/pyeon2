@@ -26,13 +26,34 @@ public class ItemVO {
 	
 	private Date dayda;
 	private Date sys_time;
-	private Date spend_date;
+	private String spend_date;
 	private String spend;
 	private String title;
 	private String content;
 	private int paynum;
+	private String year;
+	private String month;
+	private String days;
 	
 
+	public String getYear() {
+		return year;
+	}
+	public void setYear(String year) {
+		this.year = year;
+	}
+	public String getMonth() {
+		return month;
+	}
+	public void setMonth(String month) {
+		this.month = month;
+	}
+	public String getDays() {
+		return days;
+	}
+	public void setDays(String days) {
+		this.days = days;
+	}
 	public String getState() {
 		return state;
 	}
@@ -48,10 +69,10 @@ public class ItemVO {
 	public void setSys_time(Date sys_time) {
 		this.sys_time = sys_time;
 	}
-	public Date getSpend_date() {
+	public String getSpend_date() {
 		return spend_date;
 	}
-	public void setSpend_date(Date spend_date) {
+	public void setSpend_date(String spend_date) {
 		this.spend_date = spend_date;
 	}
 	public String getSpend() {

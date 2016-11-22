@@ -13,7 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body>	
 	<sec:authentication property="name" var="LoingUser" />
 	<form action="ps_item_select_now" method="post">
 		<input type="hidden" value="${pageMaker.cri.page}"> <input

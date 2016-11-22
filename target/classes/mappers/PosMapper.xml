@@ -362,12 +362,47 @@
 	
 	<!-- sal , orderspend 리스트 p2_daymoney 에 insert -->
 	<insert id="daymoneyinsert" parameterType="com.pyeon2.vo.ItemVO">
-		insert into p2_daymoney(num,title,content,pay,year,month,days,dayda,area) values(#{paynum},#{title},#{content},#{pay},(SELECT TO_CHAR(sysdate, 'YYYY' )FROM dual ),(SELECT TO_CHAR(sysdate, 'MM' ) FROM dual ),(SELECT TO_CHAR(sysdate, 'dd' ) FROM dual ),sysdate,#{area})
+		insert into p2_daymoney(bno, num,title,content,pay,year,month,days,dayda,area) values(p2_daymoney_num.nextVal, #{paynum},#{title},#{content},#{pay},(SELECT TO_CHAR(sysdate, 'YYYY' )FROM dual ),(SELECT TO_CHAR(sysdate, 'MM' ) FROM dual ),(SELECT TO_CHAR(sysdate, 'dd' ) FROM dual ),sysdate,#{area})
+		<!-- <choose>
+			<when test="#{content == '수입'}">
+				insert into p2_daymoney(num,title,content,pay,year,month,days,dayda,area) values(#{paynum},#{title},#{content},#{pay}, 
+				(select TO_CHAR(sal_time, 'YYYY' ) from sal where sal_time = #{p2_time}), 
+				(select TO_CHAR(sal_time, 'MM' ) from sal where sal_time = #{p2_time}), 
+				(select TO_CHAR(sal_time, 'dd' ) from sal where sal_time = #{p2_time}), 
+				sysdate, #{area})
+			</when>
+			<when test="#{content =='지출'}">
+				insert into p2_daymoney(num,title,content,pay,year,month,days,dayda,area) values(#{paynum},#{title},#{content},#{pay}, 
+				(select TO_CHAR(spend_date, 'YYYY' ) from orderSpend where spend_date = #{p2_time}), 
+				(select TO_CHAR(spend_date, 'MM' ) from orderSpend where spend_date = #{p2_time}), 
+				(select TO_CHAR(spend_date, 'dd' ) from orderSpend where spend_date = #{p2_time}), 
+				sysdate, #{area})
+			</when>
+		</choose> -->
 	</insert>
 	
 	<!-- p2_daymoney 리스트 가져오기 -->
 	<select id="daymoneylist" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
-		select title , content , pay , TO_CHAR(dayda, 'YYYY-MM-dd HH24:mi' ) as sal_time from p2_daymoney where area = #{area} order by dayda
+		<!-- select title , content , pay , TO_CHAR(dayda, 'YYYY-MM-dd HH24:mi' ) as sal_time from p2_daymoney where area = #{area} 
+		and year like #{year} and month like #{month} order by dayda -->
+		<!-- TO_CHAR(dayda, 'YYYY-MM-dd HH24:mi' ) -->
+		<![CDATA[
+			select
+  				bno, title , content , pay , dayda
+			from
+  				(
+  					select
+    				/*+INDEX_DESC(tbl_board, pk_board)*/
+    					rownum rn, bno, title , content , pay , dayda
+ 					from p2_daymoney
+  					where rownum <= #{cri.page} * #{cri.perPageNum}
+  					and bno > 0
+  					and area = #{area}
+  					and year like #{year}
+  					and month like #{month}
+  				)
+			where rn > (#{cri.page} -1) * #{cri.perPageNum} order by dayda
+ 		]]>
 	</select>
 	
 	<!-- sal 리스트 delete -->
@@ -381,12 +416,16 @@
 	</delete>
 	
 	<!-- sal 리스트 총액 -->
-	<select id="daysaltotalpay" parameterType="com.pyeon2.vo.ItemVO" resultType="Integer">
-		select sum(pay) as pay from sal where area = #{area}
+	<select id="daysaltotalpay" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
+		select sum(pay) as pay from p2_daymoney where area = #{area} and title = '판매' and year like #{year} and month like #{month}
 	</select>
 	
 	<!-- sal 리스트 총액 -->
-	<select id="daysalspendpay" parameterType="com.pyeon2.vo.ItemVO" resultType="Integer">
-		select sum(pay) as pay from orderSpend where area = #{area}
+	<select id="daysalspendpay" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
+		select sum(pay) as pay from p2_daymoney where area = #{area} and title = '지출' and year like #{year} and month like #{month}
+	</select>
+	
+	<select id="daymoneyCount" parameterType="com.pyeon2.vo.ItemVO" resultType="Integer">
+		select count(*) from p2_daymoney
 	</select>
 </mapper>
