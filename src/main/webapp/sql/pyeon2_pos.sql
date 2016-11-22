@@ -11,7 +11,6 @@ select * from p2_monthCalc;
 select * from role;
 select * from SAL;
 
-
 drop table p2_member;
 drop table p2_item;
 drop table p2_calc;

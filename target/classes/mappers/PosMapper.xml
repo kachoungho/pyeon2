@@ -389,4 +389,29 @@
 	<select id="daysalspendpay" parameterType="com.pyeon2.vo.ItemVO" resultType="Integer">
 		select sum(pay) as pay from orderSpend where area = #{area}
 	</select>
+	
+	<!-- 메인 페이지에 공지사항 최근 5개글 띄우기  -->
+	<select id="getNoticeList" resultType="com.pyeon2.vo.NoticeVO">
+		SELECT * FROM ( SELECT * FROM COMPANY_NOTICE ORDER BY NOTICENUM DESC )
+		<![CDATA[
+		WHERE ROWNUM <= 5
+		]]>
+	</select>
+	
+	<!-- 재고 10개 미만인 물건 불러오기 -->
+	<select id="getLessItem" resultType="com.pyeon2.vo.ItemVO">
+		SELECT * FROM P2_ITEM 
+		<![CDATA[
+		WHERE COUNT <= 10
+		]]>
+	</select>
+	
+	<!-- 재고 10개 미만인 물건 카운트 -->
+	<select id="getLessItemCount" resultType="Integer">
+		SELECT COUNT(*) FROM P2_ITEM
+		<![CDATA[
+		WHERE COUNT <= 10
+		]]>
+	</select>
+	
 </mapper>

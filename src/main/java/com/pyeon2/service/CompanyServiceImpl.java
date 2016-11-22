@@ -142,4 +142,14 @@ public class CompanyServiceImpl implements CompanyService {
 	public void noticedelete(NoticeVO Nvo) throws Exception {
 		comDao.noticedelete(Nvo);
 	}
+
+	@Override
+	public List<NoticeVO> getNotConfirm() throws Exception {
+		return comDao.getNotConfirm();
+	}
+
+	@Override
+	public int getNotConfirmCount() throws Exception {
+		return comDao.getNotConfirmCount();
+	}
 }

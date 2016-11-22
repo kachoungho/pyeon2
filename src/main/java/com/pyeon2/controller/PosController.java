@@ -36,8 +36,26 @@ public class PosController {
 	 */
 
 	@RequestMapping("pos")
-	public String getCompany() {
-		return ".pos";
+	public ModelAndView getCompany(HttpServletRequest request, MemberVO Mvo) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		try {
+
+			List<NoticeVO> list = posService.getNoticeList();
+			List<ItemVO> list2 = posService.getLessItem();
+			int count = posService.getLessItemCount();
+			
+			mav.addObject("list", list);
+			mav.addObject("list2", list2);
+			mav.addObject("count", count);
+			
+			mav.setViewName(".pos.pos_main");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return mav;
 	}
 
 	@RequestMapping(value = "pos/ps_order", method = RequestMethod.GET)
