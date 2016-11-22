@@ -10,7 +10,6 @@ import com.pyeon2.domain.Criteria;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
-import com.pyeon2.vo.NoticeVO;
 import com.pyeon2.vo.SelectSearch;
 import com.pyeon2.vo.UserVO;
 
@@ -302,20 +301,5 @@ public class PosDAOImpl implements PosDAO {
 	@Override
 	public int daysalspendpay(ItemVO vo) throws Exception {
 		return session.selectOne(namespace+".daysalspendpay",vo);
-	}
-
-	@Override
-	public List<NoticeVO> getNoticeList() throws Exception {
-		return session.selectList(namespace + ".getNoticeList");
-	}
-
-	@Override
-	public List<ItemVO> getLessItem() throws Exception {
-		return session.selectList(namespace + ".getLessItem");
-	}
-
-	@Override
-	public int getLessItemCount() throws Exception {
-		return session.selectOne(namespace + ".getLessItemCount");
 	}
 }

@@ -202,18 +202,4 @@
 	<delete id="noticedelete" parameterType="com.pyeon2.vo.NoticeVO">
 		delete from company_notice where noticenum = #{noticenum}
 	</delete>
-	
-	<!-- 메인 페이지에 미승인 건 최근 5개글 띄우기 -->
-	<select id="getNotConfirm" resultType="com.pyeon2.vo.ItemVO">
-		SELECT * FROM ( SELECT * FROM ORDERREQSTATE WHERE STATE = '승인 대기' ORDER BY BNO DESC )
-		<![CDATA[
-		WHERE ROWNUM <= 5
-		]]>
-	</select>
-	
-	<!-- 미승인 건 카운트 -->
-	<select id="getNotConfirmCount" resultType="Integer">
-		SELECT COUNT(*) FROM ORDERREQSTATE WHERE STATE = '승인 대기'
-	</select>
-	
 </mapper>

@@ -6,13 +6,6 @@ drop table company_item;
 drop table company_notice
 drop sequence noticenum
 
-create table calendar(
-	contents varchar2(100),
-	day number,
-	month number,
-	year number
-);
-
 create table company_notice(
 	noticenum number(10) not null,
 	title varchar2(50) not null,

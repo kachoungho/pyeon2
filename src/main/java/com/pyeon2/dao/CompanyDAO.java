@@ -83,11 +83,5 @@ public interface CompanyDAO {
 		
 	//공지사항 삭제
 	public void noticedelete(NoticeVO Nvo) throws Exception;
-	
-	// 메인 페이지에 공지사항 최근 5개글 띄우기
-	public List<NoticeVO> getNotConfirm() throws Exception;
-	
-	// 미승인 건 카운트
-	public int getNotConfirmCount() throws Exception;
 
 }
