@@ -8,7 +8,72 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h3>일일 정산 목록</h3>
+	<h3>정산 목록</h3>
+	<form action="ps_daymoneyconfirmSelect" method="post">
+		<input type="hidden" name="area" value="${area }">
+		<select name="year">
+			<option value="2016">2016</option>
+			<option value="2015">2015</option>
+			<option value="2014">2014</option>
+			<option value="2013">2013</option>
+			<option value="2016">2012</option>
+			<option value="2015">2011</option>
+			<option value="2014">2010</option>
+			<option value="2013">2009</option>
+		</select>
+		<select name="month">
+			<option value="12">12</option>
+			<option value="11">11</option>
+			<option value="10">10</option>
+			<option value="9">9</option>
+			<option value="8">8</option>
+			<option value="7">7</option>
+			<option value="6">6</option>
+			<option value="5">5</option>
+			<option value="4">4</option>
+			<option value="3">3</option>
+			<option value="2">2</option>
+			<option value="1">1</option>
+		</select>
+	<!-- 	<select name="month">
+			<option value="2015">31</option>
+			<option value="2014">30</option>
+			<option value="2013">29</option>
+			<option value="2016">28</option>
+			<option value="2015">27</option>
+			<option value="2014">26</option>
+			<option value="2013">25</option>
+			<option value="2016">24</option>
+			<option value="2015">23</option>
+			<option value="2014">22</option>
+			<option value="2013">21</option>
+			<option value="2016">20</option>
+			<option value="2015">19</option>
+			<option value="2014">18</option>
+			<option value="2013">17</option>
+			<option value="2016">16</option>
+			<option value="2015">15</option>
+			<option value="2014">14</option>
+			<option value="2013">13</option>
+			<option value="2016">12</option>
+			<option value="2015">11</option>
+			<option value="2014">10</option>
+			<option value="2013">9</option>
+			<option value="2016">8</option>
+			<option value="2015">7</option>
+			<option value="2014">6</option>
+			<option value="2013">5</option>
+			<option value="2016">4</option>
+			<option value="2015">3</option>
+			<option value="2014">2</option>
+			<option value="2013">1</option>
+		</select> -->
+		<input type="submit" value="select">
+	</form>
+	<c:if test="${result == null }">
+		<h2>내용이 없습니다.</h2>
+	</c:if>
+	<c:if test="${result != null }">
 	<table>
 		<tr>
 			<th>제목</th>
@@ -38,5 +103,6 @@
 			<td>${total }</td>
 		</tr>
 	</table>
+	</c:if>
 </body>
 </html>

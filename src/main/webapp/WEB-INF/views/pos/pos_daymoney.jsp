@@ -48,6 +48,8 @@
 			</table>
 		</div>
 		<input type="hidden" value="${ area}" name="area" >
+		<input type="hidden" value="" name="year" >
+		<input type="hidden" value="" name="month" >
 		<input type="submit" value="Á¤»ê">
 	</form>
 </body>

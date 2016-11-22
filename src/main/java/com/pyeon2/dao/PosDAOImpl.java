@@ -294,12 +294,12 @@ public class PosDAOImpl implements PosDAO {
 	}
 
 	@Override
-	public int daysaltotalpay(ItemVO vo) throws Exception {
-		return session.selectOne(namespace+".daysaltotalpay",vo);
+	public List<ItemVO> daysaltotalpay(ItemVO vo) throws Exception {
+		return session.selectList(namespace+".daysaltotalpay",vo);
 	}
 
 	@Override
-	public int daysalspendpay(ItemVO vo) throws Exception {
-		return session.selectOne(namespace+".daysalspendpay",vo);
+	public List<ItemVO> daysalspendpay(ItemVO vo) throws Exception {
+		return session.selectList(namespace+".daysalspendpay",vo);
 	}
 }

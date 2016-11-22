@@ -293,12 +293,12 @@ public class PosServiceImpl implements PosService {
 	}
 
 	@Override
-	public int daysaltotalpay(ItemVO vo) throws Exception {
+	public List<ItemVO> daysaltotalpay(ItemVO vo) throws Exception {
 		return posDao.daysaltotalpay(vo);
 	}
 
 	@Override
-	public int daysalspendpay(ItemVO vo) throws Exception {
+	public List<ItemVO> daysalspendpay(ItemVO vo) throws Exception {
 		return posDao.daysalspendpay(vo);
 	}
 }

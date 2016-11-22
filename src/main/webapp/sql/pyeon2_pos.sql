@@ -10,6 +10,7 @@ select * from p2_weekCalc;
 select * from p2_monthCalc;
 select * from role;
 select * from SAL;
+select * from p2_daymoney;
 
 
 drop table p2_member;
@@ -488,6 +489,7 @@ create table sal(
 	sys_time date default sysdate,
 	area varchar2(30) not null
 );
+
 create sequence paynum
    increment by 1
    start with 1

@@ -175,8 +175,8 @@ public interface PosDAO {
 	public void dayspenddelete(ItemVO vo) throws Exception;
 
 	// sal 총액
-	public int daysaltotalpay(ItemVO vo) throws Exception;
+	public List<ItemVO> daysaltotalpay(ItemVO vo) throws Exception;
 
 	// spend 총액
-	public int daysalspendpay(ItemVO vo) throws Exception;
+	public List<ItemVO> daysalspendpay(ItemVO vo) throws Exception;
 }
