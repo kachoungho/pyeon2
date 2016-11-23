@@ -44,7 +44,7 @@
 			<thead>
 				<tr>
 					<th style="text-align: left; background-color: #FFFFFF;"><font
-						color="#054A75"> 재고 부족 건 (${ count } 건) </font><input
+						color="#054A75"> 재고 부족 건</font> <font color=red> ( ${ count } 건 ) </font><input
 						style="float: right; margin-right: 20px;" type="image"
 						src="/controller/resources/images/more.png" alt="button"
 						onclick="document.location.href='${pageContext.request.contextPath}/pos/ps_order'" /></th>
@@ -64,7 +64,7 @@
 			<c:forEach items="${ list2 }" var="list">
 				<tbody>
 					<tr class="odd">
-						<td class="date4">${ list.category }</td>
+						<td class="date2">${ list.category }</td>
 						<td class="date4">${ list.item_name }</td>
 						<td class="date2">${ list.count }</td>
 					</tr>
