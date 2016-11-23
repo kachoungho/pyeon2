@@ -105,22 +105,23 @@
 						</c:if>
 					</c:forEach>
 
-					<c:forEach var="a" begin="1" end="${end}">
+					<c:forEach var="a" begin="1" end="${end}" varStatus="idx">
 						<td style="vertical-align: top; cursor: pointer;"
 						onmouseover="this.style.backgroundColor='#F3F5BB'"
 						onmouseout="this.style.backgroundColor='#f9f9f9'"
 						onclick="">
-						<c:if test="${br==6 || br==13 || br==20 || br==27 || br==34}">
-							<font style="color: blue">${a }</font>
-						</c:if>
-						<c:if test="${br==0 || br==7 || br==14 || br==21 || br==28 || br==35}">
-							<font style="color: red">${a }</font>
-						</c:if>
-						<c:if test="${br!=0 && br!=7 && br!=14 && br!=21 && br!=28 && br!=35 && br!=6 && br!=13 && br!=20 && br!=27 && br!=34}">
-							<font style="color: black">${a }</font>
-						</c:if><br>
-						<c:set var="br" value="${br+1}" />
-						<c:if test="${(br%7) == 0 && a != end }">
+							<c:if test="${br==6 || br==13 || br==20 || br==27 || br==34}">
+								<font style="color: blue">${a }</font>
+							</c:if>
+							<c:if test="${br==0 || br==7 || br==14 || br==21 || br==28 || br==35}">
+								<font style="color: red">${a }</font>
+							</c:if>
+							<c:if test="${br!=0 && br!=7 && br!=14 && br!=21 && br!=28 && br!=35 && br!=6 && br!=13 && br!=20 && br!=27 && br!=34}">
+								<font style="color: black">${a }</font>
+							</c:if><br>
+							<c:set var="br" value="${br+1}" />
+							<c:if test="${(br%7) == 0 && a != end }">
+						</td>
 				</tr>
 				<tr height=70>
 					</c:if>

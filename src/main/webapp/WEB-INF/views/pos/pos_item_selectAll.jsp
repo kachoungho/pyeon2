@@ -68,19 +68,19 @@
 		<ul class="com_stock_li-paging">
 			<c:if test="${pageMaker.prev }">
 				<li><a
-					href="ps_item_selectAll?page=${pageMaker.startPage - 1 }">&laquo;</a></li>
+					href="ps_item_selectAll?page=${pageMaker.startPage - 1 }&id=${id}">&laquo;</a></li>
 			</c:if>
 
 			<c:forEach begin="${pageMaker.startPage }"
 				end="${pageMaker.endPage }" var="idx">
 				<li
 					<c:out value="${pageMaker.cri.page == idx ? 'class=active' : '' }"/>>
-					<a href="ps_item_selectAll?page=${idx}">${idx }</a>
+					<a href="ps_item_selectAll?page=${idx}&id=${id}">${idx }</a>
 				</li>
 			</c:forEach>
 
 			<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
-				<li><a href="ps_item_selectAll?page=${pageMaker.endPage + 1 }">&raquo;</a></li>
+				<li><a href="ps_item_selectAll?page=${pageMaker.endPage + 1 }&id=${id}">&raquo;</a></li>
 			</c:if>
 		</ul>
 	</div>
