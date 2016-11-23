@@ -6,6 +6,7 @@ import com.pyeon2.domain.Criteria;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
+import com.pyeon2.vo.NoticeVO;
 import com.pyeon2.vo.SelectSearch;
 import com.pyeon2.vo.UserVO;
 
@@ -181,4 +182,13 @@ public interface PosService {
 	
 	//daymoney의 총 컬럼 수
 	public String daymoneyCount(ItemVO vo) throws Exception;
+	
+	// 메인 페이지에 공지사항 최근 5개글 띄우기
+	public List<NoticeVO> getNoticeList() throws Exception;
+	
+	// 재고 10개 미만인 물건 불러오기
+	public List<ItemVO> getLessItem() throws Exception;
+	
+	// 재고 10개 미만인 물건 카운트
+	public int getLessItemCount() throws Exception;
 }

@@ -426,7 +426,33 @@
 		select sum(pay) as pay from p2_daymoney where area = #{area} and title = '지출' and year like #{year} and month like #{month}
 	</select>
 	
+	<!-- daymoney의 총 컬럼 수 -->
 	<select id="daymoneyCount" parameterType="com.pyeon2.vo.ItemVO" resultType="String">
 		select count(*) from p2_daymoney where year like #{year} and month like #{month}
 	</select>
+	
+	<!-- 메인 페이지에 공지사항 최근 5개글 띄우기  -->
+	<select id="getNoticeList" resultType="com.pyeon2.vo.NoticeVO">
+		SELECT * FROM ( SELECT * FROM COMPANY_NOTICE ORDER BY NOTICENUM DESC )
+		<![CDATA[
+		WHERE ROWNUM <= 5
+		]]>
+	</select>
+	
+	<!-- 재고 10개 미만인 물건 불러오기 -->
+	<select id="getLessItem" resultType="com.pyeon2.vo.ItemVO">
+		SELECT * FROM P2_ITEM 
+		<![CDATA[
+		WHERE COUNT <= 10
+		]]>
+	</select>
+	
+	<!-- 재고 10개 미만인 물건 카운트 -->
+	<select id="getLessItemCount" resultType="Integer">
+		SELECT COUNT(*) FROM P2_ITEM
+		<![CDATA[
+		WHERE COUNT <= 10
+		]]>
+	</select>
+	
 </mapper>
