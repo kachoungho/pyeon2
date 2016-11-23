@@ -36,21 +36,26 @@ public class PosController {
 	 */
 
 	@RequestMapping("pos")
-	public ModelAndView getCompany(HttpServletRequest request, MemberVO Mvo) {
+	public ModelAndView getCompany(HttpServletRequest request, ItemVO Ivo, MemberVO Mvo) {
 		
 		ModelAndView mav = new ModelAndView();
+		Ivo.setId(request.getParameter("id"));
 		
 		try {
-
+			
+			String area = posService.areaserch(Ivo);
+			Mvo.setArea(area);
+			
 			List<NoticeVO> list = posService.getNoticeList();
-			List<ItemVO> list2 = posService.getLessItem();
-			int count = posService.getLessItemCount();
+			List<ItemVO> list2 = posService.getLessItem(Mvo);
+			int count = posService.getLessItemCount(Mvo);
 			
 			mav.addObject("list", list);
 			mav.addObject("list2", list2);
 			mav.addObject("count", count);
 			
 			mav.setViewName(".pos.pos_main");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

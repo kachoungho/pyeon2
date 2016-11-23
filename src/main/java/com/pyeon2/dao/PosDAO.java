@@ -188,8 +188,9 @@ public interface PosDAO {
 	public List<NoticeVO> getNoticeList() throws Exception;
 	
 	// 재고 10개 미만인 물건 불러오기
-	public List<ItemVO> getLessItem() throws Exception;
+	public List<ItemVO> getLessItem(MemberVO Mvo) throws Exception;
 	
 	// 재고 10개 미만인 물건 카운트
-	public int getLessItemCount() throws Exception;
+	public int getLessItemCount(MemberVO Mvo) throws Exception;
+
 }

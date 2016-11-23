@@ -440,19 +440,21 @@
 	</select>
 	
 	<!-- 재고 10개 미만인 물건 불러오기 -->
-	<select id="getLessItem" resultType="com.pyeon2.vo.ItemVO">
+	<select id="getLessItem" parameterType="com.pyeon2.vo.MemberVO" resultType="com.pyeon2.vo.ItemVO">
 		SELECT * FROM P2_ITEM 
 		<![CDATA[
 		WHERE COUNT <= 10
 		]]>
+		AND AREA = #{area}
 	</select>
 	
 	<!-- 재고 10개 미만인 물건 카운트 -->
-	<select id="getLessItemCount" resultType="Integer">
+	<select id="getLessItemCount" parameterType="com.pyeon2.vo.MemberVO" resultType="Integer">
 		SELECT COUNT(*) FROM P2_ITEM
 		<![CDATA[
 		WHERE COUNT <= 10
 		]]>
+		AND AREA = #{area}
 	</select>
 	
 </mapper>

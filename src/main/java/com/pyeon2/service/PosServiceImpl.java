@@ -314,12 +314,12 @@ public class PosServiceImpl implements PosService {
 	}
 
 	@Override
-	public List<ItemVO> getLessItem() throws Exception {
-		return posDao.getLessItem();
+	public List<ItemVO> getLessItem(MemberVO Mvo) throws Exception {
+		return posDao.getLessItem(Mvo);
 	}
 
 	@Override
-	public int getLessItemCount() throws Exception {
-		return posDao.getLessItemCount();
+	public int getLessItemCount(MemberVO Mvo) throws Exception {
+		return posDao.getLessItemCount(Mvo);
 	}
 }

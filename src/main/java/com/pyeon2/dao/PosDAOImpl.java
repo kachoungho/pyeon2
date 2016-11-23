@@ -313,14 +313,14 @@ public class PosDAOImpl implements PosDAO {
 	public List<NoticeVO> getNoticeList() throws Exception {
 		return session.selectList(namespace + ".getNoticeList");
 	}
-
+	
 	@Override
-	public List<ItemVO> getLessItem() throws Exception {
-		return session.selectList(namespace + ".getLessItem");
+	public List<ItemVO> getLessItem(MemberVO Mvo) throws Exception {
+		return session.selectList(namespace + ".getLessItem", Mvo);
 	}
 
 	@Override
-	public int getLessItemCount() throws Exception {
-		return session.selectOne(namespace + ".getLessItemCount");
+	public int getLessItemCount(MemberVO Mvo) throws Exception {
+		return session.selectOne(namespace + ".getLessItemCount", Mvo);
 	}
 }
