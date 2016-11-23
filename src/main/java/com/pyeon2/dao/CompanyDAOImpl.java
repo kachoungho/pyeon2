@@ -163,7 +163,7 @@ public class CompanyDAOImpl implements CompanyDAO{
 
 	@Override
 	public List<CalendarMemoVO> calendarMemoList(CalendarMemoVO vo) throws Exception {
-		return session.selectList(namespace + ".calendarMemoList");
+		return session.selectList(namespace + ".calendarMemoList", vo);
 	}
 
 }
