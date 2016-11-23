@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>wow</h1>
-<h3>${year}년 / ${month }월 / ${day }일</h3>
+<h3>${year}년 / ${month + 1}월 / ${day }일</h3>
 <form action="${pageContext.request.contextPath}/company/com_calendarMemoInsert">
 	<input type="text" name="memo">
 	<input type="submit" value="입력">

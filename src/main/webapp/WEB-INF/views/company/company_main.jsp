@@ -78,7 +78,7 @@
 				</tr>
 			</table>
 			
-			<table class="ex1">
+			<table class="ex1" style="width: 630px">
 				<!-- 달력 부분 -->
 				<thead>
 					<tr style="text-align: center;" class="odd">
@@ -99,7 +99,7 @@
 					</tr>
 				</thead>
 			</table>
-			<table style="width: 90%; background: #f9f9f9">
+			<table style="width: 630px; background: #f9f9f9">
 				<tr height=70>
 					<c:set var="br" value="0" />
 					<c:forEach var="i" begin="1" end="${startDay-1}">
@@ -111,19 +111,19 @@
 					</c:forEach>
 
 					<c:forEach var="a" begin="1" end="${end}" varStatus="idx">
-						<td style="vertical-align: top; cursor: pointer;"
+						<td style="width:90px; vertical-align: top; cursor: pointer;"
 						onmouseover="this.style.backgroundColor='#F3F5BB'"
 						onmouseout="this.style.backgroundColor='#f9f9f9'"
-						onclick="document.location.href='${pageContext.request.contextPath}/company/com_calendarMemo?year=${year }&month=${month + 1}&day=${idx.index }'">
-							${memoMap[idx.index] }
+						onclick="document.location.href='${pageContext.request.contextPath}/company/com_calendarMemo?year=${year }&month=${month}&day=${idx.index }'">
+							
 							<c:if test="${br==6 || br==13 || br==20 || br==27 || br==34}">
-								<font style="color: blue">${a }</font>
+								<font style="color: blue">${a }<br>${memoMap[idx.index] }</font>
 							</c:if>
 							<c:if test="${br==0 || br==7 || br==14 || br==21 || br==28 || br==35}">
-								<font style="color: red">${a }</font>
+								<font style="color: red">${a }<br>${memoMap[idx.index] }</font>
 							</c:if>
 							<c:if test="${br!=0 && br!=7 && br!=14 && br!=21 && br!=28 && br!=35 && br!=6 && br!=13 && br!=20 && br!=27 && br!=34}">
-								<font style="color : black">${a }</font>
+								<font style="color : black">${a }<br>${memoMap[idx.index] }</font>
 							</c:if><br>
 							<c:set var="br" value="${br+1}" />
 							<c:if test="${(br%7) == 0 && a != end }">

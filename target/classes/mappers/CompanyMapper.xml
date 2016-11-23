@@ -222,7 +222,7 @@
         MERGE INTO calendarMemo a
             USING dual
                on (a.year = #{year} AND 
-                   a.month = #{month} AND
+                   a.month = #{month) AND
                    a.day = #{day})
              WHEN MATCHED THEN
              UPDATE SET
