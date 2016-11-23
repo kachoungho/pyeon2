@@ -44,7 +44,11 @@
 			<thead>
 				<tr>
 					<th style="text-align: left; background-color: #FFFFFF;"><font
-						color="#054A75"> 재고 부족 건</font> <font color=red> ( ${ count } 건 ) </font><input
+						color="#054A75"> 재고 부족 건</font> 
+						<c:if test="${ count != 0 }">
+						<font color=red> ( ${ count } 건 ) </font>
+						</c:if>
+						<input
 						style="float: right; margin-right: 20px;" type="image"
 						src="/controller/resources/images/more.png" alt="button"
 						onclick="document.location.href='${pageContext.request.contextPath}/pos/ps_order'" /></th>
