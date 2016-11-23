@@ -612,7 +612,7 @@ public class CompanyController {
 		return mav;
 	}
 	
-	//달력 메모 기능
+	//달력 메모 기능(form)
 	@RequestMapping("company/com_calendarMemo")
 	public ModelAndView calendarMemo(HttpServletRequest request) throws Exception{
 		ModelAndView mav = new ModelAndView();
@@ -622,7 +622,25 @@ public class CompanyController {
 		day = request.getParameter("day");
 		System.out.println("year : " + year + ", month : " + month + ", day : " + day);
 		
-		mav.setViewName("company_calendarMemoWrite");
+		mav.addObject("year", year);
+		mav.addObject("month", month);
+		mav.addObject("day", day);
+		mav.setViewName(".company.company_calendarMemoForm");
+		
+		return mav;
+	}
+	
+	//달력 메모 기능(insert)
+	@RequestMapping("company/com_calendarMemoInsert")
+	public ModelAndView calendarMemoInsert(HttpServletRequest request) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		String year, month, day;
+		year = request.getParameter("year");
+		month = request.getParameter("month");
+		day = request.getParameter("day");
+		System.out.println("year : " + year + ", month : " + month + ", day : " + day);
+		
+		mav.setViewName(".company.company_calendarMemoForm");
 		
 		return mav;
 	}

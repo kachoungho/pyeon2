@@ -109,7 +109,7 @@
 						<td style="vertical-align: top; cursor: pointer;"
 						onmouseover="this.style.backgroundColor='#F3F5BB'"
 						onmouseout="this.style.backgroundColor='#f9f9f9'"
-						onclick="">
+						onclick="document.location.href='${pageContext.request.contextPath}/company/com_calendarMemo?year=${year }&month=${month + 1}&day=${idx.index }'">
 							<c:if test="${br==6 || br==13 || br==20 || br==27 || br==34}">
 								<font style="color: blue">${a }</font>
 							</c:if>
