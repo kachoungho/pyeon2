@@ -611,4 +611,19 @@ public class CompanyController {
 		mav.setViewName(".company.company_notice_delete");
 		return mav;
 	}
+	
+	//달력 메모 기능
+	@RequestMapping("company/com_calendarMemo")
+	public ModelAndView calendarMemo(HttpServletRequest request) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		String year, month, day;
+		year = request.getParameter("year");
+		month = request.getParameter("month");
+		day = request.getParameter("day");
+		System.out.println("year : " + year + ", month : " + month + ", day : " + day);
+		
+		mav.setViewName("company_calendarMemoWrite");
+		
+		return mav;
+	}
 }

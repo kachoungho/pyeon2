@@ -396,14 +396,14 @@ public class PosController {
 	}
 
 	@RequestMapping("pos/ps_item_selectAll")
-	public ModelAndView productList(String page, String id) {
+	public ModelAndView productList(String page, String id, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		String area;
+
 		List<ItemVO> list;
 		int count = 0;
 		int pageNum = 1;
 		ItemVO vo = new ItemVO();
-		
 		area = posService.getArea(id);
 
 		if (page != null && !page.equals("")) {
@@ -427,6 +427,8 @@ public class PosController {
 			mav.addObject("pageNum", pageNum);
 			mav.addObject("count", count);
 			mav.addObject("pageMaker", pageMaker);
+			//mav.addObject("area", area);
+			mav.addObject("id", id);
 
 			mav.setViewName(".pos.pos_item_selectAll");
 
