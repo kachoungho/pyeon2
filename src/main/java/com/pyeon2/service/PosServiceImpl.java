@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.pyeon2.dao.PosDAO;
 import com.pyeon2.domain.Criteria;
+import com.pyeon2.vo.CalendarMemoVO;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
@@ -322,4 +323,5 @@ public class PosServiceImpl implements PosService {
 	public int getLessItemCount(MemberVO Mvo) throws Exception {
 		return posDao.getLessItemCount(Mvo);
 	}
+
 }

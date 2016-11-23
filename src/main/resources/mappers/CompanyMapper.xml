@@ -215,4 +215,39 @@
 	<select id="getNotConfirmCount" resultType="Integer">
 		SELECT COUNT(*) FROM ORDERREQSTATE WHERE STATE = '승인 대기'
 	</select>
+	
+	<!-- 달력 메모 입력 / 업데이트 -->
+	<update id="calendarMemoInsert" parameterType="com.pyeon2.vo.CalendarMemoVO">
+		<![CDATA[
+        MERGE INTO calendarMemo a
+            USING dual
+               on (a.year = #{year} AND 
+                   a.month = #{month} AND
+                   a.day = #{day})
+             WHEN MATCHED THEN
+             UPDATE SET
+                 a.content = #{content} where 
+                 a.year = #{year} AND 
+                 a.month = #{month} AND
+                 a.day = #{day}
+              WHEN NOT MATCHED THEN
+                INSERT (      
+                			  a.year,
+                              a.month, 
+                              a.day, 
+                              a.content
+                        ) 
+                values (
+                			  #{year},
+                			  #{month},
+                			  #{day},
+                			  #{content}
+                        )
+          ]]>
+	</update>
+	
+	<!-- 달력 메모 리스트 -->
+	<select id="calendarMemoList" resultType="com.pyeon2.vo.CalendarMemoVO" parameterType="com.pyeon2.vo.CalendarMemoVO">
+		select year, month, day, content from calendarMemo where year = #{year} and month = #{month}
+	</select>
 </mapper>

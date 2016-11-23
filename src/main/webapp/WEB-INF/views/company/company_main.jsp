@@ -10,6 +10,7 @@
 <title>본사 첫 페이지</title>
 </head>
 <body>
+<c:out value="${memoMap['7'] }" />
 	<div style="float: left; width: 50%; margin-top: 10px;">
 		<table class="ex1">
 			<thead>
@@ -110,6 +111,7 @@
 						onmouseover="this.style.backgroundColor='#F3F5BB'"
 						onmouseout="this.style.backgroundColor='#f9f9f9'"
 						onclick="document.location.href='${pageContext.request.contextPath}/company/com_calendarMemo?year=${year }&month=${month + 1}&day=${idx.index }'">
+							${memoMap[idx.index] }
 							<c:if test="${br==6 || br==13 || br==20 || br==27 || br==34}">
 								<font style="color: blue">${a }</font>
 							</c:if>
@@ -117,7 +119,7 @@
 								<font style="color: red">${a }</font>
 							</c:if>
 							<c:if test="${br!=0 && br!=7 && br!=14 && br!=21 && br!=28 && br!=35 && br!=6 && br!=13 && br!=20 && br!=27 && br!=34}">
-								<font style="color: black">${a }</font>
+								<font style="color : black">${a }</font>
 							</c:if><br>
 							<c:set var="br" value="${br+1}" />
 							<c:if test="${(br%7) == 0 && a != end }">

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.pyeon2.domain.Criteria;
+import com.pyeon2.vo.CalendarMemoVO;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
@@ -153,6 +154,16 @@ public class CompanyDAOImpl implements CompanyDAO{
 	@Override
 	public int getNotConfirmCount() throws Exception {
 		return session.selectOne(namespace + ".getNotConfirmCount");
+	}
+
+	@Override
+	public void calendarMemoInsert(CalendarMemoVO vo) throws Exception {
+		session.update(namespace + ".calendarMemoInsert", vo);
+	}
+
+	@Override
+	public List<CalendarMemoVO> calendarMemoList(CalendarMemoVO vo) throws Exception {
+		return session.selectList(namespace + ".calendarMemoList");
 	}
 
 }

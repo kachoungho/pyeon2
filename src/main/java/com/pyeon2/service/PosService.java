@@ -3,6 +3,7 @@ package com.pyeon2.service;
 import java.util.List;
 
 import com.pyeon2.domain.Criteria;
+import com.pyeon2.vo.CalendarMemoVO;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
@@ -191,4 +192,5 @@ public interface PosService {
 	
 	// 재고 10개 미만인 물건 카운트
 	public int getLessItemCount(MemberVO Mvo) throws Exception;
+
 }

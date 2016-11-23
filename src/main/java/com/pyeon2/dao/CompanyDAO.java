@@ -3,6 +3,7 @@ package com.pyeon2.dao;
 import java.util.List;
 
 import com.pyeon2.domain.Criteria;
+import com.pyeon2.vo.CalendarMemoVO;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
@@ -90,4 +91,9 @@ public interface CompanyDAO {
 	// 미승인 건 카운트
 	public int getNotConfirmCount() throws Exception;
 	
+	// 달렵 메모 입력 / 업데이트
+	public void calendarMemoInsert(CalendarMemoVO vo) throws Exception;
+	
+	// 달력 메모 출력
+	public List<CalendarMemoVO> calendarMemoList(CalendarMemoVO vo) throws Exception;
 }
