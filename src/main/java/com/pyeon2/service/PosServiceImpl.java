@@ -10,6 +10,7 @@ import com.pyeon2.domain.Criteria;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
+import com.pyeon2.vo.NoticeVO;
 import com.pyeon2.vo.SelectSearch;
 import com.pyeon2.vo.UserVO;
 
@@ -305,5 +306,20 @@ public class PosServiceImpl implements PosService {
 	@Override
 	public String daymoneyCount(ItemVO vo) throws Exception {
 		return posDao.daymoneyCount(vo);
+	}
+	
+	@Override
+	public List<NoticeVO> getNoticeList() throws Exception {
+		return posDao.getNoticeList();
+	}
+
+	@Override
+	public List<ItemVO> getLessItem() throws Exception {
+		return posDao.getLessItem();
+	}
+
+	@Override
+	public int getLessItemCount() throws Exception {
+		return posDao.getLessItemCount();
 	}
 }

@@ -144,5 +144,15 @@ public class CompanyDAOImpl implements CompanyDAO{
 	public void noticedelete(NoticeVO Nvo) throws Exception {
 		session.delete(namespace+".noticedelete",Nvo);
 	}
+	
+	@Override
+	public List<NoticeVO> getNotConfirm() throws Exception {
+		return session.selectList(namespace + ".getNotConfirm");
+	}
+
+	@Override
+	public int getNotConfirmCount() throws Exception {
+		return session.selectOne(namespace + ".getNotConfirmCount");
+	}
 
 }
