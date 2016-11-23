@@ -372,12 +372,15 @@ public class PosController {
 	}
 
 	@RequestMapping("pos/ps_item_selectAll")
-	public ModelAndView productList(String page) {
+	public ModelAndView productList(String page, String id) {
 		ModelAndView mav = new ModelAndView();
-
+		String area;
 		List<ItemVO> list;
 		int count = 0;
 		int pageNum = 1;
+		ItemVO vo = new ItemVO();
+		
+		area = posService.getArea(id);
 
 		if (page != null && !page.equals("")) {
 			pageNum = Integer.parseInt(page);
@@ -387,9 +390,11 @@ public class PosController {
 			Criteria cri = new Criteria();
 			cri.setPage(pageNum);
 			cri.setPerPageNum(10);
-			count = posService.getCount();
-			list = posService.getList(cri);
-
+			vo.setArea(area);
+			vo.setCri(cri);
+			count = posService.getCount(vo);
+			list = posService.getList(vo);
+			
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(cri);
 			pageMaker.setTotalCount(count);
@@ -433,8 +438,9 @@ public class PosController {
 			Criteria cri = new Criteria();
 			cri.setPage(pageNum);
 			cri.setPerPageNum(10);
-			count = posService.getCount();
-			list = posService.getList(cri);
+			vo.setCri(cri);
+			count = posService.getCount(vo);
+			list = posService.getList(vo);
 
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(cri);

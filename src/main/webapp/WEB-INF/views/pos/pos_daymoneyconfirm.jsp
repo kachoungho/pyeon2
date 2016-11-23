@@ -12,9 +12,11 @@
 </head>
 <body>
 	<h3>정산 목록</h3>
+	
 	<form action="ps_daymoneyconfirm" method="post">
 		<input type="hidden" name="area" value="${area }">
 		<select name="year">
+			<option value="">전부</option>
 			<option value="2016">2016</option>
 			<option value="2015">2015</option>
 			<option value="2014">2014</option>
@@ -25,6 +27,7 @@
 			<option value="2013">2009</option>
 		</select>
 		<select name="month">
+			<option value="">전부</option>
 			<option value="12">12</option>
 			<option value="11">11</option>
 			<option value="10">10</option>
@@ -73,6 +76,14 @@
 		</select> -->
 		<input type="submit" value="select">
 	</form>
+	
+	<c:if test="${year == '' && month == '' }">
+		<h4>모든 목록</h2>
+	</c:if>
+	<c:if test="${year != '' && month != '' }">
+		<h4>${year }년 / ${month }월</h2>
+	</c:if>
+
 	<c:if test="${result == null }">
 		<h2>내용이 없습니다.</h2>
 	</c:if>

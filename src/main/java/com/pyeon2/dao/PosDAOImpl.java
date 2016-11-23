@@ -32,8 +32,8 @@ public class PosDAOImpl implements PosDAO {
 	}
 
 	@Override
-	public List<ItemVO> getList(Criteria cri) throws Exception {
-		return session.selectList(namespace + ".getList", cri);
+	public List<ItemVO> getList(ItemVO vo) throws Exception {
+		return session.selectList(namespace + ".getList", vo);
 	}
 
 	@Override
@@ -67,8 +67,8 @@ public class PosDAOImpl implements PosDAO {
 	}
 
 	@Override
-	public int getCount() {
-		return session.selectOne(namespace + ".getCount");
+	public int getCount(ItemVO vo) {
+		return session.selectOne(namespace + ".getCount", vo);
 	}
 
 	@Override

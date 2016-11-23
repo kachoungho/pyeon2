@@ -61,10 +61,11 @@
     				/*+INDEX_DESC(tbl_board, pk_board)*/
     					rownum rn, bno, item_code, item_name, item_image, price, count, hit, category, area
  					from p2_item
-  					where rownum <= #{page} * #{perPageNum}
+  					where rownum <= #{cri.page} * #{cri.perPageNum}
   					and bno > 0
+  					and area = #{area}
   				)
-			where rn > (#{page} -1) * #{perPageNum} order by bno asc
+			where rn > (#{cri.page} -1) * #{cri.perPageNum} order by bno asc
  		]]>
 		<!-- select * from (select ROWNUM num, N.* from (select * from p2_item) N) where num between #{page} and #{perPageNum} -->
 	</select>
@@ -91,8 +92,8 @@
 	</select>
 	
 	<!-- 물품 개수 -->
-	<select id="getCount" resultType="Integer">
-		SELECT count(*) FROM p2_item
+	<select id="getCount" resultType="Integer" parameterType="com.pyeon2.vo.ItemVO">
+		SELECT count(*) FROM p2_item where area = #{area}
 	</select>
 	
 	<!-- 선택된 물품 개수 -->
@@ -346,7 +347,7 @@
 	
 	<!-- price 계산 전 임시로 orderSpend 컬럼 생성 -->
 	<insert id="orderSpendTemp" parameterType="com.pyeon2.vo.ItemVO">
-		insert into orderSpend (bno, spend, pay, spend_date, area) values(orderSpend_num.nextVal, '지출', 0, SYSDATE, #{area})
+		insert into orderSpend (bno, spend, pay, spend_date, area) values(orderSpend_num.nextVal, '발주', 0, SYSDATE, #{area})
 	</insert>
 	
 		<!-- sal 리스트 가져오기 -->

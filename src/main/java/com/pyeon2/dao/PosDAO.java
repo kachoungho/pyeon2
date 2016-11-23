@@ -20,7 +20,7 @@ public interface PosDAO {
 	public void updateOrderTemp(ItemVO vo) throws Exception;
 
 	// 물품(재고) 전체 리스트 출력 메소드
-	public List<ItemVO> getList(Criteria cri) throws Exception;
+	public List<ItemVO> getList(ItemVO vo) throws Exception;
 
 	// 물품(재고) 이름으로 검색하여 리스트 출력 메소드
 	public List<ItemVO> selectName(SelectSearch ss) throws Exception;
@@ -41,7 +41,7 @@ public interface PosDAO {
 	public List<UserVO> selectmanpay(UserVO vo) throws Exception;
 
 	// 물품(재고) 몰룍 수
-	public int getCount();
+	public int getCount(ItemVO vo);
 
 	// 물품(재고) 선택된 물품 수
 	public int getSelectCount(ItemVO vo);

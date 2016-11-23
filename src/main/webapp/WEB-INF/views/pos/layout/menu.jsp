@@ -30,7 +30,7 @@
 						href="${pageContext.request.contextPath}/pos/ps_orderState?id=${LoingUser}">발
 						주 현 황</a>
 				</sec:authorize>
-				<a href="${pageContext.request.contextPath}/pos/ps_item_selectAll">상
+				<a href="${pageContext.request.contextPath}/pos/ps_item_selectAll?id=${LoingUser}">상
 					품 리 스 트</a>
 			</div></li>
 

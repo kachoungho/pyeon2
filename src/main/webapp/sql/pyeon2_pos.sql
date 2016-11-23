@@ -382,12 +382,14 @@ insert into p2_item(bno,item_code,item_name,item_image,price,count,hit,category,
 insert into p2_member(id,pwd,name,position,area) values ('admin','1','admin','admin','판교');
 insert into p2_member(id,pwd,name,position,area) values ('mina','1','mina','manager','판교');
 insert into p2_member(id,pwd,name,position,area) values ('ch','1','choungho','user','판교');
+insert into p2_member(id,pwd,name,position,area) values ('repl','1','lws','manager','야탑');
 
 
 
-insert into roll values('admin', 'ROLE_ADMIN');
-insert into roll values('mina', 'ROLE_MANAGER');
-insert into roll values('ch', 'ROLE_USER');
+insert into role values('admin', 'ROLE_ADMIN');
+insert into role values('mina', 'ROLE_MANAGER');
+insert into role values('ch', 'ROLE_USER');
+insert into role values('repl', 'ROLE_MANAGER');
 
 
 insert into p2_item values('1', 'beer', 'beer', '2200', '20', '0', 'drink', 'pangyo');
@@ -413,7 +415,7 @@ create table p2_gps(
 );
 
 
-CREATE TABLE ROLL(
+CREATE TABLE ROLE(
 	ID VARCHAR2(20 BYTE), 	
 	ROLE_NAME VARCHAR2(30 BYTE)
    ) SEGMENT CREATION IMMEDIATE ;

@@ -30,8 +30,8 @@ public class PosServiceImpl implements PosService {
 	}
 
 	@Override
-	public List<ItemVO> getList(Criteria cri) throws Exception {
-		return posDao.getList(cri);
+	public List<ItemVO> getList(ItemVO vo) throws Exception {
+		return posDao.getList(vo);
 	}
 
 	@Override
@@ -65,8 +65,8 @@ public class PosServiceImpl implements PosService {
 	}
 
 	@Override
-	public int getCount() {
-		return posDao.getCount();
+	public int getCount(ItemVO vo) {
+		return posDao.getCount(vo);
 	}
 
 	@Override
