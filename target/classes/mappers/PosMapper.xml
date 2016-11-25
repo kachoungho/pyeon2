@@ -392,12 +392,12 @@
 		<!-- TO_CHAR(dayda, 'YYYY-MM-dd HH24:mi' ) -->
 		<![CDATA[
 			select
-  				bno, title , content , pay , dayda, area
+  				bno, title , content , pay , dayda, area , num
 			from
   				(
   					select
     				/*+INDEX_DESC(tbl_board, pk_board)*/
-    					rownum rn, bno, title , content , pay , dayda, area
+    					rownum rn, bno, title , content , pay , dayda, area , num
  					from p2_daymoney
   					where rownum <= #{cri.page} * #{cri.perPageNum}
   					and bno > 0
@@ -459,5 +459,35 @@
 		]]>
 		AND AREA = #{area}
 	</select>
+	
+	<!-- daycalc 리스트 가져오기 -->
+	<select id="daycalclist" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
+		select item_code , item_name , count , price from p2_daycalc where area = #{area} and num = #{paynum}
+	</select>
+	
+	<!-- 환불목록 삭제 -->
+	<delete id="daycalclistdelete" parameterType="com.pyeon2.vo.ItemVO">
+		delete from p2_daycalc where area = #{area} and num = #{paynum}
+	</delete>
+	
+	<!-- daymoney 리스트가져오기 -->
+	<select id="daymoneyselect" resultType="com.pyeon2.vo.ItemVO">
+		select num from p2_daymoney 
+	</select>
+	
+	<!-- sal num으로 지우기 -->
+	<delete id="saldeletenum" parameterType="com.pyeon2.vo.ItemVO">
+		delete from sal where area = #{area} and paynum = #{paynum}
+	</delete>
+	
+	<!-- p2_daymoney num으로 지우기 -->
+	<delete id="daymoneydeletenum" parameterType="com.pyeon2.vo.ItemVO">
+		delete from p2_daymoney where area = #{area} and num = #{paynum}
+	</delete>
+	
+	<!-- item_update -->
+	<update id="itemupdate">
+		update p2_item set count = count + #{count} , hit = hit - #{count} where area = #{area} and item_code = #{item_code}
+	</update>
 	
 </mapper>

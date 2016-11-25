@@ -192,5 +192,23 @@ public interface PosService {
 	
 	// 재고 10개 미만인 물건 카운트
 	public int getLessItemCount(MemberVO Mvo) throws Exception;
+	
+	//영수증 넘버와 비교
+	public List<ItemVO> daycalclist(ItemVO vo) throws Exception;
+		
+	//환불 목록 삭제
+	public void daycalclistdelete(ItemVO vo) throws Exception;
+		
+	//daymoney 리스트 가져와 비교 
+	public List<ItemVO> daymoneyselect() throws Exception;
+		
+	//sal 번호로 지우기
+	public void saldeletenum(ItemVO vo) throws Exception;
+		
+	//daymoney 번호로 지우기
+	public void daymoneydeletenum(ItemVO vo) throws Exception;
+		
+	//p2_item hit&count업데이트
+	public void itemupdate(ItemVO vo) throws Exception;
 
 }
