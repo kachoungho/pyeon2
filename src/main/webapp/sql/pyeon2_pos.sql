@@ -521,8 +521,9 @@ create table p2_dayCalc(
 	sys_time date default sysdate,
 	constraint dayCalc_pk  primary key(item_code, area,sys_time)
 );
-
+drop table p2_daymoney
 create table p2_daymoney(
+	bno number(10),
 	num number(10),
 	title varchar2(20) not null,
 	content varchar2(10) not null,
@@ -533,3 +534,7 @@ create table p2_daymoney(
 	days varchar2(20) not null,
 	dayda date
 );
+create sequence p2_daymoney_num
+   increment by 1
+   start with 1
+   nocache;
