@@ -8,7 +8,10 @@ public class MemberVO {
 	private String position;
 	private String phone;
 	private String age;
-	private String address;
+	private String post1;
+	private String post2;
+	private String addr1;
+	private String addr2;
 	private String gender;
 	private String area;
 	private String role_name;
@@ -50,11 +53,29 @@ public class MemberVO {
 	public void setAge(String age) {
 		this.age = age;
 	}
-	public String getAddress() {
-		return address;
+	public String getPost1() {
+		return post1;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setPost1(String post1) {
+		this.post1 = post1;
+	}
+	public String getPost2() {
+		return post2;
+	}
+	public void setPost2(String post2) {
+		this.post2 = post2;
+	}
+	public String getAddr1() {
+		return addr1;
+	}
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
+	}
+	public String getAddr2() {
+		return addr2;
+	}
+	public void setAddr2(String addr2) {
+		this.addr2 = addr2;
 	}
 	public String getGender() {
 		return gender;
