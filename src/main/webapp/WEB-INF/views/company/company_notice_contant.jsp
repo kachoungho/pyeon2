@@ -41,6 +41,7 @@
 
 .td_write2 {
 	height: 400px;
+	font-family: 'Jeju Gothic', sans-serif;
 }
 </style>
 
@@ -81,7 +82,7 @@
 				</tr>
 				<tr class="tr_write">
 					<th class="th_write">³»¿ë</th>
-					<td class="td_write2">${list.contant }</td>
+					<td class="td_write2"><pre><font face="Jeju Gothic">${list.contant }</font></pre></td>
 				</tr>
 			</table>
 			<br>

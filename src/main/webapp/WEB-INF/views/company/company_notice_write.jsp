@@ -73,7 +73,7 @@
 				<tr class="tr_write">
 					<th class="th_write">내용</th>
 					<td class="td_write2"><textarea rows="15" cols="50"
-							name="contant"></textarea></td>
+							name="contant" wrap="hard"></textarea></td>
 				</tr>
 				</tbody>
 				</thead>

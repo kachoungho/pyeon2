@@ -67,14 +67,14 @@
 			</tr>
 			<tr class="tr_write">
 				<th class="th_write">내용</th>
-				<td class="td_write2">${list.contant }</td>
+				<td class="td_write2"><pre><font face="Jeju Gothic">${list.contant }</font></pre></td>
 			</tr>
 		</table>
 <br>
 		<input style="display: block; float: right; margin-right: 410px;"
 			width="40" type="image" src="/controller/resources/images/list.png"
 			alt="button"
-			onclick="document.location.href='${pageContext.request.contextPath}/company/com_notice_list?'" />
+			onclick="document.location.href='${pageContext.request.contextPath}/pos/ps_notice_list?'" />
 	</c:forEach>
 	<br>
 	<br>
