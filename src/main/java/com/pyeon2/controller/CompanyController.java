@@ -1,6 +1,9 @@
 package com.pyeon2.controller;
 
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +19,7 @@ import com.pyeon2.domain.PageMaker;
 import com.pyeon2.service.CompanyService;
 import com.pyeon2.service.MemberService;
 import com.pyeon2.service.PosService;
+import com.pyeon2.vo.CalendarMemoVO;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
@@ -35,9 +39,81 @@ public class CompanyController {
 	private MemberService memberService;
 
 	@RequestMapping("company")
-	public String getCompany() {
-		return ".company";
+	public ModelAndView getCompany(HttpServletRequest request) {
+		CalendarMemoVO vo = new CalendarMemoVO();
+		ModelAndView mav = new ModelAndView();
+		List<NoticeVO> list;
+		List<CalendarMemoVO> list1;
+		Map<Integer, String> memoMap = new HashMap();
+
+		try {
+			
+			// 달력 관련 부분
+			Calendar cal = Calendar.getInstance(); // Calendar객체 cal생성
+			int currentYear = cal.get(Calendar.YEAR); // 현재 날짜 기억
+			int currentMonth = cal.get(Calendar.MONTH);
+			int currentDate = cal.get(Calendar.DATE);
+			String Year = request.getParameter("year"); // 나타내고자 하는 날짜
+			String Month = request.getParameter("month");
+			int year, month;
+			if (Year == null && Month == null) { // 처음 호출했을 때
+				year = currentYear;
+				month = currentMonth;
+			} else { // 나타내고자 하는 날짜를 숫자로 변환
+				year = Integer.parseInt(Year);
+				month = Integer.parseInt(Month);
+				if (month < 0) {
+					month = 11;
+					year = year - 1;
+				} // 1월부터 12월까지 범위 지정.
+				if (month > 11) {
+					month = 0;
+					year = year + 1;
+				}
+			}
+
+			cal.set(year, month, 1); // 현재 날짜를 현재 월의 1일로 설정
+			int startDay = cal.get(Calendar.DAY_OF_WEEK); // 현재날짜(1일)의 요일
+			int end = cal.getActualMaximum(Calendar.DAY_OF_MONTH); // 이 달의 끝나는 날
+			int br = 0; // 7일마다 줄 바꾸기
+
+			mav.addObject("year", new Integer(year));
+			mav.addObject("month", new Integer(month));
+			mav.addObject("currentYear", new Integer(currentYear));
+			mav.addObject("currentMonth", new Integer(currentMonth));
+			mav.addObject("currentDate", new Integer(currentDate));
+			mav.addObject("startDay", new Integer(startDay));
+			mav.addObject("end", new Integer(end));
+			mav.addObject("br", br);
+			// 달력 관련 부분 end
+			
+			// 미승인건 관련 부분
+			list = companyService.getNotConfirm();
+			int count = companyService.getNotConfirmCount();
+
+			mav.addObject("result", list);
+			mav.addObject("count", count);
+			// 미승인건 관련 부분 end
+			mav.setViewName(".company.company_main");
+			vo.setYear(Integer.toString(year));
+			vo.setMonth(Integer.toString(month));
+
+			list1 = companyService.calendarMemoList(vo);
+			
+			for(int i = 0; i < list1.size(); i++){
+				memoMap.put(Integer.parseInt(list1.get(i).getDay()), list1.get(i).getContent());
+			}
+			
+			mav.addObject("memoMap", memoMap);
+			//mav.addObject("memoList", list1);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return mav;
 	}
+
 
 	/*@RequestMapping(value = "company/com_stock", method = RequestMethod.GET)
 	public String comStockGET() {
@@ -199,6 +275,8 @@ public class CompanyController {
 		ModelAndView mav = new ModelAndView();
 		List<ItemVO> list;
 		ItemVO vo = new ItemVO();
+		int totalPrice = 0;
+		int sequence = 0;
 
 		vo.setItem_code(request.getParameter("item_code"));
 		vo.setCount(Integer.parseInt(request.getParameter("count")));
@@ -212,6 +290,12 @@ public class CompanyController {
 			companyService.updateItemCount(vo);
 			companyService.odertDelete(vo);
 			companyService.orderUpdate(vo);
+			totalPrice = posService.getPrice(vo);
+			vo.setTotalPrice(totalPrice);
+			sequence = posService.getSpendSequence(vo);
+			vo.setBno(sequence);
+			System.out.println("sequence : " + sequence);
+			posService.orderSpend(vo);
 			mav.setViewName(".company.orderApprovalsuc");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -541,6 +625,111 @@ public class CompanyController {
 		companyService.noticedelete(Nvo);
 		
 		mav.setViewName(".company.company_notice_delete");
+		return mav;
+	}
+	
+	//달력 메모 기능(form)
+	@RequestMapping("company/com_calendarMemo")
+	public ModelAndView calendarMemo(HttpServletRequest request) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		String year, month, day;
+		year = request.getParameter("year");
+		month = request.getParameter("month");
+		day = request.getParameter("day");
+		System.out.println("year : " + year + ", month : " + month + ", day : " + day);
+		
+		mav.addObject("year", year);
+		mav.addObject("month", month);
+		mav.addObject("day", day);
+		mav.setViewName(".company.company_calendarMemoForm");
+		
+		return mav;
+	}
+	
+	//달력 메모 기능(insert)
+	@RequestMapping("company/com_calendarMemoInsert")
+	public ModelAndView calendarMemoInsert(HttpServletRequest request) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		CalendarMemoVO vo = new CalendarMemoVO();
+		List<NoticeVO> list;
+		List<CalendarMemoVO> list1;
+		Map<Integer, String> memoMap = new HashMap();
+		String year1, month1, day1, content;
+		year1 = request.getParameter("year");
+		month1 = request.getParameter("month");
+		day1 = request.getParameter("day");
+		content = request.getParameter("memo");
+		System.out.println("year : " + year1 + ", month : " + month1 + ", day : " + day1);
+		
+		vo.setYear(year1);
+		vo.setMonth(month1);
+		vo.setDay(day1);
+		vo.setContent(content);
+		
+		companyService.calendarMemoInsert(vo);
+		list1 = companyService.calendarMemoList(vo);
+		
+		for(int i = 0; i < list1.size(); i++){
+			memoMap.put(Integer.parseInt(list1.get(i).getDay()), list1.get(i).getContent());
+		}
+		
+		mav.addObject("memoMap", memoMap);
+		//mav.addObject("memoList", list1);
+		try {
+			
+			// 달력 관련 부분
+			Calendar cal = Calendar.getInstance(); // Calendar객체 cal생성
+			int currentYear = cal.get(Calendar.YEAR); // 현재 날짜 기억
+			int currentMonth = cal.get(Calendar.MONTH);
+			int currentDate = cal.get(Calendar.DATE);
+			String Year = request.getParameter("year"); // 나타내고자 하는 날짜
+			String Month = request.getParameter("month");
+			int year, month;
+			if (Year == null && Month == null) { // 처음 호출했을 때
+				year = currentYear;
+				month = currentMonth;
+			} else { // 나타내고자 하는 날짜를 숫자로 변환
+				year = Integer.parseInt(Year);
+				month = Integer.parseInt(Month);
+				if (month < 0) {
+					month = 11;
+					year = year - 1;
+				} // 1월부터 12월까지 범위 지정.
+				if (month > 11) {
+					month = 0;
+					year = year + 1;
+				}
+			}
+
+			cal.set(year, month, 1); // 현재 날짜를 현재 월의 1일로 설정
+			int startDay = cal.get(Calendar.DAY_OF_WEEK); // 현재날짜(1일)의 요일
+			int end = cal.getActualMaximum(Calendar.DAY_OF_MONTH); // 이 달의 끝나는 날
+			int br = 0; // 7일마다 줄 바꾸기
+
+			mav.addObject("year", new Integer(year));
+			mav.addObject("month", new Integer(month));
+			mav.addObject("currentYear", new Integer(currentYear));
+			mav.addObject("currentMonth", new Integer(currentMonth));
+			mav.addObject("currentDate", new Integer(currentDate));
+			mav.addObject("startDay", new Integer(startDay));
+			mav.addObject("end", new Integer(end));
+			mav.addObject("br", br);
+			// 달력 관련 부분 end
+			
+			// 미승인건 관련 부분
+			list = companyService.getNotConfirm();
+			int count = companyService.getNotConfirmCount();
+
+			mav.addObject("result", list);
+			mav.addObject("count", count);
+			// 미승인건 관련 부분 end
+			mav.setViewName(".company.company_main");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		
 		return mav;
 	}
 }

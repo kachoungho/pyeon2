@@ -61,10 +61,11 @@
     				/*+INDEX_DESC(tbl_board, pk_board)*/
     					rownum rn, bno, item_code, item_name, item_image, price, count, hit, category, area
  					from p2_item
-  					where rownum <= #{page} * #{perPageNum}
+  					where rownum <= #{cri.page} * #{cri.perPageNum}
   					and bno > 0
+  					and area = #{area}
   				)
-			where rn > (#{page} -1) * #{perPageNum} order by bno asc
+			where rn > (#{cri.page} -1) * #{cri.perPageNum} order by bno asc
  		]]>
 		<!-- select * from (select ROWNUM num, N.* from (select * from p2_item) N) where num between #{page} and #{perPageNum} -->
 	</select>
@@ -91,8 +92,8 @@
 	</select>
 	
 	<!-- 물품 개수 -->
-	<select id="getCount" resultType="Integer">
-		SELECT count(*) FROM p2_item
+	<select id="getCount" resultType="Integer" parameterType="com.pyeon2.vo.ItemVO">
+		SELECT count(*) FROM p2_item where area = #{area}
 	</select>
 	
 	<!-- 선택된 물품 개수 -->
@@ -300,14 +301,29 @@
 	</select>
 	
 	<!-- 발주 비용 -->
-	<insert id="orderSpend" parameterType="com.pyeon2.vo.ItemVO">
-		insert into orderSpend (bno, spend, pay, spend_date, area) values(
+	<update id="orderSpend" parameterType="com.pyeon2.vo.ItemVO">
+		<!-- insert into orderSpend (bno, spend, pay, spend_date, area) values(
 		orderSpend_num.nextVal,
 		'지출',
 		#{totalPrice},
 		SYSDATE,
-		#{area})
-	</insert>
+		#{area}) -->
+		
+		<!-- <![CDATA[
+        MERGE INTO orderSpend a
+            USING dual
+               on (a.pay = null AND a.bno = #{bno})
+             WHEN MATCHED THEN
+             UPDATE SET
+             	 a.pay = #{totalPrice} where a.bno = #{bno}         
+             WHEN NOT MATCHED THEN
+             UPDATE SET      
+                 a.pay = a.pay + #{totalPrice} where a.bno = #{bno}
+          ]]> -->
+          <![CDATA[
+			update orderSpend set pay = pay + #{totalPrice} where bno = #{bno} and area = #{area}
+          ]]>
+	</update>
 	
 	<!-- 발주 현황 리스트 -->
 	<select id="getStateList" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
@@ -323,4 +339,122 @@
 	<delete id="deleteOrder" parameterType="com.pyeon2.vo.ItemVO">
 		delete from orderReqState where item_code = #{item_code} and p2_time = #{p2_time}
 	</delete>
+	
+	<!-- orderSpend Sequence 추출 -->
+	<select id="getSpendSequence" resultType="Integer" parameterType="com.pyeon2.vo.ItemVO">
+		select max(bno) from orderSpend
+	</select>
+	
+	<!-- price 계산 전 임시로 orderSpend 컬럼 생성 -->
+	<insert id="orderSpendTemp" parameterType="com.pyeon2.vo.ItemVO">
+		insert into orderSpend (bno, spend, pay, spend_date, area) values(orderSpend_num.nextVal, '발주', 0, SYSDATE, #{area})
+	</insert>
+	
+		<!-- sal 리스트 가져오기 -->
+	<select id="sallist" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
+		select * from sal where area = #{area}
+	</select>
+	
+	
+	<!-- orderspend 리스트 가져오기 -->
+	<select id="orderSpendlist" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
+		select spend , pay , TO_CHAR(spend_date, 'YYYY-MM-dd HH24:mi' ) as sal_time from orderspend where area = #{area}
+	</select>
+	
+	<!-- sal , orderspend 리스트 p2_daymoney 에 insert -->
+	<insert id="daymoneyinsert" parameterType="com.pyeon2.vo.ItemVO">
+		insert into p2_daymoney(bno, num,title,content,pay,year,month,days,dayda,area) values(p2_daymoney_num.nextVal, #{paynum},#{title},#{content},#{pay},(SELECT TO_CHAR(sysdate, 'YYYY' )FROM dual ),(SELECT TO_CHAR(sysdate, 'MM' ) FROM dual ),(SELECT TO_CHAR(sysdate, 'dd' ) FROM dual ),sysdate,#{area})
+		<!-- <choose>
+			<when test="#{content == '수입'}">
+				insert into p2_daymoney(num,title,content,pay,year,month,days,dayda,area) values(#{paynum},#{title},#{content},#{pay}, 
+				(select TO_CHAR(sal_time, 'YYYY' ) from sal where sal_time = #{p2_time}), 
+				(select TO_CHAR(sal_time, 'MM' ) from sal where sal_time = #{p2_time}), 
+				(select TO_CHAR(sal_time, 'dd' ) from sal where sal_time = #{p2_time}), 
+				sysdate, #{area})
+			</when>
+			<when test="#{content =='지출'}">
+				insert into p2_daymoney(num,title,content,pay,year,month,days,dayda,area) values(#{paynum},#{title},#{content},#{pay}, 
+				(select TO_CHAR(spend_date, 'YYYY' ) from orderSpend where spend_date = #{p2_time}), 
+				(select TO_CHAR(spend_date, 'MM' ) from orderSpend where spend_date = #{p2_time}), 
+				(select TO_CHAR(spend_date, 'dd' ) from orderSpend where spend_date = #{p2_time}), 
+				sysdate, #{area})
+			</when>
+		</choose> -->
+	</insert>
+	
+	<!-- p2_daymoney 리스트 가져오기 -->
+	<select id="daymoneylist" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
+		<!-- select title , content , pay , TO_CHAR(dayda, 'YYYY-MM-dd HH24:mi' ) as sal_time from p2_daymoney where area = #{area} 
+		and year like #{year} and month like #{month} order by dayda -->
+		<!-- TO_CHAR(dayda, 'YYYY-MM-dd HH24:mi' ) -->
+		<![CDATA[
+			select
+  				bno, title , content , pay , dayda
+			from
+  				(
+  					select
+    				/*+INDEX_DESC(tbl_board, pk_board)*/
+    					rownum rn, bno, title , content , pay , dayda
+ 					from p2_daymoney
+  					where rownum <= #{cri.page} * #{cri.perPageNum}
+  					and bno > 0
+  					and area = #{area}
+  					and year like #{year}
+  					and month like #{month}
+  				)
+			where rn > (#{cri.page} -1) * #{cri.perPageNum} order by dayda
+ 		]]>
+	</select>
+	
+	<!-- sal 리스트 delete -->
+	<delete id="daysaldelete" parameterType="com.pyeon2.vo.ItemVO">
+		delete from sal where area = #{area}
+	</delete>
+	
+	<!-- orderSpend 리스트 delete -->
+	<delete id="dayspenddelete" parameterType="com.pyeon2.vo.ItemVO">
+		delete from orderSpend where area = #{area}
+	</delete>
+	
+	<!-- sal 리스트 총액 -->
+	<select id="daysaltotalpay" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
+		select sum(pay) as pay from p2_daymoney where area = #{area} and title = '판매' and year like #{year} and month like #{month}
+	</select>
+	
+	<!-- sal 리스트 총액 -->
+	<select id="daysalspendpay" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
+		select sum(pay) as pay from p2_daymoney where area = #{area} and title = '지출' and year like #{year} and month like #{month}
+	</select>
+	
+	<!-- daymoney의 총 컬럼 수 -->
+	<select id="daymoneyCount" parameterType="com.pyeon2.vo.ItemVO" resultType="String">
+		select count(*) from p2_daymoney where year like #{year} and month like #{month}
+	</select>
+	
+	<!-- 메인 페이지에 공지사항 최근 5개글 띄우기  -->
+	<select id="getNoticeList" resultType="com.pyeon2.vo.NoticeVO">
+		SELECT * FROM ( SELECT * FROM COMPANY_NOTICE ORDER BY NOTICENUM DESC )
+		<![CDATA[
+		WHERE ROWNUM <= 5
+		]]>
+	</select>
+	
+	<!-- 재고 10개 미만인 물건 불러오기 -->
+	<select id="getLessItem" parameterType="com.pyeon2.vo.MemberVO" resultType="com.pyeon2.vo.ItemVO">
+		SELECT * FROM P2_ITEM 
+		<![CDATA[
+		WHERE COUNT <= 10
+		]]>
+		AND AREA = #{area}
+	</select>
+	
+	<!-- 재고 10개 미만인 물건 카운트 -->
+	<select id="getLessItemCount" parameterType="com.pyeon2.vo.MemberVO" resultType="Integer">
+		SELECT COUNT(*) FROM P2_ITEM
+		<![CDATA[
+		WHERE COUNT <= 10
+		]]>
+		AND AREA = #{area}
+	</select>
+	
 </mapper>

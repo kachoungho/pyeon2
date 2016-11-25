@@ -9,7 +9,7 @@
 　
 </div>
 <div style="float: left; width: 34%">
-	<a href="${pageContext.request.contextPath}/"><img style="margin-left: auto; margin-right: auto; margin-top: 20px;margin-bottom: 20px; display: block  " alt="" src="/controller/resources/images/Logo2.png"></a>
+	<a href="${pageContext.request.contextPath}/pos?id=${ LoingUser }"><img style="margin-left: auto; margin-right: auto; margin-top: 20px;margin-bottom: 20px; display: block  " alt="" src="/controller/resources/images/Logo2.png"></a>
 </div>
 <div style="float: left; width: 33%; margin-top: 90px;  text-align: right;
 	font-family: 'Jeju Gothic', sans-serif;">

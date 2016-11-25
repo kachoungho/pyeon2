@@ -7,9 +7,11 @@ import org.springframework.stereotype.Repository;
 
 import com.pyeon2.dao.PosDAO;
 import com.pyeon2.domain.Criteria;
+import com.pyeon2.vo.CalendarMemoVO;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
+import com.pyeon2.vo.NoticeVO;
 import com.pyeon2.vo.SelectSearch;
 import com.pyeon2.vo.UserVO;
 
@@ -30,8 +32,8 @@ public class PosServiceImpl implements PosService {
 	}
 
 	@Override
-	public List<ItemVO> getList(Criteria cri) throws Exception {
-		return posDao.getList(cri);
+	public List<ItemVO> getList(ItemVO vo) throws Exception {
+		return posDao.getList(vo);
 	}
 
 	@Override
@@ -65,8 +67,8 @@ public class PosServiceImpl implements PosService {
 	}
 
 	@Override
-	public int getCount() {
-		return posDao.getCount();
+	public int getCount(ItemVO vo) {
+		return posDao.getCount(vo);
 	}
 
 	@Override
@@ -249,6 +251,77 @@ public class PosServiceImpl implements PosService {
 	
 	public int getPrice(ItemVO vo) {
 		return posDao.getPrice(vo);
+	}
+
+	@Override
+	public int getSpendSequence(ItemVO vo) {
+		return posDao.getSpendSequence(vo);
+	}
+
+	@Override
+	public void orderSpendTemp(ItemVO vo) {
+		posDao.orderSpendTemp(vo);
+	}
+
+	@Override
+	public List<ItemVO> sallist(ItemVO vo) throws Exception {
+		return posDao.sallist(vo);
+	}
+
+	@Override
+	public List<ItemVO> orderSpendlist(ItemVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return posDao.orderSpendlist(vo);
+	}
+
+	@Override
+	public void daymoneyinsert(ItemVO vo) throws Exception {
+		posDao.daymoneyinsert(vo);
+	}
+
+	@Override
+	public List<ItemVO> daymoneylist(ItemVO vo) throws Exception {
+		return posDao.daymoneylist(vo);
+	}
+
+	@Override
+	public void daysaldelete(ItemVO vo) throws Exception {
+		posDao.daysaldelete(vo);
+	}
+
+	@Override
+	public void dayspenddelete(ItemVO vo) throws Exception {
+		posDao.dayspenddelete(vo);
+	}
+
+	@Override
+	public List<ItemVO> daysaltotalpay(ItemVO vo) throws Exception {
+		return posDao.daysaltotalpay(vo);
+	}
+
+	@Override
+	public List<ItemVO> daysalspendpay(ItemVO vo) throws Exception {
+		return posDao.daysalspendpay(vo);
+	}
+
+	@Override
+	public String daymoneyCount(ItemVO vo) throws Exception {
+		return posDao.daymoneyCount(vo);
+	}
+	
+	@Override
+	public List<NoticeVO> getNoticeList() throws Exception {
+		return posDao.getNoticeList();
+	}
+
+	@Override
+	public List<ItemVO> getLessItem(MemberVO Mvo) throws Exception {
+		return posDao.getLessItem(Mvo);
+	}
+
+	@Override
+	public int getLessItemCount(MemberVO Mvo) throws Exception {
+		return posDao.getLessItemCount(Mvo);
 	}
 
 }

@@ -36,9 +36,33 @@ public class PosController {
 	 */
 
 	@RequestMapping("pos")
-	public String getCompany() {
-		return ".pos";
+	public ModelAndView getCompany(HttpServletRequest request, ItemVO Ivo, MemberVO Mvo) {
+		
+		ModelAndView mav = new ModelAndView();
+		Ivo.setId(request.getParameter("id"));
+		
+		try {
+			
+			String area = posService.areaserch(Ivo);
+			Mvo.setArea(area);
+			
+			List<NoticeVO> list = posService.getNoticeList();
+			List<ItemVO> list2 = posService.getLessItem(Mvo);
+			int count = posService.getLessItemCount(Mvo);
+			
+			mav.addObject("list", list);
+			mav.addObject("list2", list2);
+			mav.addObject("count", count);
+			
+			mav.setViewName(".pos.pos_main");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return mav;
 	}
+
 
 	@RequestMapping(value = "pos/ps_order", method = RequestMethod.GET)
 	public ModelAndView orderGET(Model model, String page, String item_code, String item_name, String category, String name) {
@@ -180,7 +204,7 @@ public class PosController {
 			for(int i = 0; i < list.size(); i++){
 				posService.insertOrder(list.get(i));
 				posService.orderInsert(list.get(i));
-				totalPrice = totalPrice + posService.getPrice(list.get(i));
+				//totalPrice = totalPrice + posService.getPrice(list.get(i));
 				System.out.println(posService.getPrice(list.get(i)));
 				System.out.println(totalPrice);
 				temp = 1;
@@ -189,7 +213,7 @@ public class PosController {
 			if(temp == 1){
 				vo.setTotalPrice(totalPrice);
 				vo.setArea(list.get(0).getArea());
-				posService.orderSpend(vo);
+				posService.orderSpendTemp(vo);
 				posService.orderTempDeleteAll();
 			}
 			
@@ -372,12 +396,15 @@ public class PosController {
 	}
 
 	@RequestMapping("pos/ps_item_selectAll")
-	public ModelAndView productList(String page) {
+	public ModelAndView productList(String page, String id, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
+		String area;
 
 		List<ItemVO> list;
 		int count = 0;
 		int pageNum = 1;
+		ItemVO vo = new ItemVO();
+		area = posService.getArea(id);
 
 		if (page != null && !page.equals("")) {
 			pageNum = Integer.parseInt(page);
@@ -387,9 +414,11 @@ public class PosController {
 			Criteria cri = new Criteria();
 			cri.setPage(pageNum);
 			cri.setPerPageNum(10);
-			count = posService.getCount();
-			list = posService.getList(cri);
-
+			vo.setArea(area);
+			vo.setCri(cri);
+			count = posService.getCount(vo);
+			list = posService.getList(vo);
+			
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(cri);
 			pageMaker.setTotalCount(count);
@@ -398,6 +427,8 @@ public class PosController {
 			mav.addObject("pageNum", pageNum);
 			mav.addObject("count", count);
 			mav.addObject("pageMaker", pageMaker);
+			//mav.addObject("area", area);
+			mav.addObject("id", id);
 
 			mav.setViewName(".pos.pos_item_selectAll");
 
@@ -433,8 +464,9 @@ public class PosController {
 			Criteria cri = new Criteria();
 			cri.setPage(pageNum);
 			cri.setPerPageNum(10);
-			count = posService.getCount();
-			list = posService.getList(cri);
+			vo.setCri(cri);
+			count = posService.getCount(vo);
+			list = posService.getList(vo);
 
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(cri);
@@ -846,6 +878,196 @@ public class PosController {
 		
 		mav.addObject("result",list);
 		mav.setViewName(".pos.pos_notice_contant");
+		return mav;
+	}
+	
+	@RequestMapping(value = "pos/ps_daymoney" , method = RequestMethod.GET)
+	public ModelAndView daymoney(HttpServletRequest request,Model model) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		ItemVO vo = new ItemVO();
+		vo.setId(request.getParameter("id"));
+		String area = posService.areaserch(vo);
+		vo.setArea(area);
+		
+		List<ItemVO> list1 = posService.sallist(vo);
+		List<ItemVO> list2 = posService.orderSpendlist(vo);
+		
+		mav.addObject("result1",list1);
+		mav.addObject("result2",list2);
+		mav.addObject("area", area);
+		mav.setViewName(".pos.pos_daymoney");
+		return mav;
+	}
+	
+	@RequestMapping("pos/ps_daymoneyconfirm")
+	public ModelAndView daymoneyconfirm(HttpServletRequest request,Model model) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		ItemVO vo = new ItemVO();
+		String area = request.getParameter("area");
+		vo.setArea(area);
+		String year = "";
+		String month = "";
+		//String days = "";
+		int pay1 = 0;
+		int pay2 = 0;
+		int pageNum = 1;
+		int count;
+		if(request.getParameter("page") != null && !request.getParameter("page").equals(null)){
+			pageNum = Integer.parseInt(request.getParameter("page"));
+		}
+		
+		if((request.getParameter("year") == null) && (request.getParameter("month") == null)) {
+			year = "";
+			month = "";
+			//days = "";
+		}
+		else{
+			year = request.getParameter("year");
+			month = request.getParameter("month");
+			//days = request.getParameter("days");
+		}
+		
+		vo.setYear("%"+year+"%");
+		vo.setMonth("%"+month+"%");
+		//vo.setDays("%"+days+"%");
+		
+		Criteria cri = new Criteria();
+		cri.setPage(pageNum);
+		cri.setPerPageNum(7);
+		if(posService.daymoneyCount(vo) == null){
+			count = 0;
+		}
+		else {
+			count = Integer.parseInt(posService.daymoneyCount(vo));
+		}
+		
+		vo.setCri(cri);
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(count);
+				
+		List<ItemVO> list1 = posService.sallist(vo);
+		for(int i = 0 ; i < list1.size() ; i++){
+			vo.setPaynum(list1.get(i).getPaynum());
+			vo.setTitle(list1.get(i).getSold());
+			vo.setContent("수입");
+			vo.setPay(list1.get(i).getPay());
+			vo.setP2_time(list1.get(i).getSal_time());
+			System.out.println("p2_time : " + list1.get(i).getSal_time());
+			posService.daymoneyinsert(vo);
+		}
+		if(posService.daysaltotalpay(vo).get(0) == null){
+			pay1 = 0;
+		}
+		else {
+			pay1 = posService.daysaltotalpay(vo).get(0).getPay();
+		}
+		
+		posService.daysaldelete(vo);
+		System.out.println("pay1 : " + pay1);
+		
+		List<ItemVO> list2 = posService.orderSpendlist(vo);
+		for(int i = 0 ; i < list2.size() ; i++){
+			vo.setPaynum(0);
+			vo.setTitle(list2.get(i).getSpend());
+			vo.setContent("지출");
+			vo.setPay(list2.get(i).getPay());
+			vo.setP2_time(list2.get(i).getSpend_date());
+			System.out.println("p2_time : " + list2.get(i).getSal_time());
+			posService.daymoneyinsert(vo);
+		}
+		if(posService.daysalspendpay(vo).get(0) == null){
+			pay2 = 0;
+		}
+		else {
+			pay2 = posService.daysalspendpay(vo).get(0).getPay();
+		}
+		
+		posService.dayspenddelete(vo);
+		System.out.println("pay2 : " + pay2);
+
+		
+		int total = pay1 - pay2;
+		
+		vo.setArea(request.getParameter("area"));
+		System.out.println("여긴 오니?!");
+		List<ItemVO> list3 = posService.daymoneylist(vo);
+		System.out.println("여기는?!?!");
+		
+		mav.addObject("pay1",pay1);
+		mav.addObject("pay2",pay2);
+		mav.addObject("total",total);
+		mav.addObject("result",list3);
+		mav.addObject("area", area);
+		mav.addObject("page", pageNum);
+		mav.addObject("pageMaker", pageMaker);
+		mav.addObject("year", year);
+		mav.addObject("month", month);
+		mav.setViewName(".pos.pos_daymoneyconfirm");
+		
+		return mav;
+	}
+	
+	@RequestMapping("pos/ps_daymoneyconfirmSelect")
+	public ModelAndView daymoneyconfirmSelect(HttpServletRequest request,Model model) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		ItemVO vo = new ItemVO();
+		String area = request.getParameter("area");
+		vo.setArea(area);
+		String year = "";
+		String month = "";
+		//String days = "";
+		int pay1 = 0;
+		int pay2 = 0;
+		if((request.getParameter("year") == null) && (request.getParameter("month") == null)) {
+			year = "";
+			month = "";
+			//days = "";
+		}
+		else{
+			year = request.getParameter("year");
+			month = request.getParameter("month");
+			//days = request.getParameter("days");
+		}
+		
+		System.out.println("area : " + area);
+		System.out.println("year : " + year);
+		System.out.println("month : " + month);
+		vo.setYear("%"+year+"%");
+		vo.setMonth("%"+month+"%");
+		//vo.setDays("%"+days+"%");
+	
+		vo.setTitle("판매");
+		if(posService.daysaltotalpay(vo).get(0) == null){
+			pay1 = 0;
+		}
+		else {
+			pay1 = posService.daysaltotalpay(vo).get(0).getPay();
+		}
+
+		vo.setTitle("지출");
+		if(posService.daysaltotalpay(vo).get(0) == null){
+			pay2 = 0;
+		}
+		else {
+			pay2 = posService.daysalspendpay(vo).get(0).getPay();
+		}
+		
+		System.out.println("pay1 : " + pay1);
+		System.out.println("pay2 : " + pay2);
+		
+		int total = pay1 - pay2;
+		
+		vo.setArea(request.getParameter("area"));
+		List<ItemVO> list3 = posService.daymoneylist(vo);
+		
+		mav.addObject("pay1",pay1);
+		mav.addObject("pay2",pay2);
+		mav.addObject("total",total);
+		mav.addObject("result",list3);
+		mav.addObject("area", area);
+		mav.setViewName(".pos.pos_daymoneyconfirm");
 		return mav;
 	}
 }

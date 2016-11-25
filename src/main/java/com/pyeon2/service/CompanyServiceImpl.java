@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.pyeon2.dao.CompanyDAO;
 import com.pyeon2.domain.Criteria;
+import com.pyeon2.vo.CalendarMemoVO;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
@@ -141,5 +142,25 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public void noticedelete(NoticeVO Nvo) throws Exception {
 		comDao.noticedelete(Nvo);
+	}
+	
+	@Override
+	public List<NoticeVO> getNotConfirm() throws Exception {
+		return comDao.getNotConfirm();
+	}
+
+	@Override
+	public int getNotConfirmCount() throws Exception {
+		return comDao.getNotConfirmCount();
+	}
+
+	@Override
+	public void calendarMemoInsert(CalendarMemoVO vo) throws Exception {
+		comDao.calendarMemoInsert(vo);
+	}
+
+	@Override
+	public List<CalendarMemoVO> calendarMemoList(CalendarMemoVO vo) throws Exception {
+		return comDao.calendarMemoList(vo);
 	}
 }

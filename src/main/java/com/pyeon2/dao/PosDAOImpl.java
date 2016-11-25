@@ -10,6 +10,7 @@ import com.pyeon2.domain.Criteria;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
+import com.pyeon2.vo.NoticeVO;
 import com.pyeon2.vo.SelectSearch;
 import com.pyeon2.vo.UserVO;
 
@@ -32,8 +33,8 @@ public class PosDAOImpl implements PosDAO {
 	}
 
 	@Override
-	public List<ItemVO> getList(Criteria cri) throws Exception {
-		return session.selectList(namespace + ".getList", cri);
+	public List<ItemVO> getList(ItemVO vo) throws Exception {
+		return session.selectList(namespace + ".getList", vo);
 	}
 
 	@Override
@@ -67,8 +68,8 @@ public class PosDAOImpl implements PosDAO {
 	}
 
 	@Override
-	public int getCount() {
-		return session.selectOne(namespace + ".getCount");
+	public int getCount(ItemVO vo) {
+		return session.selectOne(namespace + ".getCount", vo);
 	}
 
 	@Override
@@ -229,7 +230,7 @@ public class PosDAOImpl implements PosDAO {
 
 	@Override
 	public void orderSpend(ItemVO vo) {
-		session.insert(namespace + ".orderSpend", vo);
+		session.update(namespace + ".orderSpend", vo);
 	}
 
 	@Override
@@ -249,5 +250,77 @@ public class PosDAOImpl implements PosDAO {
 	
 	public int getPrice(ItemVO vo) {
 		return session.selectOne(namespace + ".getPrice", vo);
+	}
+
+	@Override
+	public int getSpendSequence(ItemVO vo) {
+		return session.selectOne(namespace + ".getSpendSequence", vo);
+	}
+
+	@Override
+	public void orderSpendTemp(ItemVO vo) {
+		session.insert(namespace + ".orderSpendTemp", vo);
+	}
+	
+	@Override
+	public List<ItemVO> sallist(ItemVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+".sallist",vo);
+	}
+
+	@Override
+	public List<ItemVO> orderSpendlist(ItemVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+".orderSpendlist",vo);
+	}
+
+	@Override
+	public void daymoneyinsert(ItemVO vo) throws Exception {
+		session.insert(namespace+".daymoneyinsert",vo);
+	}
+
+	@Override
+	public List<ItemVO> daymoneylist(ItemVO vo) throws Exception {
+		return session.selectList(namespace+".daymoneylist",vo);
+	}
+
+	@Override
+	public void daysaldelete(ItemVO vo) throws Exception {
+		session.delete(namespace+".daysaldelete",vo);
+	}
+
+	@Override
+	public void dayspenddelete(ItemVO vo) throws Exception {
+		session.delete(namespace+".dayspenddelete",vo);
+	}
+
+	@Override
+	public List<ItemVO> daysaltotalpay(ItemVO vo) throws Exception {
+		return session.selectList(namespace+".daysaltotalpay",vo);
+	}
+
+	@Override
+	public List<ItemVO> daysalspendpay(ItemVO vo) throws Exception {
+		return session.selectList(namespace+".daysalspendpay",vo);
+	}
+
+	@Override
+	public String daymoneyCount(ItemVO vo) throws Exception {
+		return session.selectOne(namespace + ".daymoneyCount", vo);
+	}
+	
+	@Override
+	public List<NoticeVO> getNoticeList() throws Exception {
+		return session.selectList(namespace + ".getNoticeList");
+	}
+	
+	@Override
+	public List<ItemVO> getLessItem(MemberVO Mvo) throws Exception {
+		return session.selectList(namespace + ".getLessItem", Mvo);
+	}
+
+	@Override
+	public int getLessItemCount(MemberVO Mvo) throws Exception {
+		return session.selectOne(namespace + ".getLessItemCount", Mvo);
 	}
 }

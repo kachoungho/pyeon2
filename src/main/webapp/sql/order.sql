@@ -1,18 +1,21 @@
 
 select * from orderReq;
 select * from orderReq_temp;
+select * from orderSpend;
 select * from orderReqState where area = '판교';
+
+select * from orderSpend where spend_date between '2016-11-21 13:23:00.0' and '2016-11-21 14:23:00.0';
 
 drop table orderReq;
 drop table orderReq_temp;
 drop table orderReqState;
-
 drop table orderSpend;
 
 select * from ordeerSpend;
 
 
 create table orderReqState(
+<<<<<<< HEAD
 	bno number,
 	item_code varchar2(40) not null, 
 	item_name varchar2(30) not null, 
@@ -21,8 +24,17 @@ create table orderReqState(
 	area varchar2(30) not null,
 	p2_time varchar2(40),
 	state varchar2(30)
+=======
+   bno number,
+   item_code varchar2(40) not null, 
+   item_name varchar2(30) not null, 
+   count number(10), 
+   category varchar2(20), 
+   area varchar2(30) not null,
+   p2_time varchar2(40),
+   state varchar2(30)
+>>>>>>> c5c6bd0af88f330dcd73f93c8902d0cfcfa21666
 );
-
 
 create table orderReq(
 	bno number,
@@ -58,9 +70,9 @@ create table orderSpend(
 	pay number(10),
 	spend_date date,
 	area varchar2(20)
-)
+);
 
-
+drop sequence orderSpend_num;
 
 create sequence orderSpend_num
    increment by 1
@@ -83,3 +95,14 @@ create sequence orderReqState_num
    nocache;
 
 drop sequence orderReqState_num
+
+create table orderReqState(
+   bno number,
+   item_code varchar2(40) not null, 
+   item_name varchar2(30) not null, 
+   count number(10), 
+   category varchar2(20), 
+   area varchar2(30) not null,
+   p2_time varchar2(40),
+   state varchar2(30)
+);

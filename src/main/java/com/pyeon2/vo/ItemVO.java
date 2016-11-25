@@ -1,5 +1,7 @@
 package com.pyeon2.vo;
 
+import java.util.Date;
+
 import com.pyeon2.domain.Criteria;
 
 public class ItemVO {
@@ -22,9 +24,80 @@ public class ItemVO {
 	private String state;
 	private int totalPrice;
 	
+	private Date dayda;
+	private Date sys_time;
+	private String spend_date;
+	private String spend;
+	private String title;
+	private String content;
+	private int paynum;
+	private String year;
+	private String month;
+	private String days;
+	
 
+	public String getYear() {
+		return year;
+	}
+	public void setYear(String year) {
+		this.year = year;
+	}
+	public String getMonth() {
+		return month;
+	}
+	public void setMonth(String month) {
+		this.month = month;
+	}
+	public String getDays() {
+		return days;
+	}
+	public void setDays(String days) {
+		this.days = days;
+	}
 	public String getState() {
 		return state;
+	}
+	public Date getDayda() {
+		return dayda;
+	}
+	public void setDayda(Date dayda) {
+		this.dayda = dayda;
+	}
+	public Date getSys_time() {
+		return sys_time;
+	}
+	public void setSys_time(Date sys_time) {
+		this.sys_time = sys_time;
+	}
+	public String getSpend_date() {
+		return spend_date;
+	}
+	public void setSpend_date(String spend_date) {
+		this.spend_date = spend_date;
+	}
+	public String getSpend() {
+		return spend;
+	}
+	public void setSpend(String spend) {
+		this.spend = spend;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public int getPaynum() {
+		return paynum;
+	}
+	public void setPaynum(int paynum) {
+		this.paynum = paynum;
 	}
 	public void setState(String state) {
 		this.state = state;

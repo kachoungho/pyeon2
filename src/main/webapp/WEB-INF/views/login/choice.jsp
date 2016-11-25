@@ -23,7 +23,7 @@
 </sec:authorize>
 
 <sec:authorize access="hasAuthority('ROLE_MANAGER')">
-	<meta http-equiv="Refresh" content="0; url=pos">
+	<meta http-equiv="Refresh" content="0; url=${pageContext.request.contextPath}/pos?id=${LoingUser}">
 	<script type="text/javascript">
 		alert("지점장 로그인 성공");
 		history.go(1);

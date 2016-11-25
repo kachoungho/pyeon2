@@ -6,6 +6,7 @@ import com.pyeon2.domain.Criteria;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
+import com.pyeon2.vo.NoticeVO;
 import com.pyeon2.vo.SelectSearch;
 import com.pyeon2.vo.UserVO;
 
@@ -20,7 +21,7 @@ public interface PosDAO {
 	public void updateOrderTemp(ItemVO vo) throws Exception;
 
 	// 물품(재고) 전체 리스트 출력 메소드
-	public List<ItemVO> getList(Criteria cri) throws Exception;
+	public List<ItemVO> getList(ItemVO vo) throws Exception;
 
 	// 물품(재고) 이름으로 검색하여 리스트 출력 메소드
 	public List<ItemVO> selectName(SelectSearch ss) throws Exception;
@@ -41,7 +42,7 @@ public interface PosDAO {
 	public List<UserVO> selectmanpay(UserVO vo) throws Exception;
 
 	// 물품(재고) 몰룍 수
-	public int getCount();
+	public int getCount(ItemVO vo);
 
 	// 물품(재고) 선택된 물품 수
 	public int getSelectCount(ItemVO vo);
@@ -150,4 +151,46 @@ public interface PosDAO {
 	//아이템별 가격
 	public int getPrice(ItemVO vo);
 	
+	//orderSpend sequence 추출
+	public int getSpendSequence(ItemVO vo);
+	
+	// 발주 비용 계산전 임시로 컬럼 생성
+	public void orderSpendTemp(ItemVO vo);
+
+	// 일일 수익 가져오기
+	public List<ItemVO> sallist(ItemVO vo) throws Exception;
+
+	// 일일 지출 가져오기
+	public List<ItemVO> orderSpendlist(ItemVO vo) throws Exception;
+
+	// 일일 정산 입력
+	public void daymoneyinsert(ItemVO vo) throws Exception;
+
+	// 일일 정산 리스트 가져오기
+	public List<ItemVO> daymoneylist(ItemVO vo) throws Exception;
+
+	// sal 삭제
+	public void daysaldelete(ItemVO vo) throws Exception;
+
+	// orderSpend 삭제
+	public void dayspenddelete(ItemVO vo) throws Exception;
+
+	// sal 총액
+	public List<ItemVO> daysaltotalpay(ItemVO vo) throws Exception;
+
+	// spend 총액
+	public List<ItemVO> daysalspendpay(ItemVO vo) throws Exception;
+	
+	//daymoney의 총 컬럼 수
+	public String daymoneyCount(ItemVO vo) throws Exception;
+	
+	// 메인 페이지에 공지사항 최근 5개글 띄우기
+	public List<NoticeVO> getNoticeList() throws Exception;
+	
+	// 재고 10개 미만인 물건 불러오기
+	public List<ItemVO> getLessItem(MemberVO Mvo) throws Exception;
+	
+	// 재고 10개 미만인 물건 카운트
+	public int getLessItemCount(MemberVO Mvo) throws Exception;
+
 }

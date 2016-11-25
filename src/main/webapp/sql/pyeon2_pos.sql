@@ -382,12 +382,14 @@ insert into p2_item(bno,item_code,item_name,item_image,price,count,hit,category,
 insert into p2_member(id,pwd,name,position,area) values ('admin','1','admin','admin','판교');
 insert into p2_member(id,pwd,name,position,area) values ('mina','1','mina','manager','판교');
 insert into p2_member(id,pwd,name,position,area) values ('ch','1','choungho','user','판교');
+insert into p2_member(id,pwd,name,position,area) values ('repl','1','lws','manager','야탑');
 
 
 
-insert into roll values('admin', 'ROLE_ADMIN');
-insert into roll values('mina', 'ROLE_MANAGER');
-insert into roll values('ch', 'ROLE_USER');
+insert into role values('admin', 'ROLE_ADMIN');
+insert into role values('mina', 'ROLE_MANAGER');
+insert into role values('ch', 'ROLE_USER');
+insert into role values('repl', 'ROLE_MANAGER');
 
 
 insert into p2_item values('1', 'beer', 'beer', '2200', '20', '0', 'drink', 'pangyo');
@@ -413,7 +415,7 @@ create table p2_gps(
 );
 
 
-CREATE TABLE ROLL(
+CREATE TABLE ROLE(
 	ID VARCHAR2(20 BYTE), 	
 	ROLE_NAME VARCHAR2(30 BYTE)
    ) SEGMENT CREATION IMMEDIATE ;
@@ -519,3 +521,20 @@ create table p2_dayCalc(
 	sys_time date default sysdate,
 	constraint dayCalc_pk  primary key(item_code, area,sys_time)
 );
+drop table p2_daymoney
+create table p2_daymoney(
+	bno number(10),
+	num number(10),
+	title varchar2(20) not null,
+	content varchar2(10) not null,
+	pay number(10) not null,
+	area varchar2(30) not null,
+	year varchar2(20) not null,
+	month varchar2(20) not null,
+	days varchar2(20) not null,
+	dayda date
+);
+create sequence p2_daymoney_num
+   increment by 1
+   start with 1
+   nocache;

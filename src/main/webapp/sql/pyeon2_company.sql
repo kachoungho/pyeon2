@@ -1,10 +1,18 @@
 
 select * from company_item;				-- 본사 재고 테이블
 select * from company_notice;	
+select * from calendarMemo;
 
 drop table company_item;
 drop table company_notice
 drop sequence noticenum
+
+create table calendarMemo(
+	year varchar2(10),
+	month varchar2(10),
+	day varchar2(10),
+	content varchar2(20)
+);
 
 create table company_notice(
 	noticenum number(10) not null,
@@ -159,3 +167,4 @@ insert into company_item(bno, item_code,item_name,item_image,cost,price,count,ca
 'http://callmart-gimpo.com/data/item/1440838900/thumb-OB7ZSE66as6647JeE500ml_300x300.jpg',1300,2600,500,'주류' );
 insert into company_item(bno, item_code,item_name,item_image,cost,price,count,category ) values(company_item_num.nextVal, 'ALCOHOLIC108','CASS FRESH 500ml 캔',
 'http://callmart-gimpo.com/data/item/1440838986/thumb-7Lm07Iqk500ml_300x300.jpg',1300,2600,500,'주류' );
+
