@@ -323,4 +323,34 @@ public class PosDAOImpl implements PosDAO {
 	public int getLessItemCount(MemberVO Mvo) throws Exception {
 		return session.selectOne(namespace + ".getLessItemCount", Mvo);
 	}
+	
+	@Override
+	public List<ItemVO> daycalclist(ItemVO vo) throws Exception {
+		return session.selectList(namespace+".daycalclist",vo);
+	}
+
+	@Override
+	public void daycalclistdelete(ItemVO vo) throws Exception {
+		session.delete(namespace+".daycalclistdelete",vo);
+	}
+
+	@Override
+	public List<ItemVO> daymoneyselect() throws Exception {
+		return session.selectList(namespace+".daymoneyselect");
+	}
+
+	@Override
+	public void saldeletenum(ItemVO vo) throws Exception {
+		session.delete(namespace+".saldeletenum",vo);
+	}
+
+	@Override
+	public void daymoneydeletenum(ItemVO vo) throws Exception {
+		session.delete(namespace+".daymoneydeletenum",vo);
+	}
+
+	@Override
+	public void itemupdate(ItemVO vo) throws Exception {
+		session.update(namespace+".itemupdate",vo);
+	}
 }

@@ -323,5 +323,34 @@ public class PosServiceImpl implements PosService {
 	public int getLessItemCount(MemberVO Mvo) throws Exception {
 		return posDao.getLessItemCount(Mvo);
 	}
+	
+	@Override
+	public List<ItemVO> daycalclist(ItemVO vo) throws Exception {
+		return posDao.daycalclist(vo);
+	}
 
+	@Override
+	public void daycalclistdelete(ItemVO vo) throws Exception {
+		posDao.daycalclistdelete(vo);
+	}
+
+	@Override
+	public List<ItemVO> daymoneyselect() throws Exception {
+		return posDao.daymoneyselect();
+	}
+
+	@Override
+	public void saldeletenum(ItemVO vo) throws Exception {
+		posDao.saldeletenum(vo);
+	}
+
+	@Override
+	public void daymoneydeletenum(ItemVO vo) throws Exception {
+		posDao.daymoneydeletenum(vo);
+	}
+
+	@Override
+	public void itemupdate(ItemVO vo) throws Exception {
+		posDao.itemupdate(vo);
+	}
 }
