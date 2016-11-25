@@ -675,7 +675,6 @@ public class CompanyController {
 		
 		mav.addObject("memoMap", memoMap);
 		//mav.addObject("memoList", list1);
-		System.out.println(memoMap.get("2016117"));
 		try {
 			
 			// 달력 관련 부분

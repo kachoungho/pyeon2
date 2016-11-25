@@ -19,8 +19,7 @@
 
 			<security:jdbc-user-service
 				data-source-ref="dataSource"
-				users-by-username-query="SELECT ID, PWD, 1 ENABLED 
-    	                          FROM P2_MEMBER WHERE ID = ?"
+				users-by-username-query="SELECT ID, PWD, 1 ENABLED FROM P2_MEMBER WHERE ID = ?"
 				authorities-by-username-query="SELECT ID, ROLE_NAME FROM ROLE WHERE ID = ?" />
 
 		</security:authentication-provider>
