@@ -52,6 +52,7 @@ div {
 	<sec:authorize ifAnyGranted="ROLE_USER ,ROLE_MANAGER">
 		<meta http-equiv="Refresh" content="0; url=pos">
 	</sec:authorize>
+	
 	<c:url value="/j_spring_security_check" var="loginURL"></c:url>
 	<form action="${loginURL}" method="post">
 		<div>

@@ -168,3 +168,5 @@ insert into company_item(bno, item_code,item_name,item_image,cost,price,count,ca
 insert into company_item(bno, item_code,item_name,item_image,cost,price,count,category ) values(company_item_num.nextVal, 'ALCOHOLIC108','CASS FRESH 500ml 캔',
 'http://callmart-gimpo.com/data/item/1440838986/thumb-7Lm07Iqk500ml_300x300.jpg',1300,2600,500,'주류' );
 
+
+
