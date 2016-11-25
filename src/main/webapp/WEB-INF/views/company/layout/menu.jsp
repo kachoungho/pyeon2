@@ -37,8 +37,12 @@
 					<a
 						href="${pageContext.request.contextPath}/company/com_notice_list">공
 						지 사 항</a>
+					<a
+						href="${pageContext.request.contextPath}/company/com_importSpendList">매장별 수입/지출</a>
 				</sec:authorize>
-			</div></li>
+			</div>
+			
+		</li>
 
 		<li style="width: 33.33%" class="w3-dropdown-hover"><a href="#">인사
 				관리 <i class="fa fa-caret-down"></i>

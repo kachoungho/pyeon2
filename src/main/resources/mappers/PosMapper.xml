@@ -389,16 +389,16 @@
 		<!-- TO_CHAR(dayda, 'YYYY-MM-dd HH24:mi' ) -->
 		<![CDATA[
 			select
-  				bno, title , content , pay , dayda
+  				bno, title , content , pay , dayda, area
 			from
   				(
   					select
     				/*+INDEX_DESC(tbl_board, pk_board)*/
-    					rownum rn, bno, title , content , pay , dayda
+    					rownum rn, bno, title , content , pay , dayda, area
  					from p2_daymoney
   					where rownum <= #{cri.page} * #{cri.perPageNum}
   					and bno > 0
-  					and area = #{area}
+  					and area like #{area}
   					and year like #{year}
   					and month like #{month}
   				)
@@ -418,12 +418,12 @@
 	
 	<!-- sal 리스트 총액 -->
 	<select id="daysaltotalpay" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
-		select sum(pay) as pay from p2_daymoney where area = #{area} and title = '판매' and year like #{year} and month like #{month}
+		select sum(pay) as pay from p2_daymoney where area like #{area} and title = '판매' and year like #{year} and month like #{month}
 	</select>
 	
 	<!-- sal 리스트 총액 -->
 	<select id="daysalspendpay" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
-		select sum(pay) as pay from p2_daymoney where area = #{area} and title = '지출' and year like #{year} and month like #{month}
+		select sum(pay) as pay from p2_daymoney where area like #{area} and title = '지출' and year like #{year} and month like #{month}
 	</select>
 	
 	<!-- daymoney의 총 컬럼 수 -->
