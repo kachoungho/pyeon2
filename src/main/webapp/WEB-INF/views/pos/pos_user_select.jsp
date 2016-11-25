@@ -62,7 +62,7 @@
 					<td class="date3">${ member.position }</td>
 					<td class="date5">${ member.phone }</td>
 					<td class="date6">${ member.age }</td>
-					<td class="date7">${ member.addr1 }</td>
+					<td class="date7">${ member.address } ${ member.address2 }</td>
 					<td class="date8">${ member.gender }</td>
 					<td class="date5">${ member.area }</td>
 					<td class="date5">${ member.optime }</td>

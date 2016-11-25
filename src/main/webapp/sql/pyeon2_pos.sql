@@ -21,13 +21,16 @@ drop table p2_monthCalc;
 drop table roll;
 drop table p2_local;
 drop table sal;
+
+alter table p2_member drop column post1;
+alter table p2_member drop column post2;
 alter table p2_member drop column addr1;
 alter table p2_member drop column addr2;
 
-alter table p2_member add post1 varchar2(10)
-alter table p2_member add post2 varchar2(10)
-alter table p2_member add addr1 varchar2(200);
-alter table p2_member add addr2 varchar2(200);
+alter table p2_member add postcode varchar2(20);
+alter table p2_member add address varchar2(200);
+alter table p2_member add address2 varchar2(200);
+
 -- 아르바이트생 근무시간 오전/오후/야간 구분
 insert into p2_member values('alba1', 1, 'alba1', 'user', '010', 20, '한국', '남', '정자동', '오전');
 insert into p2_member values('alba2', 1, 'alba2', 'user', '010', 20, '한국', '남', '정자동', '오후');
