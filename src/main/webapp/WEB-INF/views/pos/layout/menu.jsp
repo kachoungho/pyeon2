@@ -4,8 +4,6 @@
 	uri="http://www.springframework.org/security/tags"%>
 <link rel="stylesheet" type="text/css"
 	href="/controller/resources/css/listcss.css">
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">

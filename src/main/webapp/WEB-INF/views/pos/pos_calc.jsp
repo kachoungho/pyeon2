@@ -119,11 +119,10 @@
 <br><br><br>
 
 
-	<input type="text" name="item_code">
+	<input type="text" name="item_code"> <!-- onkeypress='input(1)' -->
 	<input type="hidden" name="area" value="${ area }"> 
-	<input type="button" value = "입력" onclick = 'input(1)'/>
+	<input type="button" value = "입력" onclick='input(1)'/>
 </form>
-
 
 </body>
 </html>

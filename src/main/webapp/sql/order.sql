@@ -20,8 +20,7 @@ create table orderReqState(
 	category varchar2(20), 
 	area varchar2(30) not null,
 	p2_time varchar2(40),
-	state varchar2(30),
-	constraint orderReqState_pk  primary key(item_code, area, state)
+	state varchar2(30)
 );
 
 
