@@ -1,11 +1,19 @@
 package com.pyeon2.vo;
 
+import com.pyeon2.domain.Criteria;
+
 public class NoticeVO {
 	
 	int noticenum;
 	String title,name,position,contant,noticedate;
+	private Criteria cri;
 	
-	
+	public Criteria getCri() {
+		return cri;
+	}
+	public void setCri(Criteria cri) {
+		this.cri = cri;
+	}
 	public int getNoticenum() {
 		return noticenum;
 	}

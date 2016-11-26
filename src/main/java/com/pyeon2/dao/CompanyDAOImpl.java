@@ -122,8 +122,8 @@ public class CompanyDAOImpl implements CompanyDAO{
 	}
 	
 	@Override
-	public List<NoticeVO> getnoticelist() throws Exception {
-		return session.selectList(namespace+".getnoticelist");
+	public List<NoticeVO> getnoticelist(NoticeVO Nvo) throws Exception {
+		return session.selectList(namespace+".getnoticelist", Nvo);
 	}
 
 	@Override
@@ -167,6 +167,7 @@ public class CompanyDAOImpl implements CompanyDAO{
 	}
 
 	@Override
+<<<<<<< HEAD
 	public List<CalendarMemoVO> calendarMemoSelect(CalendarMemoVO vo) throws Exception {
 		return session.selectList(namespace + ".calendarMemoSelect", vo);
 	}
@@ -174,6 +175,10 @@ public class CompanyDAOImpl implements CompanyDAO{
 	@Override
 	public void calendarMemoDelete(CalendarMemoVO vo) throws Exception {
 		session.delete(namespace + ".calendarMemoDelete", vo);
+=======
+	public String getNoticeCount(NoticeVO nvo) throws Exception {
+		return session.selectOne(namespace + ".getNoticeCount", nvo);
+>>>>>>> bac4fd18b2979412a1880206c0f57b9d0c2992cf
 	}
 
 }

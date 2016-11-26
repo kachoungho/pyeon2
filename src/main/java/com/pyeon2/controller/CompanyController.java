@@ -529,20 +529,84 @@ public class CompanyController {
 	}
 	
 	@RequestMapping(value = "company/com_notice_list", method = RequestMethod.GET)
-	public ModelAndView comnotice(HttpServletRequest request ,Model model) throws Exception {
+	public ModelAndView comnotice(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		Criteria cri = new Criteria();
+		NoticeVO nvo = new NoticeVO();
+		PageMaker pageMaker = new PageMaker();
+		int pageNum = 1;
+		int count = 0;
+		String titleSearch = "";
 		
-		List<NoticeVO> list = companyService.getnoticelist();
+		if(request.getParameter("page") != null && !request.getParameter("page").equals("")){
+			pageNum = Integer.parseInt(request.getParameter("page"));
+		}
+		
+		if(request.getParameter("titleSearch") == null){
+			titleSearch = "";
+		} else{
+			titleSearch = request.getParameter("titleSearch");
+		}
+		System.out.println("titleSearch : " + request.getParameter("titleSearch"));	
+		nvo.setTitle("%"+titleSearch+"%");
+		
+		if(companyService.getNoticeCount(nvo) == null){
+			count = 0;
+		} else{
+			count = Integer.parseInt(companyService.getNoticeCount(nvo));
+		}
+		
+		cri.setPage(pageNum);
+		cri.setPerPageNum(10);
+		nvo.setCri(cri);
+		
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(count);
+		
+		List<NoticeVO> list = companyService.getnoticelist(nvo);
+		System.out.println("list : " + list);
 		mav.addObject("result", list);
+		mav.addObject("pageMaker", pageMaker);
+		mav.addObject("page", pageNum);
+		mav.addObject("titleSearch", titleSearch);
 		mav.setViewName(".company.company_notice_list");
+		
 		return mav;
 	}
 	
 	@RequestMapping(value = "company/com_notice_list", method = RequestMethod.POST)
 	public ModelAndView comnoticelist(HttpServletRequest request ,Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		
+		Criteria cri = new Criteria();
+		PageMaker pageMaker = new PageMaker();
 		NoticeVO Nvo = new NoticeVO();
+		
+		int pageNum = 1;
+		int count = 0;
+		String titleSearch = "";
+		
+		if(request.getParameter("titleSearch") == null){
+			titleSearch = "";
+		} else{
+			titleSearch = request.getParameter("titleSearch");
+		}
+			
+		Nvo.setTitle("%"+titleSearch+"%");
+		
+		if(companyService.getNoticeCount(Nvo) == null){
+			count = 0;
+		} else{
+			count = Integer.parseInt(companyService.getNoticeCount(Nvo));
+		}
+		
+		cri.setPage(pageNum);
+		cri.setPerPageNum(10);
+		Nvo.setCri(cri);
+		
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(count);
+		
+		List<NoticeVO> list = companyService.getnoticelist(Nvo);
 		
 		Nvo.setTitle(request.getParameter("title"));
 		Nvo.setName(request.getParameter("name"));
@@ -551,10 +615,12 @@ public class CompanyController {
 		
 		companyService.noticewrite(Nvo);
 		
-		List<NoticeVO> list = companyService.getnoticelist();
-		
 		mav.addObject("result", list);
+		mav.addObject("pageMaker", pageMaker);
+		mav.addObject("page", pageNum);
+		mav.addObject("titleSearch", titleSearch);
 		mav.setViewName(".company.company_notice_list");
+		
 		return mav;
 	}
 	

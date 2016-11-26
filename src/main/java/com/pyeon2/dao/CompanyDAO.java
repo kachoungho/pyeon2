@@ -71,7 +71,7 @@ public interface CompanyDAO {
 	public void updateOrderState(ItemVO vo) throws Exception;
 	
 	//공지사항 리스트 가져오기
-	public List<NoticeVO> getnoticelist() throws Exception; 
+	public List<NoticeVO> getnoticelist(NoticeVO Nvo) throws Exception; 
 		
 	//동지사항 글쓰기
 	public void noticewrite(NoticeVO Nvo) throws Exception;
@@ -97,9 +97,14 @@ public interface CompanyDAO {
 	// 달력 메모 출력
 	public List<CalendarMemoVO> calendarMemoList(CalendarMemoVO vo) throws Exception;
 	
+<<<<<<< HEAD
 	// 달력 메모 WriteForm에 띄우기
 	public List<CalendarMemoVO> calendarMemoSelect(CalendarMemoVO vo) throws Exception;
 	
 	// 달력 메모 삭제하기
 	public void calendarMemoDelete(CalendarMemoVO vo) throws Exception;
+=======
+	//공지사항 컬럼 수
+	public String getNoticeCount(NoticeVO nvo) throws Exception;
+>>>>>>> bac4fd18b2979412a1880206c0f57b9d0c2992cf
 }

@@ -71,7 +71,7 @@ public interface CompanyService {
 	public void updateOrderState(ItemVO vo) throws Exception;
 	
 	//공지사항 리스트 가져오기
-	public List<NoticeVO> getnoticelist() throws Exception; 
+	public List<NoticeVO> getnoticelist(NoticeVO Nvo) throws Exception; 
 		
 	//동지사항 글쓰기
 	public void noticewrite(NoticeVO Nvo) throws Exception;
@@ -103,4 +103,6 @@ public interface CompanyService {
 	// 달력 메모 삭제하기
 	public void calendarMemoDelete(CalendarMemoVO vo) throws Exception;
 
+	//공지사항 컬럼 수
+	public String getNoticeCount(NoticeVO nvo) throws Exception;
 }

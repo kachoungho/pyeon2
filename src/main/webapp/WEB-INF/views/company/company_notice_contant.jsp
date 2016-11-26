@@ -100,7 +100,7 @@
 			<input style="display: block; float: left; margin-right: 20px;"
 				width="40" type="image" src="/controller/resources/images/list.png"
 				alt="button"
-				onclick="document.location.href='${pageContext.request.contextPath}/company/com_notice_list?'" />
+				onclick="document.location.href='${pageContext.request.contextPath}/company/com_notice_list?page=${page }&titleSearch=${titleSearch}'" />
 	<br>
 	<br>
 	<br>

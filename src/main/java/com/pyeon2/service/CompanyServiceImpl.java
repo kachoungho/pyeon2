@@ -120,8 +120,8 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 	
 	@Override
-	public List<NoticeVO> getnoticelist() throws Exception {
-		return comDao.getnoticelist();
+	public List<NoticeVO> getnoticelist(NoticeVO Nvo) throws Exception {
+		return comDao.getnoticelist(Nvo);
 	}
 
 	@Override
@@ -165,6 +165,7 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public List<CalendarMemoVO> calendarMemoSelect(CalendarMemoVO vo) throws Exception {
 		return comDao.calendarMemoSelect(vo);
 	}
@@ -172,6 +173,10 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public void calendarMemoDelete(CalendarMemoVO vo) throws Exception {
 		comDao.calendarMemoDelete(vo);
+=======
+	public String getNoticeCount(NoticeVO nvo) throws Exception {
+		return comDao.getNoticeCount(nvo);
+>>>>>>> bac4fd18b2979412a1880206c0f57b9d0c2992cf
 	}
 
 }
