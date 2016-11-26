@@ -97,7 +97,7 @@
 					</tr>
 				</thead>
 			</table>
-			<table style="width: 630px; background: #f9f9f9">
+			<table style="width: 630px; background: #f9f9f9; TABLE-layout:fixed">
 				<tr height=70>
 					<c:set var="br" value="0" />
 					<c:forEach var="i" begin="1" end="${startDay-1}">
@@ -109,11 +109,12 @@
 					</c:forEach>
 
 					<c:forEach var="a" begin="1" end="${end}" varStatus="idx">
-						<td style="width:90px; vertical-align: top; cursor: pointer;"
+						<td style="width:90px; vertical-align: top; cursor: pointer; overflow:hidden; text-overflow:ellipsis;"
 						onmouseover="this.style.backgroundColor='#F3F5BB'"
 						onmouseout="this.style.backgroundColor='#f9f9f9'"
 						onclick="window.open('${pageContext.request.contextPath}/company/com_calendarMemo?year=${year }&month=${month}&day=${idx.index }',
-						'window','width=350,height=580,left=500,top=50')">
+						'window','width=250,height=330,left=500,top=50')">
+						<nobr>
 							<c:if test="${br==6 || br==13 || br==20 || br==27 || br==34}">
 								<font style="color: blue">${a }<br>${memoMap[idx.index] }</font>
 							</c:if>
@@ -125,6 +126,7 @@
 							</c:if><br>
 							<c:set var="br" value="${br+1}" />
 							<c:if test="${(br%7) == 0 && a != end }">
+						</nobr>
 						</td>
 				</tr>
 				<tr height=70>

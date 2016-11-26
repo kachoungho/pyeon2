@@ -164,4 +164,14 @@ public class CompanyServiceImpl implements CompanyService {
 		return comDao.calendarMemoList(vo);
 	}
 
+	@Override
+	public List<CalendarMemoVO> calendarMemoSelect(CalendarMemoVO vo) throws Exception {
+		return comDao.calendarMemoSelect(vo);
+	}
+
+	@Override
+	public void calendarMemoDelete(CalendarMemoVO vo) throws Exception {
+		comDao.calendarMemoDelete(vo);
+	}
+
 }

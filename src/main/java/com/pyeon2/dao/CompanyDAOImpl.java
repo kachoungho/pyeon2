@@ -166,4 +166,14 @@ public class CompanyDAOImpl implements CompanyDAO{
 		return session.selectList(namespace + ".calendarMemoList", vo);
 	}
 
+	@Override
+	public List<CalendarMemoVO> calendarMemoSelect(CalendarMemoVO vo) throws Exception {
+		return session.selectList(namespace + ".calendarMemoSelect", vo);
+	}
+
+	@Override
+	public void calendarMemoDelete(CalendarMemoVO vo) throws Exception {
+		session.delete(namespace + ".calendarMemoDelete", vo);
+	}
+
 }

@@ -631,17 +631,29 @@ public class CompanyController {
 	//달력 메모 기능(form)
 	@RequestMapping("company/com_calendarMemo")
 	public ModelAndView calendarMemo(HttpServletRequest request) throws Exception{
-		request.setCharacterEncoding("UTF-8");
 		ModelAndView mav = new ModelAndView();
+		CalendarMemoVO vo = new CalendarMemoVO();
 		String year, month, day;
+		List<CalendarMemoVO> content;
+		String content1;
 		year = request.getParameter("year");
 		month = request.getParameter("month");
 		day = request.getParameter("day");
-		System.out.println("year : " + year + ", month : " + month + ", day : " + day);
+		vo.setYear(year);
+		vo.setMonth(month);
+		vo.setDay(day);
+		
+		if (companyService.calendarMemoSelect(vo).size() == 0) {
+			content1 = "";
+		} else {
+			content = companyService.calendarMemoSelect(vo);
+			content1 = content.get(0).getContent();
+		}
 		
 		mav.addObject("year", year);
 		mav.addObject("month", month);
 		mav.addObject("day", day);
+		mav.addObject("content", content1);
 		mav.setViewName("/pop/company_calendarMemoForm");
 		
 		return mav;
@@ -661,7 +673,6 @@ public class CompanyController {
 		month1 = request.getParameter("month");
 		day1 = request.getParameter("day");
 		content = request.getParameter("memo");
-		System.out.println("year : " + year1 + ", month : " + month1 + ", day : " + day1);
 		
 		vo.setYear(year1);
 		vo.setMonth(month1);
@@ -733,6 +744,19 @@ public class CompanyController {
 
 		
 		return mav;
+	}
+	
+	@RequestMapping(value="company/com_calendarMemoDelete", method=RequestMethod.POST)
+	public String calendarMemoDelete(HttpServletRequest request) throws Exception {
+		
+		CalendarMemoVO vo = new CalendarMemoVO();
+		vo.setYear(request.getParameter("year"));
+		vo.setMonth(request.getParameter("month"));
+		vo.setDay(request.getParameter("day"));
+		
+		companyService.calendarMemoDelete(vo);
+
+		return ".company.company_calendarMemoDelete";
 	}
 	
 	//매장별 수입/지출 리스트

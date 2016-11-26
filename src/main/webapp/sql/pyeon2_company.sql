@@ -3,6 +3,7 @@ select * from company_item;				-- 본사 재고 테이블
 select * from company_notice;	
 select * from calendarMemo;
 
+drop table calendarMemo;
 drop table company_item;
 drop table company_notice
 drop sequence noticenum
@@ -11,7 +12,7 @@ create table calendarMemo(
 	year varchar2(10),
 	month varchar2(10),
 	day varchar2(10),
-	content varchar2(20)
+	content varchar2(500)
 );
 
 create table company_notice(

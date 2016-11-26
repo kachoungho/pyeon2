@@ -251,4 +251,14 @@
 	<select id="calendarMemoList" resultType="com.pyeon2.vo.CalendarMemoVO" parameterType="com.pyeon2.vo.CalendarMemoVO">
 		select year, month, day, content from calendarMemo where year = #{year} and month = #{month}
 	</select>
+	
+	<!-- 달력 메모 WriteForm에 띄우기 -->
+	<select id="calendarMemoSelect" resultType="com.pyeon2.vo.CalendarMemoVO" parameterType="com.pyeon2.vo.CalendarMemoVO">
+		select content from calendarMemo where year = #{year} and month = #{month} and day = #{day}
+	</select>
+	
+	<!-- 달력 메모 삭제하기 -->
+	<delete id="calendarMemoDelete" parameterType="com.pyeon2.vo.CalendarMemoVO">
+		delete from calendarMemo where year = #{year} and month = #{month} and day = #{day}
+	</delete>
 </mapper>

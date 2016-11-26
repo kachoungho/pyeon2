@@ -96,5 +96,11 @@ public interface CompanyService {
 	
 	// 달력 메모 출력
 	public List<CalendarMemoVO> calendarMemoList(CalendarMemoVO vo) throws Exception;
+	
+	// 달력 메모 WriteForm에 띄우기
+	public List<CalendarMemoVO> calendarMemoSelect(CalendarMemoVO vo) throws Exception;
+	
+	// 달력 메모 삭제하기
+	public void calendarMemoDelete(CalendarMemoVO vo) throws Exception;
 
 }
