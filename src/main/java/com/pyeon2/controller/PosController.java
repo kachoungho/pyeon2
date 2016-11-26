@@ -857,13 +857,45 @@ public class PosController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "pos/ps_notice_list", method = RequestMethod.GET)
+	@RequestMapping(value = "pos/ps_notice_list")
 	public ModelAndView comnotice(HttpServletRequest request ,Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		NoticeVO nvo = new NoticeVO();
+		Criteria cri = new Criteria();
+		PageMaker pageMaker = new PageMaker();
+		int pageNum = 1;
+		int count = 0;
+		String title = "";
+
+		if(request.getParameter("page") != null && !request.getParameter("page").equals("")){
+			pageNum = Integer.parseInt(request.getParameter("page"));
+		}
 		
-		List<NoticeVO> list = companyService.getnoticelist();
+		if(request.getParameter("title") != null){
+			title = request.getParameter("title");
+		}
+			
+		nvo.setTitle("%"+title+"%");
+		
+		if(companyService.getNoticeCount(nvo) == null){
+			count = 0;
+		} else{
+			count = Integer.parseInt(companyService.getNoticeCount(nvo));
+		}
+		cri.setPage(pageNum);
+		cri.setPerPageNum(10);
+		nvo.setCri(cri);
+
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(count);
+		
+		List<NoticeVO> list = companyService.getnoticelist(nvo);
 		mav.addObject("result", list);
+		mav.addObject("pageMaker", pageMaker);
+		mav.addObject("page", pageNum);
+		mav.addObject("title", title);
 		mav.setViewName(".pos.pos_notice_list");
+		
 		return mav;
 	}
 	

@@ -35,7 +35,7 @@
 					<tr class="odd">
 						<td class="date2">${list.noticenum }</td>
 						<td class="date2"><a
-							href="${pageContext.request.contextPath}/company/com_notice_contant?noticenum=${list.noticenum }">${list.title }</a></td>
+							href="${pageContext.request.contextPath}/company/com_notice_contant?noticenum=${list.noticenum }&page=${page}&titleSearch=${titleSearch}">${list.title }</a></td>
 						<td class="date2">${list.name}</td>
 						<td class="date2">${list.noticedate }</td>
 					</tr>
@@ -47,7 +47,34 @@
 			alt="submit">
 	</form>
 	<br>
+	<div align="center">
+	<form action="${pageContext.request.contextPath}/company/com_notice_list" method="get"> 
+		<input type="text" name="titleSearch">
+		<input type="hidden" name="page" value=${pageNum }>
+		<input type="submit" value="검색">
+	</form>
+	</div>
 	<br>
+	<div>
+		<ul class="com_stock_li-paging">
+			<c:if test="${pageMaker.prev }">
+				<li><a
+					href="${pageContext.request.contextPath}/company/com_notice_list?page=${pageMaker.startPage - 1 }&titleSearch=${titleSearch}">&laquo;</a></li>
+			</c:if>
+
+			<c:forEach begin="${pageMaker.startPage }"
+				end="${pageMaker.endPage }" var="idx">
+				<li
+					<c:out value="${pageMaker.cri.page == idx ? 'class=active' : '' }"/>>
+					<a href="${pageContext.request.contextPath}/company/com_notice_list?page=${idx}&titleSearch=${titleSearch}">${idx }</a>
+				</li>
+			</c:forEach>
+
+			<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
+				<li><a href="${pageContext.request.contextPath}/company/com_notice_list?page=${pageMaker.endPage + 1 }&titleSearch=${titleSearch}">&raquo;</a></li>
+			</c:if>
+		</ul>
+	</div>
 	<br>
 	<br>
 	<br>

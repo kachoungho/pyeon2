@@ -180,8 +180,41 @@
 	</update>
 	
 	<!-- 공지사항 리스트 검색 -->
-	<select id="getnoticelist" resultType="com.pyeon2.vo.NoticeVO">
-		select * from company_notice order by noticenum desc
+	<select id="getnoticelist" resultType="com.pyeon2.vo.NoticeVO" parameterType="com.pyeon2.vo.NoticeVO">
+		<!-- <![CDATA[
+			select
+  				noticenum, title, name, position, contant, noticedate
+			from
+  				(
+  					select
+    				/*+INDEX_DESC(tbl_board, pk_board)*/
+    					rownum rn, noticenum, title, name, position, contant, noticedate
+ 					from company_notice
+  					where 
+  					title like #{title}
+  				)
+			where 
+			rn > (select count(*) from company_notice) - (#{cri.page} * #{cri.perPageNum}) and
+			rn <= (select count(*) from company_notice) - ((#{cri.page} - 1) * #{cri.perPageNum}) order by noticenum desc
+ 		]]> -->
+ 		<![CDATA[
+			select
+  				noticenum, title, name, position, contant, noticedate
+			from
+  				(
+  					select
+    				/*+INDEX_DESC(tbl_board, pk_board)*/
+    					rownum rn, noticenum, title, name, position, contant, noticedate
+ 					from company_notice
+  					where 
+  					rownum <= (select count(*) from company_notice) - ((#{cri.page} - 1) * #{cri.perPageNum})
+  					and noticenum > 0
+  					and title like #{title}
+  				)
+			where 
+			rn > (select count(*) from company_notice) - (#{cri.page} * #{cri.perPageNum}) 
+			order by noticenum desc
+ 		]]>
 	</select>
 	
 	<!-- 공지사항 글쓰기 -->
@@ -250,5 +283,10 @@
 	<!-- 달력 메모 리스트 -->
 	<select id="calendarMemoList" resultType="com.pyeon2.vo.CalendarMemoVO" parameterType="com.pyeon2.vo.CalendarMemoVO">
 		select year, month, day, content from calendarMemo where year = #{year} and month = #{month}
+	</select>
+	
+	<!-- 공지사항 컬럼 수 -->
+	<select id="getNoticeCount" resultType="String" parameterType="com.pyeon2.vo.NoticeVO">
+		select count(*) from company_notice where title like #{title}
 	</select>
 </mapper>

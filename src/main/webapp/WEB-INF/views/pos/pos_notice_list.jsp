@@ -39,6 +39,34 @@
 		</c:forEach>
 	</table>
 	<br>
+	<div align="center">
+	<form action="${pageContext.request.contextPath}/pos/ps_notice_list"> 
+		<input type="text" name="title">
+		<input type="hidden" name="page" value=${pageNum }>
+		<input type="submit" value="검색">
+	</form>
+	</div>
+	<br>
+	<div>
+		<ul class="com_stock_li-paging">
+			<c:if test="${pageMaker.prev }">
+				<li><a
+					href="${pageContext.request.contextPath}/pos/ps_notice_list?page=${pageMaker.startPage - 1 }&title=${title}">&laquo;</a></li>
+			</c:if>
+
+			<c:forEach begin="${pageMaker.startPage }"
+				end="${pageMaker.endPage }" var="idx">
+				<li
+					<c:out value="${pageMaker.cri.page == idx ? 'class=active' : '' }"/>>
+					<a href="${pageContext.request.contextPath}/pos/ps_notice_list?page=${idx}&title=${title}">${idx }</a>
+				</li>
+			</c:forEach>
+
+			<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
+				<li><a href="${pageContext.request.contextPath}/pos/ps_notice_list?page=${pageMaker.endPage + 1 }&title=${title}">&raquo;</a></li>
+			</c:if>
+		</ul>
+	</div>
 	<br>
 	<br>
 	<br>
