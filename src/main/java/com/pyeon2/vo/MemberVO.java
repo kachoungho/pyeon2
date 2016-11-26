@@ -8,7 +8,9 @@ public class MemberVO {
 	private String position;
 	private String phone;
 	private String age;
+	private String postcode;
 	private String address;
+	private String address2;
 	private String gender;
 	private String area;
 	private String role_name;
@@ -50,11 +52,23 @@ public class MemberVO {
 	public void setAge(String age) {
 		this.age = age;
 	}
+	public String getPostcode() {
+		return postcode;
+	}
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
 	public String getAddress() {
 		return address;
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public String getAddress2() {
+		return address2;
+	}
+	public void setAddress2(String address2) {
+		this.address2 = address2;
 	}
 	public String getGender() {
 		return gender;

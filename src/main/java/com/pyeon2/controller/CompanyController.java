@@ -631,6 +631,7 @@ public class CompanyController {
 	//달력 메모 기능(form)
 	@RequestMapping("company/com_calendarMemo")
 	public ModelAndView calendarMemo(HttpServletRequest request) throws Exception{
+		request.setCharacterEncoding("UTF-8");
 		ModelAndView mav = new ModelAndView();
 		String year, month, day;
 		year = request.getParameter("year");
@@ -641,7 +642,7 @@ public class CompanyController {
 		mav.addObject("year", year);
 		mav.addObject("month", month);
 		mav.addObject("day", day);
-		mav.setViewName(".company.company_calendarMemoForm");
+		mav.setViewName("/pop/company_calendarMemoForm");
 		
 		return mav;
 	}
@@ -649,6 +650,7 @@ public class CompanyController {
 	//달력 메모 기능(insert)
 	@RequestMapping("company/com_calendarMemoInsert")
 	public ModelAndView calendarMemoInsert(HttpServletRequest request) throws Exception{
+		request.setCharacterEncoding("UTF-8");
 		ModelAndView mav = new ModelAndView();
 		CalendarMemoVO vo = new CalendarMemoVO();
 		List<NoticeVO> list;
@@ -723,12 +725,129 @@ public class CompanyController {
 			mav.addObject("result", list);
 			mav.addObject("count", count);
 			// 미승인건 관련 부분 end
-			mav.setViewName(".company.company_main");
+			mav.setViewName(".company.company_calendarMemoInsert");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+		
+		return mav;
+	}
+	
+	//매장별 수입/지출 리스트
+	@RequestMapping("company/com_importSpendList")
+	public ModelAndView importSpendList(HttpServletRequest request) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		String area;
+		int pageNum = 1;
+		if(request.getParameter("area") == null){
+			area = "";
+		}
+		else {
+			area = request.getParameter("area");
+		}
+		
+		ItemVO vo = new ItemVO();
+		vo.setArea("%"+area+"%");
+		String year = "";
+		String month = "";
+		//String days = "";
+		int pay1 = 0;
+		int pay2 = 0;
+
+		int count;
+		if(request.getParameter("page") != null && !request.getParameter("page").equals(null)){
+			pageNum = Integer.parseInt(request.getParameter("page"));
+		}
+		
+		if((request.getParameter("year") == null) && (request.getParameter("month") == null)) {
+			year = "";
+			month = "";
+			//days = "";
+		}
+		else{
+			year = request.getParameter("year");
+			month = request.getParameter("month");
+			//days = request.getParameter("days");
+		}
+		
+		vo.setYear("%"+year+"%");
+		vo.setMonth("%"+month+"%");
+		//vo.setDays("%"+days+"%");
+		
+		Criteria cri = new Criteria();
+		cri.setPage(pageNum);
+		cri.setPerPageNum(7);
+		if(posService.daymoneyCount(vo) == null){
+			count = 0;
+		}
+		else {
+			count = Integer.parseInt(posService.daymoneyCount(vo));
+		}
+		
+		vo.setCri(cri);
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(count);
+				
+		List<ItemVO> list1 = posService.sallist(vo);
+		for(int i = 0 ; i < list1.size() ; i++){
+			vo.setPaynum(list1.get(i).getPaynum());
+			vo.setTitle(list1.get(i).getSold());
+			vo.setContent("수입");
+			vo.setPay(list1.get(i).getPay());
+			vo.setP2_time(list1.get(i).getSal_time());
+			System.out.println("p2_time : " + list1.get(i).getSal_time());
+			posService.daymoneyinsert(vo);
+		}
+		if(posService.daysaltotalpay(vo).get(0) == null){
+			pay1 = 0;
+		}
+		else {
+			pay1 = posService.daysaltotalpay(vo).get(0).getPay();
+		}
+		
+		posService.daysaldelete(vo);
+		System.out.println("pay1 : " + pay1);
+		
+		List<ItemVO> list2 = posService.orderSpendlist(vo);
+		for(int i = 0 ; i < list2.size() ; i++){
+			vo.setPaynum(0);
+			vo.setTitle(list2.get(i).getSpend());
+			vo.setContent("지출");
+			vo.setPay(list2.get(i).getPay());
+			vo.setP2_time(list2.get(i).getSpend_date());
+			System.out.println("p2_time : " + list2.get(i).getSal_time());
+			posService.daymoneyinsert(vo);
+		}
+		if(posService.daysalspendpay(vo).get(0) == null){
+			pay2 = 0;
+		}
+		else {
+			pay2 = posService.daysalspendpay(vo).get(0).getPay();
+		}
+		
+		posService.dayspenddelete(vo);
+		System.out.println("pay2 : " + pay2);
+
+		
+		int total = pay1 - pay2;
+
+		List<ItemVO> list3 = posService.daymoneylist(vo);
+
+		
+		mav.addObject("pay1",pay1);
+		mav.addObject("pay2",pay2);
+		mav.addObject("total",total);
+		mav.addObject("result",list3);
+		mav.addObject("area", area);
+		mav.addObject("page", pageNum);
+		mav.addObject("pageMaker", pageMaker);
+		mav.addObject("year", year);
+		mav.addObject("month", month);
+		mav.setViewName(".company.company_importSpendList");
 		
 		return mav;
 	}

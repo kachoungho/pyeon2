@@ -144,7 +144,9 @@
 	<!-- 아르바이트생 정보 수정하기 -->
 	<update id="updateUser" parameterType="com.pyeon2.vo.MemberVO">
 		update p2_member set pwd = #{pwd}, name = #{name}, 
-		phone = #{phone}, age = #{age}, address = #{address}, optime = #{optime}
+		phone = #{phone}, age = #{age}, 
+		postcode = #{postcode}, address = #{address}, address2 = #{address2}, 
+		optime = #{optime}
 		where id = #{id}
 	</update>
 	
@@ -165,8 +167,9 @@
 	
 	<!-- 아르바이트생 정보 입력 -->
 	<insert id="insertUser" parameterType="com.pyeon2.vo.MemberVO">
-		insert into p2_member(id, pwd, name, position, phone, age, address, gender, area, optime)
-		values(#{id}, #{pwd}, #{name}, #{position}, #{phone}, #{age}, #{address}, #{gender}, #{area}, #{optime})
+		insert into p2_member(id, pwd, name, position, phone, age, postcode, address, address2, gender, area, optime)
+		values(#{id}, #{pwd}, #{name}, #{position}, #{phone}, #{age}, 
+		#{postcode}, #{address}, #{address2}, #{gender}, #{area}, #{optime})
 	</insert>
 	
 	<!-- 입력된 정보를 바탕으로 권한 자동으로 주기 -->
@@ -389,16 +392,16 @@
 		<!-- TO_CHAR(dayda, 'YYYY-MM-dd HH24:mi' ) -->
 		<![CDATA[
 			select
-  				bno, title , content , pay , dayda
+  				bno, title , content , pay , dayda, area , num
 			from
   				(
   					select
     				/*+INDEX_DESC(tbl_board, pk_board)*/
-    					rownum rn, bno, title , content , pay , dayda
+    					rownum rn, bno, title , content , pay , dayda, area , num
  					from p2_daymoney
   					where rownum <= #{cri.page} * #{cri.perPageNum}
   					and bno > 0
-  					and area = #{area}
+  					and area like #{area}
   					and year like #{year}
   					and month like #{month}
   				)
@@ -418,12 +421,12 @@
 	
 	<!-- sal 리스트 총액 -->
 	<select id="daysaltotalpay" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
-		select sum(pay) as pay from p2_daymoney where area = #{area} and title = '판매' and year like #{year} and month like #{month}
+		select sum(pay) as pay from p2_daymoney where area like #{area} and title = '판매' and year like #{year} and month like #{month}
 	</select>
 	
 	<!-- sal 리스트 총액 -->
 	<select id="daysalspendpay" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
-		select sum(pay) as pay from p2_daymoney where area = #{area} and title = '지출' and year like #{year} and month like #{month}
+		select sum(pay) as pay from p2_daymoney where area like #{area} and title = '지출' and year like #{year} and month like #{month}
 	</select>
 	
 	<!-- daymoney의 총 컬럼 수 -->
@@ -456,5 +459,35 @@
 		]]>
 		AND AREA = #{area}
 	</select>
+	
+	<!-- daycalc 리스트 가져오기 -->
+	<select id="daycalclist" parameterType="com.pyeon2.vo.ItemVO" resultType="com.pyeon2.vo.ItemVO">
+		select item_code , item_name , count , price from p2_daycalc where area = #{area} and num = #{paynum}
+	</select>
+	
+	<!-- 환불목록 삭제 -->
+	<delete id="daycalclistdelete" parameterType="com.pyeon2.vo.ItemVO">
+		delete from p2_daycalc where area = #{area} and num = #{paynum}
+	</delete>
+	
+	<!-- daymoney 리스트가져오기 -->
+	<select id="daymoneyselect" resultType="com.pyeon2.vo.ItemVO">
+		select num from p2_daymoney 
+	</select>
+	
+	<!-- sal num으로 지우기 -->
+	<delete id="saldeletenum" parameterType="com.pyeon2.vo.ItemVO">
+		delete from sal where area = #{area} and paynum = #{paynum}
+	</delete>
+	
+	<!-- p2_daymoney num으로 지우기 -->
+	<delete id="daymoneydeletenum" parameterType="com.pyeon2.vo.ItemVO">
+		delete from p2_daymoney where area = #{area} and num = #{paynum}
+	</delete>
+	
+	<!-- item_update -->
+	<update id="itemupdate">
+		update p2_item set count = count + #{count} , hit = hit - #{count} where area = #{area} and item_code = #{item_code}
+	</update>
 	
 </mapper>

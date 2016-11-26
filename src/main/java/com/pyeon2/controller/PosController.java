@@ -1070,4 +1070,72 @@ public class PosController {
 		mav.setViewName(".pos.pos_daymoneyconfirm");
 		return mav;
 	}
+	
+	@RequestMapping(value = "pop_calcrefurnd" , method = RequestMethod.GET)
+	public ModelAndView calcrefurnd(HttpServletRequest request,Model model) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		
+		ItemVO vo = new ItemVO();
+		vo.setId(request.getParameter("id"));
+		String area = posService.areaserch(vo);
+		mav.addObject("area",area);
+		mav.setViewName("pop/pop_calcrefurnd");
+		return mav;
+	}
+	
+	@RequestMapping(value = "pop_calcrefurndlist" , method = RequestMethod.POST)
+	public ModelAndView calcrefurndlist(HttpServletRequest request,Model model) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		
+		ItemVO vo = new ItemVO();
+		vo.setPaynum(Integer.parseInt(request.getParameter("num")));
+		
+		vo.setArea(request.getParameter("area"));
+		List<ItemVO> list = posService.daycalclist(vo);
+		
+		mav.addObject("num",Integer.parseInt(request.getParameter("num")));
+		mav.addObject("area",request.getParameter("area"));
+		mav.addObject("result" , list);
+		mav.setViewName("pop/pop_calcrefurndlist");
+		return mav;
+	}
+	
+	@RequestMapping(value = "pop_calcrefurnd_delete" , method = RequestMethod.GET)
+	public ModelAndView calcrefurnddelete(HttpServletRequest request,Model model) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		
+		ItemVO vo = new ItemVO();
+		
+		vo.setPaynum(Integer.parseInt(request.getParameter("num")));
+		vo.setArea(request.getParameter("area"));
+		
+		List<ItemVO> list = posService.sallist(vo);
+		for(int i = 0 ; i < list.size() ; i++){
+			if(list.get(i).getPaynum()== vo.getPaynum()){
+				posService.saldeletenum(vo);
+			}
+		}
+		
+
+		List<ItemVO> list1 = posService.daymoneyselect();
+		for(int i = 0 ; i < list1.size() ; i++){
+			if(list1.get(i).getNum() == vo.getPaynum()){
+				posService.daymoneydeletenum(vo);
+			}
+		}
+		
+
+		List<ItemVO> list2 = posService.daycalclist(vo);
+		for(int i = 0 ; i < list2.size() ; i++){
+			vo.setItem_code(list2.get(i).getItem_code());
+			vo.setCount(list2.get(i).getCount());
+			
+			posService.itemupdate(vo);
+		}
+
+		posService.daycalclistdelete(vo);
+		
+		mav.setViewName("pop/pop_calcrefurnd_delete");
+		return mav;
+	}
 }

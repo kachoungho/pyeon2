@@ -96,4 +96,5 @@ public interface CompanyService {
 	
 	// 달력 메모 출력
 	public List<CalendarMemoVO> calendarMemoList(CalendarMemoVO vo) throws Exception;
+
 }

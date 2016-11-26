@@ -22,7 +22,6 @@
 		}
 	}
 </script>
-
 <title>관리자/지점장 선택 후 리스트 출력</title>
 </head>
 <body>
@@ -37,7 +36,7 @@
 			src="/controller/resources/images/choice.png" alt="submit">
 	</form>
 
-	<table class="ex1">
+	<table class="ex1" id="listTable">
 		<thead>
 			<tr>
 				<th scope="col">아이디</th>
@@ -61,7 +60,7 @@
 					<td class="date3">${ member.position }</td>
 					<td class="date5">${ member.phone }</td>
 					<td class="date6">${ member.age }</td>
-					<td class="date7">${ member.address }</td>
+					<td class="date7">${ member.address } ${ member.address2 }</td>
 					<td class="date8">${ member.gender }</td>
 					<td class="date5">${ member.area }</td>
 					<td class="date8"><input class="button_center" width="40"

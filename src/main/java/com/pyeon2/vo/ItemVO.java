@@ -34,7 +34,7 @@ public class ItemVO {
 	private String year;
 	private String month;
 	private String days;
-	
+	private int num;
 
 	public String getYear() {
 		return year;
@@ -205,5 +205,10 @@ public class ItemVO {
 	public void setSal_time(String sal_time) {
 		this.sal_time = sal_time;
 	}
-		
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 }

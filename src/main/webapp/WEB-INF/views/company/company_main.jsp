@@ -1,13 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <link rel="stylesheet" type="text/css"
 	href="/controller/resources/css/listcss.css">
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>º»»ç Ã¹ ÆäÀÌÁö</title>
+<title>ë³¸ì‚¬ ì²« í˜ì´ì§€</title>
 </head>
 <body>
 <c:out value="${memoMap['7'] }" />
@@ -16,9 +14,9 @@
 			<thead>
 				<tr>
 					<th style="text-align: left; background-color: #FFFFFF;"><font
-						color="#054A75"> ¹ßÁÖ ¹Ì½ÂÀÎ°Ç</font>
+						color="#054A75"> ë°œì£¼ ë¯¸ìŠ¹ì¸ê±´</font>
 						<c:if test="${ count != 0 }">
-						<font color=red> ( ${ count } °Ç ) </font>
+						<font color=red> ( ${ count } ê±´ ) </font>
 						</c:if>
 						<input
 						style="float: right; margin-right: 20px;" type="image"
@@ -31,12 +29,12 @@
 		<table class="ex1">
 			<thead>
 				<tr class="odd">
-					<th scope="col">Á¦Ç°¸í</th>
-					<th scope="col">¼ö·®</th>
-					<th scope="col">Ä«Å×°í¸®</th>
-					<th scope="col">ÁöÁ¡</th>
-					<th scope="col">¹ßÁÖ½Ã°£</th>
-					<th scope="col">»óÅÂ</th>
+					<th scope="col">ì œí’ˆëª…</th>
+					<th scope="col">ìˆ˜ëŸ‰</th>
+					<th scope="col">ì¹´í…Œê³ ë¦¬</th>
+					<th scope="col">ì§€ì </th>
+					<th scope="col">ë°œì£¼ì‹œê°„</th>
+					<th scope="col">ìƒíƒœ</th>
 				</tr>
 			</thead>
 
@@ -57,45 +55,45 @@
 
 	<div style="float: left; width: 50%;">
 		<center>
-			<input type=text name=memoYear size=2 value="${currentYear}">³â
-			<input type=text name=memoMonth size=2 value="${currentMonth+1}">¿ù
-			<input type=text name=memoDay size=2 value="${currentDate}">ÀÏ
+			<input type=text name=memoYear size=2 value="${currentYear}">ë…„
+			<input type=text name=memoMonth size=2 value="${currentMonth+1}">ì›”
+			<input type=text name=memoDay size=2 value="${currentDate}">ì¼
 		</center>
 		<center>
 			<table border=0>
 				<tr>
 					<td align=center width=200>
-						<!-- ³â µµ--> <a
-						href="${pageContext.request.contextPath}/company?year=${year-1}&month=${month}">¢¸</a>
-						${year}³â <a
-						href="${pageContext.request.contextPath}/company?year=${year+1}&month=${month}">¢º</a>
-						<!-- ¿ù --> <a
-						href="${pageContext.request.contextPath}/company?year=${year}&month=${month-1}">¢¸</a>
-						${month+1}¿ù <a
-						href="${pageContext.request.contextPath}/company?year=${year}&month=${month+1}">¢º</a>
+						<!-- ë…„ ë„--> <a
+						href="${pageContext.request.contextPath}/company?year=${year-1}&month=${month}">â—€</a>
+						${year}ë…„ <a
+						href="${pageContext.request.contextPath}/company?year=${year+1}&month=${month}">â–¶</a>
+						<!-- ì›” --> <a
+						href="${pageContext.request.contextPath}/company?year=${year}&month=${month-1}">â—€</a>
+						${month+1}ì›” <a
+						href="${pageContext.request.contextPath}/company?year=${year}&month=${month+1}">â–¶</a>
 					</td>
 <%-- 					<td align=right width=200>${currentYear}-${currentMonth+1}-${currentDate}</td> --%>
 				</tr>
 			</table>
 			
 			<table class="ex1" style="width: 630px">
-				<!-- ´Ş·Â ºÎºĞ -->
+				<!-- ë‹¬ë ¥ ë¶€ë¶„ -->
 				<thead>
 					<tr style="text-align: center;" class="odd">
-						<th width=70 style="color: red; text-align: center;" scope="col">ÀÏ</th>
-						<!-- ÀÏ=1 -->
-						<th width=70 style="text-align: center;" scope="col">¿ù</th>
-						<!-- ¿ù=2 -->
-						<th width=70 style="text-align: center;" scope="col">È­</th>
-						<!-- È­=3 -->
-						<th width=70 style="text-align: center;" scope="col">¼ö</th>
-						<!-- ¼ö=4 -->
-						<th width=70 style="text-align: center;" scope="col">¸ñ</th>
-						<!-- ¸ñ=5 -->
-						<th width=70 style="text-align: center;" scope="col">±İ</th>
-						<!-- ±İ=6 -->
-						<th width=70 style="color: blue; text-align: center;" scope="col">Åä</th>
-						<!-- Åä=7 -->
+						<th width=70 style="color: red; text-align: center;" scope="col">ì¼</th>
+						<!-- ì¼=1 -->
+						<th width=70 style="text-align: center;" scope="col">ì›”</th>
+						<!-- ì›”=2 -->
+						<th width=70 style="text-align: center;" scope="col">í™”</th>
+						<!-- í™”=3 -->
+						<th width=70 style="text-align: center;" scope="col">ìˆ˜</th>
+						<!-- ìˆ˜=4 -->
+						<th width=70 style="text-align: center;" scope="col">ëª©</th>
+						<!-- ëª©=5 -->
+						<th width=70 style="text-align: center;" scope="col">ê¸ˆ</th>
+						<!-- ê¸ˆ=6 -->
+						<th width=70 style="color: blue; text-align: center;" scope="col">í† </th>
+						<!-- í† =7 -->
 					</tr>
 				</thead>
 			</table>
@@ -114,8 +112,8 @@
 						<td style="width:90px; vertical-align: top; cursor: pointer;"
 						onmouseover="this.style.backgroundColor='#F3F5BB'"
 						onmouseout="this.style.backgroundColor='#f9f9f9'"
-						onclick="document.location.href='${pageContext.request.contextPath}/company/com_calendarMemo?year=${year }&month=${month}&day=${idx.index }'">
-							
+						onclick="window.open('${pageContext.request.contextPath}/company/com_calendarMemo?year=${year }&month=${month}&day=${idx.index }',
+						'window','width=350,height=580,left=500,top=50')">
 							<c:if test="${br==6 || br==13 || br==20 || br==27 || br==34}">
 								<font style="color: blue">${a }<br>${memoMap[idx.index] }</font>
 							</c:if>
@@ -145,7 +143,7 @@
 			</table>
 			<br> <br> <br>
 		</center>
-		<script>
+<!-- 		<script>
 			// tooltip demo
 			$('.tooltip-demo').tooltip({
 				selector : "[data-toggle=tooltip]",
@@ -153,7 +151,7 @@
 			})
 			// popover demo
 			$("[data-toggle=popover]").popover()
-		</script>
+		</script> -->
 	</div>
 </body>
 </html>

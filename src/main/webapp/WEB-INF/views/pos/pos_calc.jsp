@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.*, com.pyeon2.vo.*" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -31,6 +32,7 @@
 
 </head>
 <body>
+<sec:authentication property="name" var="LoingUser" />
 <form method="post" name=daily id = daily>
 <table>
 	<tr>
@@ -113,6 +115,17 @@
 		</td>
 		<td align="right">
 			<input type="button" value = "계산" onclick = 'input(3)'>
+		</td>
+	</tr> 
+	
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td align="right">
+			 <input type="button" value="환불" onclick="window.open('${pageContext.request.contextPath}/pop_calcrefurnd?id=${LoingUser}','window','width=350,height=580,left=500,top=50')">
 		</td>
 	</tr> 
 </table>

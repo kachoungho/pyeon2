@@ -163,4 +163,5 @@ public class CompanyServiceImpl implements CompanyService {
 	public List<CalendarMemoVO> calendarMemoList(CalendarMemoVO vo) throws Exception {
 		return comDao.calendarMemoList(vo);
 	}
+
 }
