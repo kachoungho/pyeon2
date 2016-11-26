@@ -11,11 +11,9 @@
 
 <style type="text/css">
 .table_write {
-	/* margin-top: 50px; */
 	margin-left: auto;
 	margin-right: auto;
 	width: 50%;
-	/* margin: 0 auto; */
 	text-align: center;
 	border-collapse: collapse;
 	font-family: 'Jeju Gothic', sans-serif;

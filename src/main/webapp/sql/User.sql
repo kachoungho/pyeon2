@@ -19,9 +19,9 @@ drop table p2_user;
 drop table p2_userMoney;
 
 
-
-
-
+alter table p2_member drop column address;
+alter table p2_member add addr1 varchar2(200);
+alter table p2_member add addr2 varchar2(200);
 
 create table p2_user(
 	userid varchar2(30),
