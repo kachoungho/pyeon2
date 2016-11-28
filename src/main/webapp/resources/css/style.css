@@ -54,6 +54,18 @@
 	padding-right: 50px;
 }
 
+.ipt_insert {
+	margin-left: 20px;
+	height: 35px;
+	border: none;
+	border-right: 1px solid #009688;
+	border-bottom: 1px solid #009688;
+	width: 250px;
+	font-family: 'Jeju Gothic', sans-serif;
+	font-size: 15px;
+	padding-right: 50px;
+}
+
 #ipt_insert2 {
 	margin-left: 20px;
 	height: 35px;
