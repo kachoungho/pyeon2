@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<sec:authentication property="name" var="LoingUser" />
 	<form action="com_companyStock2" method="POST">
 		<table>
 			<tr>
@@ -38,6 +40,7 @@
 				</td>
 			</tr>
 		</table>
+		<input type="hidden" name="id" value="${LoingUser}">
 		<input type="submit" value="Ãß°¡">
 	</form>
 </body>
