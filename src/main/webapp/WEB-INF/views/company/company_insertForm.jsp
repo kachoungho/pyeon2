@@ -50,13 +50,33 @@
 				<th>
 				<font face="Jeju Gothic">
 				
-				<input type="text" id="postcode" placeholder="우편번호" name="postcode">
+				<input type="text" id="postcode" placeholder="우편번호" name="postcode"
+				style="margin-left: 20px;
+				border: none;
+				border-right: 1px solid #009688;
+				border-bottom: 1px solid #009688;
+				width: 80px;
+				font-family: 'Jeju Gothic', sans-serif;
+				">
 				<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-				<input type="text" id="address" placeholder="주소" name="address">
-				<input type="text" id="address2" placeholder="상세주소" name="address2">
+				<input type="text" id="address" placeholder="주소" name="address"
+				style="margin-left: 20px;
+				border: none;
+				border-right: 1px solid #009688;
+				border-bottom: 1px solid #009688;
+				width: 300px;
+				font-family: 'Jeju Gothic', sans-serif;
+				">
+				<input type="text" id="address2" placeholder="상세주소" name="address2"
+				style="margin-left: 20px;
+				border: none;
+				border-right: 1px solid #009688;
+				border-bottom: 1px solid #009688;
+				width: 300px;
+				font-family: 'Jeju Gothic', sans-serif;
+				">
 
 				</font>
-				</th>
 			</tr>
 			<tr>
 				<th id="tr_insert"><img class="img_insert" src="/controller/resources/images/gender.png">성별</th>
