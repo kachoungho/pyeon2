@@ -10,7 +10,7 @@
 </head>
 <body>
 	<form action="${pageContext.request.contextPath}/company/com_insert"
-		method="post">
+		method="post" name="submit">
 
 		<table id="tb_insert">
 			<tr>
@@ -24,7 +24,7 @@
 			</tr>
 			<tr>
 				<th id="tr2_insert"><img class="img_insert" src="/controller/resources/images/pwd.png">비밀번호</th>
-				<th>&nbsp;&nbsp;<input class="ipt_insert" type="password" name="pwd" placeholder="비밀번호 입력"></th>
+				<th>&nbsp;&nbsp;<input class="ipt_insert" type="password" id="pwd" name="pwd" placeholder="비밀번호 입력"></th>
 			</tr>
 			<tr>
 				<th id="tr2_insert"><img class="img_insert" src="/controller/resources/images/name.png">이름</th>
@@ -55,8 +55,8 @@
 			<tr>
 				<th id="tr2_insert"><img class="img_insert" src="/controller/resources/images/gender.png">성별</th>
 				<th>&nbsp;&nbsp;<select id="slt_insert" name="gender">
-						<option value="man">남자</option>
-						<option value="woman">여자</option>
+						<option value="남자">남자</option>
+						<option value="여자">여자</option>
 				</select></th>
 			</tr>
 			<tr>
@@ -67,7 +67,7 @@
 			<tr>
 				<th></th>
 				<th><input id="btn_insert" width="40" type="image"
-					src="/controller/resources/images/check.png" alt="submit">
+					src="/controller/resources/images/check.png" alt="submit" onclick="checkPW();return false;">
 				</th>
 			</tr>
 		</table>
@@ -75,6 +75,19 @@
 	
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
+
+function checkPW() {
+	
+	var check = document.getElementById('pwd').value;
+	
+	if((check == null) || (check == "")) {
+		alert("비밀번호를 입력해주세요");
+		return false;
+	} else {
+		form.submit.submit();
+	}
+}
+
 function execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {

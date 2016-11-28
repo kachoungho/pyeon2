@@ -11,7 +11,7 @@
 </head>
 <body>
 	<form action="${pageContext.request.contextPath}/pos/ps_user_insert"
-		method="post">
+		method="post" name="submit">
 		<table id="tb_insert">
 			<tr>
 				<th colspan="2"><label id="lb_insert"> 직원 정보 입력 </label></th>
@@ -24,7 +24,7 @@
 			<tr>
 				<th id="tr2_insert"><img class="img_insert"
 					src="/controller/resources/images/pwd.png">비밀번호</th>
-				<th><input class="ipt_insert" type="password" name="pwd" placeholder="비밀번호 입력"></th>
+				<th><input class="ipt_insert" type="password" id="pwd" name="pwd" placeholder="비밀번호 입력"></th>
 			</tr>
 			<tr>
 				<th id="tr2_insert"><img class="img_insert"
@@ -87,13 +87,27 @@
 			<tr>
 				<th></th>
 				<th><input id="button_insert" width="40" type="image"
-					src="/controller/resources/images/check.png" alt="submit">
+					src="/controller/resources/images/check.png" alt="submit" onclick="checkPW();return false;">
 				</th>
 			</tr>
 		</table>
 	</form>
+
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
+
+function checkPW() {
+	
+	var check = document.getElementById('pwd').value;
+	
+	if((check == null) || (check == "")) {
+		alert("비밀번호를 입력해주세요");
+		return false;
+	} else {
+		form.submit.submit();
+	}
+}
+
 function execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {

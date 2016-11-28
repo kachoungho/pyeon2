@@ -12,7 +12,7 @@
 <body>
 
 	<form action="${pageContext.request.contextPath}/company/com_update"
-		method="POST">
+		method="POST" name="submit">
 		<c:forEach items="${ list }" var="list">
 			<table id="tb_insert">
 				<tr>
@@ -28,7 +28,7 @@
 					<th id="tr2_insert"><img class="img_insert"
 						src="/controller/resources/images/pwd.png">비밀번호</th>
 					<th><input class="ipt_insert" type="password" name="pwd"
-						value="${ list.pwd }"></th>
+						 id="pwd" value="${ list.pwd }"></th>
 				</tr>
 				<tr>
 					<th id="tr2_insert"><img class="img_insert"
@@ -57,12 +57,11 @@
 				<tr>
 					<th id="tr2_insert"><img class="img_insert"
 						src="/controller/resources/images/address.png">주소</th>
-					<th><font face="Jeju Gothic"> <input class="ipt_insert2" type="text"
-							id="postcode" placeholder="우편번호 입력" name="postcode"> <input class="submit"
-							type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-							<input class="ipt_insert" type="text" id="address" placeholder="주소 입력" name="address">
-							<input class="ipt_insert" type="text" id="address2" placeholder="상세주소 입력"
-							name="address2">
+					<th><font face="Jeju Gothic">
+				<input class="ipt_insert2" type="text" id="postcode" placeholder="우편번호" name="postcode" value="${postcode}">
+				<input class="submit" type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+				<input class="ipt_insert" type="text" id="address" placeholder="주소" name="address" value="${address}">
+				<input class="ipt_insert" type="text" id="address2" placeholder="상세주소" name="address2" value="${address2}">
 
 					</font></th>
 				</tr>
@@ -82,7 +81,7 @@
 				<tr>
 					<th></th>
 					<th><input id="button_insert" width="40" type="image"
-						src="/controller/resources/images/check.png" alt="submit">
+						src="/controller/resources/images/check.png" alt="submit" onclick="checkPW();return false;">
 					</th>
 				</tr>
 			</table>
@@ -90,6 +89,19 @@
 	</form>
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script>
+	
+	function checkPW() {
+		
+		var check = document.getElementById('pwd').value;
+		
+		if((check == null) || (check == "")) {
+			alert("비밀번호를 입력해주세요");
+			return false;
+		} else {
+			form.submit.submit();
+		}
+	}
+	
 		function execDaumPostcode() {
 			new daum.Postcode({
 				oncomplete : function(data) {
