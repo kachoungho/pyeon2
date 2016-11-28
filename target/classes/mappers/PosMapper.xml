@@ -491,4 +491,12 @@
 		update p2_item set count = count + #{count} , hit = hit - #{count} where area = #{area} and item_code = #{item_code}
 	</update>
 	
+	<!-- 지점장 본인 정보 수정하기 -->
+	<update id="updateManager">
+		update p2_member set pwd = #{pwd}, name = #{name}, 
+		phone = #{phone}, age = #{age}, 
+		postcode = #{postcode}, address = #{address}, address2 = #{address2}
+		where id = #{id}
+	</update>
+	
 </mapper>

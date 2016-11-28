@@ -62,8 +62,8 @@
 				<th id="tr2_insert"><img class="img_insert"
 					src="/controller/resources/images/gender.png">성별</th>
 				<th><select id="slt_insert" name="gender">
-						<option value="man">남자</option>
-						<option value="woman">여자</option>
+						<option value="남자">남자</option>
+						<option value="여자">여자</option>
 				</select></th>
 			</tr>
 			<c:forEach items="${ list }" var="list">

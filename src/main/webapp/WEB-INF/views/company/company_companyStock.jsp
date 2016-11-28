@@ -22,6 +22,9 @@
 		</select> 
 		
 		<input class="com_stock_button" width="40" type="image" src="/controller/resources/images/choice.png" alt="submit">
+		
+		<input type="button" value="재품 추가"
+				onclick="document.location.href='${pageContext.request.contextPath}/company/com_newproduct'" />
 	</form>
 
 	<c:if test="${result == null}">

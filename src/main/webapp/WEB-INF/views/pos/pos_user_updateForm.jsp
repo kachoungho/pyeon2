@@ -59,10 +59,10 @@
 				<th>
 				<font face="Jeju Gothic">
 				
-				<input type="text" id="postcode" placeholder="快祈锅龋" name="postcode">
+				<input type="text" id="postcode" placeholder="快祈锅龋" name="postcode" value="postcode">
 				<input type="button" onclick="execDaumPostcode()" value="快祈锅龋 茫扁"><br>
-				<input type="text" id="address" placeholder="林家" name="address">
-				<input type="text" id="address2" placeholder="惑技林家" name="address2">
+				<input type="text" id="address" placeholder="林家" name="address" value="address">
+				<input type="text" id="address2" placeholder="惑技林家" name="address2" value="address2">
 
 				</font>
 				</th>

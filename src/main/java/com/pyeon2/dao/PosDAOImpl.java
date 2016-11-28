@@ -353,4 +353,9 @@ public class PosDAOImpl implements PosDAO {
 	public void itemupdate(ItemVO vo) throws Exception {
 		session.update(namespace+".itemupdate",vo);
 	}
+
+	@Override
+	public void updateManager(MemberVO Mvo) throws Exception {
+		session.update(namespace+".updateManager", Mvo);
+	}
 }
