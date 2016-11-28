@@ -55,12 +55,7 @@
 
 	<div style="float: left; width: 50%;">
 		<center>
-			<input type=text name=memoYear size=2 value="${currentYear}">년
-			<input type=text name=memoMonth size=2 value="${currentMonth+1}">월
-			<input type=text name=memoDay size=2 value="${currentDate}">일
-		</center>
-		<center>
-			<table border=0>
+			<table border=0, style="font-family: 'Jeju Gothic', sans-serif;">
 				<tr>
 					<td align=center width=200>
 						<!-- 년 도--> <a
@@ -76,7 +71,7 @@
 				</tr>
 			</table>
 			
-			<table class="ex1" style="width: 630px">
+			<table class="ex1" style="width: 630px; font-family: 'Jeju Gothic', sans-serif;">
 				<!-- 달력 부분 -->
 				<thead>
 					<tr style="text-align: center;" class="odd">
@@ -97,7 +92,7 @@
 					</tr>
 				</thead>
 			</table>
-			<table style="width: 630px; background: #f9f9f9; TABLE-layout:fixed">
+			<table style="width: 630px; background: #f9f9f9; TABLE-layout:fixed; font-family: 'Jeju Gothic', sans-serif;">
 				<tr height=70>
 					<c:set var="br" value="0" />
 					<c:forEach var="i" begin="1" end="${startDay-1}">
