@@ -105,4 +105,19 @@ public interface CompanyDAO {
 	
 	//공지사항 컬럼 수
 	public String getNoticeCount(NoticeVO nvo) throws Exception;
+	
+	//재품 code1 가져오기
+	public String newproductcode1(ComItemVO cvo) throws Exception;
+		
+	//재품 code2 가져오기
+	public int newproductcode2(ComItemVO cvo) throws Exception;
+	
+	//재품 추가
+	public void newproduct(ComItemVO cvo) throws Exception;
+		
+	//지점 검색 해오기
+	public List<ItemVO> newproductarea() throws Exception;
+		
+	//각각지점에 신제품 입력
+	public void newproductareainsert(ItemVO vo) throws Exception;
 }

@@ -179,4 +179,28 @@ public class CompanyServiceImpl implements CompanyService {
 		return comDao.getNoticeCount(nvo);
 	}
 
+	@Override
+	public void newproduct(ComItemVO cvo) throws Exception {
+		comDao.newproduct(cvo);
+	}
+
+	@Override
+	public String newproductcode1(ComItemVO cvo) throws Exception {
+		return comDao.newproductcode1(cvo);
+	}
+
+	@Override
+	public int newproductcode2(ComItemVO cvo) throws Exception {
+		return comDao.newproductcode2(cvo);
+	}
+
+	@Override
+	public List<ItemVO> newproductarea() throws Exception {
+		return comDao.newproductarea();
+	}
+
+	@Override
+	public void newproductareainsert(ItemVO vo) throws Exception {
+		comDao.newproductareainsert(vo);
+	}
 }

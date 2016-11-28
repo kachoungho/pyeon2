@@ -180,5 +180,30 @@ public class CompanyDAOImpl implements CompanyDAO{
 	public String getNoticeCount(NoticeVO nvo) throws Exception {
 		return session.selectOne(namespace + ".getNoticeCount", nvo);
 	}
+	
+	@Override
+	public String newproductcode1(ComItemVO cvo) throws Exception {
+		return session.selectOne(namespace+".newproductcode1",cvo);
+	}
+
+	@Override
+	public int newproductcode2(ComItemVO cvo) throws Exception {
+		return session.selectOne(namespace+".newproductcode2",cvo);
+	}
+	
+	@Override
+	public void newproduct(ComItemVO cvo) throws Exception {
+		session.insert(namespace + ".newproduct",cvo);
+	}
+
+	@Override
+	public List<ItemVO> newproductarea() throws Exception {
+		return session.selectList(namespace+".newproductarea");
+	}
+
+	@Override
+	public void newproductareainsert(ItemVO vo) throws Exception {
+		session.insert(namespace+".newproductareainsert" , vo);
+	}
 
 }
