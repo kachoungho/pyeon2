@@ -30,6 +30,12 @@
   }
 </script>
 
+<script type="text/javascript">
+	window.onload = function(){
+		item_code.focus();
+	}
+</script>
+
 </head>
 <body>
 <sec:authentication property="name" var="LoingUser" />
@@ -132,9 +138,9 @@
 <br><br><br>
 
 
-	<input type="text" name="item_code"> <!-- onkeypress='input(1)' -->
+	상품 코드 : <input type="text" name="item_code" id="item_code" onkeypress="if(event.keyCode==13) {input(1);}" class="invisible">
 	<input type="hidden" name="area" value="${ area }"> 
-	<input type="button" value = "입력" onclick='input(1)'/>
+	<input type="button" value = "입력" onclick = 'input(1)'/>
 </form>
 
 </body>
