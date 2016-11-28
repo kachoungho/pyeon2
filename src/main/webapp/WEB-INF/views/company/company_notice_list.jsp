@@ -8,6 +8,8 @@
 <head>
 <link rel="stylesheet" type="text/css"
 	href="/controller/resources/css/listcss.css">
+<link rel="stylesheet" type="text/css"
+	href="/controller/resources/css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 </head>
@@ -49,9 +51,9 @@
 	<br>
 	<div align="center">
 	<form action="${pageContext.request.contextPath}/company/com_notice_list" method="get"> 
-		<input type="text" name="titleSearch">
+		<input class="ipt_insert" type="text" name="titleSearch">
 		<input type="hidden" name="page" value=${pageNum }>
-		<input type="submit" value="검색">
+		<input class="submit" type="submit" value="검색">
 	</form>
 	</div>
 	<br>

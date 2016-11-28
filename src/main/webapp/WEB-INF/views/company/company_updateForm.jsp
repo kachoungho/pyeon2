@@ -1,123 +1,138 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" type="text/css"
-	href="/controller/resources/css/listcss.css">
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	href="/controller/resources/css/style.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 
 	<form action="${pageContext.request.contextPath}/company/com_update"
 		method="POST">
-	<c:forEach items="${ list }" var="list">
-		<table id="table_insert">
-			<tr>
-				<th colspan="2">
-					<label id="label_insert"> Á÷¿ø Á¤º¸ ¼öÁ¤ </label>
-				</th>
-			</tr>
-			<tr>
-				<th id="tr_insert"><img class="img_insert" style="" src="/controller/resources/images/id.png">¾ÆÀÌµğ</th>
-				<th><input id="input_insert" type="text" name="id" value="${ list.id }" readonly="readonly"></th>
-			</tr>
-			<tr>
-				<th id="tr_insert"><img class="img_insert" src="/controller/resources/images/pwd.png">ºñ¹Ğ¹øÈ£</th>
-				<th><input id="input_insert" type="password" name="pwd" value="${ list.pwd }"></th>
-			</tr>
-			<tr>
-				<th id="tr_insert"><img class="img_insert" src="/controller/resources/images/name.png">ÀÌ¸§</th>
-				<th><input id="input_insert" type="text" name="name" value="${ list.name }"></th>
-			</tr>
-			<tr>
-				<th id="tr_insert"><img class="img_insert" src="/controller/resources/images/rank.png">Á÷±Ş</th>
-				<th><input id="input_insert" type="text" name="position" value="${ list.position }" readonly="readonly"></th>
-			</tr>
-			<tr>
-				<th id="tr_insert"><img class="img_insert" src="/controller/resources/images/phone.png">ÀüÈ­¹øÈ£</th>
-				<th><input id="input_insert" type="text" name="phone" value="${ list.phone }"></th>
-			</tr>
-			<tr>
-				<th id="tr_insert"><img class="img_insert" src="/controller/resources/images/age.png">»ı³â¿ùÀÏ</th>
-				<th><input id="input_insert" type="text" name="age" value="${ list.age }"></th>
-			</tr>
-			<tr>
-				<th id="tr_insert"><img class="img_insert" src="/controller/resources/images/address.png">ÁÖ¼Ò</th>
-				<th>
-				<font face="Jeju Gothic">
-				
-				<input type="text" id="postcode" placeholder="¿ìÆí¹øÈ£" name="postcode">
-				<input type="button" onclick="execDaumPostcode()" value="¿ìÆí¹øÈ£ Ã£±â"><br>
-				<input type="text" id="address" placeholder="ÁÖ¼Ò" name="address">
-				<input type="text" id="address2" placeholder="»ó¼¼ÁÖ¼Ò" name="address2">
-
-				</font>
-				</th>
+		<c:forEach items="${ list }" var="list">
+			<table id="tb_insert">
+				<tr>
+					<th colspan="2"><label id="lb_insert"> ì§ì› ì •ë³´ ìˆ˜ì • </label></th>
 				</tr>
-			<tr>
-				<th id="tr_insert"><img class="img_insert" src="/controller/resources/images/gender.png">¼ºº°</th>
-				<th><input id="input_insert" type="text" name="gender" value="${ list.gender }" readonly="readonly"></th>
-			</tr>
-			<tr>
-				<th id="tr_insert"><img class="img_insert" src="/controller/resources/images/area.png">ÁöÁ¡</th>
-				<th><input id="input_insert" type="text" name="area" value="${ list.area }"></th>
-			</tr>
+				<tr>
+					<th id="tr2_insert"><img class="img_insert" style=""
+						src="/controller/resources/images/id.png">ì•„ì´ë””</th>
+					<th><input class="ipt_insert" type="text" name="id"
+						value="${ list.id }" readonly="readonly"></th>
+				</tr>
+				<tr>
+					<th id="tr2_insert"><img class="img_insert"
+						src="/controller/resources/images/pwd.png">ë¹„ë°€ë²ˆí˜¸</th>
+					<th><input class="ipt_insert" type="password" name="pwd"
+						value="${ list.pwd }"></th>
+				</tr>
+				<tr>
+					<th id="tr2_insert"><img class="img_insert"
+						src="/controller/resources/images/name.png">ì´ë¦„</th>
+					<th><input class="ipt_insert" type="text" name="name"
+						value="${ list.name }"></th>
+				</tr>
+				<tr>
+					<th id="tr2_insert"><img class="img_insert"
+						src="/controller/resources/images/rank.png">ì§ê¸‰</th>
+					<th><input class="ipt_insert" type="text" name="position"
+						value="${ list.position }" readonly="readonly"></th>
+				</tr>
+				<tr>
+					<th id="tr2_insert"><img class="img_insert"
+						src="/controller/resources/images/phone.png">ì „í™”ë²ˆí˜¸</th>
+					<th><input class="ipt_insert" type="text" name="phone"
+						value="${ list.phone }" placeholder="ì „í™”ë²ˆí˜¸ ì…ë ¥"></th>
+				</tr>
+				<tr>
+					<th id="tr2_insert"><img class="img_insert"
+						src="/controller/resources/images/age.png">ìƒë…„ì›”ì¼</th>
+					<th><input class="ipt_insert" type="text" name="age"
+						value="${ list.age }" placeholder="ìƒë…„ì›”ì¼ ì…ë ¥"></th>
+				</tr>
+				<tr>
+					<th id="tr2_insert"><img class="img_insert"
+						src="/controller/resources/images/address.png">ì£¼ì†Œ</th>
+					<th><font face="Jeju Gothic"> <input class="ipt_insert2" type="text"
+							id="postcode" placeholder="ìš°í¸ë²ˆí˜¸ ì…ë ¥" name="postcode"> <input class="submit"
+							type="button" onclick="execDaumPostcode()" value="ìš°í¸ë²ˆí˜¸ ì°¾ê¸°"><br>
+							<input class="ipt_insert" type="text" id="address" placeholder="ì£¼ì†Œ ì…ë ¥" name="address">
+							<input class="ipt_insert" type="text" id="address2" placeholder="ìƒì„¸ì£¼ì†Œ ì…ë ¥"
+							name="address2">
 
-			<tr>
-				<th></th>
-				<th><input id="button_insert" width="40" type="image"
-					src="/controller/resources/images/check.png" alt="submit">
-				</th>
-			</tr>
-		</table>
+					</font></th>
+				</tr>
+				<tr>
+					<th id="tr2_insert"><img class="img_insert"
+						src="/controller/resources/images/gender.png">ì„±ë³„</th>
+					<th><input class="ipt_insert" type="text" name="gender"
+						value="${ list.gender }" readonly="readonly"></th>
+				</tr>
+				<tr>
+					<th id="tr2_insert"><img class="img_insert"
+						src="/controller/resources/images/area.png">ì§€ì </th>
+					<th><input class="ipt_insert" type="text" name="area"
+						value="${ list.area }"></th>
+				</tr>
+
+				<tr>
+					<th></th>
+					<th><input id="button_insert" width="40" type="image"
+						src="/controller/resources/images/check.png" alt="submit">
+					</th>
+				</tr>
+			</table>
 		</c:forEach>
 	</form>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script>
-function execDaumPostcode() {
-    new daum.Postcode({
-        oncomplete: function(data) {
-            // ÆË¾÷¿¡¼­ °Ë»ö°á°ú Ç×¸ñÀ» Å¬¸¯ÇßÀ»¶§ ½ÇÇàÇÒ ÄÚµå¸¦ ÀÛ¼ºÇÏ´Â ºÎºĞ.
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	<script>
+		function execDaumPostcode() {
+			new daum.Postcode({
+				oncomplete : function(data) {
+					// íŒì—…ì—ì„œ ê²€ìƒ‰ê²°ê³¼ í•­ëª©ì„ í´ë¦­í–ˆì„ë•Œ ì‹¤í–‰í•  ì½”ë“œë¥¼ ì‘ì„±í•˜ëŠ” ë¶€ë¶„.
 
-            // °¢ ÁÖ¼ÒÀÇ ³ëÃâ ±ÔÄ¢¿¡ µû¶ó ÁÖ¼Ò¸¦ Á¶ÇÕÇÑ´Ù.
-            // ³»·Á¿À´Â º¯¼ö°¡ °ªÀÌ ¾ø´Â °æ¿ì¿£ °ø¹é('')°ªÀ» °¡Áö¹Ç·Î, ÀÌ¸¦ Âü°íÇÏ¿© ºĞ±â ÇÑ´Ù.
-            var fullAddr = ''; // ÃÖÁ¾ ÁÖ¼Ò º¯¼ö
-            var extraAddr = ''; // Á¶ÇÕÇü ÁÖ¼Ò º¯¼ö
+					// ê° ì£¼ì†Œì˜ ë…¸ì¶œ ê·œì¹™ì— ë”°ë¼ ì£¼ì†Œë¥¼ ì¡°í•©í•œë‹¤.
+					// ë‚´ë ¤ì˜¤ëŠ” ë³€ìˆ˜ê°€ ê°’ì´ ì—†ëŠ” ê²½ìš°ì—” ê³µë°±('')ê°’ì„ ê°€ì§€ë¯€ë¡œ, ì´ë¥¼ ì°¸ê³ í•˜ì—¬ ë¶„ê¸° í•œë‹¤.
+					var fullAddr = ''; // ìµœì¢… ì£¼ì†Œ ë³€ìˆ˜
+					var extraAddr = ''; // ì¡°í•©í˜• ì£¼ì†Œ ë³€ìˆ˜
 
-            // »ç¿ëÀÚ°¡ ¼±ÅÃÇÑ ÁÖ¼Ò Å¸ÀÔ¿¡ µû¶ó ÇØ´ç ÁÖ¼Ò °ªÀ» °¡Á®¿Â´Ù.
-            if (data.userSelectedType === 'R') { // »ç¿ëÀÚ°¡ µµ·Î¸í ÁÖ¼Ò¸¦ ¼±ÅÃÇßÀ» °æ¿ì
-                fullAddr = data.roadAddress;
+					// ì‚¬ìš©ìê°€ ì„ íƒí•œ ì£¼ì†Œ íƒ€ì…ì— ë”°ë¼ í•´ë‹¹ ì£¼ì†Œ ê°’ì„ ê°€ì ¸ì˜¨ë‹¤.
+					if (data.userSelectedType === 'R') { // ì‚¬ìš©ìê°€ ë„ë¡œëª… ì£¼ì†Œë¥¼ ì„ íƒí–ˆì„ ê²½ìš°
+						fullAddr = data.roadAddress;
 
-            } else { // »ç¿ëÀÚ°¡ Áö¹ø ÁÖ¼Ò¸¦ ¼±ÅÃÇßÀ» °æ¿ì(J)
-                fullAddr = data.jibunAddress;
-            }
+					} else { // ì‚¬ìš©ìê°€ ì§€ë²ˆ ì£¼ì†Œë¥¼ ì„ íƒí–ˆì„ ê²½ìš°(J)
+						fullAddr = data.jibunAddress;
+					}
 
-            // »ç¿ëÀÚ°¡ ¼±ÅÃÇÑ ÁÖ¼Ò°¡ µµ·Î¸í Å¸ÀÔÀÏ¶§ Á¶ÇÕÇÑ´Ù.
-            if(data.userSelectedType === 'R'){
-                //¹ıÁ¤µ¿¸íÀÌ ÀÖÀ» °æ¿ì Ãß°¡ÇÑ´Ù.
-                if(data.bname !== ''){
-                    extraAddr += data.bname;
-                }
-                // °Ç¹°¸íÀÌ ÀÖÀ» °æ¿ì Ãß°¡ÇÑ´Ù.
-                if(data.buildingName !== ''){
-                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                }
-                // Á¶ÇÕÇüÁÖ¼ÒÀÇ À¯¹«¿¡ µû¶ó ¾çÂÊ¿¡ °ıÈ£¸¦ Ãß°¡ÇÏ¿© ÃÖÁ¾ ÁÖ¼Ò¸¦ ¸¸µç´Ù.
-                fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
-            }
+					// ì‚¬ìš©ìê°€ ì„ íƒí•œ ì£¼ì†Œê°€ ë„ë¡œëª… íƒ€ì…ì¼ë•Œ ì¡°í•©í•œë‹¤.
+					if (data.userSelectedType === 'R') {
+						//ë²•ì •ë™ëª…ì´ ìˆì„ ê²½ìš° ì¶”ê°€í•œë‹¤.
+						if (data.bname !== '') {
+							extraAddr += data.bname;
+						}
+						// ê±´ë¬¼ëª…ì´ ìˆì„ ê²½ìš° ì¶”ê°€í•œë‹¤.
+						if (data.buildingName !== '') {
+							extraAddr += (extraAddr !== '' ? ', '
+									+ data.buildingName : data.buildingName);
+						}
+						// ì¡°í•©í˜•ì£¼ì†Œì˜ ìœ ë¬´ì— ë”°ë¼ ì–‘ìª½ì— ê´„í˜¸ë¥¼ ì¶”ê°€í•˜ì—¬ ìµœì¢… ì£¼ì†Œë¥¼ ë§Œë“ ë‹¤.
+						fullAddr += (extraAddr !== '' ? ' (' + extraAddr + ')'
+								: '');
+					}
 
-            // ¿ìÆí¹øÈ£¿Í ÁÖ¼Ò Á¤º¸¸¦ ÇØ´ç ÇÊµå¿¡ ³Ö´Â´Ù.
-            document.getElementById('postcode').value = data.zonecode; //5ÀÚ¸® »õ¿ìÆí¹øÈ£ »ç¿ë
-            document.getElementById('address').value = fullAddr;
+					// ìš°í¸ë²ˆí˜¸ì™€ ì£¼ì†Œ ì •ë³´ë¥¼ í•´ë‹¹ í•„ë“œì— ë„£ëŠ”ë‹¤.
+					document.getElementById('postcode').value = data.zonecode; //5ìë¦¬ ìƒˆìš°í¸ë²ˆí˜¸ ì‚¬ìš©
+					document.getElementById('address').value = fullAddr;
 
-            // Ä¿¼­¸¦ »ó¼¼ÁÖ¼Ò ÇÊµå·Î ÀÌµ¿ÇÑ´Ù.
-            document.getElementById('address2').focus();
-        }
-    }).open();
-}
-</script>
+					// ì»¤ì„œë¥¼ ìƒì„¸ì£¼ì†Œ í•„ë“œë¡œ ì´ë™í•œë‹¤.
+					document.getElementById('address2').focus();
+				}
+			}).open();
+		}
+	</script>
 </body>
 </html>
