@@ -17,7 +17,8 @@
                    a.area = #{area})
              WHEN MATCHED THEN
              UPDATE SET
-                 a.count = a.count + #{count} where a.item_code = #{item_code} and a.area = #{area}
+                 a.count = a.count + #{count}, a.p2_time = sysdate
+                 where a.item_code = #{item_code} and a.area = #{area}
               WHEN NOT MATCHED THEN
                 INSERT (      
                 			  a.bno,
