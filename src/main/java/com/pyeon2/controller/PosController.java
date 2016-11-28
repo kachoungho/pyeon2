@@ -615,9 +615,14 @@ public class PosController {
 	public String posPersonnelUpdate(HttpServletRequest request, MemberVO Mvo) {
 
 		Mvo.setId(request.getParameter("id"));
-
+		String position = request.getParameter("position");
 		try {
-			posService.updateUser(Mvo);
+			if (position.equals("user")) {
+				posService.updateUser(Mvo);
+			} else if (position.equals("manager")){
+				posService.updateManager(Mvo);
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -965,7 +970,7 @@ public class PosController {
 		
 		Criteria cri = new Criteria();
 		cri.setPage(pageNum);
-		cri.setPerPageNum(7);
+		cri.setPerPageNum(15);
 		if(posService.daymoneyCount(vo) == null){
 			count = 0;
 		}
@@ -1168,6 +1173,21 @@ public class PosController {
 		posService.daycalclistdelete(vo);
 		
 		mav.setViewName("pop/pop_calcrefurnd_delete");
+		return mav;
+	}
+	
+	@RequestMapping("pos/ps_user_information")
+	public ModelAndView informManager(HttpServletRequest request, MemberVO Mvo) throws Exception {
+		
+		ModelAndView mav = new ModelAndView();
+		List<MemberVO> list;
+		
+		list = posService.selectUserId(Mvo);
+		System.out.println(list);
+		
+		mav.addObject("list", list);
+		mav.setViewName(".pos.pos_user_information");
+		
 		return mav;
 	}
 }

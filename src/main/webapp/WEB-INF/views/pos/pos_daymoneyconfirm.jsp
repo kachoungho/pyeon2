@@ -1,143 +1,119 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" type="text/css"
-	href="/controller/resources/css/listcss.css">
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	href="/controller/resources/css/style.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<h3>Á¤»ê ¸ñ·Ï</h3>
-	
-	<form action="ps_daymoneyconfirm" method="post">
-		<input type="hidden" name="area" value="${area }">
-		<select name="year">
-			<option value="">ÀüºÎ</option>
-			<option value="2016">2016</option>
-			<option value="2015">2015</option>
-			<option value="2014">2014</option>
-			<option value="2013">2013</option>
-			<option value="2016">2012</option>
-			<option value="2015">2011</option>
-			<option value="2014">2010</option>
-			<option value="2013">2009</option>
-		</select>
-		<select name="month">
-			<option value="">ÀüºÎ</option>
-			<option value="12">12</option>
-			<option value="11">11</option>
-			<option value="10">10</option>
-			<option value="9">9</option>
-			<option value="8">8</option>
-			<option value="7">7</option>
-			<option value="6">6</option>
-			<option value="5">5</option>
-			<option value="4">4</option>
-			<option value="3">3</option>
-			<option value="2">2</option>
-			<option value="1">1</option>
-		</select>
-	<!-- 	<select name="month">
-			<option value="2015">31</option>
-			<option value="2014">30</option>
-			<option value="2013">29</option>
-			<option value="2016">28</option>
-			<option value="2015">27</option>
-			<option value="2014">26</option>
-			<option value="2013">25</option>
-			<option value="2016">24</option>
-			<option value="2015">23</option>
-			<option value="2014">22</option>
-			<option value="2013">21</option>
-			<option value="2016">20</option>
-			<option value="2015">19</option>
-			<option value="2014">18</option>
-			<option value="2013">17</option>
-			<option value="2016">16</option>
-			<option value="2015">15</option>
-			<option value="2014">14</option>
-			<option value="2013">13</option>
-			<option value="2016">12</option>
-			<option value="2015">11</option>
-			<option value="2014">10</option>
-			<option value="2013">9</option>
-			<option value="2016">8</option>
-			<option value="2015">7</option>
-			<option value="2014">6</option>
-			<option value="2013">5</option>
-			<option value="2016">4</option>
-			<option value="2015">3</option>
-			<option value="2014">2</option>
-			<option value="2013">1</option>
-		</select> -->
-		<input type="submit" value="select">
-	</form>
-	
-	<c:if test="${year == '' && month == '' }">
-		<h4>¸ğµç ¸ñ·Ï</h2>
-	</c:if>
-	<c:if test="${year != '' && month != '' }">
-		<h4>${year }³â / ${month }¿ù</h2>
-	</c:if>
+	<div class="div_container2">
+		<div class="div_row" style="margin-top: 30px;">
+			<div class="div_col2">
+				<h3 class="h">ì •ì‚° ëª©ë¡</h3>
 
-	<c:if test="${result == null }">
-		<h2>³»¿ëÀÌ ¾ø½À´Ï´Ù.</h2>
-	</c:if>
-	<c:if test="${result != null }">
-	<table>
-		<tr>
-			<th>Á¦¸ñ</th>
-			<th>¼öÀÔ / ÁöÃâ</th>
-			<th>±İ¾×</th>
-			<th>³¯ÀÚ</th>
-		</tr>
-		<c:forEach items="${ result}" var="list">
-			<tr>
-				<td>${list.title }</td>
-				<td>${list.content }</td>
-				<td>${list.pay }</td>
-				<td><fmt:formatDate value="${list.dayda }" pattern="yyyy-MM-dd"/></td>
-			</tr>
-		</c:forEach>
-		
-		<tr>
-			<td>¼öÀÔ</td>
-			<td>${pay1 }</td>
-			<td>ÁöÃâ</td>
-			<td>${pay2 }</td>
-		</tr>
-		<tr>
-			<td>¼øÀÌÀÍ</td>
-			<td></td>
-			<td></td>
-			<td>${total }</td>
-		</tr>
-	</table>
-	</c:if>
-	
-	<div>
-		<ul class="com_stock_li-paging">
-			<c:if test="${pageMaker.prev }">
-				<li><a
-					href="ps_daymoneyconfirm?page=${pageMaker.startPage - 1 }&year=${year}&month=${month}&area=${area}">&laquo;</a></li>
-			</c:if>
+				<form action="ps_daymoneyconfirm" method="post">
+					<br>
+					<br> <input type="hidden" name="area" value="${area }">
+					<select class="slt_insert2" name="year">
+						<option value="">ì „ë¶€</option>
+						<option value="2016">2016</option>
+						<option value="2015">2015</option>
+						<option value="2014">2014</option>
+						<option value="2013">2013</option>
+						<option value="2016">2012</option>
+						<option value="2015">2011</option>
+						<option value="2014">2010</option>
+						<option value="2013">2009</option>
+					</select> <select class="slt_insert2" name="month">
+						<option value="">ì „ë¶€</option>
+						<option value="12">12</option>
+						<option value="11">11</option>
+						<option value="10">10</option>
+						<option value="9">9</option>
+						<option value="8">8</option>
+						<option value="7">7</option>
+						<option value="6">6</option>
+						<option value="5">5</option>
+						<option value="4">4</option>
+						<option value="3">3</option>
+						<option value="2">2</option>
+						<option value="1">1</option>
+					</select> <input class="submit" type="submit" value="ì„ íƒ">
+				</form>
+				<br>
+				<br>
+				<c:if test="${year == '' && month == '' }">
+					<h4 class="h">ëª¨ë“  ëª©ë¡</h4>
+				</c:if>
+				<c:if test="${year != '' && month != '' }">
+					<h4 class="h">${year }ë…„/ ${month }ì›”</h4>
+				</c:if>
 
-			<c:forEach begin="${pageMaker.startPage }"
-				end="${pageMaker.endPage }" var="idx">
-				<li
-					<c:out value="${pageMaker.cri.page == idx ? 'class=active' : '' }"/>>
-					<a href="ps_daymoneyconfirm?page=${idx}&year=${year}&month=${month}&area=${area}">${idx }</a>
-				</li>
-			</c:forEach>
+				<c:if test="${result == null }">
+					<h2>ë‚´ìš©ì´ ì—†ìŠµë‹ˆë‹¤.</h2>
+				</c:if>
+				<c:if test="${result != null }">
+					<table class="table">
+						<tr>
+							<th class="th1">ì œëª©</th>
+							<th class="th1">ìˆ˜ì… / ì§€ì¶œ</th>
+							<th class="th1">ê¸ˆì•¡</th>
+							<th class="th1">ë‚ ì§œ</th>
+						</tr>
+						<c:forEach items="${ result}" var="list">
+							<tr>
+								<td class="td1">${list.title }</td>
+								<td class="td1">${list.content }</td>
+								<td class="td1">${list.pay }</td>
+								<td class="td1"><fmt:formatDate value="${list.dayda }"
+										pattern="yyyy-MM-dd" /></td>
+							</tr>
+						</c:forEach>
 
-			<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
-				<li><a href="ps_daymoneyconfirm?page=${pageMaker.endPage + 1 }&year=${year}&month=${month}&area=${area}">&raquo;</a></li>
-			</c:if>
-		</ul>
+						<tr>
+							<td class="td1">ìˆ˜ì…</td>
+							<td class="td1">${pay1 }</td>
+							<td class="td1">ì§€ì¶œ</td>
+							<td class="td1">${pay2 }</td>
+						</tr>
+						<tr>
+							<td class="td1">ìˆœì´ìµ</td>
+							<td class="td1"></td>
+							<td class="td1"></td>
+							<td class="td1">${total }</td>
+						</tr>
+					</table>
+				</c:if>
+
+				<div>
+					<ul class="com_stock_li-paging">
+						<c:if test="${pageMaker.prev }">
+							<li><a
+								href="ps_daymoneyconfirm?page=${pageMaker.startPage - 1 }&year=${year}&month=${month}&area=${area}">&laquo;</a></li>
+						</c:if>
+
+						<c:forEach begin="${pageMaker.startPage }"
+							end="${pageMaker.endPage }" var="idx">
+							<li
+								<c:out value="${pageMaker.cri.page == idx ? 'class=active' : '' }"/>>
+								<a
+								href="ps_daymoneyconfirm?page=${idx}&year=${year}&month=${month}&area=${area}">${idx }</a>
+							</li>
+						</c:forEach>
+
+						<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
+							<li><a
+								href="ps_daymoneyconfirm?page=${pageMaker.endPage + 1 }&year=${year}&month=${month}&area=${area}">&raquo;</a></li>
+						</c:if>
+					</ul>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

@@ -1,112 +1,132 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<link rel="stylesheet" type="text/css"
+	href="/controller/resources/css/style.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/company/com_importSpendList" method="post">
-		<select name="area">
-			<option value="">Áö¿ª ¼±ÅÃ</option>
-			<option value="ÆÇ±³">ÆÇ±³</option>
-			<option value="¾ßÅ¾">¾ßÅ¾</option>
-			<option value="¼­Çö">¼­Çö</option>
-		</select>
-		<select name="year">
-			<option value="">³âµµ</option>
-			<option value="2016">2016</option>
-			<option value="2015">2015</option>
-			<option value="2014">2014</option>
-			<option value="2013">2013</option>
-			<option value="2016">2012</option>
-			<option value="2015">2011</option>
-			<option value="2014">2010</option>
-			<option value="2013">2009</option>
-		</select>
-		<select name="month">
-			<option value="">¿ù</option>
-			<option value="12">12</option>
-			<option value="11">11</option>
-			<option value="10">10</option>
-			<option value="9">9</option>
-			<option value="8">8</option>
-			<option value="7">7</option>
-			<option value="6">6</option>
-			<option value="5">5</option>
-			<option value="4">4</option>
-			<option value="3">3</option>
-			<option value="2">2</option>
-			<option value="1">1</option>
-		</select>
-		<input type="submit" value="°Ë»ö">
-	</form>
-	
-	<c:if test="${year != '' && month != '' }">
-		<h4>Áö¿ª : ${area } / ${year }³â / ${month }¿ù</h4>
-	</c:if>
+	<div class="div_container2">
+		<div class="div_row" style="margin-top: 30px;">
+			<div class="div_col2">
+				<form
+					action="${pageContext.request.contextPath}/company/com_importSpendList"
+					method="post">
+					<br>
+					<br> <select class="slt_insert3" name="area">
+						<option value="">ì§€ì—­ ì„ íƒ</option>
+						<option value="íŒêµ">íŒêµ</option>
+						<option value="ì•¼íƒ‘">ì•¼íƒ‘</option>
+						<option value="ì„œí˜„">ì„œí˜„</option>
+					</select> <select class="slt_insert3" name="year">
+						<option value="">ë…„ë„</option>
+						<option value="2016">2016</option>
+						<option value="2015">2015</option>
+						<option value="2014">2014</option>
+						<option value="2013">2013</option>
+						<option value="2016">2012</option>
+						<option value="2015">2011</option>
+						<option value="2014">2010</option>
+						<option value="2013">2009</option>
+					</select> <select class="slt_insert3" name="month">
+						<option value="">ì›”</option>
+						<option value="12">12</option>
+						<option value="11">11</option>
+						<option value="10">10</option>
+						<option value="9">9</option>
+						<option value="8">8</option>
+						<option value="7">7</option>
+						<option value="6">6</option>
+						<option value="5">5</option>
+						<option value="4">4</option>
+						<option value="3">3</option>
+						<option value="2">2</option>
+						<option value="1">1</option>
+					</select> <input class="submit" type="submit" value="ê²€ìƒ‰">
+				</form>
+				<br>
+				<br>
 
-	<c:if test="${result == null }">
-		<h2>³»¿ëÀÌ ¾ø½À´Ï´Ù.</h2>
-	</c:if>
-	<c:if test="${result != null }">
-	<table>
-		<tr>
-			<th>Áö¿ª</th>
-			<th>Á¦¸ñ</th>
-			<th>¼öÀÔ / ÁöÃâ</th>
-			<th>±İ¾×</th>
-			<th>³¯ÀÚ</th>
-		</tr>
-		<c:forEach items="${ result}" var="list">
-			<tr>
-				<td>${list.area }</td>
-				<td>${list.title }</td>
-				<td>${list.content }</td>
-				<td>${list.pay }</td>
-				<td><fmt:formatDate value="${list.dayda }" pattern="yyyy-MM-dd"/></td>
-			</tr>
-		</c:forEach>
+				<c:if test="${year != '' && month != '' }">
+					<h4>ì§€ì—­ : ${area } / ${year }ë…„ / ${month }ì›”</h4>
+				</c:if>
 
-		<tr><td colspan="4"></td></tr>
-		<tr><td colspan="4"></td></tr>
+				<c:if test="${result == null }">
+					<h2>ë‚´ìš©ì´ ì—†ìŠµë‹ˆë‹¤.</h2>
+				</c:if>
+				<c:if test="${result != null }">
+					<table class="table">
+						<tr>
+							<th class="th1">ì§€ì—­</th>
+							<th class="th1">ì œëª©</th>
+							<th class="th1">ìˆ˜ì… / ì§€ì¶œ</th>
+							<th class="th1">ê¸ˆì•¡</th>
+							<th class="th1">ë‚ ì§œ</th>
+						</tr>
+						<c:forEach items="${ result}" var="list">
+							<tr>
+								<td class="td1">${list.area }</td>
+								<td class="td1">${list.title }</td>
+								<td class="td1">${list.content }</td>
+								<td class="td1">${list.pay }</td>
+								<td class="td1"><fmt:formatDate value="${list.dayda }"
+										pattern="yyyy-MM-dd" /></td>
+							</tr>
+						</c:forEach>
 
-		<tr>
-			<td>¼öÀÔ</td>
-			<td>${pay1 }</td>
-			<td>ÁöÃâ</td>
-			<td>${pay2 }</td>
-		</tr>
-		<tr>
-			<td>¼øÀÌÀÍ</td>
-			<td></td>
-			<td></td>
-			<td>${total }</td>
-		</tr>
-	</table>
-	</c:if>
-	
-	<div>
-		<ul class="com_stock_li-paging">
-			<c:if test="${pageMaker.prev }">
-				<li><a
-					href="com_importSpendList?page=${pageMaker.startPage - 1 }&year=${year}&month=${month}&area=${area}">&laquo;</a></li>
-			</c:if>
+						<tr>
+							<td colspan="4"></td>
+						</tr>
+						<tr>
+							<td colspan="4"></td>
+						</tr>
 
-			<c:forEach begin="${pageMaker.startPage }"
-				end="${pageMaker.endPage }" var="idx">
-				<li
-					<c:out value="${pageMaker.cri.page == idx ? 'class=active' : '' }"/>>
-					<a href="com_importSpendList?page=${idx}&year=${year}&month=${month}&area=${area}">${idx }</a>
-				</li>
-			</c:forEach>
+						<tr>
+							<td class="td1">ìˆ˜ì…</td>
+							<td class="td1">${pay1 }</td>
+							<td class="td1">ì§€ì¶œ</td>
+							<td class="td1">${pay2 }</td>
+							<td class="td1"></td>
+						</tr>
+						<tr>
+							<td class="td1">ìˆœì´ìµ</td>
+							<td class="td1"></td>
+							<td class="td1"></td>
+							<td class="td1">${total }</td>
+							<td class="td1"></td>
+						</tr>
+					</table>
+				</c:if>
 
-			<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
-				<li><a href="com_importSpendList?page=${pageMaker.endPage + 1 }&year=${year}&month=${month}&area=${area}">&raquo;</a></li>
-			</c:if>
-		</ul>
+				<div>
+					<ul class="com_stock_li-paging">
+						<c:if test="${pageMaker.prev }">
+							<li><a
+								href="com_importSpendList?page=${pageMaker.startPage - 1 }&year=${year}&month=${month}&area=${area}">&laquo;</a></li>
+						</c:if>
+
+						<c:forEach begin="${pageMaker.startPage }"
+							end="${pageMaker.endPage }" var="idx">
+							<li
+								<c:out value="${pageMaker.cri.page == idx ? 'class=active' : '' }"/>>
+								<a
+								href="com_importSpendList?page=${idx}&year=${year}&month=${month}&area=${area}">${idx }</a>
+							</li>
+						</c:forEach>
+
+						<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
+							<li><a
+								href="com_importSpendList?page=${pageMaker.endPage + 1 }&year=${year}&month=${month}&area=${area}">&raquo;</a></li>
+						</c:if>
+					</ul>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
