@@ -65,7 +65,7 @@
 	padding-right: 50px;
 }
 
-#ipt_insert2 {
+.ipt_insert2 {
 	margin-left: 20px;
 	height: 35px;
 	border: none;
@@ -90,6 +90,17 @@
 
 .slt_insert2 {
 	width: 200px;
+	height: 35px;
+	color: #000;
+	border: none;
+	border-right: 1px solid #009688;
+	border-bottom: 1px solid #009688;
+	font-family: 'Jeju Gothic', sans-serif;
+	font-size: 15px;
+}
+
+.slt_insert3 {
+	width: 130px;
 	height: 35px;
 	color: #000;
 	border: none;

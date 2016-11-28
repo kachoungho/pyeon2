@@ -868,7 +868,7 @@ public class CompanyController {
 		
 		Criteria cri = new Criteria();
 		cri.setPage(pageNum);
-		cri.setPerPageNum(7);
+		cri.setPerPageNum(15);
 		if(posService.daymoneyCount(vo) == null){
 			count = 0;
 		}
