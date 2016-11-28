@@ -952,6 +952,8 @@ public class CompanyController {
 		ModelAndView mav = new ModelAndView();
 		ComItemVO cvo = new ComItemVO();
 		ItemVO vo = new ItemVO();
+		NoticeVO Nvo = new NoticeVO();
+		MemberVO Mvo = new MemberVO();
 		
 		cvo.setItem_name(request.getParameter("item_name"));
 		cvo.setCost(Integer.parseInt(request.getParameter("cost")));
@@ -980,6 +982,16 @@ public class CompanyController {
 			companyService.newproductareainsert(vo);
 		}
 		
+		Mvo.setId(request.getParameter("id"));
+		
+		List<MemberVO> list1= memberService.getname(Mvo);
+		
+		Nvo.setTitle("pmart 신제품 출시!!");
+		Nvo.setName(list1.get(0).getName());
+		Nvo.setPosition(list1.get(0).getPosition());
+		Nvo.setContant(cvo.getItem_name() + "를 출시 하였습니다. 많은 이용 바랍니다.");
+		
+		companyService.noticewrite(Nvo);
 		mav.setViewName("redirect:com_companyStock");
 		return mav;
 	}
