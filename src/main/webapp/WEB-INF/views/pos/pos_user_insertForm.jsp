@@ -19,17 +19,17 @@
 			<tr>
 				<th id="tr2_insert"><img class="img_insert"
 					src="/controller/resources/images/id.png">아이디</th>
-				<th><input id="ipt_insert" type="text" name="id" placeholder="아이디 입력"></th>
+				<th><input class="ipt_insert" type="text" name="id" placeholder="아이디 입력"></th>
 			</tr>
 			<tr>
 				<th id="tr2_insert"><img class="img_insert"
 					src="/controller/resources/images/pwd.png">비밀번호</th>
-				<th><input id="ipt_insert" type="password" name="pwd" placeholder="비밀번호 입력"></th>
+				<th><input class="ipt_insert" type="password" name="pwd" placeholder="비밀번호 입력"></th>
 			</tr>
 			<tr>
 				<th id="tr2_insert"><img class="img_insert"
 					src="/controller/resources/images/name.png">이름</th>
-				<th><input id="ipt_insert" type="text" name="name" placeholder="이름 입력"></th>
+				<th><input class="ipt_insert" type="text" name="name" placeholder="이름 입력"></th>
 			</tr>
 			<tr>
 				<th id="tr2_insert"><img class="img_insert"
@@ -41,20 +41,20 @@
 			<tr>
 				<th id="tr2_insert"><img class="img_insert"
 					src="/controller/resources/images/phone.png">전화번호</th>
-				<th><input id="ipt_insert" type="text" name="phone" placeholder="전화번호 입력"></th>
+				<th><input class="ipt_insert" type="text" name="phone" placeholder="전화번호 입력"></th>
 			</tr>
 			<tr>
 				<th id="tr2_insert"><img class="img_insert"
 					src="/controller/resources/images/age.png">생년월일</th>
-				<th><input id="ipt_insert" type="text" name="age" placeholder="생년월일 입력"></th>
+				<th><input class="ipt_insert" type="text" name="age" placeholder="생년월일 입력"></th>
 			</tr>
 			<tr>
 				<th id="tr2_insert"><img class="img_insert" src="/controller/resources/images/address.png">주소</th>
 				<th>
-				<input id="ipt_insert2" type="text" id="postcode" placeholder="우편번호" name="postcode">
+				<input class="ipt_insert2" type="text" id="postcode" placeholder="우편번호" name="postcode">
 				<input class="submit" type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-				<input id="ipt_insert" type="text" id="address" placeholder="주소" name="address">
-				<input id="ipt_insert" type="text" id="address2" placeholder="상세주소" name="address2">
+				<input class="ipt_insert" type="text" id="address" placeholder="주소" name="address">
+				<input class="ipt_insert" type="text" id="address2" placeholder="상세주소" name="address2">
 
 				</th>
 			</tr>
@@ -70,7 +70,7 @@
 				<tr>
 					<th id="tr2_insert"><img class="img_insert"
 						src="/controller/resources/images/area.png">지점</th>
-					<th><input id="ipt_insert" type="text" name="area"
+					<th><input class="ipt_insert" type="text" name="area"
 						value="${ list.area }" readonly="readonly"></th>
 				</tr>
 			</c:forEach>

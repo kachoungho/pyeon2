@@ -33,13 +33,11 @@
 			</div></li>
 
 		<li style="width: 20%" class="w3-dropdown-hover"><a href="#">매출
-				관리 <i class="fa fa-caret-down"></i>
-		</a>
-			<div style="width: 266.5px;"
-				class="w3-dropdown-content w3-light-gray w3-card-4">
-				<a href="${pageContext.request.contextPath}/pos/ps_daymoney?id=${LoingUser}">일 일 정 산</a> <a href="#">주 간 정 산</a> <a href="#">월 간
-					정 산</a>
-			</div></li>
+				관리 <i class="fa fa-caret-down"></i> </a>
+			<div style="width: 266.5px;" class="w3-dropdown-content w3-light-gray w3-card-4">
+				<a href="${pageContext.request.contextPath}/pos/ps_daymoney?id=${LoingUser}">일 일 정 산</a> 
+			</div>
+		</li>
 
 		<li style="width: 20%" class="w3-dropdown-hover"><a href="#">출
 				/ 퇴근 관리 <i class="fa fa-caret-down"></i>
