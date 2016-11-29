@@ -1,5 +1,6 @@
 package com.pyeon2.controller;
 
+import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,10 @@ import com.pyeon2.vo.MemberVO;
 import com.pyeon2.vo.NoticeVO;
 import com.pyeon2.vo.SelectSearch;
 import com.pyeon2.vo.UserVO;
+
+import net.sourceforge.barbecue.Barcode;
+import net.sourceforge.barbecue.BarcodeFactory;
+import net.sourceforge.barbecue.BarcodeImageHandler;
 
 @Controller
 /* @RequestMapping(value="/pos/") */
@@ -793,8 +798,17 @@ public class PosController {
 		ItemVO vo = new ItemVO();
 		
 		ModelAndView mav = new ModelAndView();
+		
+		// 바코드 생성 코드
+		String str = "1234567890";
+		Barcode barcode = BarcodeFactory.createCode128B(str);
+
+		File file = new File("C:\\app\\" + str + ".jpg");
+		BarcodeImageHandler.saveJPEG(barcode, file);
+		
 		vo.setTotal(Integer.parseInt(request.getParameter("total")));
 		vo.setArea(request.getParameter("area"));
+		
 		posService.salinsert(vo);
 		
 		List<ItemVO> list = posService.calcList();
