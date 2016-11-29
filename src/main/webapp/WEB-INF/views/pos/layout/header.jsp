@@ -20,8 +20,8 @@
 </se:authorize>
 
 <se:authorize access="hasAuthority('ROLE_MANAGER')">
-	[ ${LoingUser} ] 님 로그인 중<br>
-	<a href="${pageContext.request.contextPath}/j_spring_security_logout">로 그 아 웃</a>
+	<a href="${pageContext.request.contextPath}/pos/ps_user_information?id=${ LoingUser }">[ ${LoingUser} ]</a> 님 로그인 중<br>
+	<a href="${pageContext.request.contextPath}/pos/logout">로 그 아 웃</a>
 </se:authorize>
 </div>
 

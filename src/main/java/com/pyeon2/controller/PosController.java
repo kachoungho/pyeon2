@@ -1,5 +1,6 @@
 package com.pyeon2.controller;
 
+import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,10 @@ import com.pyeon2.vo.NoticeReplVO;
 import com.pyeon2.vo.NoticeVO;
 import com.pyeon2.vo.SelectSearch;
 import com.pyeon2.vo.UserVO;
+
+import net.sourceforge.barbecue.Barcode;
+import net.sourceforge.barbecue.BarcodeFactory;
+import net.sourceforge.barbecue.BarcodeImageHandler;
 
 @Controller
 @RestController
@@ -622,9 +627,14 @@ public class PosController {
 	public String posPersonnelUpdate(HttpServletRequest request, MemberVO Mvo) {
 
 		Mvo.setId(request.getParameter("id"));
-
+		String position = request.getParameter("position");
 		try {
-			posService.updateUser(Mvo);
+			if (position.equals("user")) {
+				posService.updateUser(Mvo);
+			} else if (position.equals("manager")){
+				posService.updateManager(Mvo);
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -795,8 +805,17 @@ public class PosController {
 		ItemVO vo = new ItemVO();
 		
 		ModelAndView mav = new ModelAndView();
+		
+		// 바코드 생성 코드
+		String str = "1234567890";
+		Barcode barcode = BarcodeFactory.createCode128B(str);
+
+		File file = new File("C:\\app\\" + str + ".jpg");
+		BarcodeImageHandler.saveJPEG(barcode, file);
+		
 		vo.setTotal(Integer.parseInt(request.getParameter("total")));
 		vo.setArea(request.getParameter("area"));
+		
 		posService.salinsert(vo);
 		
 		List<ItemVO> list = posService.calcList();
@@ -973,7 +992,7 @@ public class PosController {
 		
 		Criteria cri = new Criteria();
 		cri.setPage(pageNum);
-		cri.setPerPageNum(7);
+		cri.setPerPageNum(15);
 		if(posService.daymoneyCount(vo) == null){
 			count = 0;
 		}
@@ -1179,6 +1198,7 @@ public class PosController {
 		return mav;
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping(value = "pos/ps_notice_repl_write", method=RequestMethod.POST)
 	public ResponseEntity<String> noticeReplRegister(@RequestBody NoticeReplVO vo) throws Exception {
 		ResponseEntity<String> entity = null;
@@ -1237,5 +1257,20 @@ public class PosController {
 		}
 		
 		return entity;
+=======
+	@RequestMapping("pos/ps_user_information")
+	public ModelAndView informManager(HttpServletRequest request, MemberVO Mvo) throws Exception {
+		
+		ModelAndView mav = new ModelAndView();
+		List<MemberVO> list;
+		
+		list = posService.selectUserId(Mvo);
+		System.out.println(list);
+		
+		mav.addObject("list", list);
+		mav.setViewName(".pos.pos_user_information");
+		
+		return mav;
+>>>>>>> 7de0162e320bd25b9f56b769168afb7506a19c91
 	}
 }

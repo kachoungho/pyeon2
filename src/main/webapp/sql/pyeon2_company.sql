@@ -194,5 +194,19 @@ insert into company_item(bno, item_code,item_name,item_image,cost,price,count,ca
 insert into company_item(bno, item_code,item_name,item_image,cost,price,count,category ) values(company_item_num.nextVal, 'ALCOHOLIC108','CASS FRESH 500ml 캔',
 'http://callmart-gimpo.com/data/item/1440838986/thumb-7Lm07Iqk500ml_300x300.jpg',1300,2600,500,'주류' );
 
+select * from company_item;
+alter table company_item add code1 varchar2(20);
+alter table company_item add code2 number(10);
+update company_item set code1 = 'DRINK' , code2 = 110 where item_code = 'DRINK110';
+update company_item set code1 = 'SNACK' , code2 = 114 where item_code = 'SNACK114';
+update company_item set code1 = 'INSTANT' , code2 = 123 where item_code = 'INSTANT123';
+update company_item set code1 = 'ALCOHOLIC' , code2 = 108 where item_code = 'ALCOHOLIC108';
 
+update company_item set code1 = 'SNACK' where category = '스낵';
+
+update company_item set code1 = 'DRINK' where category = '음료';
+
+update company_item set code1 = 'INSTANT' where category = '인스턴트';
+
+update company_item set code1 = 'ALCOHOLIC' where category = '주류';
 

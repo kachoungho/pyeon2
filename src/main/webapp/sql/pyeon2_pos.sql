@@ -1,5 +1,16 @@
 update p2_user set back_time = sysdate where userid = 'ch'
 
+
+update p2_item set item_image = 'http://justliquor.com.au/512/hite-dry-finish-cans.jpg' where item_name = 'Hite Dry Finish 500ml 캔';
+update p2_item set item_image = 'http://photo.jtbc.joins.com/news/2015/06/10/20150610070105487.jpg' where item_name = '참이슬 자몽에 이슬';
+update p2_item set item_image = 'http://cdnweb01.wikitree.co.kr/webdata/editor/201411/17/img_20141117104024_a5983ded.jpg' where item_name = '참이슬 fresh';
+
+
+update company_item set item_image = 'http://justliquor.com.au/512/hite-dry-finish-cans.jpg' where item_name = 'Hite Dry Finish 500ml 캔';
+update company_item set item_image = 'http://photo.jtbc.joins.com/news/2015/06/10/20150610070105487.jpg' where item_name = '참이슬 자몽에 이슬';
+update company_item set item_image = 'http://cdnweb01.wikitree.co.kr/webdata/editor/201411/17/img_20141117104024_a5983ded.jpg' where item_name = '참이슬 fresh';
+
+
 ALTER TABLE roll RENAME TO role;
 
 select * from p2_member;

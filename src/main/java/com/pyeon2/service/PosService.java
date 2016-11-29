@@ -3,7 +3,6 @@ package com.pyeon2.service;
 import java.util.List;
 
 import com.pyeon2.domain.Criteria;
-import com.pyeon2.vo.CalendarMemoVO;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
@@ -212,6 +211,7 @@ public interface PosService {
 	//p2_item hit&count업데이트
 	public void itemupdate(ItemVO vo) throws Exception;
 	
+<<<<<<< HEAD
 	//댓글 리스트
 	public List<NoticeReplVO> noticeReplList(int bno) throws Exception;
 	
@@ -223,5 +223,9 @@ public interface PosService {
 	
 	//댓글 삭제
 	public void noticeReplDelete(int rno) throws Exception;
+=======
+	// 지점장 본인 정보 수정하기
+	public void updateManager(MemberVO Mvo) throws Exception;
+>>>>>>> 7de0162e320bd25b9f56b769168afb7506a19c91
 
 }

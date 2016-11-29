@@ -868,7 +868,7 @@ public class CompanyController {
 		
 		Criteria cri = new Criteria();
 		cri.setPage(pageNum);
-		cri.setPerPageNum(7);
+		cri.setPerPageNum(15);
 		if(posService.daymoneyCount(vo) == null){
 			count = 0;
 		}
@@ -939,6 +939,60 @@ public class CompanyController {
 		mav.addObject("month", month);
 		mav.setViewName(".company.company_importSpendList");
 		
+		return mav;
+	}
+	
+	@RequestMapping(value = "company/com_newproduct", method = RequestMethod.GET)
+	public String comnewprodeuct() {
+		return ".company.company_newproduct";
+	}
+	
+	@RequestMapping(value = "company/com_companyStock2", method = RequestMethod.POST)
+	public ModelAndView comnewprodeuctin(HttpServletRequest request, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		ComItemVO cvo = new ComItemVO();
+		ItemVO vo = new ItemVO();
+		NoticeVO Nvo = new NoticeVO();
+		MemberVO Mvo = new MemberVO();
+		
+		cvo.setItem_name(request.getParameter("item_name"));
+		cvo.setCost(Integer.parseInt(request.getParameter("cost")));
+		cvo.setPrice(Integer.parseInt(request.getParameter("price")));
+		cvo.setCount(Integer.parseInt(request.getParameter("count")));
+		cvo.setCategory(request.getParameter("category"));
+		
+		System.out.println("categorydd"+cvo.getCategory());
+		
+		String code1 = companyService.newproductcode1(cvo);
+		int code2 = companyService.newproductcode2(cvo)+1;
+		
+		String result = code1+code2;
+		
+		cvo.setCode1(code1);
+		cvo.setCode2(code2);
+		cvo.setItem_code(result);
+		
+		companyService.newproduct(cvo);
+		
+		vo.setItem_code(result);
+		List<ItemVO> list = companyService.newproductarea();
+		
+		for(int i = 0 ; i < list.size() ; i++){
+			vo.setArea(list.get(i).getArea());
+			companyService.newproductareainsert(vo);
+		}
+		
+		Mvo.setId(request.getParameter("id"));
+		
+		List<MemberVO> list1= memberService.getname(Mvo);
+		
+		Nvo.setTitle("pmart 신제품 출시!!");
+		Nvo.setName(list1.get(0).getName());
+		Nvo.setPosition(list1.get(0).getPosition());
+		Nvo.setContant(cvo.getItem_name() + "를 출시 하였습니다. 많은 이용 바랍니다.");
+		
+		companyService.noticewrite(Nvo);
+		mav.setViewName("redirect:com_companyStock");
 		return mav;
 	}
 }

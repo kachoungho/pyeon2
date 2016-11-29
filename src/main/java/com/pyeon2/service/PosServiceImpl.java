@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.pyeon2.dao.PosDAO;
 import com.pyeon2.domain.Criteria;
-import com.pyeon2.vo.CalendarMemoVO;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
@@ -356,6 +355,7 @@ public class PosServiceImpl implements PosService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public List<NoticeReplVO> noticeReplList(int bno) throws Exception {
 		return posDao.noticeReplList(bno);
 	}
@@ -373,5 +373,9 @@ public class PosServiceImpl implements PosService {
 	@Override
 	public void noticeReplDelete(int rno) throws Exception {
 		posDao.noticeReplDelete(rno);
+=======
+	public void updateManager(MemberVO Mvo) throws Exception {
+		posDao.updateManager(Mvo);
+>>>>>>> 7de0162e320bd25b9f56b769168afb7506a19c91
 	}
 }

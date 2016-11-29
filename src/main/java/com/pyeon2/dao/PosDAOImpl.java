@@ -356,6 +356,7 @@ public class PosDAOImpl implements PosDAO {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public List<NoticeReplVO> noticeReplList(int bno) throws Exception {
 		return session.selectList(namespace + ".noticeReplList", bno);
 	}
@@ -373,5 +374,9 @@ public class PosDAOImpl implements PosDAO {
 	@Override
 	public void noticeReplDelete(int rno) throws Exception {
 		session.delete(namespace + ".noticeReplDelete", rno);
+=======
+	public void updateManager(MemberVO Mvo) throws Exception {
+		session.update(namespace+".updateManager", Mvo);
+>>>>>>> 7de0162e320bd25b9f56b769168afb7506a19c91
 	}
 }

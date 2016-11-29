@@ -15,16 +15,6 @@ select * from ordeerSpend;
 
 
 create table orderReqState(
-<<<<<<< HEAD
-	bno number,
-	item_code varchar2(40) not null, 
-	item_name varchar2(30) not null, 
-	count number(10), 
-	category varchar2(20), 
-	area varchar2(30) not null,
-	p2_time varchar2(40),
-	state varchar2(30)
-=======
    bno number,
    item_code varchar2(40) not null, 
    item_name varchar2(30) not null, 
@@ -33,7 +23,6 @@ create table orderReqState(
    area varchar2(30) not null,
    p2_time varchar2(40),
    state varchar2(30)
->>>>>>> c5c6bd0af88f330dcd73f93c8902d0cfcfa21666
 );
 
 create table orderReq(

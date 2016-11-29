@@ -74,4 +74,10 @@ public class LoginController {
 		
 		return mav;
 	}
+	
+	@RequestMapping(value="pos/logout", method = RequestMethod.GET)
+	public String logout() {
+		
+		return "login/logoutSuc";
+	}
 }

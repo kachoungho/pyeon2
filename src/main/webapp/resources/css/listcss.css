@@ -234,9 +234,9 @@ table.ex1 {
 	background-color: rgba(58, 129, 165, 0.4);
 }
 
-#tr_insert {
+#tr_insert { 
 	margin-left: auto;
-	margin-right: auto;
+	margin-right: auto; 
 	margin-bottom: 5%;
 	border-radius: 16px !important;
 	color: white;
@@ -253,7 +253,7 @@ table.ex1 {
 	border: none;
 	border-right: 1px solid #009688;
 	border-bottom: 1px solid #009688;
-	width: 300px;
+	width: 100px;
 	font-family: 'Jeju Gothic', sans-serif;
 	padding-right: 50px;
 }

@@ -1,54 +1,63 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<link rel="stylesheet" type="text/css"
+	href="/controller/resources/css/style.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 </head>
 <body>
 	<form action="ps_daymoneyconfirm" method="POST">
-	<div style="float: left; width: 50%;">
-		<table>
-			<tr>
-				<td colspan="4">¼öÀÔ</td>
-			</tr>
-			<tr>
-				<td>Á¦¸ñ</td>
-				<td>±İ¾×</td>
-				<td>³¯ÀÚ</td>
-			</tr>
-			<c:forEach items="${ result1}" var="list">
-				<tr>
-					<td>${list.sold }</td>
-					<td>${list.pay }</td>
-					<td>${list.sal_time }</td>
-				</tr>
-			</c:forEach>
-			</table>
+		<div class="div_container">
+			<div class="div_row" style="margin-top: 30px;">
+				<div class="div_col">
+					<table class="table">
+						<tr>
+							<th colspan="3" class="th1">ìˆ˜ì…</th>
+						</tr>
+						<tr>
+							<th class="th2">ì œëª©</th>
+							<th class="th2">ê¸ˆì•¡</th>
+							<th class="th2">ë‚ ì§œ</th>
+						</tr>
+						<c:forEach items="${ result1}" var="list">
+							<tr>
+								<td class="td1">${list.sold }</td>
+								<td class="td1">${list.pay }</td>
+								<td class="td1">${list.sal_time }</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
+				<div class="div_col">
+					<table class="table">
+						<tr>
+							<th colspan="3" class="th1">ì§€ì¶œ</th>
+						</tr>
+						<tr>
+							<td class="th2">ì œëª©</td>
+							<td class="th2">ê¸ˆì•¡</td>
+							<td class="th2">ë‚ ì</td>
+						</tr>
+						<c:forEach items="${ result2}" var="list2">
+							<tr>
+								<td class="td1">${list2.spend }</td>
+								<td class="td1">${list2.pay }</td>
+								<td class="td1">${list2.sal_time }</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
+				
+			</div>
+			<br><br><br><br><br>
+			<input type="hidden" value="${ area}" name="area"> 
+			<input style="float: right; " class="submit" type="submit" value="ì •ì‚°">
+			<br><br><br><br><br><br><br><br><br><br>
 		</div>
-		<div style="float: right; width: 50%;">
-			<table>
-				<tr>
-					<td colspan="4">¼öÀÔ</td>
-				</tr>
-				<tr>
-					<td>Á¦¸ñ</td>
-					<td>±İ¾×</td>
-					<td>³¯ÀÚ</td>
-				</tr>
-				<c:forEach items="${ result2}" var="list2">
-					<tr>
-						<td>${list2.spend }</td>
-						<td>${list2.pay }</td>
-						<td>${list2.sal_time }</td>
-					</tr>
-				</c:forEach>
-			</table>
-		</div>
-		<input type="hidden" value="${ area}" name="area" >
-		<input type="submit" value="Á¤»ê">
 	</form>
 </body>
 </html>

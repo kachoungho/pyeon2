@@ -30,6 +30,10 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/pyeon2/Desktop/barbecue-1.5-beta1.jar"/>
+=======
+	<classpathentry kind="lib" path="C:/Users/pyeon2/Downloads/barbecue-1.5-beta1.jar"/>
+>>>>>>> 7de0162e320bd25b9f56b769168afb7506a19c91
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

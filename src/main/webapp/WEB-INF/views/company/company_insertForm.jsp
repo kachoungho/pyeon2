@@ -4,96 +4,70 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css"
-	href="/controller/resources/css/listcss.css">
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	href="/controller/resources/css/style.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>정보 입력 폼</title>
 </head>
 <body>
 	<form action="${pageContext.request.contextPath}/company/com_insert"
-		method="post">
+		method="post" name="submit">
 
-		<table id="table_insert">
+		<table id="tb_insert">
 			<tr>
 				<th colspan="2">
-					<label id="label_insert"> 직원 정보 입력 </label>
+					<label id="lb_insert"> 직원 정보 입력 </label>
 				</th>
 			</tr>
 			<tr>
-				<th id="tr_insert"><img class="img_insert" style="" src="/controller/resources/images/id.png">아이디</th>
-				<th><input id="input_insert" type="text" name="id"></th>
+				<th id="tr2_insert"><img class="img_insert" style="" src="/controller/resources/images/id.png">아이디</th>
+				<th>&nbsp;&nbsp;<input class="ipt_insert" type="text" name="id" placeholder="아이디 입력"></th>
 			</tr>
 			<tr>
-				<th id="tr_insert"><img class="img_insert" src="/controller/resources/images/pwd.png">비밀번호</th>
-				<th><input id="input_insert" type="password" name="pwd"></th>
+				<th id="tr2_insert"><img class="img_insert" src="/controller/resources/images/pwd.png">비밀번호</th>
+				<th>&nbsp;&nbsp;<input class="ipt_insert" type="password" id="pwd" name="pwd" placeholder="비밀번호 입력"></th>
 			</tr>
 			<tr>
-				<th id="tr_insert"><img class="img_insert" src="/controller/resources/images/name.png">이름</th>
-				<th><input id="input_insert" type="text" name="name"></th>
+				<th id="tr2_insert"><img class="img_insert" src="/controller/resources/images/name.png">이름</th>
+				<th>&nbsp;&nbsp;<input class="ipt_insert" type="text" name="name" placeholder="이름 입력"></th>
 			</tr>
 			<tr>
-				<th id="tr_insert"><img class="img_insert" src="/controller/resources/images/rank.png">직급</th>
-				<th><select id="select_insert" name="position">
+				<th id="tr2_insert"><img class="img_insert" src="/controller/resources/images/rank.png">직급</th>
+				<th>&nbsp;&nbsp;<select id="slt_insert" name="position">
 						<option value="admin">관리자</option>
 						<option value="manager">지점장</option>
 				</select></th>
 			</tr>
 			<tr>
-				<th id="tr_insert"><img class="img_insert" src="/controller/resources/images/phone.png">전화번호</th>
-				<th><input id="input_insert" type="text" name="phone"></th>
+				<th id="tr2_insert"><img class="img_insert" src="/controller/resources/images/phone.png">전화번호</th>
+				<th>&nbsp;&nbsp;<input class="ipt_insert" type="text" name="phone" placeholder="전화번호 입력"></th>
 			</tr>
 			<tr>
-				<th id="tr_insert"><img class="img_insert" src="/controller/resources/images/age.png">생년월일</th>
-				<th><input id="input_insert" type="text" name="age"></th>
+				<th id="tr2_insert"><img class="img_insert" src="/controller/resources/images/age.png">생년월일</th>
+				<th>&nbsp;&nbsp;<input class="ipt_insert" type="text" name="age" placeholder="생년월일 입력"></th>
 			</tr>
 			<tr>
-				<th id="tr_insert"><img class="img_insert" src="/controller/resources/images/address.png">주소</th>
-				<th>
-				<font face="Jeju Gothic">
-				
-				<input type="text" id="postcode" placeholder="우편번호" name="postcode"
-				style="margin-left: 20px;
-				border: none;
-				border-right: 1px solid #009688;
-				border-bottom: 1px solid #009688;
-				width: 80px;
-				font-family: 'Jeju Gothic', sans-serif;
-				">
-				<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-				<input type="text" id="address" placeholder="주소" name="address"
-				style="margin-left: 20px;
-				border: none;
-				border-right: 1px solid #009688;
-				border-bottom: 1px solid #009688;
-				width: 300px;
-				font-family: 'Jeju Gothic', sans-serif;
-				">
-				<input type="text" id="address2" placeholder="상세주소" name="address2"
-				style="margin-left: 20px;
-				border: none;
-				border-right: 1px solid #009688;
-				border-bottom: 1px solid #009688;
-				width: 300px;
-				font-family: 'Jeju Gothic', sans-serif;
-				">
-
-				</font>
+				<th id="tr2_insert"><img class="img_insert" src="/controller/resources/images/address.png">주소</th>
+				<th>&nbsp;&nbsp;<input class="ipt_insert2" type="text" id="postcode" placeholder="우편번호" name="postcode">
+				<input class="submit" type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+				&nbsp;&nbsp;<input class="ipt_insert" type="text" id="address" placeholder="주소" name="address">
+				&nbsp;&nbsp;<input class="ipt_insert" type="text" id="address2" placeholder="상세주소" name="address2">
 			</tr>
 			<tr>
-				<th id="tr_insert"><img class="img_insert" src="/controller/resources/images/gender.png">성별</th>
-				<th><select id="select_insert" name="gender">
-						<option value="man">남자</option>
-						<option value="woman">여자</option>
+				<th id="tr2_insert"><img class="img_insert" src="/controller/resources/images/gender.png">성별</th>
+				<th>&nbsp;&nbsp;<select id="slt_insert" name="gender">
+						<option value="남자">남자</option>
+						<option value="여자">여자</option>
 				</select></th>
 			</tr>
 			<tr>
-				<th id="tr_insert"><img class="img_insert" src="/controller/resources/images/area.png">지점</th>
-				<th><input id="input_insert" type="text" name="area"></th>
+				<th id="tr2_insert"><img class="img_insert" src="/controller/resources/images/area.png">지점</th>
+				<th>&nbsp;&nbsp;<input class="ipt_insert" type="text" name="area" placeholder="지점 입력"></th>
 			</tr>
 
 			<tr>
 				<th></th>
-				<th><input id="button_insert" width="40" type="image"
-					src="/controller/resources/images/check.png" alt="submit">
+				<th><input id="btn_insert" width="40" type="image"
+					src="/controller/resources/images/check.png" alt="submit" onclick="checkPW();return false;">
 				</th>
 			</tr>
 		</table>
@@ -101,6 +75,19 @@
 	
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
+
+function checkPW() {
+	
+	var check = document.getElementById('pwd').value;
+	
+	if((check == null) || (check == "")) {
+		alert("비밀번호를 입력해주세요");
+		return false;
+	} else {
+		form.submit.submit();
+	}
+}
+
 function execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
