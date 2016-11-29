@@ -5,10 +5,15 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pyeon2.domain.Criteria;
@@ -18,11 +23,13 @@ import com.pyeon2.service.PosService;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
+import com.pyeon2.vo.NoticeReplVO;
 import com.pyeon2.vo.NoticeVO;
 import com.pyeon2.vo.SelectSearch;
 import com.pyeon2.vo.UserVO;
 
 @Controller
+@RestController
 /* @RequestMapping(value="/pos/") */
 public class PosController {
 
@@ -902,12 +909,13 @@ public class PosController {
 	@RequestMapping(value = "pos/ps_notice_contant" , method = RequestMethod.GET)
 	public ModelAndView comnoticecontant(HttpServletRequest request ,Model model)throws Exception{
 		ModelAndView mav = new ModelAndView();
-		
+		int num = 0;
 		NoticeVO Nvo = new NoticeVO();
 		Nvo.setNoticenum(Integer.parseInt(request.getParameter("noticenum")));
 		
 		List<NoticeVO> list = companyService.getnoticecontant(Nvo);
-		
+		num = list.get(0).getNoticenum();
+		mav.addObject("num", num);
 		mav.addObject("result",list);
 		mav.setViewName(".pos.pos_notice_contant");
 		return mav;
@@ -1169,5 +1177,65 @@ public class PosController {
 		
 		mav.setViewName("pop/pop_calcrefurnd_delete");
 		return mav;
+	}
+	
+	@RequestMapping(value = "pos/ps_notice_repl_write", method=RequestMethod.POST)
+	public ResponseEntity<String> noticeReplRegister(@RequestBody NoticeReplVO vo) throws Exception {
+		ResponseEntity<String> entity = null;
+		
+		try {
+			posService.noticeReplWrite(vo);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	@RequestMapping(value = "pos/ps_notice_repl_list/{bno}", method=RequestMethod.GET)
+	public ResponseEntity<List<NoticeReplVO>> noticeReplList(@PathVariable("bno")int bno) {
+		ResponseEntity<List<NoticeReplVO>> entity = null;
+		try {
+			entity = new ResponseEntity<>(posService.noticeReplList(bno), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+	
+	@RequestMapping(value = "pos/ps_notice_repl_update/{bno}", method= {RequestMethod.PUT, RequestMethod.PATCH})
+	public ResponseEntity<String> noticeReplUpdate(@PathVariable("bno")int bno,
+			@RequestBody NoticeReplVO vo) {
+		ResponseEntity<String> entity = null;
+		
+		try {
+			vo.setRno(bno);
+			posService.noticeReplUpdate(vo);
+			
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+	
+	@RequestMapping(value = "pos/ps_notice_repl_delete/{rno}", method=RequestMethod.DELETE)
+	public ResponseEntity<String> noticeReplDelete(@PathVariable("rno")int rno){
+		ResponseEntity<String> entity = null;
+		
+		try {
+			posService.noticeReplDelete(rno);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
 	}
 }

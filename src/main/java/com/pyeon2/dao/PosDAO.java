@@ -6,6 +6,7 @@ import com.pyeon2.domain.Criteria;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
+import com.pyeon2.vo.NoticeReplVO;
 import com.pyeon2.vo.NoticeVO;
 import com.pyeon2.vo.SelectSearch;
 import com.pyeon2.vo.UserVO;
@@ -210,4 +211,16 @@ public interface PosDAO {
 	
 	//p2_item hit&count업데이트
 	public void itemupdate(ItemVO vo) throws Exception;
+	
+	//댓글 리스트
+	public List<NoticeReplVO> noticeReplList(int bno) throws Exception;
+	
+	//댓글 쓰기
+	public void noticeReplWrite(NoticeReplVO vo) throws Exception;
+	
+	//댓글 수정
+	public void noticeReplUpdate(NoticeReplVO vo) throws Exception;
+	
+	//댓글 삭제
+	public void noticeReplDelete(int rno) throws Exception;
 }

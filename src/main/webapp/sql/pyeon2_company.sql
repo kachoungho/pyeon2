@@ -2,6 +2,7 @@
 select * from company_item;				-- 본사 재고 테이블
 select * from company_notice;	
 select * from calendarMemo;
+select * from company_notice_repl;
 
 drop table calendarMemo;
 drop table company_item;
@@ -23,6 +24,30 @@ create table company_notice(
 	contant varchar2(1000) not null,
 	noticedate varchar2(30) not null
 );
+
+create table company_notice_repl(
+	rno number(10),
+	bno number(10),
+	replyText varchar2(1000),
+	replyer varchar2(50),
+	regdate TIMESTAMP,
+	updateDate TIMESTAMP
+);
+
+drop table company_notice_repl;
+
+insert into company_notice_repl values(noticeRepl_num.nextVal, 1000, 'wow', 'repl', sysdate, null);
+insert into company_notice_repl values(noticeRepl_num.nextVal, 14, 'wow', 'repl', sysdate, null);
+insert into company_notice_repl values(noticeRepl_num.nextVal, 14, 'wow1', 'repl', sysdate, null);
+insert into company_notice_repl values(noticeRepl_num.nextVal, 14, 'wow2', 'repl', sysdate, null);
+
+drop sequence noticeRepl_num;
+
+create sequence noticeRepl_num
+   increment by 1
+   start with 1
+   nocache;
+
 
 create sequence noticenum
    increment by 1

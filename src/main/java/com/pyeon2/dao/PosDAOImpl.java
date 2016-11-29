@@ -10,6 +10,7 @@ import com.pyeon2.domain.Criteria;
 import com.pyeon2.vo.ComItemVO;
 import com.pyeon2.vo.ItemVO;
 import com.pyeon2.vo.MemberVO;
+import com.pyeon2.vo.NoticeReplVO;
 import com.pyeon2.vo.NoticeVO;
 import com.pyeon2.vo.SelectSearch;
 import com.pyeon2.vo.UserVO;
@@ -352,5 +353,25 @@ public class PosDAOImpl implements PosDAO {
 	@Override
 	public void itemupdate(ItemVO vo) throws Exception {
 		session.update(namespace+".itemupdate",vo);
+	}
+
+	@Override
+	public List<NoticeReplVO> noticeReplList(int bno) throws Exception {
+		return session.selectList(namespace + ".noticeReplList", bno);
+	}
+
+	@Override
+	public void noticeReplWrite(NoticeReplVO vo) throws Exception {
+		session.insert(namespace +".noticeReplWrite", vo);
+	}
+
+	@Override
+	public void noticeReplUpdate(NoticeReplVO vo) throws Exception {
+		session.update(namespace + ".noticeReplUpdate", vo);
+	}
+
+	@Override
+	public void noticeReplDelete(int rno) throws Exception {
+		session.delete(namespace + ".noticeReplDelete", rno);
 	}
 }
