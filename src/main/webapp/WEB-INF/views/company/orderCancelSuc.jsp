@@ -6,7 +6,7 @@
 
 <meta http-equiv="Refresh" content="0; url=/controller/orderApproval">
 <script type="text/javascript">
-	alert("발주 승인 성공");
+	alert("발주가 취소되었습니다.");
 	history.go(1);
 </script>
 

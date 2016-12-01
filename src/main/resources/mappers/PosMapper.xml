@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pyeon2.mappers.PosMapper">
+
+	<!-- 발주 신청 메소드 -->
+	<insert id="insertOrder">
+		insert into orderReq(item_code, item_name, count, category, area)
+		values(#{item_code}, #{item_name}, #{count}, #{category}, #{area})
+	</insert>
+	
+	<!-- 물품(재고) 전체 리스트 출력 메소드 -->
+	<select id="getList" resultType="com.pyeon2.vo.ItemVO">
+		SELECT * FROM p2_item
+	</select>
+	
+	<!-- 물품(재고) 이름으로 검색하여 리스트 출력 메소드 -->
+	<select id="selectName" resultType="com.pyeon2.vo.ItemVO" parameterType="com.pyeon2.vo.ItemVO">
+		SELECT * FROM p2_item where item_name = #{item_name}
+	</select>
+	
+	<!-- 물품(재고) 제거 메소드 -->
+	<delete id="Delete" parameterType="com.pyeon2.vo.ItemVO">
+		delete from p2_item where item_code = #{item_code} and area = #{area}
+	</delete>
+	
+</mapper>

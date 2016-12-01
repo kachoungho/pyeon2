@@ -1,45 +1,56 @@
-package com.pyeon2.dao;
+package com.pyeon2.service;
 
-import org.apache.ibatis.session.SqlSession;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.pyeon2.dao.MemberDAO;
 import com.pyeon2.vo.MemberVO;
 import com.pyeon2.vo.UserVO;
 
 @Repository
-public class MemberDAOImpl implements MemberDAO {
-
+public class MemberServiceImpl implements MemberService {
+	
 	@Autowired
-	private SqlSession session;
-
-	private static String namespace = "com.pyeon2.mappers.MemberMapper";
+	private MemberDAO memDao;
 
 	@Override
 	public MemberVO getMember(String id) throws Exception {
-
-		MemberDAO memberDAO = session.getMapper(MemberDAO.class);
-		return memberDAO.getMember(id);
+		return memDao.getMember(id);
 	}
 
 	@Override
 	public void userstart(UserVO vo) throws Exception {
-		session.update(namespace + ".userstart", vo);
+		memDao.userstart(vo);
 	}
 
 	@Override
 	public void userfinsh(UserVO vo) throws Exception {
-		session.update(namespace + ".userfinsh", vo);
+		memDao.userfinsh(vo);
 	}
 
 	@Override
 	public void userinsertmoney(MemberVO Mvo) throws Exception {
-		session.insert(namespace+".userinsertmoney",Mvo);
+		memDao.userinsertmoney(Mvo);
 	}
 
 	@Override
 	public MemberVO checkId(UserVO vo) throws Exception {
-		return session.selectOne(namespace + ".checkId", vo);
+		return memDao.checkId(vo);
 	}
+	
+	/*
+	@Override
+	public List<UserVO> usermoneyM(MemberVO Mvo) throws Exception {
+		return dao.usermoneyM(Mvo);
+	}
+
+	@Override
+	public void userinsertmoney(MemberVO Mvo) throws Exception {
+		dao.userinsertmoney(Mvo);
+	}
+
+	*/
 
 }

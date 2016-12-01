@@ -15,11 +15,18 @@
 			history.go(1);
 		</script>
 	</sec:authorize>
-
+	
+	
+	<sec:authentication property="name" var="LoingUser" />
 	<sec:authorize access="hasAuthority('ROLE_USER')">
+		<meta http-equiv="Refresh" content="0; url=usermoneystart?id=${LoingUser}">
+		
+	</sec:authorize>
+	
+	<sec:authorize access="hasAuthority('ROLE_MANAGER')">
 		<meta http-equiv="Refresh" content="0; url=pos">
 		<script type="text/javascript">
-			alert("알바 로그인 성공");
+			alert("지점장 로그인 성공");
 			history.go(1);
 		</script>
 	</sec:authorize>

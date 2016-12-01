@@ -7,7 +7,7 @@
 		<security:form-login login-page="/login"
 			authentication-failure-url="/login?error"
 			default-target-url="/choice" />
-		<security:logout logout-success-url="/index" />
+		<security:logout logout-success-url="/login" />
 
 		<security:intercept-url pattern="/admin"
 			access="hasAuthority('ROLE_ADMIN')" />

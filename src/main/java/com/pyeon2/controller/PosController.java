@@ -11,14 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pyeon2.service.Pyeon2Service;
+import com.pyeon2.service.PosService;
 import com.pyeon2.vo.ItemVO;
 
 @Controller
+/*@RequestMapping(value="/pos/")*/
 public class PosController {
 
 	@Autowired
-	private Pyeon2Service pyeon2Service;
+	private PosService posService;
+	
+	/*@Autowired
+	public UserService userService;*/
 
 	@RequestMapping("pos")
 	public String getCompany() {
@@ -42,7 +46,7 @@ public class PosController {
 
 		ModelAndView mav = new ModelAndView();
 
-		pyeon2Service.insertOrder(vo);
+		posService.insertOrder(vo);
 
 		mav.setViewName(".pos.ordersuc");
 
@@ -75,7 +79,7 @@ public class PosController {
 
 		List<ItemVO> list;
 		try {
-			list = pyeon2Service.getList();
+			list = posService.getList();
 			mav.addObject("result", list);
 			mav.setViewName(".pos.pos_item_selectAll");
 		} catch (Exception e) {
@@ -92,7 +96,7 @@ public class PosController {
 		vo.setItem_code(request.getParameter("item_code"));
 		vo.setArea(request.getParameter("area"));
 
-		pyeon2Service.Delete(vo);
+		posService.Delete(vo);
 
 		mav.setViewName(".pos");
 		return mav;
@@ -112,7 +116,7 @@ public class PosController {
 		ItemVO vo = new ItemVO();
 		vo.setItem_name(request.getParameter("item_name"));
 
-		List<ItemVO> list = pyeon2Service.selectName(vo);
+		List<ItemVO> list = posService.selectName(vo);
 
 		mav.addObject("result", list);
 		mav.setViewName(".pos.pos_item_selectAll");
@@ -127,4 +131,34 @@ public class PosController {
 
 		return mav;
 	}
+	
+	
+/*
+	@RequestMapping(value = "usermoneytotal" , method = RequestMethod.GET)
+	public ModelAndView usertotal(HttpServletRequest request) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		UserVO vo = new UserVO();
+		MemberVO Mvo = new MemberVO();
+		String id = request.getParameter("id");
+		System.out.println("id : " + id);
+		vo.setUserid(id);
+		
+		Mvo = userService.checkId(vo);
+		
+		System.out.println("Mvo.getPosition() : " + Mvo.getPosition());
+		System.out.println("Mvo.getArea() : " + Mvo.getArea());
+		
+		if(Mvo.getPosition().equals("manager")){
+			List<UserVO> list = userService.usermoneyM(Mvo);
+			mav.addObject("result", list);
+			
+		} else if(Mvo.getPosition().equals("user")){
+			List<UserVO> list2 = userService.usermoney(vo);
+			mav.addObject("result", list2);
+			
+		}
+		
+		mav.setViewName(".pos.usermonrytotal");
+		return mav;
+	}*/
 }

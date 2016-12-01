@@ -17,6 +17,7 @@
 			<td align="center">area</td>
 			<td align="center">p2_time</td>
 			<td align="center">발주 승인</td>
+			<td align="center">발주 미승인</td>
 		</tr>
 
 		<!-- 	result는 controller의 addObject로 부터 가져온다. -->
@@ -35,6 +36,8 @@
 				<td>${orderList.area}</td>
 				<td>${orderList.p2_time}</td>
 				<td><input type="submit" value="승인"></td>
+				<td><input type="button" value="미승인"
+				onclick="document.location.href='orderCancel?item_code=${orderList.item_code}&area=${orderList.area}'"></td>
 			</tr>
 			</form>
 		</c:forEach>

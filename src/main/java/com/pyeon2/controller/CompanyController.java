@@ -3,6 +3,7 @@ package com.pyeon2.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pyeon2.service.Pyeon2Service;
+import com.pyeon2.service.CompanyService;
 import com.pyeon2.vo.ItemVO;
 
 
@@ -18,7 +19,7 @@ import com.pyeon2.vo.ItemVO;
 public class CompanyController {
 	
 	@Autowired
-	private Pyeon2Service pyeon2Service;	
+	private CompanyService companyService;	
 	
 	@RequestMapping("company")
 	public String getCompany(){
@@ -50,7 +51,7 @@ public class CompanyController {
 		ModelAndView mav = new ModelAndView();
 		List<ItemVO> list;
 		try {
-			list = pyeon2Service.orderList();
+			list = companyService.orderList();
 			mav.addObject("orderList", list);
 			mav.setViewName(".company.orderApproval");
 		} catch (Exception e) {
@@ -72,9 +73,28 @@ public class CompanyController {
 		vo.setArea(request.getParameter("area"));
 		
 		try {
-			pyeon2Service.updateItemCount(vo);
-			pyeon2Service.odertDelete(vo);
+			companyService.updateItemCount(vo);
+			companyService.odertDelete(vo);
 			mav.setViewName(".company.orderApprovalsuc");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+	
+	
+	@RequestMapping(value="orderCancel", method=RequestMethod.GET)
+	public ModelAndView orderCancelGET(HttpServletRequest request){
+		System.out.println("orderCancel GET 요청 성공");
+		ModelAndView mav = new ModelAndView();
+		
+		ItemVO vo = new ItemVO();
+		
+		vo.setItem_code(request.getParameter("item_code"));
+		vo.setArea(request.getParameter("area"));
+		try {
+			companyService.odertDelete(vo);
+			mav.setViewName(".company.orderCancelSuc");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

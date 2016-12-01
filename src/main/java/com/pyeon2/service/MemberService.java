@@ -1,9 +1,9 @@
-package com.pyeon2.dao;
+package com.pyeon2.service;
 
 import com.pyeon2.vo.MemberVO;
 import com.pyeon2.vo.UserVO;
 
-public interface MemberDAO {
+public interface MemberService {
 
 	// 로그인 메소드
 	public MemberVO getMember(String id) throws Exception;
